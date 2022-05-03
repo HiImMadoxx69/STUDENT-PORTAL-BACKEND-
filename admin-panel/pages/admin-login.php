@@ -29,13 +29,20 @@ if($total > 0){
   $_SESSION['Position'] = $row['position'];
   echo header("Location: admin-dashboard.php");
 }else{
-  echo "No user found!";
+
+//   <div class="xtcontainer">
+//   <p class="success" data-message="👊 You got this, kid! 👊"></p>
+//   <button class="warning">Delete</button>
+//   <button class="info">Agree to Terms</button>
+// </div>
+
+ echo '<div class ="toast-container">
+ <p class = "toast">Hi</p>
+ </div>
+ <script src="../js/toast.js">callFailed();</script>';
+
+ }
 }
-
-
-}
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,12 +75,11 @@ if($total > 0){
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- Toastr css file -->
+  <link href="../css/toast.css" rel="stylesheet">
+
+  <!-- Toastr js file -->
+  <script src="../js/toast.js"></script>
 </head>
 
 <body>
@@ -118,8 +124,7 @@ if($total > 0){
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
-
-                   
+              
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit" name="login">Login</button>
                     </div>
