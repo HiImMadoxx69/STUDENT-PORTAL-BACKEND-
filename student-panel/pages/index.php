@@ -1,14 +1,17 @@
 <?php
-
+session_start();
+if(!isset($_SESSION['StudentID'])){
+  echo header("Location: login.php");
+}
 include_once("../connections/connection.php");
-
 $con = connection();
 
-$sql = "SELECT * FROM tbl_studentinfo";
+$sql = "SELECT * FROM tbl_studentinfo WHERE studentid = '".$_SESSION['StudentID']."';";
 
-$students = $con->query($sql) or die ($con->error);//if wrong query kill the connections (students is the query)
+$user = $con->query($sql) or die ($con->error);//if wrong query kill the connections (students is the query)
 
-$row = $students->fetch_assoc();
+$user = $user->fetch_assoc();// for getting the admin credentials it is like a array to access data like profile simply user['profilepic']
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +21,7 @@ $row = $students->fetch_assoc();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Users / Profile - NiceAdmin Bootstrap Template</title>
+  <title>Student Portal Profile</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -223,8 +226,12 @@ $row = $students->fetch_assoc();
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            
+            <?php  echo '<img src="data:image;base64,'.base64_encode($user['profilepic']).'" alt="Profile" class="rounded-circle" />';
+   ?> 
+            <?php
+                echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$user['firstname'].' '.$user['lastname'].'</span>' ;
+                ?>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -269,7 +276,9 @@ $row = $students->fetch_assoc();
             <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span onclick = "window.location='logout.php'">Sign Out
+                </span>
+               
               </a>
             </li>
 
@@ -293,14 +302,7 @@ $row = $students->fetch_assoc();
         </a>
       </li><!-- End Dashboard Nav -->
 
-    
-
-   
-
-
  
-
-     
 
       <li class="nav-heading">Pages</li>
 
@@ -463,7 +465,7 @@ $row = $students->fetch_assoc();
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form method="POST" action="#" >
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
