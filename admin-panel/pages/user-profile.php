@@ -611,13 +611,12 @@ if(isset($_POST['submitChanges'])){
                       <div class="col-md-8 col-lg-9">
                         
                         <?php echo '<input name="linkedin" type="text" class="form-control" id="Linkedin" value ="'.$user['linkedinprofile'].'"/>' 
-              ?>
+                          ?>
                       </div>
                     </div>
 
         <!-- Modal -->
-        <div class="card">
-            <div class="card-body">
+      
               <!-- Basic Modal -->
               
               <div class="modal fade" id="basicModal" tabindex="-1">
@@ -632,14 +631,14 @@ if(isset($_POST['submitChanges'])){
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 
                       <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                   </div>
                 </div>
               </div><!-- End Basic Modal-->
 
-            </div>
-          </div>
+           
 
                     <div class="text-center">
                       <button type="submit"  name ="submitChanges" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Save Changes</button>
