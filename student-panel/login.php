@@ -2,7 +2,7 @@
 <?php
 if(!isset($_SESSION)){
   session_start();//if there is no session then start session
-} //Session lol
+} 
 
 
 if(isset($_SESSION['UserLogin'])){
