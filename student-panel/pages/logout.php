@@ -2,9 +2,8 @@
 
 session_start();
 
-unset($_SESSION['UserLogin']);
-unset($_SESSION['Position']);
-echo header("Location: admin-login.php");
+unset($_SESSION['StudentID']);
+echo header("Location: login.php");
 
 //DAVID ANGELO BAYSA
 //hhelo

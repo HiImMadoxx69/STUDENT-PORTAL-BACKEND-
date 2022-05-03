@@ -5,8 +5,8 @@ if(!isset($_SESSION)){
 } 
 
 
-if(isset($_SESSION['UserLogin'])){
-  echo header("Location: admin-dashboard.php");
+if(isset($_SESSION['StudentID'])){
+  echo header("Location: index.php");
 }
 
 include_once("../connections/connection.php");
@@ -14,10 +14,10 @@ include_once("../connections/connection.php");
 $con = connection();
 
 if(isset($_POST['login'])){
-$username = $_POST['username'];
+$studentid = $_POST['studentid'];
 $password = $_POST['password'];
 
-$sql = "SELECT * FROM tbl_admin WHERE username = '$username' AND password = '$password'";
+$sql = "SELECT * FROM tbl_studentinfo WHERE studentid = '$studentid' AND password = '$password'";
 
 $user = $con ->query($sql) or die ($con->error);
 $row = $user->fetch_assoc();
@@ -25,9 +25,8 @@ $total = $user->num_rows;
 
 
 if($total > 0){
-  $_SESSION['UserLogin'] = $row['username'];
-  $_SESSION['Position'] = $row['position'];
-  echo header("Location: admin-dashboard.php");
+  $_SESSION['StudentID'] = $row['studentid'];
+  echo header("Location: index.php");
 }else{
 
 //   <div class="xtcontainer">
@@ -51,7 +50,7 @@ if($total > 0){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <title>Student Portal Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -105,17 +104,17 @@ if($total > 0){
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <p class="text-center small">Enter your Studentid & password to login</p>
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate action="" method="post">
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="yourStudentid" class="form-label">Student Id</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <input type="text" name="studentid" class="form-control" id="yourStudentid" required>
+                        <div class="invalid-feedback">Please enter your Student Id.</div>
                       </div>
                     </div>
 
