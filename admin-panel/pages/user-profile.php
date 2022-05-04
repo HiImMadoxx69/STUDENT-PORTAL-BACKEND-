@@ -14,23 +14,23 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
 $currentId = $user['id'];
 
-if(isset($_POST['submitChanges'])){
-    $fname = $_POST['firstname'];
-    $lname = $_POST['lastname'];
-    $about = $_POST['about'];
-    $position = $_POST['position'];
-    $address = $_POST['address'];
-    $contact = $_POST['phone'];
-    $email = $_POST['email'];
-    $twitter = $_POST['twitter'];
-    $facebook = $_POST['facebook'];
-    $instagram = $_POST['instagram'];
-    $linkedin = $_POST['linkedin'];
+// if(isset($_POST['submitChanges'])){
+//     $fname = $_POST['firstname'];
+//     $lname = $_POST['lastname'];
+//     $about = $_POST['about'];
+//     $position = $_POST['position'];
+//     $address = $_POST['address'];
+//     $contact = $_POST['phone'];
+//     $email = $_POST['email'];
+//     $twitter = $_POST['twitter'];
+//     $facebook = $_POST['facebook'];
+//     $instagram = $_POST['instagram'];
+//     $linkedin = $_POST['linkedin'];
 
-    $sqlUpdate = "UPDATE tbl_admin SET firstname = '$fname', lastname = '$lname', about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = 'facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id = $currentId";
+//     $sqlUpdate = "UPDATE tbl_admin SET firstname = '$fname', lastname = '$lname', about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = 'facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id = $currentId";
 
-    $con->query($sqlUpdate) or die ($con->error);//if wrong query kill the connections (students is the query)
-}
+//     $con->query($sqlUpdate) or die ($con->error);//if wrong query kill the connections (students is the query)
+// }
 
 ?>
 
@@ -80,8 +80,8 @@ if(isset($_POST['submitChanges'])){
     
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="../img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <img src="../img/globe-client-logo.png" alt="">
+        <span class="d-none d-lg-block">Student Portal</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -503,9 +503,12 @@ if(isset($_POST['submitChanges'])){
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+               
+                <!-- Profile Edit Form -->
+                  <form id ="updateProfileForm">
+                  
 
-                  <!-- Profile Edit Form -->
-                  <form action="" method ="post">
+                <!-- PROFILE IMAGE -->
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
@@ -523,6 +526,10 @@ if(isset($_POST['submitChanges'])){
                     </div>
 
                     <div class="row mb-3">
+                         <!-- GET THE ID OF USER -->
+                <?php
+echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';  
+?>
                       <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                       <div class="col-md-8 col-lg-9">
                           <?php echo '<input name="firstname" type="text" class="form-control" id="firstName" value ="'.$user['firstname'].'"/>' 
@@ -542,7 +549,7 @@ if(isset($_POST['submitChanges'])){
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
                     
-                        <?php echo '<textarea name="about" class="form-control" id="about" style="height: 100px">'.$user['about'].'"</textarea>' 
+                        <?php echo '<textarea name="about" class="form-control" id="About" style="height: 100px">'.$user['about'].'"</textarea>' 
               ?>
                       </div>
                     </div>
@@ -565,9 +572,9 @@ if(isset($_POST['submitChanges'])){
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                      <label for="Contact" class="col-md-4 col-lg-3 col-form-label">Contact</label>
                       <div class="col-md-8 col-lg-9">
-                        <?php echo '<input name="phone" type="text" class="form-control" id="Phone" value ="'.$user['contact'].'"/>' 
+                        <?php echo '<input name="contact" type="text" class="form-control" id="Contact" value ="'.$user['contact'].'"/>' 
               ?>
                       </div>
                     </div>
@@ -641,11 +648,12 @@ if(isset($_POST['submitChanges'])){
            
 
                     <div class="text-center">
-                      <button type="submit"  name ="submitChanges" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Save Changes</button>
+                      <button type="submit" id ="btnUpdateProfile"  class="btn btn-primary" >Save Changes</button>
                     </div>
+                    
                   </form><!-- End Profile Edit Form -->
 
-                </div>
+              </div>
 
                 <div class="tab-pane fade pt-3" id="profile-settings">
 
@@ -762,6 +770,8 @@ if(isset($_POST['submitChanges'])){
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
 
+<!-- Script for updating the profile -->
+<script src = "../js/user-edit.js"></script><!-- End of script for updating the profile -->
 
 </body>
 
