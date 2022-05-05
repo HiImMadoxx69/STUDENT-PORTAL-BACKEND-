@@ -2,15 +2,19 @@ document.getElementById('loginForm').addEventListener('submit', logIn);
 document.getElementById('btnLogin').addEventListener('click', logIn);
 const spin = document.getElementById('cardSpinner');//Spinner
 const logInNow = document.getElementById('containerLogin');//Main login form
-const username = document.getElementById('yourUsername').value;
-const password = document.getElementById('yourPassword').value;
+
 
 function logIn(e){
-    e.preventDefault();
+    const username = document.getElementById('yourUsername').value;
+    const password = document.getElementById('yourPassword').value;
     
-    const xhr = new XMLHttpRequest();
+    e.preventDefault();
 
-    let params = "username="+username+"&password="+password;
+    let params = 
+    "username="+username+
+    "&password="+password;
+    console.log(params);
+    const xhr = new XMLHttpRequest();
 
     xhr.open('POST', '../controller/user-login.php', true);
 
@@ -37,18 +41,19 @@ function checkStatus(){
 
     xhr.onload = function (){
         if(this.status == 200){
-           
-            let user = JSON.parse(this.responseText);
-             
-             if(user === username){
+                      
+            let currentUser = this.responseText;
+            console.log(currentUser);
+            if(currentUser === true){
                 location.reload();
+                
             }else{
+                logInNow.style.display = 'block';
                 console.log("Wrong Credentials!");
             }
 
-            console.log(user);
+            console.log(currentUser);
        }
     }
-
     xhr.send();
 }

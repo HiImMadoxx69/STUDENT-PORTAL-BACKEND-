@@ -36,13 +36,13 @@ if(isset($_SESSION['UserLogin'])){
   <link href="../vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="../vendor/scss/_spinners.scss" rel="stylesheet">
+
 
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
 
-  <!-- Toastr css file -->
-  <link href="../css/toast.css" rel="stylesheet">
-
+  
   <!-- Toastr js file -->
  
 </head>
@@ -54,49 +54,15 @@ if(isset($_SESSION['UserLogin'])){
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-      <div class="card" id ="cardSpinner" hidden="hidden">
-            <div class="card-body">
-              <h5 class="card-title">Sizes</h5>
-              <p>Add <code>.spinner-border-sm</code> and <code>.spinner-grow-sm</code> to make a smaller spinner that can quickly be used within other components. Or, use custom CSS or inline styles to change the dimensions as needed.</p>
-
-              <!-- Sized spinners -->
-              <div class="spinner-border spinner-border-sm" role="status">
+  
+      <div class="spinner-border" style="width: 50px; height: 50px;" role="status" id ="cardSpinner">
                 <span class="visually-hidden">Loading...</span>
-              </div>
+      </div>
+          <!-- End Sized spinners -->
 
-              <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
 
-              <div class="spinner-border" style="width: 40px; height: 40px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-border" style="width: 50px; height: 50px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow spinner-grow-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow" style="width: 30px; height: 30px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow" style="width: 40px; height: 40px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow" style="width: 50px; height: 50px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              <!-- End Sized spinners -->
-
-            </div>
-          </div>  
       
-      <div class="container" id ="containerLogin">
+          <div class="container" id ="containerLogin">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
