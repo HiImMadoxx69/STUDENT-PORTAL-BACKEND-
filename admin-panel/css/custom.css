@@ -1,0 +1,98 @@
+
+/* SPINNER */
+@-webkit-keyframes spinner-border {
+	to {
+		transform: rotate(360deg)
+	}
+}
+
+@keyframes spinner-border {
+	to {
+		transform: rotate(360deg)
+	}
+}
+
+div#alertLogin{
+	display: none;
+}
+
+.Myspinner-border {
+	display: none;
+	width: 2rem;
+	height: 2rem;
+	vertical-align: -.125em;
+	border: .25em solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+	-webkit-animation: .75s linear infinite spinner-border;
+	animation: .50s linear infinite spinner-border
+}
+
+
+.Myspinner-border-sm {
+	width: 1rem;
+	height: 1rem;
+	border-width: .2em
+}
+
+@-webkit-keyframes Myspinner-grow {
+	0% {
+		transform: scale(0)
+	}
+
+	50% {
+		opacity: 1;
+		transform: none
+	}
+}
+
+@keyframes Myspinner-grow {
+	0% {
+		transform: scale(0)
+	}
+
+	50% {
+		opacity: 1;
+		transform: none
+	}
+}
+
+.Myspinner-grow {
+	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+	vertical-align: -.125em;
+	background-color: currentColor;
+	border-radius: 50%;
+	opacity: 0;
+	-webkit-animation: .75s linear infinite spinner-grow;
+	animation: .75s linear infinite spinner-grow
+}
+
+.Myspinner-grow-sm {
+	width: 1rem;
+	height: 1rem
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+	.Myspinner-border,
+	.Myspinner-grow {
+		-webkit-animation-duration: 1.5s;
+		animation-duration: 1.5s
+	}
+}
+
+.Myvisually-hidden,
+.Myvisually-hidden-focusable:not(:focus):not(:focus-within) {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important
+}
+/* END OF SPINNER */

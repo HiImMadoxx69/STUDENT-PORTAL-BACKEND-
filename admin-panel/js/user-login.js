@@ -2,8 +2,9 @@ document.getElementById('loginForm').addEventListener('submit', logIn);
 document.getElementById('btnLogin').addEventListener('click', logIn);
 const spin = document.getElementById('cardSpinner');//Spinner
 const logInNow = document.getElementById('containerLogin');//Main login form
+const alertPrompt = document.getElementById('alertLogin');
 
-
+// HTTP REQUEST
 function logIn(e){
     const username = document.getElementById('yourUsername').value;
     const password = document.getElementById('yourPassword').value;
@@ -19,13 +20,33 @@ function logIn(e){
     xhr.open('POST', '../controller/user-login.php', true);
 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.onprogress = function (){
-        spin.style.display = 'block';
-        logInNow.style.display = 'none';
-    }
+    logInNow.style.display = 'none';
+    spin.style.display = 'inline-block';
     //send
     xhr.send(params);
-    checkStatus();
+
+    xhr.onprogress = function (){
+        spin.style.display = 'inline-block';
+        logInNow.style.display = 'none';
+    }
+    xhr.onload = function (){
+        if(this.status === 200){ 
+            console.log(this.responseText);
+            let getResult = JSON.parse(this.responseText);
+
+            if(getResult.statusCode === 200){
+            spin.style.display = 'none';
+            location.reload();
+            }else{
+                spin.style.display = 'none';
+                alertPrompt.style.display = 'inline-block';
+                logInNow.style.display = 'inline-block';   
+                console.log("Wrong credentials!");
+            }
+       }
+       
+    }
+    //checkStatus();
 }
 
 
@@ -34,26 +55,6 @@ function checkStatus(){
 
     xhr.open('GET', '../controller/user-login.php', true);
 
-    xhr.onprogress = function (){
-        spin.style.display = 'block';
-        logInNow.style.display = 'none';
-    }
-
-    xhr.onload = function (){
-        if(this.status == 200){
-                      
-            let currentUser = this.responseText;
-            console.log(currentUser);
-            if(currentUser === true){
-                location.reload();
-                
-            }else{
-                logInNow.style.display = 'block';
-                console.log("Wrong Credentials!");
-            }
-
-            console.log(currentUser);
-       }
-    }
+   
     xhr.send();
 }

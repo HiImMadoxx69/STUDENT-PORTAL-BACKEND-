@@ -17,16 +17,16 @@ $con = connection();
   $user = $con ->query($sql) or die ($con->error);
   $row = $user->fetch_assoc();
   $total = $user->num_rows;
-  
+
   if($total > 0){
-   
+    
     $_SESSION['UserLogin'] = $row['username'];
     $_SESSION['Position'] = $row['position'];
-    echo true;
+    echo json_encode(array("statusCode"=>200));
   }else{
-   echo false;
+    echo json_encode(array("statusCode"=>201));
    }
+  }
   
-  } 
   
 ?>

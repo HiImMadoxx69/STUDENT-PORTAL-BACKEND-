@@ -36,32 +36,34 @@ if(isset($_SESSION['UserLogin'])){
   <link href="../vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../vendor/simple-datatables/style.css" rel="stylesheet">
-  <link href="../vendor/scss/_spinners.scss" rel="stylesheet">
-
 
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
 
   
-  <!-- Toastr js file -->
- 
+  <!-- My Custom Css-->
+  <link href="../css/custom.css" rel="stylesheet">
+
+   
 </head>
 
 <body>
 
   <main>
      
+       
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
   
-      <div class="spinner-border" style="width: 50px; height: 50px;" role="status" id ="cardSpinner">
-                <span class="visually-hidden">Loading...</span>
+      <div class="Myspinner-border" style="width: 50px; height: 50px;" role="status" id ="cardSpinner">
+                <span class="Myvisually-hidden">Loading...</span>
       </div>
           <!-- End Sized spinners -->
+          
 
-
-      
+    
+          <!-- End of Error Modal -->
           <div class="container" id ="containerLogin">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
@@ -81,7 +83,17 @@ if(isset($_SESSION['UserLogin'])){
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
+<!-- alert -->
 
+<div >
+      <div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert" id = "alertLogin">
+                A simple danger alert—check it out!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+      </div>
+</div>
+<!-- end of alert -->
                   <form class="row g-3 needs-validation" novalidate id ="loginForm">
 
                     <div class="col-12">
@@ -135,6 +147,7 @@ if(isset($_SESSION['UserLogin'])){
   <script src="../js/main.js"></script>
   <!-- User Login AJAX -->
   <script src="../js/user-login.js"></script>
+
 </body>
 
 </html>
