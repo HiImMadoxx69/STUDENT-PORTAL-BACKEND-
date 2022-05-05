@@ -4,45 +4,10 @@ if(!isset($_SESSION)){
   session_start();//if there is no session then start session
 } //Session lol
 
-
 if(isset($_SESSION['UserLogin'])){
   echo header("Location: admin-dashboard.php");
 }
 
-include_once("../connections/connection.php");
-
-$con = connection();
-
-if(isset($_POST['login'])){
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-$sql = "SELECT * FROM tbl_admin WHERE username = '$username' AND password = '$password'";
-
-$user = $con ->query($sql) or die ($con->error);
-$row = $user->fetch_assoc();
-$total = $user->num_rows;
-
-
-if($total > 0){
-  $_SESSION['UserLogin'] = $row['username'];
-  $_SESSION['Position'] = $row['position'];
-  echo header("Location: admin-dashboard.php");
-}else{
-
-//   <div class="xtcontainer">
-//   <p class="success" data-message="👊 You got this, kid! 👊"></p>
-//   <button class="warning">Delete</button>
-//   <button class="info">Agree to Terms</button>
-// </div>
-
- echo '<div class ="toast-container">
- <p class = "toast">Hi</p>
- </div>
- <script src="../js/toast.js">callFailed();</script>';
-
- }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,16 +44,59 @@ if($total > 0){
   <link href="../css/toast.css" rel="stylesheet">
 
   <!-- Toastr js file -->
-  <script src="../js/toast.js"></script>
+ 
 </head>
 
 <body>
 
   <main>
+     
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
+      <div class="card" id ="cardSpinner" hidden="hidden">
+            <div class="card-body">
+              <h5 class="card-title">Sizes</h5>
+              <p>Add <code>.spinner-border-sm</code> and <code>.spinner-grow-sm</code> to make a smaller spinner that can quickly be used within other components. Or, use custom CSS or inline styles to change the dimensions as needed.</p>
+
+              <!-- Sized spinners -->
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div class="spinner-border" style="width: 40px; height: 40px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div class="spinner-border" style="width: 50px; height: 50px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div class="spinner-grow spinner-grow-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div class="spinner-grow" style="width: 30px; height: 30px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div class="spinner-grow" style="width: 40px; height: 40px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div class="spinner-grow" style="width: 50px; height: 50px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <!-- End Sized spinners -->
+
+            </div>
+          </div>  
+      
+      <div class="container" id ="containerLogin">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
@@ -108,7 +116,7 @@ if($total > 0){
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate action="" method="post">
+                  <form class="row g-3 needs-validation" novalidate id ="loginForm">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
@@ -125,7 +133,7 @@ if($total > 0){
                     </div>
               
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit" name="login">Login</button>
+                      <button class="btn btn-primary w-100" type="submit" name="login" id ="btnLogin">Login</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Forget your account? <a href="pages-register.html">Request for recovery</a></p>
@@ -159,7 +167,8 @@ if($total > 0){
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
+  <!-- User Login AJAX -->
+  <script src="../js/user-login.js"></script>
 </body>
 
 </html>
