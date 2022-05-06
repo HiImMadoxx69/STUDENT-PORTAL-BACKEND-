@@ -458,10 +458,8 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                   </div>
 
                
-
-                 
-
                 </div>
+              
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
