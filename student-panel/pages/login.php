@@ -9,39 +9,7 @@ if(isset($_SESSION['StudentID'])){
   echo header("Location: index.php");
 }
 
-include_once("../connections/connection.php");
 
-$con = connection();
-
-if(isset($_POST['login'])){
-$studentid = $_POST['studentid'];
-$password = $_POST['password'];
-
-$sql = "SELECT * FROM tbl_studentinfo WHERE studentid = '$studentid' AND password = '$password'";
-
-$user = $con ->query($sql) or die ($con->error);
-$row = $user->fetch_assoc();
-$total = $user->num_rows;
-
-
-if($total > 0){
-  $_SESSION['StudentID'] = $row['studentid'];
-  echo header("Location: index.php");
-}else{
-
-//   <div class="xtcontainer">
-//   <p class="success" data-message="👊 You got this, kid! 👊"></p>
-//   <button class="warning">Delete</button>
-//   <button class="info">Agree to Terms</button>
-// </div>
-
- echo '<div class ="toast-container">
- <p class = "toast">Hi</p>
- </div>
- <script src="../js/toast.js">callFailed();</script>';
-
- }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,11 +42,10 @@ if($total > 0){
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
 
-  <!-- Toastr css file -->
-  <link href="../css/toast.css" rel="stylesheet">
+  
 
-  <!-- Toastr js file -->
-  <script src="../js/toast.js"></script>
+  <!-- My Custom Css -->
+  <link href = "../css/custom.css" rel = "stylesheet">
 </head>
 
 <body>
@@ -107,7 +74,19 @@ if($total > 0){
                     <p class="text-center small">Enter your Student Id & Password to Lddogin</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate action="" method="post">
+<!-- alert -->
+
+<div >
+      <div>
+<div class="alert alert-danger alert-dismissible fade show w-100" role="alert" id = "alertLogin">
+              <center><p id="alertMessage">A simple danger alert—check it out!</p>
+              </center>    
+            </div>
+      </div>
+</div>
+<!-- end of alert -->
+
+                  <form class="row g-3 needs-validation" novalidate id ="loginForm">
 
                     <div class="col-12">
                       <label for="yourStudentid" class="form-label">Student Id</label>
@@ -124,7 +103,11 @@ if($total > 0){
                     </div>
               
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit" name="login">Login</button>
+                    <button class="btn btn-primary w-100" type="button" disabled id ="btnChangeToLoading" hidden>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Logging in...
+              </button>
+                      <button class="btn btn-primary w-100" type="submit" name="login" id ="btnLogin">Login</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Forget your account? <a href="pages-register.html">Recover here</a></p>
@@ -146,6 +129,13 @@ if($total > 0){
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-------------------------------------------- MY JAVASCRIPT admin-login ------------------------------->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src ="../js/login.js" type = "text/javascript">
+  </script>
+  <!-- END OF  MY JAVASCRIPT admin-login -->
+
 
   <!-- Vendor JS Files -->
   <script src="../vendor/apexcharts/apexcharts.min.js"></script>
