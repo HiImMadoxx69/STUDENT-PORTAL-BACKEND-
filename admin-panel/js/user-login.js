@@ -1,54 +1,61 @@
 document.getElementById('loginForm').addEventListener('submit', logIn);
-document.getElementById('btnLogin').addEventListener('click', logIn);
-const spin = document.getElementById('cardSpinner');//Spinner
-const logInNow = document.getElementById('containerLogin');//Main login form
-const username = document.getElementById('yourUsername').value;
-const password = document.getElementById('yourPassword').value;
+const btnLogIn = document.getElementById('btnLogin');// Button for login
+btnLogIn.addEventListener('click', logIn);// when clicked
+const alertPrompt = document.getElementById('alertLogin');// alert error
+const btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
+const alertMSG = document.getElementById('alertMessage');
 
+// HTTP REQUEST
 function logIn(e){
-    e.preventDefault();
+    const username = document.getElementById('yourUsername').value;
+    const password = document.getElementById('yourPassword').value;
     
-    const xhr = new XMLHttpRequest();
+    e.preventDefault();
 
-    let params = "username="+username+"&password="+password;
+    let params = 
+    "username="+username+
+    "&password="+password;
+    console.log(params);
+    const xhr = new XMLHttpRequest();
 
     xhr.open('POST', '../controller/user-login.php', true);
 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.onprogress = function (){
-        spin.style.display = 'block';
-        logInNow.style.display = 'none';
-    }
+
     //send
     xhr.send(params);
-    checkStatus();
-}
-
-
-function checkStatus(){
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET', '../controller/user-login.php', true);
 
     xhr.onprogress = function (){
-        spin.style.display = 'block';
-        logInNow.style.display = 'none';
-    }
+      alertPrompt.style.display = 'none';
+      btnChangeToLoadingS.removeAttribute("hidden");
+      btnLogIn.style.display = 'none';
+    }//progress
+    
+   
+xhr.onload = function (){//once loaded
+  let getResult = JSON.parse(this.responseText);
+      console.log(getResult);
+setTimeout(delayedFunc, 2000);//Timer for loading
+function delayedFunc(){
 
-    xhr.onload = function (){
-        if(this.status == 200){
-           
-            let user = JSON.parse(this.responseText);
-             
-             if(user === username){
-                location.reload();
-            }else{
-                console.log("Wrong Credentials!");
-            }
+     
+      
+      
+      if(getResult.statusCode === 200){
+            btnChangeToLoadingS.setAttribute("hidden", "hidden");
+            location.reload();
+      }else{          
+          alertPrompt.style.display = 'inline-block';
+          alertMSG.innerHTML = 'Wrong credentials';
+          btnChangeToLoadingS.setAttribute("hidden", "hidden");
+          btnLogIn.style.display = 'inline-block';
+          console.log("Wrong credentials!");
+      
+     }//end of if status 200 
+    
+    }//end of delayedFunc
+  } // end of onload 
 
-            console.log(user);
-       }
-    }
 
-    xhr.send();
-}
+}//end of login
+

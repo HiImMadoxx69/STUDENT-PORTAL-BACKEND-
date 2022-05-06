@@ -1,10 +1,15 @@
-
-document.getElementById('btnUpdateProfile').addEventListener('click', updateProfile);
+//Javascript for user-profile 
+const btnUpdateMyProfile = document.getElementById('btnUpdateProfile');//button of update profile info
+btnUpdateMyProfile.addEventListener('click', updateProfile);//get the click listener of button update profile
 document.getElementById('updateProfileForm').addEventListener('submit', updateProfile);
+let btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
+let modalMessage = document.getElementById('modalLogs');// modal message body
 
      //POST NAME
 function updateProfile(e){
+ 
 e.preventDefault();
+
 let id = document.getElementById('currentUserID').value;
 let firstname = document.getElementById('firstName').value;
 let lastname = document.getElementById('lastName').value;
@@ -39,10 +44,21 @@ xhr.open('POST', '../controller/user-edit.php', true);
 
 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
+xhr.onprogress = function (){
+btnUpdateMyProfile.style.display = "none";
+btnChangeToLoadingS.removeAttribute("hidden");
+};
 
 xhr.onload = function(){
-console.log(this.responseText);
-}
+  setTimeout(delayedFunc, 2000);//Timer for loading
+  function delayedFunc(){
+    btnUpdateMyProfile.style.display = "inline-block";
+    btnChangeToLoadingS.setAttribute("hidden", "hidden");
+    console.log("Status: 200");
+     $("#basicModal").modal('toggle');//toggle the modal
+     modalMessage.innerText = params;
+    }
+  }
 console.log(params);
 //send
 xhr.send(params);

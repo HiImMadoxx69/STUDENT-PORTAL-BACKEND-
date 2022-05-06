@@ -40,63 +40,29 @@ if(isset($_SESSION['UserLogin'])){
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
 
-  <!-- Toastr css file -->
-  <link href="../css/toast.css" rel="stylesheet">
+  
+  <!-- My Custom Css-->
+  <link href="../css/custom.css" rel="stylesheet">
 
-  <!-- Toastr js file -->
- 
+   
 </head>
 
 <body>
 
   <main>
      
+       
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-      <div class="card" id ="cardSpinner" hidden="hidden">
-            <div class="card-body">
-              <h5 class="card-title">Sizes</h5>
-              <p>Add <code>.spinner-border-sm</code> and <code>.spinner-grow-sm</code> to make a smaller spinner that can quickly be used within other components. Or, use custom CSS or inline styles to change the dimensions as needed.</p>
-
-              <!-- Sized spinners -->
-              <div class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-border" style="width: 40px; height: 40px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-border" style="width: 50px; height: 50px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow spinner-grow-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow" style="width: 30px; height: 30px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow" style="width: 40px; height: 40px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div class="spinner-grow" style="width: 50px; height: 50px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              <!-- End Sized spinners -->
-
-            </div>
-          </div>  
+  
       
-      <div class="container" id ="containerLogin">
+          <!-- End Sized spinners -->
+          
+
+    
+          <!-- End of Error Modal -->
+          <div class="container" id ="containerLogin">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
@@ -115,7 +81,17 @@ if(isset($_SESSION['UserLogin'])){
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
+<!-- alert -->
 
+<div >
+      <div>
+<div class="alert alert-danger alert-dismissible fade show w-100" role="alert" id = "alertLogin">
+              <center><p id="alertMessage">A simple danger alert—check it out!</p>
+              </center>    
+            </div>
+      </div>
+</div>
+<!-- end of alert -->
                   <form class="row g-3 needs-validation" novalidate id ="loginForm">
 
                     <div class="col-12">
@@ -133,6 +109,10 @@ if(isset($_SESSION['UserLogin'])){
                     </div>
               
                     <div class="col-12">
+                    <button class="btn btn-primary w-100" type="button" disabled id ="btnChangeToLoading" hidden>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Logging in...
+              </button>
                       <button class="btn btn-primary w-100" type="submit" name="login" id ="btnLogin">Login</button>
                     </div>
                     <div class="col-12">
@@ -154,7 +134,13 @@ if(isset($_SESSION['UserLogin'])){
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+  
+  
+  <!-------------------------------------------- MY JAVASCRIPT admin-login ------------------------------->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src ="../js/user-login.js" type = "text/javascript">
+  </script>
+  <!-- END OF  MY JAVASCRIPT admin-login -->
   <!-- Vendor JS Files -->
   <script src="../vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -167,8 +153,7 @@ if(isset($_SESSION['UserLogin'])){
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-  <!-- User Login AJAX -->
-  <script src="../js/user-login.js"></script>
+ 
 </body>
 
 </html>

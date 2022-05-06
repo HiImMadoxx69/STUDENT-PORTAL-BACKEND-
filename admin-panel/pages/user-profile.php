@@ -14,24 +14,6 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
 $currentId = $user['id'];
 
-// if(isset($_POST['submitChanges'])){
-//     $fname = $_POST['firstname'];
-//     $lname = $_POST['lastname'];
-//     $about = $_POST['about'];
-//     $position = $_POST['position'];
-//     $address = $_POST['address'];
-//     $contact = $_POST['phone'];
-//     $email = $_POST['email'];
-//     $twitter = $_POST['twitter'];
-//     $facebook = $_POST['facebook'];
-//     $instagram = $_POST['instagram'];
-//     $linkedin = $_POST['linkedin'];
-
-//     $sqlUpdate = "UPDATE tbl_admin SET firstname = '$fname', lastname = '$lname', about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = 'facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id = $currentId";
-
-//     $con->query($sqlUpdate) or die ($con->error);//if wrong query kill the connections (students is the query)
-// }
-
 ?>
 
 <!DOCTYPE html>
@@ -300,9 +282,9 @@ $currentId = $user['id'];
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="admin-logout.php">
                 <i class="bi bi-box-arrow-right"></i>           
-              <span onclick="window.location='admin-logout.php'">Sign Out
+              <span>Sign Out
                 </span>
               </a>
             </li>
@@ -505,7 +487,7 @@ $currentId = $user['id'];
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                
                 <!-- Profile Edit Form -->
-                  <form id ="updateProfileForm">
+                  <form id ="updateProfileForm" enctype="multipart/form-data">
                   
 
                 <!-- PROFILE IMAGE -->
@@ -624,22 +606,23 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
         <!-- Modal -->
       
-              <!-- Basic Modal -->
-              
+               <!-- Basic Modal -->
+               <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Basic Modal
+              </button> -->
               <div class="modal fade" id="basicModal" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Basic Modal</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                      <div class="modal-header">
+                        <h5 class="modal-title">Updated Succesfully!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
                     <div class="modal-body">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+                     <p id="modalLogs"></p>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                 
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      
                     </div>
                   </div>
                 </div>
@@ -648,9 +631,14 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
            
 
                     <div class="text-center">
-                      <button type="submit" id ="btnUpdateProfile"  class="btn btn-primary" >Save Changes</button>
+                    <button class="btn btn-primary" type="button" disabled id ="btnChangeToLoading" hidden>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Updating...
+              </button>
+
+                      <button type="submit" id ="btnUpdateProfile"   class="btn btn-primary" >Save Changes</button>
                     </div>
-                    
+
                   </form><!-- End Profile Edit Form -->
 
               </div>
@@ -740,22 +728,23 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
   </main><!-- End #main -->
 
-
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+<footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>Footer</span></strong>. All Rights Reserved
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
+    
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  
+
+  <!-- my javascript for user-prfile -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src ="../js/user-profile.js" type = "text/javascript">
+</script>
+<!-- end of my javascript for user - profile -->
 
   <!-- Vendor JS Files -->
   <script src="../vendor/apexcharts/apexcharts.min.js"></script>
@@ -769,9 +758,6 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
-<!-- Script for updating the profile -->
-<script src = "../js/user-edit.js"></script><!-- End of script for updating the profile -->
 
 </body>
 

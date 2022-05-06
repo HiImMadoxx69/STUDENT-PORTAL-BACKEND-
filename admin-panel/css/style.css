@@ -208,6 +208,8 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #d3d3d4;
 }
 
+
+
 /* Card */
 .card {
   margin-bottom: 30px;
@@ -523,6 +525,12 @@ h1, h2, h3, h4, h5, h6 {
 .header-nav .profile .dropdown-item:hover {
   background-color: #f6f9ff;
 }
+
+.spi{
+  visibility: hidden;
+}
+
+
 
 /*--------------------------------------------------------------
 # Sidebar
@@ -1076,3 +1084,5 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #012970;
 }
+
+
