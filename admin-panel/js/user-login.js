@@ -1,8 +1,9 @@
 document.getElementById('loginForm').addEventListener('submit', logIn);
-document.getElementById('btnLogin').addEventListener('click', logIn);
-const spin = document.getElementById('cardSpinner');//Spinner
-const logInNow = document.getElementById('containerLogin');//Main login form
-const alertPrompt = document.getElementById('alertLogin');
+const btnLogIn = document.getElementById('btnLogin');// Button for login
+btnLogIn.addEventListener('click', logIn);// when clicked
+const alertPrompt = document.getElementById('alertLogin');// alert error
+const btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
+const alertMSG = document.getElementById('alertMessage');
 
 // HTTP REQUEST
 function logIn(e){
@@ -20,41 +21,41 @@ function logIn(e){
     xhr.open('POST', '../controller/user-login.php', true);
 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    logInNow.style.display = 'none';
-    spin.style.display = 'inline-block';
+
     //send
     xhr.send(params);
 
     xhr.onprogress = function (){
-        spin.style.display = 'inline-block';
-        logInNow.style.display = 'none';
-    }
-    xhr.onload = function (){
-        if(this.status === 200){ 
-            console.log(this.responseText);
-            let getResult = JSON.parse(this.responseText);
-
-            if(getResult.statusCode === 200){
-            spin.style.display = 'none';
-            location.reload();
-            }else{
-                spin.style.display = 'none';
-                alertPrompt.style.display = 'inline-block';
-                logInNow.style.display = 'inline-block';   
-                console.log("Wrong credentials!");
-            }
-       }
-       
-    }
-    //checkStatus();
-}
-
-
-function checkStatus(){
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET', '../controller/user-login.php', true);
-
+      alertPrompt.style.display = 'none';
+      btnChangeToLoadingS.removeAttribute("hidden");
+      btnLogIn.style.display = 'none';
+    }//progress
+    
    
-    xhr.send();
-}
+xhr.onload = function (){//once loaded
+  let getResult = JSON.parse(this.responseText);
+      console.log(getResult);
+setTimeout(delayedFunc, 2000);//Timer for loading
+function delayedFunc(){
+
+     
+      
+      
+      if(getResult.statusCode === 200){
+            btnChangeToLoadingS.setAttribute("hidden", "hidden");
+            location.reload();
+      }else{          
+          alertPrompt.style.display = 'inline-block';
+          alertMSG.innerHTML = 'Wrong credentials';
+          btnChangeToLoadingS.setAttribute("hidden", "hidden");
+          btnLogIn.style.display = 'inline-block';
+          console.log("Wrong credentials!");
+      
+     }//end of if status 200 
+    
+    }//end of delayedFunc
+  } // end of onload 
+
+
+}//end of login
+

@@ -14,24 +14,6 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
 $currentId = $user['id'];
 
-// if(isset($_POST['submitChanges'])){
-//     $fname = $_POST['firstname'];
-//     $lname = $_POST['lastname'];
-//     $about = $_POST['about'];
-//     $position = $_POST['position'];
-//     $address = $_POST['address'];
-//     $contact = $_POST['phone'];
-//     $email = $_POST['email'];
-//     $twitter = $_POST['twitter'];
-//     $facebook = $_POST['facebook'];
-//     $instagram = $_POST['instagram'];
-//     $linkedin = $_POST['linkedin'];
-
-//     $sqlUpdate = "UPDATE tbl_admin SET firstname = '$fname', lastname = '$lname', about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = 'facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id = $currentId";
-
-//     $con->query($sqlUpdate) or die ($con->error);//if wrong query kill the connections (students is the query)
-// }
-
 ?>
 
 <!DOCTYPE html>
@@ -505,7 +487,7 @@ $currentId = $user['id'];
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                
                 <!-- Profile Edit Form -->
-                  <form id ="updateProfileForm">
+                  <form id ="updateProfileForm" enctype="multipart/form-data">
                   
 
                 <!-- PROFILE IMAGE -->
@@ -624,22 +606,23 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
         <!-- Modal -->
       
-              <!-- Basic Modal -->
-              
+               <!-- Basic Modal -->
+               <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Basic Modal
+              </button> -->
               <div class="modal fade" id="basicModal" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Basic Modal</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                      <div class="modal-header">
+                        <h5 class="modal-title">Updated Succesfully!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
                     <div class="modal-body">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+                     <p id="modalLogs"></p>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                 
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      
                     </div>
                   </div>
                 </div>
@@ -653,7 +636,7 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
                 Updating...
               </button>
 
-                      <button type="submit" id ="btnUpdateProfile"  class="btn btn-primary">Save Changes</button>
+                      <button type="submit" id ="btnUpdateProfile"   class="btn btn-primary" >Save Changes</button>
                     </div>
 
                   </form><!-- End Profile Edit Form -->
@@ -748,85 +731,18 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
   <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>Footer</span></strong>. All Rights Reserved
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
+    
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<script>
-//Javascript for user-profile 
-const btnUpdateMyProfile = document.getElementById('btnUpdateProfile');//button of update profile info
-btnUpdateMyProfile.addEventListener('click', updateProfile);//get the click listener of button update profile
-document.getElementById('updateProfileForm').addEventListener('submit', updateProfile);
+  
 
-let btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
-
-
-     //POST NAME
-function updateProfile(e){
- 
-e.preventDefault();
-
-let id = document.getElementById('currentUserID').value;
-let firstname = document.getElementById('firstName').value;
-let lastname = document.getElementById('lastName').value;
-let about = document.getElementById('About').value;
-let position = document.getElementById('Position').value;
-let address = document.getElementById('Address').value;
-let contact = document.getElementById('Contact').value;
-let email = document.getElementById('Email').value;
-let twitter = document.getElementById('Twitter').value;
-let facebook = document.getElementById('Facebook').value;
-let instagram = document.getElementById('Instagram').value;
-let linkedin = document.getElementById('Linkedin').value;
-
-let params =  
-"firstname="+firstname+
-"&lastname="+lastname+
-"&about="+about+
-"&position="+position+
-"&address="+address+
-"&contact="+contact+
-"&email="+email+
-"&twitter="+twitter+
-"&facebook="+facebook+
-"&instagram="+instagram+
-"&linkedin="+linkedin+
-"&id="+id
-;
-
-const xhr = new XMLHttpRequest();
-
-xhr.open('POST', '../controller/user-edit.php', true);
-
-xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-xhr.onprogress = function (){
-btnUpdateMyProfile.style.display = "none";
-btnChangeToLoadingS.removeAttribute("hidden");
-};
-
-xhr.onload = function(){
-
-  setTimeout(delayedFunc, 3000);//Timer for loading
-  function delayedFunc(){
-    btnUpdateMyProfile.style.display = "inline-block";
-    btnChangeToLoadingS.setAttribute("hidden", "hidden");
-    console.log("Status: 200");
-    }
-  }
-console.log(params);
-//send
-xhr.send(params);
-}
+  <!-- my javascript for user-prfile -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src ="../js/user-profile.js" type = "text/javascript">
 </script>
 <!-- end of my javascript for user - profile -->
 
