@@ -104,7 +104,7 @@ if($total > 0){
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your Studentid & password to login</p>
+                    <p class="text-center small">Enter your Student Id & Password to Lddogin</p>
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate action="" method="post">
@@ -112,16 +112,15 @@ if($total > 0){
                     <div class="col-12">
                       <label for="yourStudentid" class="form-label">Student Id</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="text" name="studentid" class="form-control" id="yourStudentid" required>
-                        <div class="invalid-feedback">Please enter your Student Id.</div>
+                        <div class="invalid-feedback">Please enter your Student Id</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <div class="invalid-feedback">Please enter your password</div>
                     </div>
               
                     <div class="col-12">

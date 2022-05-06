@@ -300,9 +300,9 @@ $currentId = $user['id'];
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="admin-logout.php">
                 <i class="bi bi-box-arrow-right"></i>           
-              <span onclick="window.location='admin-logout.php'">Sign Out
+              <span>Sign Out
                 </span>
               </a>
             </li>
@@ -648,9 +648,14 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
            
 
                     <div class="text-center">
-                      <button type="submit" id ="btnUpdateProfile"  class="btn btn-primary" >Save Changes</button>
+                    <button class="btn btn-primary" type="button" disabled id ="btnChangeToLoading" hidden>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Updating...
+              </button>
+
+                      <button type="submit" id ="btnUpdateProfile"  class="btn btn-primary">Save Changes</button>
                     </div>
-                    
+
                   </form><!-- End Profile Edit Form -->
 
               </div>
@@ -740,9 +745,8 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
   </main><!-- End #main -->
 
-
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+<footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
@@ -757,6 +761,75 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+<script>
+//Javascript for user-profile 
+const btnUpdateMyProfile = document.getElementById('btnUpdateProfile');//button of update profile info
+btnUpdateMyProfile.addEventListener('click', updateProfile);//get the click listener of button update profile
+document.getElementById('updateProfileForm').addEventListener('submit', updateProfile);
+
+let btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
+
+
+     //POST NAME
+function updateProfile(e){
+ 
+e.preventDefault();
+
+let id = document.getElementById('currentUserID').value;
+let firstname = document.getElementById('firstName').value;
+let lastname = document.getElementById('lastName').value;
+let about = document.getElementById('About').value;
+let position = document.getElementById('Position').value;
+let address = document.getElementById('Address').value;
+let contact = document.getElementById('Contact').value;
+let email = document.getElementById('Email').value;
+let twitter = document.getElementById('Twitter').value;
+let facebook = document.getElementById('Facebook').value;
+let instagram = document.getElementById('Instagram').value;
+let linkedin = document.getElementById('Linkedin').value;
+
+let params =  
+"firstname="+firstname+
+"&lastname="+lastname+
+"&about="+about+
+"&position="+position+
+"&address="+address+
+"&contact="+contact+
+"&email="+email+
+"&twitter="+twitter+
+"&facebook="+facebook+
+"&instagram="+instagram+
+"&linkedin="+linkedin+
+"&id="+id
+;
+
+const xhr = new XMLHttpRequest();
+
+xhr.open('POST', '../controller/user-edit.php', true);
+
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+xhr.onprogress = function (){
+btnUpdateMyProfile.style.display = "none";
+btnChangeToLoadingS.removeAttribute("hidden");
+};
+
+xhr.onload = function(){
+
+  setTimeout(delayedFunc, 3000);//Timer for loading
+  function delayedFunc(){
+    btnUpdateMyProfile.style.display = "inline-block";
+    btnChangeToLoadingS.setAttribute("hidden", "hidden");
+    console.log("Status: 200");
+    }
+  }
+console.log(params);
+//send
+xhr.send(params);
+}
+</script>
+<!-- end of my javascript for user - profile -->
+
   <!-- Vendor JS Files -->
   <script src="../vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -769,9 +842,6 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
-<!-- Script for updating the profile -->
-<script src = "../js/user-edit.js"></script><!-- End of script for updating the profile -->
 
 </body>
 

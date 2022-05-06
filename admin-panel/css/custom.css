@@ -29,6 +29,7 @@ div#alertLogin{
 }
 
 
+
 .Myspinner-border-sm {
 	width: 1rem;
 	height: 1rem;
@@ -96,3 +97,178 @@ div#alertLogin{
 	border: 0 !important
 }
 /* END OF SPINNER */
+
+/* Card Customizer */
+/* .Mycard {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0, 0, 0, .125);
+	border-radius: .25rem
+}
+
+.Mycard>hr {
+	margin-right: 0;
+	margin-left: 0
+}
+
+.Mycard>.list-group {
+	border-top: inherit;
+	border-bottom: inherit
+}
+
+.Mycard>.list-group:first-child {
+	border-top-width: 0;
+	border-top-left-radius: calc(.25rem - 1px);
+	border-top-right-radius: calc(.25rem - 1px)
+}
+
+.Mycard>.list-group:last-child {
+	border-bottom-width: 0;
+	border-bottom-right-radius: calc(.25rem - 1px);
+	border-bottom-left-radius: calc(.25rem - 1px)
+}
+
+.Mycard>.Mycard-header+.list-group,
+.Mycard>.list-group+.Mycard-footer {
+	border-top: 0
+}
+
+.Mycard-body {
+	flex: 1 1 auto;
+	padding: 1rem 1rem
+}
+
+.Mycard-title {
+	margin-bottom: .5rem
+}
+
+.Mycard-subtitle {
+	margin-top: -.25rem;
+	margin-bottom: 0
+}
+
+.Mycard-text:last-child {
+	margin-bottom: 0
+}
+
+.Mycard-link+.Mycard-link {
+	margin-left: 1rem
+}
+
+.Mycard-header {
+	padding: .5rem 1rem;
+	margin-bottom: 0;
+	background-color: rgba(0, 0, 0, .03);
+	border-bottom: 1px solid rgba(0, 0, 0, .125)
+}
+
+.Mycard-header:first-child {
+	border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+}
+
+.Mycard-footer {
+	padding: .5rem 1rem;
+	background-color: rgba(0, 0, 0, .03);
+	border-top: 1px solid rgba(0, 0, 0, .125)
+}
+
+.Mycard-footer:last-child {
+	border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px)
+}
+
+.Mycard-header-tabs {
+	margin-right: -.5rem;
+	margin-bottom: -.5rem;
+	margin-left: -.5rem;
+	border-bottom: 0
+}
+
+.Mycard-header-pills {
+	margin-right: -.5rem;
+	margin-left: -.5rem
+}
+
+.Mycard-img-overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1rem;
+	border-radius: calc(.25rem - 1px)
+}
+
+.Mycard-img,
+.Mycard-img-bottom,
+.Mycard-img-top {
+	width: 100%
+}
+
+.Mycard-img,
+.Mycard-img-top {
+	border-top-left-radius: calc(.25rem - 1px);
+	border-top-right-radius: calc(.25rem - 1px)
+}
+
+.Mycard-img,
+.Mycard-img-bottom {
+	border-bottom-right-radius: calc(.25rem - 1px);
+	border-bottom-left-radius: calc(.25rem - 1px)
+}
+
+.Mycard-group>.Mycard {
+	margin-bottom: .75rem
+}
+
+@media (min-width:576px) {
+	.Mycard-group {
+		display: flex;
+		flex-flow: row wrap
+	}
+
+	.Mycard-group>.Mycard {
+		flex: 1 0 0%;
+		margin-bottom: 0
+	}
+
+	.Mycard-group>.Mycard+.Mycard {
+		margin-left: 0;
+		border-left: 0
+	}
+
+	.Mycard-group>.Mycard:not(:last-child) {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0
+	}
+
+	.Mycard-group>.Mycard:not(:last-child) .Mycard-header,
+	.Mycard-group>.Mycard:not(:last-child) .Mycard-img-top {
+		border-top-right-radius: 0
+	}
+
+	.Mycard-group>.Mycard:not(:last-child) .Mycard-footer,
+	.Mycard-group>.Mycard:not(:last-child) .Mycard-img-bottom {
+		border-bottom-right-radius: 0
+	}
+
+	.Mycard-group>.Mycard:not(:first-child) {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0
+	}
+
+	.Mycard-group>.Mycard:not(:first-child) .Mycard-header,
+	.Mycard-group>.Mycard:not(:first-child) .Mycard-img-top {
+		border-top-left-radius: 0
+	}
+
+	.Mycard-group>.Mycard:not(:first-child) .Mycard-footer,
+	.Mycard-group>.Mycard:not(:first-child) .Mycard-img-bottom {
+		border-bottom-left-radius: 0
+	}
+}
+End of Cardcustomizer */

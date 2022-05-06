@@ -274,9 +274,9 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
                 <i class="bi bi-box-arrow-right"></i>
-                <span onclick = "window.location='logout.php'">Sign Out
+                <span>Sign Out
                 </span>
                
               </a>

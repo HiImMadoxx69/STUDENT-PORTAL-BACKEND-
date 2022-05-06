@@ -56,9 +56,7 @@ if(isset($_SESSION['UserLogin'])){
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
   
-      <div class="Myspinner-border" style="width: 50px; height: 50px;" role="status" id ="cardSpinner">
-                <span class="Myvisually-hidden">Loading...</span>
-      </div>
+      
           <!-- End Sized spinners -->
           
 
@@ -87,10 +85,10 @@ if(isset($_SESSION['UserLogin'])){
 
 <div >
       <div>
-<div class="alert alert-danger alert-dismissible fade show" role="alert" id = "alertLogin">
-                A simple danger alert—check it out!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
+<div class="alert alert-danger alert-dismissible fade show w-100" role="alert" id = "alertLogin">
+              <center><p id="alertMessage">A simple danger alert—check it out!</p>
+              </center>    
+            </div>
       </div>
 </div>
 <!-- end of alert -->
@@ -111,6 +109,10 @@ if(isset($_SESSION['UserLogin'])){
                     </div>
               
                     <div class="col-12">
+                    <button class="btn btn-primary w-100" type="button" disabled id ="btnChangeToLoading" hidden>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Logging in...
+              </button>
                       <button class="btn btn-primary w-100" type="submit" name="login" id ="btnLogin">Login</button>
                     </div>
                     <div class="col-12">
@@ -132,7 +134,75 @@ if(isset($_SESSION['UserLogin'])){
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+  
+  <!-------------------------------------------- MY JAVASCRIPT admin-login ------------------------------->
+  <script>
+document.getElementById('loginForm').addEventListener('submit', logIn);
+const btnLogIn = document.getElementById('btnLogin');// Button for login
+btnLogIn.addEventListener('click', logIn);// when clicked
+const alertPrompt = document.getElementById('alertLogin');// alert error
+const btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
+const alertMSG = document.getElementById('alertMessage');
 
+// HTTP REQUEST
+function logIn(e){
+    const username = document.getElementById('yourUsername').value;
+    const password = document.getElementById('yourPassword').value;
+    
+    e.preventDefault();
+
+    let params = 
+    "username="+username+
+    "&password="+password;
+    console.log(params);
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '../controller/user-login.php', true);
+
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    //send
+    xhr.send(params);
+
+    xhr.onprogress = function (){
+      alertPrompt.style.display = 'none';
+      btnChangeToLoadingS.removeAttribute("hidden");
+      btnLogIn.style.display = 'none';
+    }//progress
+    
+   
+xhr.onload = function (){//once loaded
+  let getResult = JSON.parse(this.responseText);
+      console.log(getResult);
+setTimeout(delayedFunc, 2000);//Timer for loading
+function delayedFunc(){
+
+     
+      
+      
+      if(getResult.statusCode === 200){
+            btnChangeToLoadingS.setAttribute("hidden", "hidden");
+            location.reload();
+      }else{          
+          alertPrompt.style.display = 'inline-block';
+          alertMSG.innerHTML = 'Wrong credentials';
+          btnChangeToLoadingS.setAttribute("hidden", "hidden");
+          btnLogIn.style.display = 'inline-block';
+          console.log("Wrong credentials!");
+      
+     }//end of if status 200 
+    
+    }//end of delayedFunc
+  } // end of onload 
+
+
+}//end of login
+
+
+
+  </script>
+  <!-- END OF  MY JAVASCRIPT admin-login -->
   <!-- Vendor JS Files -->
   <script src="../vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -145,9 +215,7 @@ if(isset($_SESSION['UserLogin'])){
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-  <!-- User Login AJAX -->
-  <script src="../js/user-login.js"></script>
-
+ 
 </body>
 
 </html>
