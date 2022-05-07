@@ -228,8 +228,11 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             
-            <?php  echo '<img src="data:image;base64,'.base64_encode($user['profilepic']).'" alt="Profile" class="rounded-circle" />';
-   ?> 
+          
+<?php
+
+echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
+?>
             <?php
                 echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$_SESSION['UserLogin'].'</span>' ;
                 ?>

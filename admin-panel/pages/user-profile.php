@@ -10,7 +10,7 @@ $sql = "SELECT * FROM tbl_admin WHERE username = '".$_SESSION['UserLogin']."';";
 
 $user = $con->query($sql) or die ($con->error);//if wrong query kill the connections (students is the query)
 
-$user = $user->fetch_assoc();// for getting the admin credentials it is like a array to access data like profile simply user['profilepic']
+$user = $user->fetch_assoc();// for getting the admin credentials it is like a array to access data 
 
 $currentId = $user['id'];
 
@@ -47,8 +47,6 @@ $currentId = $user['id'];
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
 
-
-  <!-- TOASTR -->
 
 </head>
 
@@ -228,10 +226,12 @@ $currentId = $user['id'];
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            
-            <?php  echo '<img src="data:image;base64,'.base64_encode($user['profilepic']).'" alt="Profile" class="rounded-circle" />';
-   ?> 
-            <?php
+
+<?php
+
+echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
+?>
+                <?php
                 echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$_SESSION['UserLogin'].'</span>' ;
                 ?>
             
@@ -387,9 +387,10 @@ $currentId = $user['id'];
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             
-              <?php  echo '<img src="data:image;base64,'.base64_encode($user['profilepic']).'" alt="Profile" class="rounded-circle" />';
-               ?> 
-     
+              
+            <?php
+              echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
+            ?>
               <?php echo '<h2>'.$user['firstname'].' '.$user['lastname'].'</h2>' 
               ?>
               
@@ -495,17 +496,24 @@ $currentId = $user['id'];
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
                         
-                        <?php  echo '<img src="data:image;base64,'.base64_encode($user['profilepic']).'" alt="Profile"  />';
-               ?>
+                        <?php
+
+                              echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile"   />';
+                        ?>
                         <?php
 
                         ?>
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                        </div>
+                        
                       </div>
                     </div>
+                    <!-- Get the new profile -->
+                <div class="row mb-3">
+                  <label for="profileEdit" class="col-md-4 col-lg-3 col-form-label">File Upload</label>
+                    <div class="col-md-8 col-lg-9">
+                    <input class="form-control" type ="file" id ="profileEdit">
+                    </div>
+                </div>
+
 
                     <div class="row mb-3">
                          <!-- GET THE ID OF USER -->
