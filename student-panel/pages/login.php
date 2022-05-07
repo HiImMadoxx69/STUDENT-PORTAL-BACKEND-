@@ -71,7 +71,7 @@ if(isset($_SESSION['StudentID'])){
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your Student Id & Password to Lddogin</p>
+                    <p class="text-center small">Enter your Student Id & Password to Login</p>
                   </div>
 
 <!-- alert -->

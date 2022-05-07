@@ -15,7 +15,6 @@ function logIn(e){
     let params = 
     "username="+username+
     "&password="+password;
-    console.log(params);
     const xhr = new XMLHttpRequest();
 
     xhr.open('POST', '../controller/user-login.php', true);
@@ -34,8 +33,7 @@ function logIn(e){
    
 xhr.onload = function (){//once loaded
   let getResult = JSON.parse(this.responseText);
-      console.log(getResult);
-setTimeout(delayedFunc, 2000);//Timer for loading
+setTimeout(delayedFunc, 1000);//Timer for loading
 function delayedFunc(){
 
      

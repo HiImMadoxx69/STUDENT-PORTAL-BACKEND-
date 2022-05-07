@@ -50,7 +50,7 @@ btnChangeToLoadingS.removeAttribute("hidden");
 };
 
 xhr.onload = function(){
-  setTimeout(delayedFunc, 2000);//Timer for loading
+  setTimeout(delayedFunc, 1000);//Timer for loading
   function delayedFunc(){
     btnUpdateMyProfile.style.display = "inline-block";
     btnChangeToLoadingS.setAttribute("hidden", "hidden");
