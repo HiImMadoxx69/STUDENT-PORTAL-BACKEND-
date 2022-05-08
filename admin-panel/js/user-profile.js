@@ -5,12 +5,12 @@ document.getElementById('updateProfileForm').addEventListener('submit', updatePr
 let btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
 let modalMessage = document.getElementById('modalLogs');// modal message body
 let fileupload = document.getElementById('profileEdit');// fileupload
+const id = document.getElementById('currentUserID').value;
      //POST NAME
 function updateProfile(e){
  
 e.preventDefault();
 
-let id = document.getElementById('currentUserID').value;
 let fileProfile = document.getElementById('profileEdit');
 let firstname = document.getElementById('firstName').value;
 let lastname = document.getElementById('lastName').value;
@@ -24,9 +24,7 @@ let facebook = document.getElementById('Facebook').value;
 let instagram = document.getElementById('Instagram').value;
 let linkedin = document.getElementById('Linkedin').value;
 
-let profilepic = new FormData();
-profilepic.append("file", fileProfile.files[0]);
-console.log(profilepic);
+
 
 let params =  
 "firstname="+firstname+
@@ -82,13 +80,18 @@ xhr.onload = function(){
 
 
   }//onload
+
+
   async function uploadFile() {
+    let pic_params = "id="+id;
     let formData = new FormData();           
     formData.append("file", fileupload.files[0]);
     await fetch('../controller/upload.php', {
-      method: "POST", 
+      method: "POST",
+      headers:  pic_params,
       body: formData
-    });    
-    alert('The file has been uploaded successfully.');
+    }
+    );    
+
 }
 }
