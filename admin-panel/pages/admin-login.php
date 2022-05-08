@@ -138,7 +138,7 @@ if(isset($_SESSION['UserLogin'])){
   
   <!-------------------------------------------- MY JAVASCRIPT admin-login ------------------------------->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src ="../js/user-login.js" type = "text/javascript">
+  <script src ="../js/user-login.js?t=1491313943549" type = "text/javascript">
   </script>
   <!-- END OF  MY JAVASCRIPT admin-login -->
   <!-- Vendor JS Files -->
@@ -152,7 +152,7 @@ if(isset($_SESSION['UserLogin'])){
   <script src="../vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?t=1491313943549"></script>
  
 </body>
 

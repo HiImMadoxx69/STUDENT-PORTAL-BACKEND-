@@ -60,7 +60,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <header id="header" class="header fixed-top d-flex align-items-center">
     
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="admin-dashboard.php" class="logo d-flex align-items-center">
         <img src="../img/globe-client-logo.png" alt="">
         <span class="d-none d-lg-block">Student Portal</span>
       </a>
@@ -1037,7 +1037,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   <script src="../vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?t=1491313943549"></script>
 
 
 </body>

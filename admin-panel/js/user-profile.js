@@ -11,7 +11,7 @@ function updateProfile(e){
  
 e.preventDefault();
 
-let fileProfile = document.getElementById('profileEdit');
+
 let firstname = document.getElementById('firstName').value;
 let lastname = document.getElementById('lastName').value;
 let about = document.getElementById('About').value;
@@ -82,16 +82,37 @@ xhr.onload = function(){
   }//onload
 
 
-  async function uploadFile() {
-    let pic_params = "id="+id;
-    let formData = new FormData();           
-    formData.append("file", fileupload.files[0]);
-    await fetch('../controller/upload.php', {
-      method: "POST",
-      headers:  pic_params,
-      body: formData
-    }
-    );    
+  function uploadFile() {
 
-}
+  
+ // Picking up files from the input .  .  .
+ let files = fileupload.files;
+
+ // Uploading only one file; multiple uploads are not allowed.
+  let file = files[0]; 
+
+   // Create a FormData object.
+  formData = new FormData();
+
+    // Add the file to the request.
+    formData.append('profileEdit', file, file.name);
+    var xhr = new XMLHttpRequest();
+
+    // Open the connection.
+    xhr.open('POST', '../controller/upload.php', true);
+
+
+    // Set up a handler for when the task for the request is complete.
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+       let getResult = JSON.parse(this.responseText);
+       console.log(getResult.statusCode);
+      } else {
+        console.log("error");
+      }
+    };
+
+    // Send the Data.
+    xhr.send(formData);
+  }
 }

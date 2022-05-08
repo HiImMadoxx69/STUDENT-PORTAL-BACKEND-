@@ -59,7 +59,7 @@ $currentId = $user['id'];
   <header id="header" class="header fixed-top d-flex align-items-center">
     
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="admin-dashboard.php" class="logo d-flex align-items-center">
         <img src="../img/globe-client-logo.png" alt="">
         <span class="d-none d-lg-block">Student Portal</span>
       </a>
@@ -508,9 +508,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <!-- Get the new profile -->
                 <div class="row mb-3">
-                  <label for="profileEdit" class="col-md-4 col-lg-3 col-form-label">File Upload</label>
+                  <label for="profileEdit" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                     <div class="col-md-8 col-lg-9">
-                    <input class="form-control" type ="file" id ="profileEdit">
+                    <input class="form-control" type ="file" name = "profileEdit" id ="profileEdit">
                     </div>
                 </div>
 
@@ -629,8 +629,8 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
                      <p id="modalLogs"></p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      
+                      <button type="button" class="btn btn-secondary" onClick ="reloadPage()"data-bs-dismiss="modal">Close</button>
+                      <script> function reloadPage(){location.reload()}</script>
                     </div>
                   </div>
                 </div>
@@ -749,8 +749,8 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
   
 
   <!-- my javascript for user-prfile -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src ="../js/user-profile.js" type = "text/javascript">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src ="../js/user-profile.js?t=1491313943549"  type = "text/javascript">
 </script>
 <!-- end of my javascript for user - profile -->
 
@@ -765,7 +765,7 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
   <script src="../vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?t=1491313943549"></script>
 
 </body>
 
