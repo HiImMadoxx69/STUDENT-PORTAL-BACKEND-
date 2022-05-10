@@ -29,6 +29,8 @@ function updateProfile(e){
     let facebook = document.getElementById('Facebook').value;
     let instagram = document.getElementById('Instagram').value;
     let linkedin = document.getElementById('Linkedin').value; 
+
+
  // Picking up files from the input .  .  .
  let files = fileupload.files;
 
@@ -37,7 +39,7 @@ function updateProfile(e){
 
    // Create a FormData object.
   formData = new FormData();
-
+  
     // Add the file to the request.
     formData.append('profileEdit', imageFile, imageFile.name);
     console.log(currentId);

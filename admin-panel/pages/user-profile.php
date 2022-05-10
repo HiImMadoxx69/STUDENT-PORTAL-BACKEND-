@@ -232,7 +232,7 @@ $currentId = $user['id'];
 echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
 ?>
                 <?php
-                echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$_SESSION['UserLogin'].'</span>' ;
+                echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$user['username'].'</span>' ;
                 ?>
             
           </a><!-- End Profile Iamge Icon -->
@@ -240,10 +240,10 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
                <?php
-                echo '<h6>'.$_SESSION['UserLogin'].'</h6>' ;
+                echo '<h6>'.$user['firstname'].' '.$user['lastname'].'</h6>' ;
                 ?>
                <?php
-                echo '<span>'.$_SESSION['Position'].'</span>' ;
+                echo '<span>'.$user['position'].'</span>' ;
                 ?>
               
             </li>
@@ -431,9 +431,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
                 </li>
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
-                </li>
+            
 
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
@@ -493,12 +491,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                 <!-- PROFILE IMAGE -->
                     <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
+                      <label for="currentPhoto" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                      <div class="col-md-8 col-slg-9">
                         
                         <?php
 
-                              echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile"   />';
+                              echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" id ="currentPhoto"  />';
                         ?>
                         <?php
 
@@ -545,13 +543,31 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
                     </div>
 
 
-                    <div class="row mb-3">
-                      <label for="Position" class="col-md-4 col-lg-3 col-form-label">Position</label>
-                      <div class="col-md-8 col-lg-9">
-                        <?php echo '<input name="position" type="text" class="form-control" id="Position" value ="'.$user['position'].'"/>' 
-              ?>
-                      </div>
-                    </div>
+                <div class="row mb-3">
+                  <label class="col-md-4 col-lg-3 col-form-label">Job</label>
+                  <div class="col-md-8 col-lg-9">
+                    <select class="form-select" aria-label="Default select example" id= "Position">
+                      <?php
+                        if($user['position'] == 'Admin'){
+                          echo '<option selected value ="Admin">Admin</option>
+                          <option value="Registar">Registar</option>
+                          <option value="Accountant">Accountant</option>
+                          ';
+                        }else if($user['position'] == 'Registar'){
+                          echo '<option selected value ="Registrar">Registrar</option>
+                          <option value="Admin">Admin</option>
+                          <option value="Accountant">Accountant</option>
+                          ';
+                        }else{
+                          echo '<option selected value ="Accountant">Accountant</option>
+                          <option value="Admin">Admin</option>
+                          <option value="Registrar">Registrar</option>
+                          ';
+                        }
+                      ?>
+                    </select>
+                  </div>
+                </div>
 
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
@@ -651,48 +667,7 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
 
               </div>
 
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                  <!-- Settings Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">
-                            Changes made to your account
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new products and services
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                          <label class="form-check-label" for="securityNotify">
-                            Security alerts
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End settings Form -->
-
-                </div>
-
+          
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
                   <form>

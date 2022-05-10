@@ -234,18 +234,18 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
 ?>
             <?php
-                echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$_SESSION['UserLogin'].'</span>' ;
+                echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$user['username'].'</span>' ;
                 ?>
             
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-               <?php
-                echo '<h6>'.$_SESSION['UserLogin'].'</h6>' ;
+            <?php
+                echo '<h6>'.$user['firstname'].' '.$user['lastname'].'</h6>' ;
                 ?>
                <?php
-                echo '<span>'.$_SESSION['Position'].'</span>' ;
+                echo '<span>'.$user['position'].'</span>' ;
                 ?>
               
             </li>
