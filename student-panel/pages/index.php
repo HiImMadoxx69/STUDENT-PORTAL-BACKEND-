@@ -16,6 +16,24 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  table{
+    border-collapse: collapse;
+    width: 100%;
+    border : 1px solid #4CA4F3;
+  }
+  th, td{
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #4CA4F3;
+  }
+  tr:nth-child(even){
+    background-color: lightblue;
+  }
+   th{
+    background-color: lightblue;
+   }
+  </style>
 
 <head>
   <meta charset="utf-8">
@@ -229,8 +247,8 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6><?php echo $user['firstname'].' '.$user['lastname']?></h6>
+              <span><?php echo $user['course'].' '.$user['section']?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -248,12 +266,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
            
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
+            
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -365,7 +378,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
               <div class="tab-content pt-2">
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <h5 class="card-title">About</h5>
+               
                   
 
                   <h5 class="card-title">Profile Details</h5>
@@ -408,72 +421,145 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
                   <!-- Profile Edit Form -->
 
+
                   <form method="POST" action="#" >
-                    <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
-                        <?php  echo '<img src="data:image;base64,'.base64_encode($user['profilepic']).'" alt="Profile"  />';
-               ?>
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                        </div>
-                      </div>
-                    </div>
+                  <table>
+                       <thead>
+                     <tr>
+                         <th>SUBJECT CODE</th>
+                         <th>SUBJECT DESCRIPTION</th>
+                         <th>UNITS</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <?php 
+                     if ($user['subject1'] != NULL && $user['subject_code1']!= NULL && $user['units1'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code1'].'</td>
+                         <td> '.$user['subject1'].'</td>
+                         <td> '.$user['units1'].'</td>
+                       </tr>';}
+                       ?>
                     
+                    <?php 
+                     if ($user['subject2'] != NULL && $user['subject_code2']!= NULL && $user['units2'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code2'].'</td>
+                         <td> '.$user['subject2'].'</td>
+                         <td> '.$user['units2'].'</td>
+                       </tr>';}
+                       ?>
 
-                    <div class="row mb-3">
-                    <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
-                      <div class="col-md-8 col-lg-9">
-                          <?php echo '<input name="firstname" type="text" class="form-control" id="firstName" value ="'.$user['firstname'].'"/>' 
-              ?>  
-                    </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <?php echo '<input name = "lastname" type="text" class="form-control" id="lastName" value ="'.$user['lastname'].'"/>' 
-              ?>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">Student Number</label>
-                      <div class="col-md-8 col-lg-9">
-                        <?php echo '<input name="studentid" type="text" class="form-control" id="studentid" value ="'.$user['studentid'].'"/>' 
-              ?>  
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Course</label>
-                      <div class="col-md-8 col-lg-9">
-                      <?php echo '<input name="course" type="text" class="form-control" id="course" value ="'.$user['course'].'"/>' 
-              ?>  
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Section</label>
-                      <div class="col-md-8 col-lg-9">
-                      <?php echo '<input name="section" type="text" class="form-control" id="section" value ="'.$user['section'].'"/>' 
-              ?>  
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Birth Day</label>
-                      <div class="col-md-8 col-lg-9">
-                      <?php echo '<input name="birthday" type="text" class="form-control" id="birthday" value ="'.$user['birthday'].'"/>' 
-              ?>  
-                      </div>
-                    </div>
-
-      
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
+                      <?php 
+                     if ($user['subject3'] != NULL && $user['subject_code3']!= NULL && $user['units3'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code3'].'</td>
+                         <td> '.$user['subject3'].'</td>
+                         <td> '.$user['units3'].'</td>
+                       </tr>';}
+                       ?>
+                      <?php 
+                     if ($user['subject4'] != NULL && $user['subject_code4']!= NULL && $user['units4'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code4'].'</td>
+                         <td> '.$user['subject4'].'</td>
+                         <td> '.$user['units4'].'</td>
+                       </tr>';}
+                       ?>
+                       <?php 
+                     if ($user['subject5'] != NULL && $user['subject_code5']!= NULL && $user['units5'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code5'].'</td>
+                         <td> '.$user['subject5'].'</td>
+                         <td> '.$user['units5'].'</td>
+                       </tr>';}
+                       ?>
+                       <?php 
+                     if ($user['subject6'] != NULL && $user['subject_code6']!= NULL && $user['units6'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code6'].'</td>
+                         <td> '.$user['subject6'].'</td>
+                         <td> '.$user['units6'].'</td>
+                       </tr>';}
+                       ?>
+                       <?php 
+                     if ($user['subject7'] != NULL && $user['subject_code7']!= NULL && $user['units7'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code7'].'</td>
+                         <td> '.$user['subject7'].'</td>
+                         <td> '.$user['units7'].'</td>
+                       </tr>';}
+                       ?>
+                      <?php 
+                     if ($user['subject8'] != NULL && $user['subject_code8']!= NULL && $user['units8'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code8'].'</td>
+                         <td> '.$user['subject8'].'</td>
+                         <td> '.$user['units8'].'</td>
+                       </tr>';}
+                       ?>
+                       <?php 
+                     if ($user['subject9'] != NULL && $user['subject_code9']!= NULL && $user['units9'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code9'].'</td>
+                         <td> '.$user['subject9'].'</td>
+                         <td> '.$user['units9'].'</td>
+                       </tr>';}
+                       ?>
+                      <?php 
+                     if ($user['subject10'] != NULL && $user['subject_code10']!= NULL && $user['units10'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code10'].'</td>
+                         <td> '.$user['subject10'].'</td>
+                         <td> '.$user['units10'].'</td>
+                       </tr>';}
+                       ?>
+                       <?php 
+                     if ($user['subject11'] != NULL && $user['subject_code11']!= NULL && $user['units11'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code11'].'</td>
+                         <td> '.$user['subject11'].'</td>
+                         <td> '.$user['units11'].'</td>
+                       </tr>';}
+                       ?>
+                      <?php 
+                     if ($user['subject12'] != NULL && $user['subject_code12']!= NULL && $user['units12'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code12'].'</td>
+                         <td> '.$user['subject12'].'</td>
+                         <td> '.$user['units12'].'</td>
+                       </tr>';}
+                       ?>
+                       <?php 
+                     if ($user['subject13'] != NULL && $user['subject_code13']!= NULL && $user['units13'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code13'].'</td>
+                         <td> '.$user['subject13'].'</td>
+                         <td> '.$user['units13'].'</td>
+                       </tr>';}
+                       ?>
+                   <?php 
+                     if ($user['subject14'] != NULL && $user['subject_code14']!= NULL && $user['units14'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code14'].'</td>
+                         <td> '.$user['subject14'].'</td>
+                         <td> '.$user['units14'].'</td>
+                       </tr>';}
+                       ?>
+                     <?php 
+                     if ($user['subject15'] != NULL && $user['subject_code15']!= NULL && $user['units15'] != NULL){echo 
+                       '<tr>
+                         <td> '.$user['subject_code15'].'</td>
+                         <td> '.$user['subject15'].'</td>
+                         <td> '.$user['units15'].'</td>
+                       </tr>';}
+                       ?>
+                       
+                       </tbody>
+                     </table>
+                 
+                
+                   
                   </form><!-- End Profile Edit Form -->
 
                 </div>
