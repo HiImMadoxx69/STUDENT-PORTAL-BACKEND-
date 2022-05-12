@@ -60,7 +60,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <header id="header" class="header fixed-top d-flex align-items-center">
     
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="admin-dashboard.php" class="logo d-flex align-items-center">
         <img src="../img/globe-client-logo.png" alt="">
         <span class="d-none d-lg-block">Student Portal</span>
       </a>
@@ -228,21 +228,24 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             
-            <?php  echo '<img src="data:image;base64,'.base64_encode($user['profilepic']).'" alt="Profile" class="rounded-circle" />';
-   ?> 
+          
+<?php
+
+echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
+?>
             <?php
-                echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$_SESSION['UserLogin'].'</span>' ;
+                echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$user['username'].'</span>' ;
                 ?>
             
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-               <?php
-                echo '<h6>'.$_SESSION['UserLogin'].'</h6>' ;
+            <?php
+                echo '<h6>'.$user['firstname'].' '.$user['lastname'].'</h6>' ;
                 ?>
                <?php
-                echo '<span>'.$_SESSION['Position'].'</span>' ;
+                echo '<span>'.$user['position'].'</span>' ;
                 ?>
               
             </li>
@@ -1034,7 +1037,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <script src="../vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?t=1491313943549"></script>
 
 
 </body>

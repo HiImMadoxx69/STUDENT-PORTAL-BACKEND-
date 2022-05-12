@@ -7,17 +7,17 @@ const alertMSG = document.getElementById('alertMessage');
 
 // HTTP REQUEST
 function logIn(e){
-    const username = document.getElementById('yourUsername').value;
+    const studentid = document.getElementById('yourStudentid').value;
     const password = document.getElementById('yourPassword').value;
     
     e.preventDefault();
 
     let params = 
-    "username="+username+
+    "studentid="+studentid+
     "&password="+password;
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', '../controller/user-login.php', true);
+    xhr.open('POST', '../controller/controller-login.php', true);
 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -33,12 +33,9 @@ function logIn(e){
    
 xhr.onload = function (){//once loaded
   let getResult = JSON.parse(this.responseText);
+      
 setTimeout(delayedFunc, 1000);//Timer for loading
-function delayedFunc(){
-
-     
-      
-      
+function delayedFunc(){   
       if(getResult.statusCode === 200){
             btnChangeToLoadingS.setAttribute("hidden", "hidden");
             location.reload();
