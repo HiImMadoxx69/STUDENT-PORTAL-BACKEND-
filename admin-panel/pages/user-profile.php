@@ -262,7 +262,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="user-profile.php">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -271,12 +271,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
+           
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -320,60 +315,45 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Profile Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
+     
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+        <a class="nav-link collapsed" href="user-accounts.php">
           <i class="bi bi-card-list"></i>
-          <span>Register</span>
+          <span>User Account</span>
         </a>
-      </li><!-- End Register Page Nav -->
+      </li><!-- End User Account Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
-          <i class="bi bi-dash-circle"></i>
-          <span>Error 404</span>
-        </a>
-      </li><!-- End Error 404 Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
+     
     </ul>
 
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
+  <div class="modal fade" id="basicModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id ="modalMainMessage">Updated Succesfully!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                    <div class="modal-body">
+                     <p id="modalLogs"></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" onClick ="reloadPage()"data-bs-dismiss="modal">Close</button>
+                      <script> function reloadPage(){location.reload()}</script>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Basic Modal-->
 
     <div class="pagetitle">
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
+          <li class="breadcrumb-item">Pages</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
       </nav>
@@ -517,6 +497,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                          <!-- GET THE ID OF USER -->
                 <?php
 echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';  
+echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['password'].'"/>';
 ?>
                       <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                       <div class="col-md-8 col-lg-9">
@@ -628,30 +609,7 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
                       </div>
                     </div>
 
-        <!-- Modal -->
-      
-               <!-- Basic Modal -->
-               <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
-                Basic Modal
-              </button> -->
-              <div class="modal fade" id="basicModal" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Updated Succesfully!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                    <div class="modal-body">
-                     <p id="modalLogs"></p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" onClick ="reloadPage()"data-bs-dismiss="modal">Close</button>
-                      <script> function reloadPage(){location.reload()}</script>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Basic Modal-->
-
+            
            
 
                     <div class="text-center">
@@ -670,31 +628,38 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
           
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  
+                  <form id ="formUserChangePass">
 
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
+                        <input name="password" type="password" class="form-control" id="currentPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                        <input name="newpassword" type="password" class="form-control" id="newPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <input name="renewpassword" type="password" class="form-control" id="renewPassword" required>
                       </div>
                     </div>
 
+
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                    <button class="btn btn-primary" type="button" disabled id ="btnChangeToLoadingPassword" hidden>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Updating...
+              </button>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary" id ="btnUserChangePass">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
@@ -724,7 +689,7 @@ echo '<input type = "hidden" id ="currentUserID" value = "'.$user['id'].'"/>';
   
 
   <!-- my javascript for user-prfile -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
 <script src ="../js/user-profile.js?t=1491313943549"  type = "text/javascript">
 </script>
 <!-- end of my javascript for user - profile -->

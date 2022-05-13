@@ -3,18 +3,93 @@ const btnUpdateMyProfile = document.getElementById('btnUpdateProfile');//button 
 
 btnUpdateMyProfile.addEventListener('click', updateProfile);//get the click listener of button update profile
 
+
 document.getElementById('updateProfileForm').addEventListener('submit', updateProfile);
 
+
+//Loading buttons
 let btnChangeToLoadingS = document.getElementById('btnChangeToLoading');//loading button
+let btnChangeToLoadingPassword = document.getElementById('btnChangeToLoadingPassword');//loading button for change pass
+
 
 let modalMessage = document.getElementById('modalLogs');// modal message body
+let modalHeading = document.getElementById('modalMainMessage');
 
+
+
+const currentId = document.getElementById('currentUserID').value;//current user id
+const currentPassword = document.getElementById('currentUserPassword').value;
+
+//Change pass button
+const btnUserChangePass = document.getElementById('btnUserChangePass');
+btnUserChangePass.addEventListener('click', changeUserPassword);
+
+document.getElementById('formUserChangePass').addEventListener('submit', changeUserPassword);//form of changeuser pass
+
+function getSuccessModal(){
+  modalHeading.innerHTML = 'Updated Succesfully!';
+  $("#basicModal").modal('toggle');//toggle the modal
+  modalMessage.innerText = 'Succesfull!';
+ 
+}
+
+function getFailedModal(){
+  modalHeading.innerHTML = 'Action failed!';
+  $("#basicModal").modal('toggle');//toggle the modal
+  modalMessage.innerText = 'Failed!';
+}
+
+//Change password function
+function changeUserPassword(e){
+  e.preventDefault();
+let getCurrentPassword = document.getElementById('currentPassword').value;
+let newPassword = document.getElementById('newPassword').value;
+let confirmNewPassword = document.getElementById('renewPassword').value;
+
+console.log('currentpass' + getCurrentPassword +'; currentPasword ' +currentPassword+ '; newPass' + newPassword+ + '; cnfirmPass '+ confirmNewPassword);
+
+if(getCurrentPassword ===  currentPassword && newPassword === confirmNewPassword){
+  var xhr = new XMLHttpRequest();
+  // Create a FormData object.
+  formData = new FormData();
+  formData.append('newpassword', newPassword);
+  formData.append('userId', currentId);
+  xhr.open('POST', '../controller/user-change-password.php', true);
+  xhr.send(formData);
+
+  xhr.onprogress = function(){
+    btnUserChangePass.style.display = "none";
+    btnChangeToLoadingPassword.removeAttribute("hidden");
+  }
+
+  xhr.onload = function(){
+    let getResult = JSON.parse(this.responseText);
+    setTimeout(delayedFunc, 1000);//Timer for loading
+    function delayedFunc(){
+    if(getResult.statusCode === 200){
+      btnUserChangePass.style.display = "inline-block";
+      btnChangeToLoadingPassword.setAttribute("hidden", "hidden");
+      getSuccessModal();
+    }else{          
+      btnUserChangePass.style.display = "inline-block";
+      btnChangeToLoadingPassword.setAttribute("hidden", "hidden");
+      getFailedModal();
+      }//end of if status 200 
+    }
+  }
+
+ 
+
+}else{
+  getFailedModal();
+}
+}
   
 
 //POST NAME
 function updateProfile(e){
 
- let currentId = document.getElementById('currentUserID').value;
+
     e.preventDefault();
     let fileupload = document.getElementById('profileEdit');// fileupload
   
@@ -79,13 +154,11 @@ xhr.onload = function(){
         if(getResult.statusCode === 200){
           btnUpdateMyProfile.style.display = "inline-block";
           btnChangeToLoadingS.setAttribute("hidden", "hidden");
-           $("#basicModal").modal('toggle');//toggle the modal
-           modalMessage.innerText = 'Succesfull';
+          getSuccessModal();
         }else{          
           btnUpdateMyProfile.style.display = "inline-block";
           btnChangeToLoadingS.setAttribute("hidden", "hidden");
-           $("#basicModal").modal('toggle');//toggle the modal
-           modalMessage.innerText = 'Failed';
+          getFailedModal();
        }//end of if status 200 
       
       }//end of delayedFunc
