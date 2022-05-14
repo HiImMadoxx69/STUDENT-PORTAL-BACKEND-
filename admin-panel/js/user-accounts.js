@@ -4,12 +4,16 @@ var defaultRow = 5;
 //CurrentIndexPage global
 var curIndexPage = 0;
 
+//Get the total length of table
+var userAccountsLength = 0;
 
 //NextPage Call
 const nextpageCall = function nextPageCall(){
-    defaultRow += 5;
-    curIndexPage +=5;
-    getAllData();
+    if(curIndexPage <= userAccountsLength){
+        defaultRow += 5;
+        curIndexPage +=5;
+        getAllData();
+    }
 }
 
 //PrevPage Call
@@ -43,12 +47,12 @@ function getAllData(){
     //get user accounts
 fetch('../controller/user-table.php').then((res) => res.json())
 .then(response => {
-console.log(response);
+
 
 
 let output ='';
 
-console.log(defaultRow);
+
 
 for(let i = curIndexPage; i<defaultRow; i++){
     output += `<tr>
@@ -70,6 +74,8 @@ for(let i = curIndexPage; i<defaultRow; i++){
     <td>${response[i].added_at}</td>
     </tr>`
 }
+
+userAccountsLength = response.length;
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllData
