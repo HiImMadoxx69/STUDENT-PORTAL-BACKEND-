@@ -366,14 +366,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-              
+            <h5 class="card-title">User Accounts Table</h5>
+      <!-- scroll table -->    
   <div id="table-wrapper">
   <div id="table-scroll">
               <!-- Table -->
               
-              <table class="table table-hover">
-                <thead>
-                  <tr>
+              <table class="table table-hover" >
+                <thead id ="tblThead">
+                  <tr class="table-primary">
                     <th scope="col">ID</th>
                     <th scope="col">Photo</th>
                     <th scope="col">Username</th>
@@ -403,6 +404,31 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
   </div>
   </div>
+  <!-- End for scroll table -->
+   <!-- Pagination with icons -->
+ 
+   <nav aria-label="Page navigation example" margin>
+                <ul class="pagination justify-content-end">
+                  <li class="page-item" >
+                  <a class="page-link" aria-label="Previous" id="prevPage">
+                    <span aria-hidden="true">&laquo;</span>
+                        </a>
+                          </li>
+                          <li class="page-item"><a class="page-link" id= "page1">1</a></li>
+                          <li class="page-item"><a class="page-link" id= "page2">2</a></li>
+                          <li class="page-item"><a class="page-link" id= "page3">3</a></li>
+                          <li class="page-item">
+                          <a class="page-link" aria-label="Next" id ="nextPage" >
+                       <span aria-hidden="true">&raquo;</span>
+                    </a> 
+                  </li>
+                </ul>
+              </nav>
+
+              <!-- End Pagination with icons -->
+
+
+
   <!-- practiec-->
             </div>
           </div>

@@ -2,10 +2,23 @@
     position:relative;
   }
   #table-scroll {
-    height:500px;
-    overflow:auto;  
+    height:400px;
+    overflow: scroll;
     margin-top:20px;
   }
+  #tblThead th {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+  }
+  
+  tbody #tblThead {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    left: 0;
+  }
+
+
   #table-wrapper table {
     width:100%;
   
@@ -18,3 +31,4 @@
     width:35%;
     border:1px solid red;
   }
+

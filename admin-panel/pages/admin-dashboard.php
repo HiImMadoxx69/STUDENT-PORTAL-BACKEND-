@@ -985,7 +985,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-    
+
+  <!-- my javascript for user-prfile -->
+  <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
+<script src ="../js/user-accounts.js?t=1491313943549"  type = "text/javascript">
+</script>
+
+<!-- end of my javascript for user - profile -->
+
+
   <!-- Vendor JS Files -->
   <script src="../vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
