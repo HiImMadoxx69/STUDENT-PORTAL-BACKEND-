@@ -112,25 +112,40 @@ document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 
 
 //Sort the table
-const sortByID = (headerTitle) =>{
+const sortCurrentTable = (headerTitle) =>{
 
-    console.log(headerTitle);
-    
+  
+
     for(let i = 0; i<GVUNumRows; i++){
         GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
     }//Fill the GVUResultsSorted with GVUResults only needed
 
-
-   for(let i = 0; i<GVUNumRows-1; i++){
-       for(let j = 0; j<GVUNumRows-1; j++){
-        if(GVUResultsSorted[j].headerTitle < GVUResultsSorted[j+1].headerTitle){
-            // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
-            let temp = GVUResultsSorted[j];
-            GVUResultsSorted[j] = GVUResultsSorted[j+1];
-            GVUResultsSorted[j+1] = temp;
-        }
-       }
+if(GVUIsSorted){
+    for(let i = 0; i<GVUNumRows-1; i++){
+        for(let j = 0; j<GVUNumRows-1; j++){
+         if(GVUResultsSorted[j][headerTitle]< GVUResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
+             let temp = GVUResultsSorted[j];
+             GVUResultsSorted[j] = GVUResultsSorted[j+1];
+             GVUResultsSorted[j+1] = temp;
+      }
+     }
    }
+   GVUIsSorted = false;//after sorted then reverse sort
+}else{
+    for(let i = 0; i<GVUNumRows-1; i++){
+        for(let j = 0; j<GVUNumRows-1; j++){
+         if(GVUResultsSorted[j][headerTitle] > GVUResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
+             let temp = GVUResultsSorted[j];
+             GVUResultsSorted[j] = GVUResultsSorted[j+1];
+             GVUResultsSorted[j+1] = temp;
+      }
+     }
+   }
+   GVUIsSorted = true;//after sorted then reverse sort
+}
+   
 
   
     bindAllDataIntoTableSorted();

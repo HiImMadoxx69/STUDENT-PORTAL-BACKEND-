@@ -21,7 +21,7 @@
    .table-info {
     position: sticky;
     right: 0%;
-
+    color: rgb(31, 31, 32);
     top: 0px;
 
   }
@@ -29,7 +29,9 @@
   #th-action{
     z-index:1;
   }
-  
+  .th-a{
+    color: rgb(31, 31, 32);
+  }
 
 
 

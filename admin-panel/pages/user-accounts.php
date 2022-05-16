@@ -377,22 +377,22 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover" >
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortByID('id')">ID</a></th>
-                    <th scope="col" class ="header-title">Photo</th>
-                    <th scope="col" class ="header-title">Username</th>
-                    <th scope="col" class ="header-title">Firstname</th>
-                    <th scope="col" class ="header-title">Lastname</th>
-                    <th scope="col" class ="header-title">Email</th>
-                    <th scope="col" class ="header-title">Password</th>
-                    <th scope="col" class ="header-title">Job</th>
-                    <th scope="col" class ="header-title">Address</th>
-                    <th scope="col" class ="header-title">Contact</th>
-                    <th scope="col" class ="header-title">About</th>
-                    <th scope="col" class ="header-title">Twitter</th>
-                    <th scope="col" class ="header-title">Facebook</th>
-                    <th scope="col" class ="header-title">Instagram</th>
-                    <th scope="col" class ="header-title">Linked IN</th>
-                    <th scope="col" class ="header-title">Date Created</th>
+                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id')" class="th-a">ID</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url')" class="th-a">Photo</a> </th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username')" class="th-a">Username</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname')" class="th-a">Firstname</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname')" class="th-a">Lastname</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email')" class="th-a">Email</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password')" class="th-a">Password</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position')" class="th-a">Job</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address')" class="th-a">Address</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact')" class="th-a">Contact</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about')" class="th-a">About</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile')" class="th-a">Twitter</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile')" class="th-a">Facebook</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile')" class="th-a">Instagram</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile')" class="th-a">Linked IN </a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at')" class="th-a">Date Created</a></th>
                     <th scope="col" class="table-info" id ="th-action">Action</th>
                     
                     
