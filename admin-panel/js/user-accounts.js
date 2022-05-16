@@ -30,14 +30,14 @@ const nextpageCall = function nextPageCall(){
         GVUdefaultRow += GVULessThanRow;
         console.log('Default row '+GVUdefaultRow);
         console.log('Less than row'+GVULessThanRow);
-        getAllDataAPI();
+        bindAllDataIntoTable();
     }
     if(GVUdefaultRow < GVUAccLength){
      
         console.log('Index Page'+GVUdefaultRow);
         GVUdefaultRow += 10;
         GVUIndexPage +=10;
-        getAllDataAPI();
+        bindAllDataIntoTable();
     }
 }
 
@@ -55,7 +55,7 @@ const prevpageCall = function nextPageCall(){
     if(GVUIndexPage >= 10){
         GVUdefaultRow -= 10;
         GVUIndexPage -=10;
-        getAllDataAPI();
+        bindAllDataIntoTable();
     }
    
 }
@@ -138,13 +138,13 @@ const sortCurrentTable = (headerTitle) =>{
 
   
 
-    for(let i = 0; i<GVUdefaultRow; i++){
+    for(let i = 0; i<GVUNumRows; i++){
         GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
     }//Fill the GVUResultsSorted with GVUResults only needed
-
+console.log(GVUResultsSorted);
 if(GVUIsSorted){
-    for(let i = 0; i<GVUdefaultRow-1; i++){
-        for(let j = 0; j<GVUdefaultRow-1; j++){
+    for(let i = 0; i<GVUNumRows-1; i++){
+        for(let j = 0; j<GVUNumRows-1; j++){
          if(GVUResultsSorted[j][headerTitle]> GVUResultsSorted[j+1][headerTitle]){
              // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
              let temp = GVUResultsSorted[j];
@@ -155,8 +155,8 @@ if(GVUIsSorted){
    }
    GVUIsSorted = false;//after sorted then reverse sort
 }else{
-    for(let i = 0; i<GVUdefaultRow-1; i++){
-        for(let j = 0; j<GVUdefaultRow-1; j++){
+    for(let i = 0; i<GVUNumRows-1; i++){
+        for(let j = 0; j<GVUNumRows-1; j++){
          if(GVUResultsSorted[j][headerTitle] < GVUResultsSorted[j+1][headerTitle]){
              // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
              let temp = GVUResultsSorted[j];
@@ -181,7 +181,7 @@ if(GVUIsSorted){
 const bindAllDataIntoTableSorted = function (){
     let output ='';
     
-    for(let i = 0; i<GVUdefaultRow; i++){
+    for(let i = 0; i<GVUNumRows; i++){
         output += `<tr>
         <td>${GVUResultsSorted[i].id}</td>
         <td><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
