@@ -18,9 +18,23 @@ var GVUIsSorted = false;
 //Current number of rows
 var GVUNumRows = 10;
 
+//If the default row is less than 10
+var GVULessThanRow = 0;
+
 //NextPage Call
 const nextpageCall = function nextPageCall(){
-    if(GVUIndexPage <= GVUAccLength){
+    if(((GVUAccLength - GVUdefaultRow) < 10) && GVULessThanRow === 0){
+        console.log('Acclength '+GVUAccLength);
+        console.log('Default row '+GVUdefaultRow);
+        GVULessThanRow = GVUAccLength - GVUdefaultRow;
+        GVUdefaultRow += GVULessThanRow;
+        console.log('Default row '+GVUdefaultRow);
+        console.log('Less than row'+GVULessThanRow);
+        getAllDataAPI();
+    }
+    if(GVUdefaultRow < GVUAccLength){
+     
+        console.log('Index Page'+GVUdefaultRow);
         GVUdefaultRow += 10;
         GVUIndexPage +=10;
         getAllDataAPI();
@@ -31,11 +45,19 @@ const nextpageCall = function nextPageCall(){
 
 //PrevPage Call
 const prevpageCall = function nextPageCall(){
+    console.log('Default Row'+GVUdefaultRow);
+    // console.log('Less than row'+GVULessThanRow);
+    if(GVULessThanRow !== 0){
+        console.log('Default Row'+GVUdefaultRow);
+        GVUdefaultRow = GVUdefaultRow - GVULessThanRow;
+        GVULessThanRow = 0;
+    }
     if(GVUIndexPage >= 10){
         GVUdefaultRow -= 10;
         GVUIndexPage -=10;
         getAllDataAPI();
     }
+   
 }
 
 
@@ -116,14 +138,14 @@ const sortCurrentTable = (headerTitle) =>{
 
   
 
-    for(let i = 0; i<GVUNumRows; i++){
+    for(let i = 0; i<GVUdefaultRow; i++){
         GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
     }//Fill the GVUResultsSorted with GVUResults only needed
 
 if(GVUIsSorted){
-    for(let i = 0; i<GVUNumRows-1; i++){
-        for(let j = 0; j<GVUNumRows-1; j++){
-         if(GVUResultsSorted[j][headerTitle]< GVUResultsSorted[j+1][headerTitle]){
+    for(let i = 0; i<GVUdefaultRow-1; i++){
+        for(let j = 0; j<GVUdefaultRow-1; j++){
+         if(GVUResultsSorted[j][headerTitle]> GVUResultsSorted[j+1][headerTitle]){
              // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
              let temp = GVUResultsSorted[j];
              GVUResultsSorted[j] = GVUResultsSorted[j+1];
@@ -133,9 +155,9 @@ if(GVUIsSorted){
    }
    GVUIsSorted = false;//after sorted then reverse sort
 }else{
-    for(let i = 0; i<GVUNumRows-1; i++){
-        for(let j = 0; j<GVUNumRows-1; j++){
-         if(GVUResultsSorted[j][headerTitle] > GVUResultsSorted[j+1][headerTitle]){
+    for(let i = 0; i<GVUdefaultRow-1; i++){
+        for(let j = 0; j<GVUdefaultRow-1; j++){
+         if(GVUResultsSorted[j][headerTitle] < GVUResultsSorted[j+1][headerTitle]){
              // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
              let temp = GVUResultsSorted[j];
              GVUResultsSorted[j] = GVUResultsSorted[j+1];
@@ -159,7 +181,7 @@ if(GVUIsSorted){
 const bindAllDataIntoTableSorted = function (){
     let output ='';
     
-    for(let i = 0; i<GVUNumRows; i++){
+    for(let i = 0; i<GVUdefaultRow; i++){
         output += `<tr>
         <td>${GVUResultsSorted[i].id}</td>
         <td><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
