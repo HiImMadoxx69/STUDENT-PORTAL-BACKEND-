@@ -47,8 +47,6 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <link href="../css/style.css" rel="stylesheet">
 
 
-  <!-- TOASTR -->
-
 </head>
 
 <body>
@@ -988,7 +986,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
   <!-- my javascript for user-prfile -->
   <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
-<script src ="../js/user-accounts.js?t=1491313943549"  type = "text/javascript">
+
 </script>
 
 <!-- end of my javascript for user - profile -->

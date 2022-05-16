@@ -45,10 +45,10 @@ $currentId = $user['id'];
 
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
-  <!-- Custom table csss -->
+ <!-- Custom table csss -->
 
-  <link href="../css/Mytable.css" rel="stylesheet">
-
+ <link href="../css/Mytable.css" rel="stylesheet">
+ 
 </head>
 
 <body>
@@ -360,7 +360,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div>
                 </div>
               </div><!-- End Basic Modal-->
-              <section class="section">
+
+
+    <section class="section">
       <div class="row">
         <div class="col-lg-12">
 
@@ -368,30 +370,30 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             <div class="card-body" >
             <h5 class="card-title">User Accounts Table</h5>
       <!-- scroll table -->    
-  <div id="table-wrapper">
-  <div id="table-scroll">
+              <div id="table-wrapper">
+                <div id="table-scroll">
               <!-- Table -->
               
               <table class="table table-hover" >
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col">ID</th>
-                    <th scope="col">Photo</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Firstname</th>
-                    <th scope="col">Lastname</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Job</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">About</th>
-                    <th scope="col">Twitter</th>
-                    <th scope="col">Facebook</th>
-                    <th scope="col">Instagram</th>
-                    <th scope="col">Linked IN</th>
-                    <th scope="col">Date Created</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" class ="header-title" ><a onclick ="sortMe()">ID</a></th>
+                    <th scope="col" class ="header-title">Photo</th>
+                    <th scope="col" class ="header-title">Username</th>
+                    <th scope="col" class ="header-title">Firstname</th>
+                    <th scope="col" class ="header-title">Lastname</th>
+                    <th scope="col" class ="header-title">Email</th>
+                    <th scope="col" class ="header-title">Password</th>
+                    <th scope="col" class ="header-title">Job</th>
+                    <th scope="col" class ="header-title">Address</th>
+                    <th scope="col" class ="header-title">Contact</th>
+                    <th scope="col" class ="header-title">About</th>
+                    <th scope="col" class ="header-title">Twitter</th>
+                    <th scope="col" class ="header-title">Facebook</th>
+                    <th scope="col" class ="header-title">Instagram</th>
+                    <th scope="col" class ="header-title">Linked IN</th>
+                    <th scope="col" class ="header-title">Date Created</th>
+                    <th scope="col" class="table-info" id ="th-action">Action</th>
                     
                     
                   </tr>
@@ -405,9 +407,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </div>
   </div>
   <!-- End for scroll table -->
+  <div class ="row g-3">
+   <div class="col-6" id ="showNumberOfPage">
+         
+     </div>
+     
+     
    <!-- Pagination with icons -->
- 
-   <nav aria-label="Page navigation example" margin>
+
+              <div class="col-6">
                 <ul class="pagination justify-content-end">
                   <li class="page-item" >
                   <a class="page-link" aria-label="Previous" id="prevPage">
@@ -422,9 +430,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                        <span aria-hidden="true">&raquo;</span>
                     </a> 
                   </li>
-                </ul>
-              </nav>
-
+                </ul>      
+            </div>
+  </div><!-- row g-3 -->
               <!-- End Pagination with icons -->
 
 

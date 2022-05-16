@@ -6,17 +6,35 @@
     overflow: scroll;
     margin-top:20px;
   }
-  #tblThead th {
-    position: -webkit-sticky; /* for Safari */
+  #tblThead .header-title {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
   }
   
   tbody #tblThead {
-    position: -webkit-sticky; /* for Safari */
+    position: -webkit-sticky;
     position: sticky;
     left: 0;
   }
+
+   .table-info {
+    position: sticky;
+    right: 0%;
+
+    top: 0px;
+
+  }
+
+  #th-action{
+    z-index:1;
+  }
+  
+
+
+
+
+
 
 
   #table-wrapper table {

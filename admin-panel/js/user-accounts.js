@@ -1,6 +1,6 @@
 
 //Default number of row global
-var defaultRow = 5;
+var defaultRow = 10;
 //CurrentIndexPage global
 var curIndexPage = 0;
 
@@ -10,17 +10,19 @@ var userAccountsLength = 0;
 //NextPage Call
 const nextpageCall = function nextPageCall(){
     if(curIndexPage <= userAccountsLength){
-        defaultRow += 5;
-        curIndexPage +=5;
+        defaultRow += 10;
+        curIndexPage +=10;
         getAllData();
     }
 }
 
+
+
 //PrevPage Call
 const prevpageCall = function nextPageCall(){
-    if(curIndexPage >= 5){
-        defaultRow -= 5;
-        curIndexPage -=5;
+    if(curIndexPage >= 10){
+        defaultRow -= 10;
+        curIndexPage -=10;
         getAllData();
     }
 }
@@ -32,6 +34,7 @@ prevPage = document.getElementById('prevPage');
 page1 = document.getElementById('page1');
 page2 = document.getElementById('page2');
 page3 = document.getElementById('page3');
+showNumberOfPage = document.getElementById('showNumberOfPage');
 
 //Eventlistener for paginatio Buttons
 nextPage.addEventListener('click', nextpageCall);
@@ -39,6 +42,13 @@ prevPage.addEventListener('click', prevpageCall);
 // page1.addEventListener('click', getAllData());
 // page2.addEventListener('click', getAllData());
 // page3.addEventListener('click', getAllData());
+
+//Files json
+var myResultJSON = {};
+
+const sortMe = function(){
+alert(myResultJSON.username);
+}
 
 
 //getAllData Function
@@ -51,9 +61,30 @@ fetch('../controller/user-table.php').then((res) => res.json())
 
 
 let output ='';
+myResultJSON = response;
+userAccountsLength = response.length;
 
 
 
+for(let indexC = curIndexPage; indexC <defaultRow; indexC++){
+    
+    for(let j = indexC; j < defaultRow; j++){
+        if(response[indexC].id > response[j].id){
+            console.log(response[indexC].id+' > '+response[j].id);
+            console.log('yes');
+            let temp = response[indexC].id;
+            response[indexC].id = response[j].id;
+            response[indexC].id = temp;
+       }
+    }
+}
+
+console.log(response[0].id);
+if(response[0].id === 1){
+    console.log('wtf');
+}
+
+console.log(response[0].username.length);  
 for(let i = curIndexPage; i<defaultRow; i++){
     output += `<tr>
     <td>${response[i].id}</td>
@@ -72,14 +103,19 @@ for(let i = curIndexPage; i<defaultRow; i++){
     <td>${response[i].instagramprofile}</td>
     <td>${response[i].linkedinprofile}</td>
     <td>${response[i].added_at}</td>
-    </tr>`
+    <th scope="col" class="table-info">asdasd</th>
+    </tr>`;
 }
+
+let numberOfPages = '';
+numberOfPages += `<h8>Showing `+defaultRow+` out of `+userAccountsLength+` results</h8>`;
 
 userAccountsLength = response.length;
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
+document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllData
 
-
-
-getAllData();//bind the table
+window.onload = function(){
+    getAllData();
+}//Onload page
