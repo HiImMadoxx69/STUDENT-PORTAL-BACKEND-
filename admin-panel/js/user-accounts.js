@@ -1,18 +1,29 @@
-
+//GLOBAL VARIABLES USER = GVU
 //Default number of row global
-var defaultRow = 10;
+var GVUdefaultRow = 10;
 //CurrentIndexPage global
-var curIndexPage = 0;
+var GVUIndexPage = 0;
 
 //Get the total length of table
-var userAccountsLength = 0;
+var GVUAccLength = 0;
+
+//JSON global results variable
+var GVUResults = {};
+
+//JSON global result sorted variable
+var GVUResultsSorted = {};
+
+//Check if already sorted
+var GVUIsSorted = false;
+//Current number of rows
+var GVUNumRows = 10;
 
 //NextPage Call
 const nextpageCall = function nextPageCall(){
-    if(curIndexPage <= userAccountsLength){
-        defaultRow += 10;
-        curIndexPage +=10;
-        getAllData();
+    if(GVUIndexPage <= GVUAccLength){
+        GVUdefaultRow += 10;
+        GVUIndexPage +=10;
+        getAllDataAPI();
     }
 }
 
@@ -20,10 +31,10 @@ const nextpageCall = function nextPageCall(){
 
 //PrevPage Call
 const prevpageCall = function nextPageCall(){
-    if(curIndexPage >= 10){
-        defaultRow -= 10;
-        curIndexPage -=10;
-        getAllData();
+    if(GVUIndexPage >= 10){
+        GVUdefaultRow -= 10;
+        GVUIndexPage -=10;
+        getAllDataAPI();
     }
 }
 
@@ -43,79 +54,120 @@ prevPage.addEventListener('click', prevpageCall);
 // page2.addEventListener('click', getAllData());
 // page3.addEventListener('click', getAllData());
 
-//Files json
-var myResultJSON = {};
 
-const sortMe = function(){
-alert(myResultJSON.username);
-}
+
 
 
 //getAllData Function
-function getAllData(){
-
+function getAllDataAPI(){
     //get user accounts
-fetch('../controller/user-table.php').then((res) => res.json())
-.then(response => {
+    fetch('../controller/user-table.php').then((res) => res.json())
+    .then(response => {
+
+        GVUResults = response;//Store the responseJSON into GVUResults global var
+        GVUAccLength = response.length;//getThe totalLength
+
+        bindAllDataIntoTable();//Bind the data into table once fetch successfull
+    }).catch(error => console.log(error));//end of get user accounts
+}//end of function getAllDataAPI
+
+window.onload = function(){
+    getAllDataAPI();
+}//Onload page
 
 
-
-let output ='';
-myResultJSON = response;
-userAccountsLength = response.length;
-
-
-
-for(let indexC = curIndexPage; indexC <defaultRow; indexC++){
+const bindAllDataIntoTable = function (){
+    let output ='';
     
-    for(let j = indexC; j < defaultRow; j++){
-        if(response[indexC].id > response[j].id){
-            console.log(response[indexC].id+' > '+response[j].id);
-            console.log('yes');
-            let temp = response[indexC].id;
-            response[indexC].id = response[j].id;
-            response[indexC].id = temp;
-       }
-    }
-}
-
-console.log(response[0].id);
-if(response[0].id === 1){
-    console.log('wtf');
-}
-
-console.log(response[0].username.length);  
-for(let i = curIndexPage; i<defaultRow; i++){
+for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     output += `<tr>
-    <td>${response[i].id}</td>
-    <td><img src = "../../uploads/${response[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
-    <td>${response[i].username}</td>
-    <td>${response[i].firstname}</td>
-    <td>${response[i].lastname}</td>
-    <td>${response[i].email}</td>
-    <td>${response[i].password}</td>
-    <td>${response[i].position}</td>
-    <td>${response[i].address}</td>
-    <td>${response[i].contact}</td>
-    <td>${response[i].about}</td>
-    <td>${response[i].twitterprofile}</td>
-    <td>${response[i].facebookprofile}</td>
-    <td>${response[i].instagramprofile}</td>
-    <td>${response[i].linkedinprofile}</td>
-    <td>${response[i].added_at}</td>
+    <td>${GVUResults[i].id}</td>
+    <td><img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
+    <td>${GVUResults[i].username}</td>
+    <td>${GVUResults[i].firstname}</td>
+    <td>${GVUResults[i].lastname}</td>
+    <td>${GVUResults[i].email}</td>
+    <td>${GVUResults[i].password}</td>
+    <td>${GVUResults[i].position}</td>
+    <td>${GVUResults[i].address}</td>
+    <td>${GVUResults[i].contact}</td>
+    <td>${GVUResults[i].about}</td>
+    <td>${GVUResults[i].twitterprofile}</td>
+    <td>${GVUResults[i].facebookprofile}</td>
+    <td>${GVUResults[i].instagramprofile}</td>
+    <td>${GVUResults[i].linkedinprofile}</td>
+    <td>${GVUResults[i].added_at}</td>
     <th scope="col" class="table-info">asdasd</th>
     </tr>`;
 }
 
 let numberOfPages = '';
-numberOfPages += `<h8>Showing `+defaultRow+` out of `+userAccountsLength+` results</h8>`;
-
-userAccountsLength = response.length;
+numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results</h8>`;
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
-}).catch(error => console.log(error));//end of get user accounts
-}//end of function getAllData
+}
 
-window.onload = function(){
-    getAllData();
-}//Onload page
+
+
+
+
+//Sort the table
+const sortByID = (headerTitle) =>{
+
+    console.log(headerTitle);
+    
+    for(let i = 0; i<GVUNumRows; i++){
+        GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
+    }//Fill the GVUResultsSorted with GVUResults only needed
+
+
+   for(let i = 0; i<GVUNumRows-1; i++){
+       for(let j = 0; j<GVUNumRows-1; j++){
+        if(GVUResultsSorted[j].headerTitle < GVUResultsSorted[j+1].headerTitle){
+            // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
+            let temp = GVUResultsSorted[j];
+            GVUResultsSorted[j] = GVUResultsSorted[j+1];
+            GVUResultsSorted[j+1] = temp;
+        }
+       }
+   }
+
+  
+    bindAllDataIntoTableSorted();
+}//Sort by id
+
+
+
+
+
+//Bind the sorted table
+const bindAllDataIntoTableSorted = function (){
+    let output ='';
+    
+    for(let i = 0; i<GVUNumRows; i++){
+        output += `<tr>
+        <td>${GVUResultsSorted[i].id}</td>
+        <td><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
+        <td>${GVUResultsSorted[i].username}</td>
+        <td>${GVUResultsSorted[i].firstname}</td>
+        <td>${GVUResultsSorted[i].lastname}</td>
+        <td>${GVUResultsSorted[i].email}</td>
+        <td>${GVUResultsSorted[i].password}</td>
+        <td>${GVUResultsSorted[i].position}</td>
+        <td>${GVUResultsSorted[i].address}</td>
+        <td>${GVUResultsSorted[i].contact}</td>
+        <td>${GVUResultsSorted[i].about}</td>
+        <td>${GVUResultsSorted[i].twitterprofile}</td>
+        <td>${GVUResultsSorted[i].facebookprofile}</td>
+        <td>${GVUResultsSorted[i].instagramprofile}</td>
+        <td>${GVUResultsSorted[i].linkedinprofile}</td>
+        <td>${GVUResultsSorted[i].added_at}</td>
+        <th scope="col" class="table-info">asdasd</th>
+        </tr>`;
+    }
+    
+    let numberOfPages = '';
+    numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results</h8>`;
+    document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
+    document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
+}//Sorted Bind Table

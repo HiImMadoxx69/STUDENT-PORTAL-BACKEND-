@@ -377,7 +377,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover" >
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title" ><a onclick ="sortMe()">ID</a></th>
+                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortByID('id')">ID</a></th>
                     <th scope="col" class ="header-title">Photo</th>
                     <th scope="col" class ="header-title">Username</th>
                     <th scope="col" class ="header-title">Firstname</th>
