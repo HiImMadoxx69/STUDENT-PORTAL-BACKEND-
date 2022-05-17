@@ -369,7 +369,19 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <div class="card" >
             <div class="card-body" >
             <h5 class="card-title">User Accounts Table</h5>
-      <!-- scroll table -->    
+      <!-- scroll table --> 
+      <!-- Select Entry Page -->  
+      <div class="row mb-3">
+                  
+                  <div class="col-sm-2">
+                    <select class="form-select" aria-label="Default select example" id ="selectPage" onchange="selectNumPage()">
+                     
+                    </select>
+                  </div>
+                  <label class="col-sm-2 col-form-label">Rows</label>
+                </div> 
+      <!-- End of Select Entry Page -->
+
               <div id="table-wrapper">
                 <div id="table-scroll">
               <!-- Table -->

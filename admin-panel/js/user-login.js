@@ -25,9 +25,9 @@ function logIn(e){
     xhr.send(params);
 
     xhr.onprogress = function (){
-      alertPrompt.style.display = 'none';
-      btnChangeToLoadingS.removeAttribute("hidden");
-      btnLogIn.style.display = 'none';
+      // alertPrompt.style.display = 'none';
+      // btnChangeToLoadingS.removeAttribute("hidden");
+      // btnLogIn.style.display = 'none';
     }//progress
     
    

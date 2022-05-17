@@ -1,5 +1,5 @@
 //GLOBAL VARIABLES USER = GVU
-//Default number of row global
+//Current number of rows
 var GVUdefaultRow = 10;
 //CurrentIndexPage global
 var GVUIndexPage = 0;
@@ -15,28 +15,27 @@ var GVUResultsSorted = {};
 
 //Check if already sorted
 var GVUIsSorted = false;
-//Current number of rows
+//Default number of row global
 var GVUNumRows = 10;
 
 //If the default row is less than 10
 var GVULessThanRow = 0;
 
+//Get desired number of row per page
+var GVURowPerPage = 0;
+
 //NextPage Call
 const nextpageCall = function nextPageCall(){
     if(((GVUAccLength - GVUdefaultRow) < 10) && GVULessThanRow === 0){
-        console.log('Acclength '+GVUAccLength);
-        console.log('Default row '+GVUdefaultRow);
+        
         GVULessThanRow = GVUAccLength - GVUdefaultRow;
         GVUdefaultRow += GVULessThanRow;
-        console.log('Default row '+GVUdefaultRow);
-        console.log('Less than row'+GVULessThanRow);
+      
         bindAllDataIntoTable();
     }
     if(GVUdefaultRow < GVUAccLength){
-     
-        console.log('Index Page'+GVUdefaultRow);
-        GVUdefaultRow += 10;
-        GVUIndexPage +=10;
+        GVUdefaultRow += GVURowPerPage;
+        GVUIndexPage +=GVURowPerPage;
         bindAllDataIntoTable();
     }
 }
@@ -45,16 +44,16 @@ const nextpageCall = function nextPageCall(){
 
 //PrevPage Call
 const prevpageCall = function nextPageCall(){
-    console.log('Default Row'+GVUdefaultRow);
+  
     // console.log('Less than row'+GVULessThanRow);
     if(GVULessThanRow !== 0){
-        console.log('Default Row'+GVUdefaultRow);
+    
         GVUdefaultRow = GVUdefaultRow - GVULessThanRow;
         GVULessThanRow = 0;
     }
-    if(GVUIndexPage >= 10){
-        GVUdefaultRow -= 10;
-        GVUIndexPage -=10;
+    if(GVUIndexPage >= GVURowPerPage){
+        GVUdefaultRow -= GVURowPerPage;
+        GVUIndexPage -=GVURowPerPage;
         bindAllDataIntoTable();
     }
    
@@ -69,6 +68,9 @@ page2 = document.getElementById('page2');
 page3 = document.getElementById('page3');
 showNumberOfPage = document.getElementById('showNumberOfPage');
 
+//Select option
+selectPage = document.getElementById('selectPage');
+
 //Eventlistener for paginatio Buttons
 nextPage.addEventListener('click', nextpageCall);
 prevPage.addEventListener('click', prevpageCall);
@@ -78,7 +80,10 @@ prevPage.addEventListener('click', prevpageCall);
 
 
 
-
+window.onload = function(){
+    getAllDataAPI();
+    selectNumPage();
+}//Onload page
 
 //getAllData Function
 function getAllDataAPI(){
@@ -89,19 +94,60 @@ function getAllDataAPI(){
         GVUResults = response;//Store the responseJSON into GVUResults global var
         GVUAccLength = response.length;//getThe totalLength
 
+        
+        let selectHolder = '';
+        if(GVUAccLength >= 500){
+            selectHolder += `
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="ALL">All</option>`;
+        }else if (GVUAccLength >= 300){
+            selectHolder += `
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="ALL">All</option>`;
+        }else if(GVUAccLength >= 25){
+            selectHolder += `
+            <option value="5" selected>5</option>
+            <option value="10" selected>10</option>
+            <option value="ALL">All</option>`;
+        }else{
+            selectHolder += `
+            <option value="5" selected>5</option>
+            <option value="ALL">All</option>`;
+        }
+        document.querySelector('#selectPage').innerHTML = selectHolder;// set the rows per page
+
+        if(selectPage.value === '5'){
+            GVURowPerPage = 5;
+            GVUdefaultRow = 5;
+        }else if (selectPage.value === '10'){
+            GVURowPerPage = 10
+            GVUdefaultRow = 10;
+        }else if (selectPage.value === '25'){
+            GVURowPerPage = 25;
+            GVUdefaultRow = 25;
+        }else{
+            GVURowPerPage = 50;
+            GVUdefaultRow = 50;
+        }// rows condition
+
         bindAllDataIntoTable();//Bind the data into table once fetch successfull
     }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllDataAPI
 
-window.onload = function(){
-    getAllDataAPI();
-}//Onload page
+
 
 
 const bindAllDataIntoTable = function (){
+   
     let output ='';
-    
+    console.log(GVUdefaultRow);
 for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
+    console.log(GVUResults[i].id);
     output += `<tr>
     <td>${GVUResults[i].id}</td>
     <td><img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
@@ -141,7 +187,7 @@ const sortCurrentTable = (headerTitle) =>{
     for(let i = 0; i<GVUNumRows; i++){
         GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
     }//Fill the GVUResultsSorted with GVUResults only needed
-console.log(GVUResultsSorted);
+
 if(GVUIsSorted){
     for(let i = 0; i<GVUNumRows-1; i++){
         for(let j = 0; j<GVUNumRows-1; j++){
@@ -179,6 +225,7 @@ if(GVUIsSorted){
 
 //Bind the sorted table
 const bindAllDataIntoTableSorted = function (){
+    
     let output ='';
     
     for(let i = 0; i<GVUNumRows; i++){
@@ -202,9 +249,31 @@ const bindAllDataIntoTableSorted = function (){
         <th scope="col" class="table-info">asdasd</th>
         </tr>`;
     }
-    
+   
     let numberOfPages = '';
     numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results</h8>`;
     document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
+
+
+//Select bind data
+
+const selectNumPage = function(){
+    
+
+    if(selectPage.value === '5'){
+        GVURowPerPage = 5;
+        GVUdefaultRow = 5;
+    }else if (selectPage.value === '10'){
+        GVURowPerPage = 10
+        GVUdefaultRow = 10;
+    }else if (selectPage.value === '25'){
+        GVURowPerPage = 25;
+        GVUdefaultRow = 25;
+    }else{
+        GVURowPerPage = GVUAccLength;
+        GVUdefaultRow = GVUAccLength;
+    }
+    bindAllDataIntoTable();
+}
