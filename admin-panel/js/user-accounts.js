@@ -291,19 +291,13 @@ const selectNumPage = function(){
     }
     bindAllDataIntoTable();
 }
-//JSON global results variable
-// var GVUResults = {};
-//JSON global result sorted variable
-// var GVUResultsSorted = {};
-//Search bar
-// userSearchBar = document.getElementById('userSearchBar');
-//Get the total length of table
-// var GVUAccLength = 0;
+
+//Search bar function
 const userSearchKey = () =>{
 let userSearch = userSearchBar.value;
-// let result = Object.keys(GVUResults);
 
-let results = [];
+
+let results = [];//Temporary JSON
 
 for(let i = 0; i<GVUResults.length;i++){
     for( key in GVUResults[i]){
@@ -312,11 +306,11 @@ for(let i = 0; i<GVUResults.length;i++){
             break;
         }
     }
-}
+}//Put all match results in results obj
 
-console.log(results);
-GVUNumRows = results.length;
+GVUNumRows = results.length;//set the value of numrows
 GVUResultsSorted = results;
+
 bindAllDataIntoTableSorted();
 }
 
