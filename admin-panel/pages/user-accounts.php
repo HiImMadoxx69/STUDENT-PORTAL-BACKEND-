@@ -31,8 +31,8 @@ $currentId = $user['id'];
   <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
 
   <!-- Vendor CSS Files -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -375,18 +375,30 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   
                   <div class="col-sm-2">
                     <select class="form-select" aria-label="Default select example" id ="selectPage" onchange="selectNumPage()">
-                     
+                    
                     </select>
                   </div>
-                  <label class="col-sm-2 col-form-label">Rows</label>
-                </div> 
-      <!-- End of Select Entry Page -->
+                  <label for ="selectPage"class="col-sm-2 col-form-label">Rows</label>
 
+                <!-- Space between rows and searchbar -->
+                  <div class="col-sm-5 col-lg-3">
+                  </div>
+                  <!-- End of Space between rows and searchbar -->
+                  <!-- Search bar -->
+                  <div class="col-sm-2 col-lg-5">
+                    <div class ="search-bar">
+                      <input class="form-control" type ="text" placeholder="Search..." title="Enter search keyword" id="userSearchBar" onkeyup="userSearchKey()" >
+                     </div>
+                    </div><!--End of search bar-->
+                  </div> 
+      <!-- End of Select Entry Page -->
+     
+       
               <div id="table-wrapper">
                 <div id="table-scroll">
               <!-- Table -->
               
-              <table class="table table-hover" >
+              <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id')" class="th-a">ID</a></th>

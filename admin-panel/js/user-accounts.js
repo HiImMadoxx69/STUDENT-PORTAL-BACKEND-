@@ -30,10 +30,9 @@ const nextpageCall = function nextPageCall(){
         
         GVULessThanRow = GVUAccLength - GVUdefaultRow;
         GVUdefaultRow += GVULessThanRow;
-      
         bindAllDataIntoTable();
     }
-    if(GVUdefaultRow < GVUAccLength){
+    if(GVUdefaultRow < GVUAccLength &&GVUIndexPage <= GVURowPerPage ){
         GVUdefaultRow += GVURowPerPage;
         GVUIndexPage +=GVURowPerPage;
         bindAllDataIntoTable();
@@ -78,7 +77,8 @@ prevPage.addEventListener('click', prevpageCall);
 // page2.addEventListener('click', getAllData());
 // page3.addEventListener('click', getAllData());
 
-
+//Search bar
+userSearchBar = document.getElementById('userSearchBar');
 
 window.onload = function(){
     getAllDataAPI();
@@ -145,9 +145,9 @@ function getAllDataAPI(){
 const bindAllDataIntoTable = function (){
    
     let output ='';
-    console.log(GVUdefaultRow);
+
 for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
-    console.log(GVUResults[i].id);
+ 
     output += `<tr>
     <td>${GVUResults[i].id}</td>
     <td><img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
@@ -165,7 +165,14 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     <td>${GVUResults[i].instagramprofile}</td>
     <td>${GVUResults[i].linkedinprofile}</td>
     <td>${GVUResults[i].added_at}</td>
-    <th scope="col" class="table-info">asdasd</th>
+    <th scope="col" class="table-info">
+    <div class = "pt-2">
+    <a href="#" class ="btn btn-primary btn-sm" title = "Profile"><i class="bi bi-upload"></i></a>
+
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
+    
+    </div>
+    </th>
     </tr>`;
 }
 
@@ -246,7 +253,14 @@ const bindAllDataIntoTableSorted = function (){
         <td>${GVUResultsSorted[i].instagramprofile}</td>
         <td>${GVUResultsSorted[i].linkedinprofile}</td>
         <td>${GVUResultsSorted[i].added_at}</td>
-        <th scope="col" class="table-info">asdasd</th>
+        <th scope="col" class="table-info">
+        <div class = "pt-2">
+    <a href="#" class ="btn btn-primary btn-sm" title = "Profile"><i class="bi bi-upload"></i></a>
+
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
+    
+    </div>
+        </th>
         </tr>`;
     }
    
@@ -277,3 +291,33 @@ const selectNumPage = function(){
     }
     bindAllDataIntoTable();
 }
+//JSON global results variable
+// var GVUResults = {};
+//JSON global result sorted variable
+// var GVUResultsSorted = {};
+//Search bar
+// userSearchBar = document.getElementById('userSearchBar');
+//Get the total length of table
+// var GVUAccLength = 0;
+const userSearchKey = () =>{
+let userSearch = userSearchBar.value;
+// let result = Object.keys(GVUResults);
+
+let results = [];
+
+for(let i = 0; i<GVUResults.length;i++){
+    for( key in GVUResults[i]){
+        if(GVUResults[i][key].indexOf(userSearch) != -1){
+            results.push(GVUResults[i]);
+            break;
+        }
+    }
+}
+
+console.log(results);
+GVUNumRows = results.length;
+GVUResultsSorted = results;
+bindAllDataIntoTableSorted();
+}
+
+

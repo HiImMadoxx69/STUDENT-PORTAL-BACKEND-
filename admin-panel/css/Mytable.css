@@ -32,7 +32,15 @@
   .th-a{
     color: rgb(31, 31, 32);
   }
-
+  .MYsearchBar{
+    position:sticky;
+    left:0px;
+    
+  }
+  #userSearchBar{
+    left:0;
+   
+  }
 
 
 

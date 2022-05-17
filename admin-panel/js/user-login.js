@@ -26,8 +26,8 @@ function logIn(e){
 
     xhr.onprogress = function (){
       // alertPrompt.style.display = 'none';
-      // btnChangeToLoadingS.removeAttribute("hidden");
-      // btnLogIn.style.display = 'none';
+      btnChangeToLoadingS.removeAttribute("hidden");
+      btnLogIn.style.display = 'none';
     }//progress
     
    
@@ -40,7 +40,6 @@ function delayedFunc(){
       
       
       if(getResult.statusCode === 200){
-            btnChangeToLoadingS.setAttribute("hidden", "hidden");
             location.reload();
       }else{          
           alertPrompt.style.display = 'inline-block';
