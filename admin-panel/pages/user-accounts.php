@@ -361,6 +361,106 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
               </div><!-- End Basic Modal-->
 
+               <!--add user Modal -->
+              
+              <div class="modal fade" id="addusermodal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Accounts Form</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                      
+              <!-- Floating Labels Form -->
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingFname" placeholder="Firstname">
+                    <label for="floatingFname">Firstname</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatinLname" placeholder="Lastname">
+                    <label for="floatingLname">Lastname</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
+                    <label for="floatingEmail">Email</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingUsername" placeholder="Username">
+                    <label for="floatingUsername">Username</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+                <div class = "col-md-3">
+
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch ">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showPassword()">
+                    </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <label for="floatingTextarea">Address</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingCity" placeholder="City">
+                      <label for="floatingCity">City</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" aria-label="State">
+                      <option selected>New York</option>
+                      <option value="1">Oregon</option>
+                      <option value="2">DC</option>
+                    </select>
+                    <label for="floatingSelect">State</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingZip" placeholder="Zip">
+                    <label for="floatingZip">Zip</label>
+                  </div>
+                </div>
+
+              
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End floating Labels Form -->
+
+
+                    </div>
+                   
+                  </div>
+                </div>
+              </div><!-- End user Modal-->
+
 
     <section class="section">
       <div class="row">
@@ -372,7 +472,14 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
       <div class="row mb-3">
-                  
+        <div class="col-sm-5">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
+                Add User
+              </button>
+       </div>
+      </div>
+
+      <div class="row mb-3">
                   <div class="col-sm-2">
                     <select class="form-select" aria-label="Default select example" id ="selectPage" onchange="selectNumPage()">
                     

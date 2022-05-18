@@ -1,6 +1,6 @@
 //GLOBAL VARIABLES USER = GVU
 //Current number of rows
-var GVUdefaultRow = 10;
+var GVUdefaultRow = 5;
 //CurrentIndexPage global
 var GVUIndexPage = 0;
 
@@ -16,7 +16,7 @@ var GVUResultsSorted = {};
 //Check if already sorted
 var GVUIsSorted = false;
 //Default number of row global
-var GVUNumRows = 10;
+var GVUNumRows = 5;
 
 //If the default row is less than 10
 var GVULessThanRow = 0;
@@ -93,10 +93,11 @@ function getAllDataAPI(){
 
         GVUResults = response;//Store the responseJSON into GVUResults global var
         GVUAccLength = response.length;//getThe totalLength
-
+        GVUNumRows = 5;//Set Number of rows default
         
         let selectHolder = '';
         if(GVUAccLength >= 500){
+           
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10">10</option>
@@ -104,17 +105,20 @@ function getAllDataAPI(){
             <option value="50">50</option>
             <option value="ALL">All</option>`;
         }else if (GVUAccLength >= 300){
+           
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="ALL">All</option>`;
         }else if(GVUAccLength >= 25){
+            
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10" selected>10</option>
             <option value="ALL">All</option>`;
         }else{
+           
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="ALL">All</option>`;
@@ -142,8 +146,7 @@ function getAllDataAPI(){
 
 
 
-const bindAllDataIntoTable = function (){
-   
+const bindAllDataIntoTable = function (){   
     let output ='';
 
 for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
@@ -189,13 +192,13 @@ document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 //Sort the table
 const sortCurrentTable = (headerTitle) =>{
 
-  
 
     for(let i = 0; i<GVUNumRows; i++){
         GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
     }//Fill the GVUResultsSorted with GVUResults only needed
 
 if(GVUIsSorted){
+ 
     for(let i = 0; i<GVUNumRows-1; i++){
         for(let j = 0; j<GVUNumRows-1; j++){
          if(GVUResultsSorted[j][headerTitle]> GVUResultsSorted[j+1][headerTitle]){
@@ -208,6 +211,7 @@ if(GVUIsSorted){
    }
    GVUIsSorted = false;//after sorted then reverse sort
 }else{
+  
     for(let i = 0; i<GVUNumRows-1; i++){
         for(let j = 0; j<GVUNumRows-1; j++){
          if(GVUResultsSorted[j][headerTitle] < GVUResultsSorted[j+1][headerTitle]){
@@ -275,17 +279,21 @@ const bindAllDataIntoTableSorted = function (){
 
 const selectNumPage = function(){
     
-
+    GVUIsSorted = false;//Default the not sorted
     if(selectPage.value === '5'){
+        GVUNumRows = 5;
         GVURowPerPage = 5;
         GVUdefaultRow = 5;
     }else if (selectPage.value === '10'){
+        GVUNumRows = 10;
         GVURowPerPage = 10
         GVUdefaultRow = 10;
     }else if (selectPage.value === '25'){
+        GVUNumRows = 25;
         GVURowPerPage = 25;
         GVUdefaultRow = 25;
     }else{
+        GVUNumRows = GVUAccLength;
         GVURowPerPage = GVUAccLength;
         GVUdefaultRow = GVUAccLength;
     }

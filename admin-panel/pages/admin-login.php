@@ -92,9 +92,10 @@ if(isset($_SESSION['UserLogin'])){
       </div>
 </div>
 <!-- end of alert -->
-                  <form class="row g-3 needs-validation" novalidate id ="loginForm">
+                  <form class="row g-3 needs-validation" id ="loginForm">
 
                     <div class="col-12">
+                      
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
                         <input type="text" name="username" class="form-control" id="yourUsername" required>
@@ -107,14 +108,29 @@ if(isset($_SESSION['UserLogin'])){
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
+                    <div class="col-12">
+                    <div class="form-check form-switch">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showPassword()">
+                    </div>
+                    </div>
+                    <script>
 
-              
+function showPassword() {
+  var x = document.getElementById("yourPassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+                    </script>
                     <div class="col-12">
                     <button class="btn btn-primary w-100" type="button" disabled id ="btnChangeToLoading" hidden>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Logging in...
               </button>
-                      <button class="btn btn-primary w-100" type="submit" name="login" id ="btnLogin">Login</button>
+                      <button class="btn btn-primary w-100" type="submit"id ="btnLogin">Login</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Forget your account? <a href="pages-register.html">Request for recovery</a></p>
@@ -138,7 +154,7 @@ if(isset($_SESSION['UserLogin'])){
   
   
   <!-------------------------------------------- MY JAVASCRIPT admin-login ------------------------------->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
   <script src ="../js/user-login.js?t=1491313943549" type = "text/javascript">
   </script>
   <!-- END OF  MY JAVASCRIPT admin-login -->

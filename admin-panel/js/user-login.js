@@ -10,8 +10,9 @@ function logIn(e){
     const username = document.getElementById('yourUsername').value;
     const password = document.getElementById('yourPassword').value;
     
-    e.preventDefault();
-
+    console.log(username)
+if(username !== "" && password !== ""){
+  e.preventDefault();
     let params = 
     "username="+username+
     "&password="+password;
@@ -53,6 +54,6 @@ function delayedFunc(){
     }//end of delayedFunc
   } // end of onload 
 
-
+}
 }//end of login
 
