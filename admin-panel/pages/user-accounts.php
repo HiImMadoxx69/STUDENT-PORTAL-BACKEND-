@@ -448,15 +448,16 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
 
               
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
+               
               </form><!-- End floating Labels Form -->
 
 
                     </div>
-                   
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                    </div>
                   </div>
                 </div>
               </div><!-- End user Modal-->
@@ -471,8 +472,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             <h5 class="card-title">User Accounts Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
-      <div class="row mb-3">
-        <div class="col-sm-5">
+     
+      <div class="row mb-3 justify-content-end">
+        <div class="col-sm-1">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
                 Add User
               </button>

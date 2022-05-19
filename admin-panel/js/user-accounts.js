@@ -1,6 +1,6 @@
 //GLOBAL VARIABLES USER = GVU
 //Current number of rows
-var GVUdefaultRow = 5;
+var GVUdefaultRow = 0;
 //CurrentIndexPage global
 var GVUIndexPage = 0;
 
@@ -16,7 +16,7 @@ var GVUResultsSorted = {};
 //Check if already sorted
 var GVUIsSorted = false;
 //Default number of row global
-var GVUNumRows = 5;
+var GVUNumRows = 0;
 
 //If the default row is less than 10
 var GVULessThanRow = 0;
