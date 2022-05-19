@@ -317,14 +317,14 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
      
 
       <li class="nav-item">
-        <a class="nav-link " href="user-accounts.php">
+        <a class="nav-link collapsed " href="user-accounts.php">
           <i class="bi bi-card-list"></i>
           <span>User Account</span>
         </a>
       </li><!-- End User Account Nav -->
-
+      
       <li class="nav-item">
-        <a class="nav-link collapsed " href="admin-student-accounts.php">
+        <a class="nav-link " href="admin-student-accounts.php">
           <i class="bi bi-card-list"></i>
           <span>Student Account</span>
         </a>
@@ -338,12 +338,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             
 
     <div class="pagetitle">
-      <h1>User Accounts</h1>
+      <h1>Student Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">User Accounts</li>
+          <li class="breadcrumb-item active">Student Accounts</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -475,7 +475,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">User Accounts Table</h5>
+            <h5 class="card-title">Student Accounts Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
