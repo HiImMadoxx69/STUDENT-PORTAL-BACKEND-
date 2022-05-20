@@ -474,8 +474,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsLoading" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                      </button>
                       <button type="button" class="btn btn-primary" id ="btnCreateUsers" onClick ="createUserAccount()">Submit</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
                     </div>
                   </div>
                 </div>

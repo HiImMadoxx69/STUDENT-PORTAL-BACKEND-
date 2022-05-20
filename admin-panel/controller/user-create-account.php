@@ -18,13 +18,14 @@ $Instagram = $_POST['Instagram'];
 $Linkedin = $_POST['Linkedin'];
 if(isset($Fname)){
 
-
-
+    
+try{
     $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`, `username`, `password`, `firstname`, `lastname`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username', '$Password', '$Fname', '$Lname', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
-
-    $con->query($sql) or die (exit(json_encode(array("statusCode"=>201))));
- 
-
+    mysqli_query($con, $sql);
+    exit(json_encode(array("statusCode"=>'Created Succesfully')));
+}catch(Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
+}
 }
 // $getFiles = $_POST['floatingFname'];
 // if(isset($getFiles)){
