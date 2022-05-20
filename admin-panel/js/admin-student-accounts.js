@@ -154,19 +154,18 @@ for(let i = GVSAIndexPage; i<GVSAdefaultRow; i++){
     output += `<tr>
     <td>${GVSAResults[i].id}</td>
     <td><img src = "../../uploads/${GVSAResults[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
-    <td>${GVSAResults[i].username}</td>
+    <td>${GVSAResults[i].studentnumber}</td>
     <td>${GVSAResults[i].firstname}</td>
+    <td>${GVSAResults[i].middlename}</td>
     <td>${GVSAResults[i].lastname}</td>
     <td>${GVSAResults[i].email}</td>
     <td>${GVSAResults[i].password}</td>
-    <td>${GVSAResults[i].position}</td>
-    <td>${GVSAResults[i].address}</td>
+    <td>${GVSAResults[i].course}</td>
+    <td>${GVSAResults[i].section}</td>
+    <td>${GVSAResults[i].birthday}</td>
     <td>${GVSAResults[i].contact}</td>
-    <td>${GVSAResults[i].about}</td>
-    <td>${GVSAResults[i].twitterprofile}</td>
-    <td>${GVSAResults[i].facebookprofile}</td>
-    <td>${GVSAResults[i].instagramprofile}</td>
-    <td>${GVSAResults[i].linkedinprofile}</td>
+    <td>${GVSAResults[i].gaurdian}</td>
+    <td>${GVSAResults[i].gaurdian_contact}</td>
     <td>${GVSAResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
@@ -181,7 +180,7 @@ for(let i = GVSAIndexPage; i<GVSAdefaultRow; i++){
 
 let numberOfPages = '';
 numberOfPages += `<h8>Showing `+GVSAdefaultRow+` out of `+GVSAAccLength+` results</h8>`;
-document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
+document.querySelector('#tbody-admin-student-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }
 
@@ -243,19 +242,18 @@ const bindAllDataIntoTableSorted = function (){
         output += `<tr>
         <td>${GVSAResultsSorted[i].id}</td>
         <td><img src = "../../uploads/${GVSAResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
-        <td>${GVSAResultsSorted[i].username}</td>
-        <td>${GVSAResultsSorted[i].firstname}</td>
-        <td>${GVSAResultsSorted[i].lastname}</td>
-        <td>${GVSAResultsSorted[i].email}</td>
-        <td>${GVSAResultsSorted[i].password}</td>
-        <td>${GVSAResultsSorted[i].position}</td>
-        <td>${GVSAResultsSorted[i].address}</td>
-        <td>${GVSAResultsSorted[i].contact}</td>
-        <td>${GVSAResultsSorted[i].about}</td>
-        <td>${GVSAResultsSorted[i].twitterprofile}</td>
-        <td>${GVSAResultsSorted[i].facebookprofile}</td>
-        <td>${GVSAResultsSorted[i].instagramprofile}</td>
-        <td>${GVSAResultsSorted[i].linkedinprofile}</td>
+        <td>${GVSAResults[i].studentnumber}</td>
+        <td>${GVSAResults[i].firstname}</td>
+        <td>${GVSAResults[i].middlename}</td>
+        <td>${GVSAResults[i].lastname}</td>
+        <td>${GVSAResults[i].email}</td>
+        <td>${GVSAResults[i].password}</td>
+        <td>${GVSAResults[i].course}</td>
+        <td>${GVSAResults[i].section}</td>
+        <td>${GVSAResults[i].birthday}</td>
+        <td>${GVSAResults[i].contact}</td>
+        <td>${GVSAResults[i].gaurdian}</td>
+        <td>${GVSAResults[i].gaurdian_contact}</td>
         <td>${GVSAResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
@@ -270,7 +268,7 @@ const bindAllDataIntoTableSorted = function (){
    
     let numberOfPages = '';
     numberOfPages += `<h8>Showing `+GVSAdefaultRow+` out of `+GVSAAccLength+` results</h8>`;
-    document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
+    document.querySelector('#tbody-admin-student-accounts').innerHTML = output;//print the data into the tbody
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
 
