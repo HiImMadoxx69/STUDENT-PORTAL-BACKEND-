@@ -126,17 +126,21 @@ function getAllDataAPI(){
         document.querySelector('#selectPage').innerHTML = selectHolder;// set the rows per page
 
         if(selectPage.value === '5'){
+            GVUNumRows = 5;
             GVURowPerPage = 5;
             GVUdefaultRow = 5;
         }else if (selectPage.value === '10'){
+            GVUNumRows = 10;
             GVURowPerPage = 10
             GVUdefaultRow = 10;
         }else if (selectPage.value === '25'){
+            GVUNumRows = 25;
             GVURowPerPage = 25;
             GVUdefaultRow = 25;
         }else{
-            GVURowPerPage = 50;
-            GVUdefaultRow = 50;
+            GVUNumRows = GVUAccLength;
+            GVURowPerPage = GVUAccLength;
+            GVUdefaultRow = GVUAccLength;
         }// rows condition
 
         bindAllDataIntoTable();//Bind the data into table once fetch successfull
