@@ -2,8 +2,11 @@
 const btnCreateUsers = document.getElementById('btnCreateUsers');
 const frmCreateUsers = document.getElementById('frmCreateUsers');//form create account
 const btnIsLoading = document.getElementById('btnIsLoading');//LoadingButton
+const alertShowError = document.getElementById('alertError');//AlertError
+const alertShowSuccess = document.getElementById('alertSuccess');//Alert Success
+const btnError = document.getElementById('btnError');//Error button disabled
+const btnSuccess = document.getElementById('btnSuccess');//Succes button
 
-    
 const resetFields = () =>{
      let Fname = document.getElementById('newFname').value = "";
    
@@ -30,22 +33,72 @@ const resetFields = () =>{
     let Instagram = document.getElementById('newinstagramprofileURL').value = "";
 
     let Linkedin = document.getElementById('newlinkedinprofileURL').value = "";
+    btnSuccess.setAttribute("hidden", "hidden");//Is loading true
+    btnCreateUsers.removeAttribute("hidden");
+}//Reset all the fields
 
+
+const checkAllFields = () =>{
+
+    let Fname = document.getElementById('newFname').value;
+   
+    let Lname = document.getElementById('newLname').value;
+
+    let Email = document.getElementById('newEmail').value;
+ 
+    let Username = document.getElementById('newUsername').value;
+
+    let Password = document.getElementById('newPassword').value;
+    
+    let Job = document.getElementById('newJob').value;
+ 
+    let Contact = document.getElementById('newContact').value;
+
+    let Address = document.getElementById('newAddress').value;
+ 
+    let About = document.getElementById('newAbout').value;
+
+    let Twitter = document.getElementById('newtwitterprofileURL').value;
+
+    let Facebook = document.getElementById('newfacebookprofileURL').value;
+ 
+    let Instagram = document.getElementById('newinstagramprofileURL').value;
+
+    let Linkedin = document.getElementById('newlinkedinprofileURL').value;
+
+    if(Fname !== "" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
+        createUserAccount();
+    }else{
+        alertShowError.classList.add('show');
+        btnError.removeAttribute("hidden");
+        btnCreateUsers.style.display = "none";
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            btnError.setAttribute("hidden", "hidden");//Is loading true
+            btnCreateUsers.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 3000);
+    }
 }
+
 
 //Loading function for button
 const isLoadingTrue =(formStatus) =>{
     if(formStatus === true){
+        isLoadingTrue(false)//Start the loading button
     btnIsLoading.removeAttribute("hidden");//Is loading true
     btnCreateUsers.style.display = "none";
     }else{
     delayedStopLoading =() =>{
     btnIsLoading.setAttribute("hidden", "hidden");
     btnCreateUsers.style.display = "inline-block";
+ 
     }
-    setTimeout(delayedStopLoading, 1000);
+    setTimeout(delayedStopLoading, 3000);
     }
+   
 }
+
 
 const createUserAccount = (e) =>{
     
@@ -107,8 +160,21 @@ for (var pair of formData.entries()) {
     
     .then((res) => res.json())
         .then(response =>{
-            console.log(response)
-            isLoadingTrue(false)//Start the loading button
+            console.log(response.statusCode)
+          if(response.statusCode === 200){
+            delayedShowAlert = () =>{
+                alertShowSuccess.classList.add('show');
+                btnSuccess.removeAttribute("hidden");
+                btnCreateUsers.setAttribute("hidden", "hidden");
+            }
+            setTimeout(delayedShowAlert, 3000)
+            delayedRemoveAlert = () =>{   
+                
+                alertShowSuccess.classList.remove('show');  
+            }
+            setTimeout(delayedRemoveAlert, 6000);
+          }
+            
         })
     .catch(err => console.log(err))
 

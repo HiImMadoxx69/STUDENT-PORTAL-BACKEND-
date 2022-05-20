@@ -22,7 +22,7 @@ if(isset($Fname)){
 try{
     $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`, `username`, `password`, `firstname`, `lastname`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username', '$Password', '$Fname', '$Lname', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
-    exit(json_encode(array("statusCode"=>'Created Succesfully')));
+    exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }

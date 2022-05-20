@@ -374,16 +374,31 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Accounts Form</h5>
+                      
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      
                     </div>
                     <div class="modal-body">
 
-                      
+                    
+                <!--Error Alert -->
+            <div class="alert alert-danger alert-dismissible fade" role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:80%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Please fill out all the fields!
+              </div><!--Error End of Alert -->
+
+              <!-- Success Alert -->
+              <div class="alert alert-success alert-dismissible fade" role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:80%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Created Succesfully!
+              </div><!-- End of Alert -->
+
               <!-- Floating Labels Form -->
-              <form class="row g-3" id ="frmCreateUsers">
+              <form class="row g-3 needs-validation" id ="frmCreateUsers">
+
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="newFname" placeholder="Firstname">
+                    <input type="text" class="form-control" id="newFname" placeholder="Firstname" required>
                     <label for="newFname">Firstname</label>
                   </div>
                 </div>
@@ -473,18 +488,27 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               </form><!-- End floating Labels Form -->
                     </div>
                     <div class="modal-footer">
+                      
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                       <button class="btn btn-primary" type="button" disabled id ="btnIsLoading" hidden>
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       Updating...
-                      </button>
-                      <button type="button" class="btn btn-primary" id ="btnCreateUsers" onClick ="createUserAccount()">Submit</button>
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      <button class="btn btn btn-success" type="button" disabled id ="btnSuccess" hidden>
+                      <i class="bi bi-check-circle me-1"></i>
+                      Created Succesfully!
+                      </button><!-- End of success button -->
+                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
                       <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
                     </div>
                   </div>
                 </div>
               </div><!-- End user Modal-->
-
+            
 
     <section class="section">
       <div class="row">
