@@ -380,88 +380,101 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                       
               <!-- Floating Labels Form -->
-              <form class="row g-3">
+              <form class="row g-3" id ="frmCreateUsers">
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingFname" placeholder="Firstname">
-                    <label for="floatingFname">Firstname</label>
+                    <input type="text" class="form-control" id="newFname" placeholder="Firstname">
+                    <label for="newFname">Firstname</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatinLname" placeholder="Lastname">
-                    <label for="floatingLname">Lastname</label>
+                    <input type="text" class="form-control" id="newLname" placeholder="Lastname">
+                    <label for="newLname">Lastname</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
-                    <label for="floatingEmail">Email</label>
+                    <input type="email" class="form-control" id="newEmail" placeholder="Email">
+                    <label for="newEmail">Email</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingUsername" placeholder="Username">
-                    <label for="floatingUsername">Username</label>
+                    <input type="text" class="form-control" id="newUsername" placeholder="Username">
+                    <label for="newUsername">Username</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="Password">
+                    <label for="newPassword">Password</label>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                 </div>
                 <div class = "col-md-3">
 
-                </div>
-                <div class="col-md-3">
+                </div> -->
+                <!-- <div class="col-md-3">
                     <div class="form-check form-switch ">
                     <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showPassword()">
                     </div>
+                </div> -->
+                <div class="col-md-6">
+                <div class="form-floating mb-3">
+                      <select class="form-select" id="newJob" aria-label="Floating label select example">
+                        <option selected disabled>...</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Registrar">Registrar</option>
+                        <option value="Accountant">Accountant</option>
+                      </select>
+                      <label for="newJob">Job</label>
+                    </div>
+                </div>
+                <div class = "col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="newContact" placeholder="Contact">
+                    <label for="newContact">Contact</label>
+                  </div>
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea>
-                    <label for="floatingTextarea">Address</label>
+                    <textarea class="form-control" placeholder="Address" id="newAddress" style="height: 100px;"></textarea>
+                    <label for="newAddress">Address</label>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="col-md-12">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingCity" placeholder="City">
-                      <label for="floatingCity">City</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="State">
-                      <option selected>New York</option>
-                      <option value="1">Oregon</option>
-                      <option value="2">DC</option>
-                    </select>
-                    <label for="floatingSelect">State</label>
-                  </div>
-                </div>
-                <div class="col-md-2">
+                <div class="col-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingZip" placeholder="Zip">
-                    <label for="floatingZip">Zip</label>
+                    <textarea class="form-control" placeholder="About" id="newAbout" style="height: 100px;"></textarea>
+                    <label for="newAbout">About</label>
                   </div>
                 </div>
-
               
-               
+
+                    <label for="basic-url" class="form-label">Optional URL</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="twitterprofileURL">https://twitter.com/</span>
+                      <input type="text" class="form-control" id="newtwitterprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" id="facebookprofileURL">https://facebook.com/</span>
+                      <input type="text" class="form-control" id="newfacebookprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" id="instagramprofileURL">https://instagram.com/</span>
+                      <input type="text" class="form-control" id="newinstagramprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" id="linkedinprofileURL">https://linkedin.com/</span>
+                      <input type="text" class="form-control" id="newlinkedinprofileURL" aria-describedby="basic-addon3">
+                    </div>
               </form><!-- End floating Labels Form -->
-
-
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-primary" id ="btnCreateUsers" onClick ="createUserAccount()">Submit</button>
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
                     </div>
                   </div>
@@ -599,9 +612,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
   <!-- my javascript for user-prfile -->
   <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
-<script src ="../js/user-accounts.js?t=1491313943549"  type = "text/javascript">
-</script>
-
+<script src ="../js/user-accounts.js?t=1491313943549"  type = "text/javascript"></script>
+<script src ="../js/user-create-account.js?t=1491313943549"  type = "text/javascript"></script>
 <!-- end of my javascript for user - profile -->
 
   <!-- Vendor JS Files -->

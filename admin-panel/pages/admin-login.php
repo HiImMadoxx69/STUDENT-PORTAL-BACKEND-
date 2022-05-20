@@ -21,28 +21,28 @@ if(isset($_SESSION['UserLogin'])){
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../img/globe-client-logo.png" rel="icon">
-  <link href="../img/client-logo.png" rel="apple-touch-icon">
+  <link href="../img/globe-client-logo.png" rel="icon" >
+  <link href="../img/client-logo.png" rel="apple-touch-icon" >
 
   <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.gstatic.com" rel="preconnect" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" type="text/css">
 
   <!-- Vendor CSS Files -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/quill/quill.snow.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/quill/quill.bubble.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/remixicon/remixicon.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/simple-datatables/style.css" rel="stylesheet" type="text/css">
 
   <!-- Template Main CSS File -->
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
 
   
   <!-- My Custom Css-->
-  <link href="../css/custom.css" rel="stylesheet">
+  <link href="../css/custom.css" rel="stylesheet" type="text/css">
 
    
 </head>
@@ -108,13 +108,13 @@ if(isset($_SESSION['UserLogin'])){
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                     <div class="form-check form-switch">
                     <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showPassword()">
                     </div>
-                    </div>
-                    <script>
+                    </div> -->
+                    <!-- <script>
 
 function showPassword() {
   var x = document.getElementById("yourPassword");
@@ -124,7 +124,7 @@ function showPassword() {
     x.type = "password";
   }
 }
-                    </script>
+                    </script> -->
                     <div class="col-12">
                     <button class="btn btn-primary w-100" type="button" disabled id ="btnChangeToLoading" hidden>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
