@@ -382,13 +382,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                     
                 <!--Error Alert -->
-            <div class="alert alert-danger alert-dismissible fade" role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%; "> 
+            <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
                 <i class="bi bi-exclamation-octagon me-1"></i>
           Please fill out all the fields!
               </div><!--Error End of Alert -->
 
               <!-- Success Alert -->
-              <div class="alert alert-success alert-dismissible fade" role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
+              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
                 <i class="bi bi-exclamation-octagon me-1"></i>
           Created Succesfully!
               </div><!-- End of Alert -->

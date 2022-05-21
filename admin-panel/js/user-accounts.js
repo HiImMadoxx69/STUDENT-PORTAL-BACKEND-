@@ -406,10 +406,12 @@ const checkAllFields = () =>{
         createUserAccount();
     }else{
         alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
         btnError.removeAttribute("hidden");
         btnCreateUsers.style.display = "none";
         delayedAlert = () =>{
             alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
             btnError.setAttribute("hidden", "hidden");//Is loading true
             btnCreateUsers.style.display = "inline-block";
         }
@@ -500,6 +502,7 @@ for (var pair of formData.entries()) {
           if(response.statusCode === 200){
             delayedShowAlert = () =>{
                 btnCreateUsers.setAttribute("hidden", "hidden");
+                alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
                 btnSuccess.removeAttribute("hidden");
             }
@@ -507,6 +510,7 @@ for (var pair of formData.entries()) {
             delayedRemoveAlert = () =>{   
                 
                 alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.setAttribute("hidden", "hidden");
             }
             setTimeout(delayedRemoveAlert, 6000);
           }
