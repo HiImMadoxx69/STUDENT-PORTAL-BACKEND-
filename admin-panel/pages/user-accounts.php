@@ -42,12 +42,12 @@ $currentId = $user['id'];
   <link href="../vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../vendor/simple-datatables/style.css" rel="stylesheet">
+  <!-- Custom table csss -->
 
+<link href="../css/Mytable.css" rel="stylesheet">
+ <!-- End of custom table css -->
   <!-- Template Main CSS File -->
   <link href="../css/style.css" rel="stylesheet">
- <!-- Custom table csss -->
-
- <link href="../css/Mytable.css" rel="stylesheet">
  
 </head>
 
@@ -375,20 +375,20 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <div class="modal-header">
                       <h5 class="modal-title">Accounts Form</h5>
                       
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
                       
                     </div>
                     <div class="modal-body">
 
                     
                 <!--Error Alert -->
-            <div class="alert alert-danger alert-dismissible fade" role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:80%;"> 
+            <div class="alert alert-danger alert-dismissible fade" role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%; "> 
                 <i class="bi bi-exclamation-octagon me-1"></i>
           Please fill out all the fields!
               </div><!--Error End of Alert -->
 
               <!-- Success Alert -->
-              <div class="alert alert-success alert-dismissible fade" role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:80%;"> 
+              <div class="alert alert-success alert-dismissible fade" role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
                 <i class="bi bi-exclamation-octagon me-1"></i>
           Created Succesfully!
               </div><!-- End of Alert -->
@@ -426,17 +426,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="newPassword">Password</label>
                   </div>
                 </div>
-                <!-- <div class="col-md-3">
-                </div>
-                <div class = "col-md-3">
-
-                </div> -->
-                <!-- <div class="col-md-3">
-                    <div class="form-check form-switch ">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showPassword()">
-                    </div>
-                </div> -->
+               
                 <div class="col-md-6">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="newJob" aria-label="Floating label select example">
@@ -489,10 +479,10 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="modal-footer">
                       
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
                       <button class="btn btn-primary" type="button" disabled id ="btnIsLoading" hidden>
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      Updating...
+                      Creating...
                       </button><!--End of updating button-->
                       <button class="btn btn btn-danger" type="button" disabled id ="btnError" hidden>
                       <i class="bi bi-exclamation-octagon"></i>
@@ -520,13 +510,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
-      <div class="row mb-3 justify-content-end">
-        <div class="col-sm-1">
+      <div class="row mb-3">
+        <div class="col-sm-2">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
                 Add User
               </button>
        </div>
-      </div>
+       
+
+       </div>
 
       <div class="row mb-3">
                   <div class="col-sm-2">
@@ -548,8 +540,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div><!--End of search bar-->
                   </div> 
       <!-- End of Select Entry Page -->
-     
-       
+    
               <div id="table-wrapper">
                 <div id="table-scroll">
               <!-- Table -->
@@ -557,22 +548,22 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id')" class="th-a">ID</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url')" class="th-a">Photo</a> </th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username')" class="th-a">Username</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname')" class="th-a">Firstname</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname')" class="th-a">Lastname</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email')" class="th-a">Email</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password')" class="th-a">Password</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position')" class="th-a">Job</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address')" class="th-a">Address</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact')" class="th-a">Contact</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about')" class="th-a">About</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile')" class="th-a">Twitter</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile')" class="th-a">Facebook</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile')" class="th-a">Instagram</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile')" class="th-a">Linked IN </a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at')" class="th-a">Date Created</a></th>
+                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id');return false;" class="th-a">ID</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">Photo</a> </th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">Username</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">Firstname</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">Lastname</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">Email</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">Password</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position');return false;" class="th-a">Job</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">Address</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact');return false;" class="th-a">Contact</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about');return false;" class="th-a">About</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile');return false;" class="th-a">Twitter</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile');return false;" class="th-a">Facebook</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile');return false;" class="th-a">Instagram</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">Linked IN </a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">Date Created</a></th>
                     <th scope="col" class="table-info" id ="th-action">Action</th>
                     
                     
