@@ -321,3 +321,199 @@ bindAllDataIntoTableSorted();
 }
 
 
+
+
+
+//JavaScript create account admin
+const btnCreateStudents = document.getElementById('btnCreateStudents');
+const frmCreateUsers = document.getElementById('frmCreateStudents');//form create account
+const btnIsLoading = document.getElementById('btnIsLoading');//LoadingButton
+const alertShowError = document.getElementById('alertError');//AlertError
+const alertShowSuccess = document.getElementById('alertSuccess');//Alert Success
+const btnError = document.getElementById('btnError');//Error button disabled
+const btnSuccess = document.getElementById('btnSuccess');//Succes button
+
+const resetFields = () =>{
+   
+    let Studentnumber = document.getElementById('newStudNum').value = "";
+
+    let Fname = document.getElementById('newFname').value = "";
+
+    let Mname = document.getElementById('newMname').value = "";
+   
+    let Lname = document.getElementById('newLname').value = "";
+
+    let Email = document.getElementById('newEmail').value = "";
+ 
+    let Password = document.getElementById('newPassword').value = "";
+    
+    let Course = document.getElementById('newCourse').value = "";
+
+    let Section = document.getElementById('newSection').value = "";
+
+    let Birthday = document.getElementById('newBirthDay').value = "";
+
+    let Contact = document.getElementById('newContact').value = "";
+
+    let GuardianN = document.getElementById('newGuardianN').value = "";
+
+    let GuardianCon = document.getElementById('newGuardianCon').value = "";
+ 
+    btnSuccess.setAttribute("hidden", "hidden");//Is loading true
+    btnCreateStudents.removeAttribute("hidden");
+}//Reset all the fields
+
+//Call it to refresh the table
+const refreshTable = () =>{
+    getAllDataAPI();
+}
+
+
+//Check all of the fields
+const checkAllFields = () =>{
+    let Studentnumber = document.getElementById('newStudNum').value = "";
+
+    let Fname = document.getElementById('newFname').value = "";
+
+    let Mname = document.getElementById('newMname').value = "";
+   
+    let Lname = document.getElementById('newLname').value = "";
+
+    let Email = document.getElementById('newEmail').value = "";
+ 
+    let Password = document.getElementById('newPassword').value = "";
+    
+    let Course = document.getElementById('newCourse').value = "";
+
+    let Section = document.getElementById('newSection').value = "";
+
+    let Birthday = document.getElementById('newBirthDay').value = "";
+
+    let Contact = document.getElementById('newContact').value = "";
+
+    let GuardianN = document.getElementById('newGuardianN').value = "";
+
+    let GuardianCon = document.getElementById('newGuardianCon').value = "";
+
+    if(Studentnumber !== "" && Fname !== "" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "" && Birthday!== "" && Contact !== "" && GuardianN !== "" && GuardianCon !== "" ){
+        createUserAccount();
+    }else{
+        alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
+        btnError.removeAttribute("hidden");
+        btnCreateStudents.style.display = "none";
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
+            btnError.setAttribute("hidden", "hidden");//Is loading true
+            btnCreateStudents.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 3000);
+    }
+}
+
+
+//Loading function for button
+const isLoadingTrue =(formStatus) =>{
+    if(formStatus === true){
+        isLoadingTrue(false)//Start the loading button
+    btnIsLoading.removeAttribute("hidden");//Is loading true
+    btnCreateStudents.style.display = "none";
+    }else{
+    delayedStopLoading =() =>{
+    btnIsLoading.setAttribute("hidden", "hidden");
+    btnCreateStudents.style.display = "inline-block";
+ 
+    }
+    setTimeout(delayedStopLoading, 3000);
+    }
+   
+}
+
+//Sex Radio Button
+
+
+const sexRadio = (e) =>{
+    if(e === "Male"){
+        return "Male";
+    }else{
+        return "Female";
+    }
+}
+
+//Create User
+const createUserAccount = (e) =>{
+    
+    isLoadingTrue(true)//Start the loading button
+   
+    let Studentnumber = document.getElementById('newStudNum').value = "";
+
+    let Fname = document.getElementById('newFname').value = "";
+
+    let Mname = document.getElementById('newMname').value = "";
+   
+    let Lname = document.getElementById('newLname').value = "";
+
+    let Email = document.getElementById('newEmail').value = "";
+ 
+    let Password = document.getElementById('newPassword').value = "";
+    
+    let Course = document.getElementById('newCourse').value = "";
+
+    let Section = document.getElementById('newSection').value = "";
+
+    let Birthday = document.getElementById('newBirthDay').value = "";
+
+    let Contact = document.getElementById('newContact').value = "";
+
+    let GuardianN = document.getElementById('newGuardianN').value = "";
+
+    let GuardianCon = document.getElementById('newGuardianCon').value = "";
+
+    formData = new FormData();
+formData.append('Studentnumber', studentnumber);    
+formData.append('Fname', Fname);
+formData.append('Mname', Mname);
+formData.append('Lname', Lname);
+formData.append('Email', Email);
+formData.append('Password', Password);
+formData.append('Course', course);
+formData.append('Section', Section);
+formData.append('Birthday', Birthday);
+formData.append('Contact', Contact);
+formData.append('GuardianN', GuardianN);
+formData.append('GuardianCon', GuardianCon);
+for (var pair of formData.entries()) {
+    console.log(pair[0]+ ' - ' + pair[1]); 
+ }
+
+
+    fetch("../controller/admin-student-create-accounts.php",{
+        method: "POST",
+        body:formData,
+    })
+    
+    .then((res) => res.json())
+        .then(response =>{
+            console.log(response.statusCode)
+          if(response.statusCode === 200){
+            delayedShowAlert = () =>{
+                btnCreateStudents.setAttribute("hidden", "hidden");
+                alertShowSuccess.removeAttribute("hidden");
+                alertShowSuccess.classList.add('show');
+                btnSuccess.removeAttribute("hidden");
+            }
+            setTimeout(delayedShowAlert, 3000)
+            delayedRemoveAlert = () =>{   
+                
+                alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.setAttribute("hidden", "hidden");
+            }
+            setTimeout(delayedRemoveAlert, 6000);
+          }
+            
+        })
+    .catch(err => console.log(err))
+
+}
+

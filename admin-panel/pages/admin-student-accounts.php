@@ -378,45 +378,56 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="modal-body">
   
-                      
+                   <!--Error Alert -->
+            <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Please fill out all the fields!
+              </div><!--Error End of Alert -->
+
+              <!-- Success Alert -->
+              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Created Succesfully!
+              </div><!-- End of Alert -->
+
               <!-- Floating Labels Form -->
-              <form class="row g-3">
+              <form class="row g-3 needs-validation" id ="frmCreateStudents">
               <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingStudNum" placeholder="Studentnumber">
-                    <label for="floatingStudNum">Student Number</label>
+                    <input type="text" class="form-control" id="newStudNum" placeholder="Studentnumber">
+                    <label for="newStudNum">Student Number</label>
                   </div>
                 </div>
               
               <div class="col-md-4">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingFname" placeholder="Firstname">
-                    <label for="floatingFname">Firstname</label>
+                    <input type="text" class="form-control" id="newFname" placeholder="Firstname">
+                    <label for="newFname">Firstname</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatinMname" placeholder="Middlename">
-                    <label for="floatingMname">Middlename</label>
+                    <label for="newMname">Middlename</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatinLname" placeholder="Lastname">
-                    <label for="floatingLname">Lastname</label>
+                    <input type="text" class="form-control" id="newLname" placeholder="Lastname">
+                    <label for="newLname">Lastname</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
-                    <label for="floatingEmail">Email</label>
+                    <input type="email" class="form-control" id="newEmail" placeholder="Email">
+                    <label for="newEmail">Email</label>
                   </div>
                 </div>
                
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="Password">
+                    <label for="newPassword">Password</label>
                   </div>
                 </div> 
                
@@ -424,8 +435,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingCourse" placeholder="Course">
-                      <label for="floatingCourse">Course</label>
+                      <input type="text" class="form-control" id="newCourse" placeholder="Course">
+                      <label for="newCourse">Course</label>
                     </div>
                   </div>
                 </div>
@@ -433,8 +444,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingSection" placeholder="Section">
-                      <label for="floatingSection">Section</label>
+                      <input type="text" class="form-control" id="newSection" placeholder="Section">
+                      <label for="newSection">Section</label>
                     </div>
                   </div>
                 </div>
@@ -442,8 +453,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingBirthDay" placeholder="Birthday">
-                      <label for="floatingBirthDay">Birth Date</label>
+                      <input type="text" class="form-control" id="newBirthDay" placeholder="Birthday">
+                      <label for="newBirthDay">Birth Date</label>
                     </div>
                   </div>
                 </div>
@@ -451,8 +462,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingContact" placeholder="Contact">
-                      <label for="floatingContact">Contact</label>
+                      <input type="text" class="form-control" id="newContact" placeholder="Contact">
+                      <label for="newContact">Contact</label>
                     </div>
                   </div>
                 </div>
@@ -460,8 +471,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingGuardianN" placeholder="Guardian Name">
-                      <label for="floatingGuardianN">Guardian Name</label>
+                      <input type="text" class="form-control" id="newGuardianN" placeholder="Guardian Name">
+                      <label for="newGuardianN">Guardian Name</label>
                     </div>
                   </div>
                 </div>
@@ -470,8 +481,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingGuardianCon" placeholder="Guardian Contact">
-                      <label for="floatingGuardianCon">Guardian Contact</label>
+                      <input type="text" class="form-control" id="newGuardianCon" placeholder="Guardian Contact">
+                      <label for="newGuardianCon">Guardian Contact</label>
                     </div>
                   </div>
                 </div>
@@ -497,7 +508,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <i class="bi bi-check-circle me-1"></i>
                       Created Succesfully!
                       </button><!-- End of success button -->
-                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
+                      <button type="submit" class="btn btn-primary" id ="btnCreateStudents" onClick ="checkAllFields()">Submit</button>
                       <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
                     </div>
                   </div>

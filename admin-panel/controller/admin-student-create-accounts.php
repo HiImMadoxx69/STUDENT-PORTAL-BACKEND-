@@ -2,24 +2,23 @@
 include_once("../connections/connection.php");
 $con = connection();
 
-$Studentnumber = $_POST['Studentnumber'];
-$Fname = $_POST['Fname'];
-$Lname = $_POST['Mname'];
-$Lname = $_POST['Lname'];
-$Email = $_POST['Email'];
-$Password = $_POST['Password'];
-$Course = $_POST['Course'];
-$Contact = $_POST['Contact'];
-$Section = $_POST['Section'];
-$Birthday = $_POST['Birthday'];
-$Contact = $_POST['Contact'];
-$GuardianN = $_POST['GuardianN$GuardianN'];
-$GuardianCon = $_POST['GuardianCon'];
+$studentnumber = $_POST['Studentnumber'];
+$firstname = $_POST['Fname'];
+$middlename = $_POST['Mname'];
+$lastname = $_POST['Lname'];
+$email = $_POST['Email'];
+$password = $_POST['Password'];
+$course = $_POST['Course'];
+$section = $_POST['Section'];
+$birthday = $_POST['Birthday'];
+$contact = $_POST['Contact'];
+$gardian = $_POST['GuardianN'];
+$guardian_contact = $_POST['GuardianCon'];
 if(isset($Fname)){
 
     
 try{
-    $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`Studentnumber`, `password`, `firstname`, `lastname`, `email`, `course`, `section`, `birthday`, `contact`, `guardian`, `guardian_contact`, ) VALUES ('default_profile.jpg', '$Studentnumber', '$Fname', '$Mname', '$Lname',  '$Email', '$Password','$Course', '$Section', '$Contact', '$Birthday',  '$GuardianN', '$GuardianCon');";
+    $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `password`, `firstname`, `lastname`, `email`, `course`, `section`, `birthday`, `contact`, `guardian`, `guardian_contact`, ) VALUES ('default_profile.jpg', '$studentnumber', '$firstname', '$middlename', '$lastname',  '$email', '$password','$course', '$section', '$contact', '$birthday',  '$guardian', '$guardian_contact');";
     mysqli_query($con, $sql);
     exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){
