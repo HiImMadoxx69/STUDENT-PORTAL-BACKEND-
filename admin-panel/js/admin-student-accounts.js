@@ -164,8 +164,8 @@ for(let i = GVSAIndexPage; i<GVSAdefaultRow; i++){
     <td>${GVSAResults[i].section}</td>
     <td>${GVSAResults[i].birthday}</td>
     <td>${GVSAResults[i].contact}</td>
-    <td>${GVSAResults[i].gaurdian}</td>
-    <td>${GVSAResults[i].gaurdian_contact}</td>
+    <td>${GVSAResults[i].guardian}</td>
+    <td>${GVSAResults[i].guardian_contact}</td>
     <td>${GVSAResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
@@ -252,8 +252,8 @@ const bindAllDataIntoTableSorted = function (){
         <td>${GVSAResults[i].section}</td>
         <td>${GVSAResults[i].birthday}</td>
         <td>${GVSAResults[i].contact}</td>
-        <td>${GVSAResults[i].gaurdian}</td>
-        <td>${GVSAResults[i].gaurdian_contact}</td>
+        <td>${GVSAResults[i].guardian}</td>
+        <td>${GVSAResults[i].guardian_contact}</td>
         <td>${GVSAResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
