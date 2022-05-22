@@ -89,12 +89,13 @@ if(getCurrentPassword ===  currentPassword && newPassword === confirmNewPassword
 //POST NAME
 function updateProfile(e){
 
-
     e.preventDefault();
     let fileupload = document.getElementById('profileEdit');// fileupload
   
     let firstname = document.getElementById('firstName').value;
     let lastname = document.getElementById('lastName').value;
+    let birthday = document.getElementById('birthDay').value;
+    let sex = document.getElementById('Sex').value;
     let about = document.getElementById('About').value;
     let position = document.getElementById('Position').value;
     let address = document.getElementById('Address').value;
@@ -114,13 +115,15 @@ function updateProfile(e){
 
    // Create a FormData object.
   formData = new FormData();
-  
+
     // Add the file to the request.
     formData.append('profileEdit', imageFile, imageFile.name);
     console.log(currentId);
     formData.append('userId', currentId);
     formData.append('firstname', firstname);
     formData.append('lastname', lastname);
+    formData.append('birthday', birthday);
+    formData.append('sex', sex);
     formData.append('about', about);
     formData.append('position', position);
     formData.append('address', address);
@@ -145,10 +148,10 @@ btnChangeToLoadingS.removeAttribute("hidden");
 };
   // Send the Data.
   xhr.send(formData);
-    // Set up a handler for when the task for the request is complete.
     
 xhr.onload = function(){
   let getResult = JSON.parse(this.responseText);
+  console.log(getResult.statusCode)
   setTimeout(delayedFunc, 1000);//Timer for loading
   function delayedFunc(){
         if(getResult.statusCode === 200){

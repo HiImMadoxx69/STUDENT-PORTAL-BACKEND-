@@ -396,13 +396,19 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <!-- Floating Labels Form -->
               <form class="row g-3 needs-validation" id ="frmCreateUsers">
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newFname" placeholder="Firstname" required>
                     <label for="newFname">Firstname</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="newMname" placeholder="Middlename">
+                    <label for="newMname">Middlename</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newLname" placeholder="Lastname">
                     <label for="newLname">Lastname</label>
@@ -414,20 +420,23 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="newEmail">Email</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newUsername" placeholder="Username">
                     <label for="newUsername">Username</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-floating">
                     <input type="password" class="form-control" id="newPassword" placeholder="Password">
                     <label for="newPassword">Password</label>
                   </div>
                 </div>
+
                
-                <div class="col-md-6">
+                
+               
+                <div class="col-md-4">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="newJob" aria-label="Floating label select example">
                         <option selected disabled>...</option>
@@ -435,15 +444,46 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                         <option value="Registrar">Registrar</option>
                         <option value="Accountant">Accountant</option>
                       </select>
-                      <label for="newJob">Job</label>
+                      <label for="newJob">Position</label>
                     </div>
                 </div>
-                <div class = "col-md-6">
-                <div class="form-floating">
+
+                <div class = "col-md-4">
+                  <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="newBirthday" placeholder="Birthday">
+                    <label for ="newBirthday">Birthdate</label>
+                  </div>
+                </div>
+
+                <div class = "col-md-4">
+                  <div class="form-floating">
                     <input type="text" class="form-control" id="newContact" placeholder="Contact">
                     <label for="newContact">Contact</label>
                   </div>
                 </div>
+
+                <div class="col-md-1">
+                  <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+                </div>
+
+                <fieldset class="col-md-3">
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="maleCheck" value="Male" onkeypress="sexRadio(Male)" >
+                      <label class="form-check-label" for="gridRadios1">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="femaleCheck" value="Female" onkeypress="sexRadio(Female)"> 
+                      <label class="form-check-label" for="gridRadios2">
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+
+
                 <div class="col-12">
                   <div class="form-floating">
                     <textarea class="form-control" placeholder="Address" id="newAddress" style="height: 100px;"></textarea>
@@ -552,8 +592,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">Photo</a> </th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">Username</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">Firstname</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">Middlname</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">Lastname</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">Email</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">Birthday</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('sex');return false;" class="th-a">Sex</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">Password</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position');return false;" class="th-a">Job</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">Address</a></th>
@@ -562,7 +605,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile');return false;" class="th-a">Twitter</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile');return false;" class="th-a">Facebook</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile');return false;" class="th-a">Instagram</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">Linked IN </a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">LinkedIn</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">Date Created</a></th>
                     <th scope="col" class="table-info" id ="th-action">Action</th>
                     

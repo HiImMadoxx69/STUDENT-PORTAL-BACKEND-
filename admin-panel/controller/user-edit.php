@@ -27,6 +27,9 @@ $errors = []; // Store all foreseen and unforeseen errors here.
   $userCurrentId = $_POST['userId'];  
   $fname = $_POST['firstname'];
   $lname = $_POST['lastname'];
+  $birthday = $_POST['birthday'];
+  // exit(json_encode(array("statusCode"=>$birthday)));
+  $sex = $_POST['sex'];
   $about = $_POST['about'];
   $position = $_POST['position'];
   $address = $_POST['address'];
@@ -37,7 +40,7 @@ $errors = []; // Store all foreseen and unforeseen errors here.
   $instagram = $_POST['instagram'];
   $linkedin = $_POST['linkedin'];
 
-
+  
 if (isset($img_name)) {
 
   
@@ -57,7 +60,7 @@ if (isset($img_name)) {
     
                   //Insert into database
   
-                  $sql = "UPDATE tbl_admin SET profile_url = '$new_img_name',firstname = '$fname', lastname = '$lname', about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = '$facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id =  $userCurrentId";
+                  $sql = "UPDATE tbl_admin SET profile_url = '$new_img_name',firstname = '$fname', lastname = '$lname', birthday = '$birthday', sex = '$sex',about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = '$facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id =  $userCurrentId";
     
                   mysqli_query($con, $sql);
                   exit(json_encode(array("statusCode"=>200)));

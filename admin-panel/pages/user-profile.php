@@ -435,7 +435,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['firstname'].' '.$user['lastname'].'</div>' 
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['firstname'].' '.$user['middlename'].' '.$user['lastname'].'</div>' 
               ?>
                   </div>
 
@@ -447,6 +447,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               ?>
                   </div>
 
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Birthday</div>
+                    
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['birthday'].'</div>' 
+              ?>
+                  </div>
             
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
@@ -513,6 +519,16 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
                     </div>
                     </div>
 
+
+                    <div class="row mb-3">
+                      <label for="middleName" class="col-md-4 col-lg-3 col-form-label">Middle Name</label>
+                      <div class="col-md-8 col-lg-9">
+                        <?php echo '<input name = "middlename" type="text" class="form-control" id="middleName" value ="'.$user['middlename'].'"/>' 
+              ?>
+                      </div>
+                    </div>
+
+
                     <div class="row mb-3">
                       <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                       <div class="col-md-8 col-lg-9">
@@ -522,13 +538,15 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
                     </div>
 
                     <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                      <label for="about" class="col-md-4 col-lg-3 col-form-label">Birthday</label>
                       <div class="col-md-8 col-lg-9">
                     
-                        <?php echo '<textarea name="about" class="form-control" id="About" style="height: 100px">'.$user['about'].'"</textarea>' 
+                      <?php echo '<input name = "birthday" type="date" class="form-control" id="birthDay" value ="'.$user['birthday'].'"/>' 
               ?>
                       </div>
                     </div>
+
+                 
 
 
                 <div class="row mb-3">
@@ -557,10 +575,41 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
                   </div>
                 </div>
 
+                  
+                
+                <div class="row mb-3">
+                  <label class="col-md-4 col-lg-3 col-form-label">Sex</label>
+                  <div class="col-md-8 col-lg-9">
+                    <select class="form-select" aria-label="Default select example" id= "Sex">
+                      <?php
+                        if($user['sex'] == 'Male'){
+                          echo '<option selected value ="Male">Male</option>
+                          <option value="Female">Female</option>
+                          ';
+    
+                        }else{
+                          echo '<option selected value ="Female">Female</option>
+                          <option value="Males">Male</option>
+                          ';
+                        }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
                         <?php echo '<input name="address" type="text" class="form-control" id="Address" value ="'.$user['address'].'"/>' 
+              ?>
+                      </div>
+                    </div>
+                  
+                    <div class="row mb-3">
+                      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                      <div class="col-md-8 col-lg-9">
+                    
+                        <?php echo '<textarea name="about" class="form-control" id="About" style="height: 100px">'.$user['about'].'"</textarea>' 
               ?>
                       </div>
                     </div>

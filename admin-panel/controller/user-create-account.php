@@ -4,11 +4,14 @@ $con = connection();
 
 
 $Fname = $_POST['Fname'];
+$Mname = $_POST['Mname'];
 $Lname = $_POST['Lname'];
 $Email = $_POST['Email'];
 $Username = $_POST['Username'];
 $Password = $_POST['Password'];
 $Job = $_POST['Job'];
+$Birthday = $_POST['Birthday'];
+$Sex = $_POST['Sex'];
 $Contact = $_POST['Contact'];
 $Address = $_POST['Address'];
 $About = $_POST['About'];
@@ -20,7 +23,7 @@ if(isset($Fname)){
 
     
 try{
-    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`, `username`, `password`, `firstname`, `lastname`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username', '$Password', '$Fname', '$Lname', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
+    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`, `username`, `password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username', '$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
     exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){

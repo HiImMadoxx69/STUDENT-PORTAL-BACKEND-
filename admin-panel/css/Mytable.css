@@ -26,6 +26,7 @@
 
   }
 
+
   #th-action{
     z-index:1;
   }
@@ -41,6 +42,12 @@
     left:0;
    
   }
+
+  #tblUsers th,td{
+    white-space: nowrap;
+  
+    }
+  
 
 
 

@@ -160,8 +160,11 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     <td><img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
     <td>${GVUResults[i].username}</td>
     <td>${GVUResults[i].firstname}</td>
+    <td>${GVUResults[i].middlename}</td>
     <td>${GVUResults[i].lastname}</td>
     <td>${GVUResults[i].email}</td>
+    <td>${GVUResults[i].birthday}</td>
+    <td>${GVUResults[i].sex}</td>
     <td>${GVUResults[i].password}</td>
     <td>${GVUResults[i].position}</td>
     <td>${GVUResults[i].address}</td>
@@ -249,8 +252,11 @@ const bindAllDataIntoTableSorted = function (){
         <td><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
         <td>${GVUResultsSorted[i].username}</td>
         <td>${GVUResultsSorted[i].firstname}</td>
+        <td>${GVUResultsSorted[i].middlename}</td>
         <td>${GVUResultsSorted[i].lastname}</td>
         <td>${GVUResultsSorted[i].email}</td>
+        <td>${GVUResultsSorted[i].birthday}</td>
+        <td>${GVUResultsSorted[i].sex}</td>
         <td>${GVUResultsSorted[i].password}</td>
         <td>${GVUResultsSorted[i].position}</td>
         <td>${GVUResultsSorted[i].address}</td>
@@ -307,23 +313,26 @@ const selectNumPage = function(){
 //Search bar function
 const userSearchKey = () =>{
 let userSearch = userSearchBar.value;
+console.log(userSearch !== "");
+if(userSearch !== ""){
+    let results = [];//Temporary JSON
 
-
-let results = [];//Temporary JSON
-
-for(let i = 0; i<GVUResults.length;i++){
-    for( key in GVUResults[i]){
-        if(GVUResults[i][key].indexOf(userSearch) != -1){
-            results.push(GVUResults[i]);
-            break;
+    for(let i = 0; i<GVUResults.length;i++){
+        for( key in GVUResults[i]){
+            if(GVUResults[i][key].indexOf(userSearch) != -1){
+                results.push(GVUResults[i]);
+                break;
+            }
         }
-    }
-}//Put all match results in results obj
+    }//Put all match results in results obj
+    
+    GVUNumRows = results.length;//set the value of numrows
+    GVUResultsSorted = results;
+    bindAllDataIntoTableSorted();
+}else{
+    bindAllDataIntoTable();
+}
 
-GVUNumRows = results.length;//set the value of numrows
-GVUResultsSorted = results;
-
-bindAllDataIntoTableSorted();
 }
 
 
@@ -338,7 +347,9 @@ const btnError = document.getElementById('btnError');//Error button disabled
 const btnSuccess = document.getElementById('btnSuccess');//Succes button
 
 const resetFields = () =>{
-     let Fname = document.getElementById('newFname').value = "";
+    let Fname = document.getElementById('newFname').value = "";
+
+    let Mname = document.getElementById('newMname').value = "";
    
     let Lname = document.getElementById('newLname').value = "";
 
@@ -349,6 +360,12 @@ const resetFields = () =>{
     let Password = document.getElementById('newPassword').value = "";
     
     let Job = document.getElementById('newJob').value = "";
+
+    let Birthday = document.getElementById('newBirthday').value = "";
+
+    let SexMale = document.getElementById('maleCheck').checked = false;
+
+    let SexFemale = document.getElementById('femaleCheck').checked = false;
  
     let Contact = document.getElementById('newContact').value = "";
 
@@ -375,8 +392,9 @@ const refreshTable = () =>{
 
 //Check all of the fields
 const checkAllFields = () =>{
-
     let Fname = document.getElementById('newFname').value;
+
+    let Mname = document.getElementById('newMname');
    
     let Lname = document.getElementById('newLname').value;
 
@@ -387,6 +405,12 @@ const checkAllFields = () =>{
     let Password = document.getElementById('newPassword').value;
     
     let Job = document.getElementById('newJob').value;
+
+    let Birthday = document.getElementById('newBirthday').value;
+
+    let Sex = sexRadio();
+
+    console.log(sexRadio);
  
     let Contact = document.getElementById('newContact').value;
 
@@ -437,12 +461,25 @@ const isLoadingTrue =(formStatus) =>{
    
 }
 
+//Sex Radio Button
 
+
+const sexRadio = (e) =>{
+    if(e === "Male"){
+        return "Male";
+    }else{
+        return "Female";
+    }
+}
+
+//Create User
 const createUserAccount = (e) =>{
     
     isLoadingTrue(true)//Start the loading button
    
     let Fname = document.getElementById('newFname').value;
+
+    let Mname = document.getElementById('newMname');
    
     let Lname = document.getElementById('newLname').value;
 
@@ -453,6 +490,12 @@ const createUserAccount = (e) =>{
     let Password = document.getElementById('newPassword').value;
     
     let Job = document.getElementById('newJob').value;
+
+    let Birthday = document.getElementById('newBirthday').value;
+
+    let Sex = sexRadio();
+
+    console.log(sexRadio);
  
     let Contact = document.getElementById('newContact').value;
 
@@ -474,11 +517,14 @@ const createUserAccount = (e) =>{
     Linkedin = "https://Linked.com/" + Linkedin;
 formData = new FormData();
 formData.append('Fname', Fname);
+formData.append('Mname', Mname);
 formData.append('Lname', Lname);
 formData.append('Email', Email);
 formData.append('Username', Username);
 formData.append('Password', Password);
 formData.append('Job', Job);
+formData.append('Birthday', Birthday);
+formData.append('Sex', Sex);
 formData.append('Contact', Contact);
 formData.append('Address', Address);
 formData.append('About', About);
