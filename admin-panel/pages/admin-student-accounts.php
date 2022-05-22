@@ -377,79 +377,102 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
+  
                       
               <!-- Floating Labels Form -->
               <form class="row g-3">
-                <div class="col-md-6">
+              <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingStudNum" placeholder="Studentnumber">
+                    <label for="floatingStudNum">Student Number</label>
+                  </div>
+                </div>
+              
+              <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatingFname" placeholder="Firstname">
                     <label for="floatingFname">Firstname</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatinMname" placeholder="Middlename">
+                    <label for="floatingMname">Middlename</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatinLname" placeholder="Lastname">
                     <label for="floatingLname">Lastname</label>
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
                     <label for="floatingEmail">Email</label>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingUsername" placeholder="Username">
-                    <label for="floatingUsername">Username</label>
-                  </div>
-                </div>
+               
                 <div class="col-md-6">
                   <div class="form-floating">
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                   </div>
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class = "col-md-3">
-
-                </div>
-                <div class="col-md-3">
-                    <div class="form-check form-switch ">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showPassword()">
-                    </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea>
-                    <label for="floatingTextarea">Address</label>
-                  </div>
-                </div>
+                </div> 
+               
+               
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingCity" placeholder="City">
-                      <label for="floatingCity">City</label>
+                      <input type="text" class="form-control" id="floatingCourse" placeholder="Course">
+                      <label for="floatingCourse">Course</label>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="State">
-                      <option selected>New York</option>
-                      <option value="1">Oregon</option>
-                      <option value="2">DC</option>
-                    </select>
-                    <label for="floatingSelect">State</label>
+                
+                <div class="col-md-6">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingSection" placeholder="Section">
+                      <label for="floatingSection">Section</label>
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingZip" placeholder="Zip">
-                    <label for="floatingZip">Zip</label>
+                
+                <div class="col-md-6">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingBirthDay" placeholder="Birthday">
+                      <label for="floatingBirthDay">Birth Date</label>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingContact" placeholder="Contact">
+                      <label for="floatingContact">Contact</label>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingGuardianN" placeholder="Guardian Name">
+                      <label for="floatingGuardianN">Guardian Name</label>
+                    </div>
+                  </div>
+                </div>
+
+                
+                <div class="col-md-6">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingGuardianCon" placeholder="Guardian Contact">
+                      <label for="floatingGuardianCon">Guardian Contact</label>
+                    </div>
                   </div>
                 </div>
 
@@ -460,9 +483,22 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                      
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsLoading" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Creating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      <button class="btn btn btn-success" type="button" disabled id ="btnSuccess" hidden>
+                      <i class="bi bi-check-circle me-1"></i>
+                      Created Succesfully!
+                      </button><!-- End of success button -->
+                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
+                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
                     </div>
                   </div>
                 </div>
@@ -519,16 +555,16 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id')" class="th-a">ID</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url')" class="th-a">Photo</a> </th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentnumber')" class="th-a">Student Number</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname')" class="th-a">FirstName</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename')" class="th-a">MiddleName</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname')" class="th-a">LastName</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname')" class="th-a">Firstname</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename')" class="th-a">Middlename</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname')" class="th-a">Lastname</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email')" class="th-a">Email</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password')" class="th-a">Password</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('course')" class="th-a">Course</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('section')" class="th-a">Section</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday')" class="th-a">BirthDate</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday')" class="th-a">Birth Date</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact')" class="th-a">Contact</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('gaurdian')" class="th-a">Guardian</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('guardian')" class="th-a">Guardian Name</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('guardian_contact')" class="th-a">Guardian Contact</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at')" class="th-a">Date Created</a></th>
                     <th scope="col" class="table-info" id ="th-action">Action</th>
@@ -536,7 +572,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     
                   </tr>
                 </thead>
-                <tbody id ="tbody-user-accounts">
+                <tbody id ="tbody-admin-student-accounts">
                  
                 </tbody>
               </table>
