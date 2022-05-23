@@ -385,7 +385,8 @@ const resetFields = () =>{
 }//Reset all the fields
 
 //Call it to refresh the table
-const refreshTable = () =>{
+ refreshTable = () =>{
+    resetFields();
     getAllDataAPI();
 }
 
@@ -394,7 +395,7 @@ const refreshTable = () =>{
 const checkAllFields = () =>{
     let Fname = document.getElementById('newFname').value;
 
-    let Mname = document.getElementById('newMname');
+    let Mname = document.getElementById('newMname').value;
    
     let Lname = document.getElementById('newLname').value;
 
@@ -407,11 +408,19 @@ const checkAllFields = () =>{
     let Job = document.getElementById('newJob').value;
 
     let Birthday = document.getElementById('newBirthday').value;
+    
+    let Sex ="";
 
-    let Sex = sexRadio();
+    
+    if(document.getElementById('maleCheck').checked === true){
+        Sex = "Male";
+    }
+    if(document.getElementById('femaleCheck').checked === true){
+        Sex = "Female";
+    }
 
-    console.log(sexRadio);
- 
+    
+
     let Contact = document.getElementById('newContact').value;
 
     let Address = document.getElementById('newAddress').value;
@@ -426,7 +435,7 @@ const checkAllFields = () =>{
 
     let Linkedin = document.getElementById('newlinkedinprofileURL').value;
 
-    if(Fname !== "" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
+    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
         createUserAccount();
     }else{
         alertShowError.classList.add('show');
@@ -464,13 +473,7 @@ const isLoadingTrue =(formStatus) =>{
 //Sex Radio Button
 
 
-const sexRadio = (e) =>{
-    if(e === "Male"){
-        return "Male";
-    }else{
-        return "Female";
-    }
-}
+
 
 //Create User
 const createUserAccount = (e) =>{
@@ -479,7 +482,7 @@ const createUserAccount = (e) =>{
    
     let Fname = document.getElementById('newFname').value;
 
-    let Mname = document.getElementById('newMname');
+    let Mname = document.getElementById('newMname').value;
    
     let Lname = document.getElementById('newLname').value;
 
@@ -493,10 +496,15 @@ const createUserAccount = (e) =>{
 
     let Birthday = document.getElementById('newBirthday').value;
 
-    let Sex = sexRadio();
+    let Sex ="";
+    
+    if(document.getElementById('maleCheck').checked === true){
+        Sex = "Male";
+    }
+    if(document.getElementById('femaleCheck').checked === true){
+        Sex = "Female";
+    }
 
-    console.log(sexRadio);
- 
     let Contact = document.getElementById('newContact').value;
 
     let Address = document.getElementById('newAddress').value;

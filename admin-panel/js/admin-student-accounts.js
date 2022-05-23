@@ -371,31 +371,32 @@ const refreshTable = () =>{
 
 //Check all of the fields
 const checkAllFields = () =>{
-    let Studentnumber = document.getElementById('newStudNum').value = "";
+    let Studentnumber = document.getElementById('newStudNum').value;
 
-    let Fname = document.getElementById('newFname').value = "";
+    let Fname = document.getElementById('newFname').value;
 
-    let Mname = document.getElementById('newMname').value = "";
+    let Mname = document.getElementById('newMname').value;
    
-    let Lname = document.getElementById('newLname').value = "";
+    let Lname = document.getElementById('newLname').value;
 
-    let Email = document.getElementById('newEmail').value = "";
+    let Email = document.getElementById('newEmail').value;
  
-    let Password = document.getElementById('newPassword').value = "";
+    let Password = document.getElementById('newPassword').value;
     
-    let Course = document.getElementById('newCourse').value = "";
+    let Course = document.getElementById('newCourse').value;
 
-    let Section = document.getElementById('newSection').value = "";
+    let Section = document.getElementById('newSection').value;
 
-    let Birthday = document.getElementById('newBirthDay').value = "";
+    let Birthday = document.getElementById('newBirthDay').value;
 
-    let Contact = document.getElementById('newContact').value = "";
+    let Contact = document.getElementById('newContact').value;
 
-    let GuardianN = document.getElementById('newGuardianN').value = "";
+    let GuardianN = document.getElementById('newGuardianN').value;
 
-    let GuardianCon = document.getElementById('newGuardianCon').value = "";
+    let GuardianCon = document.getElementById('newGuardianCon').value;
 
-    if(Studentnumber !== "" && Fname !== "" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "" && Birthday!== "" && Contact !== "" && GuardianN !== "" && GuardianCon !== "" ){
+    if(Studentnumber !== "" && Fname !== "" && Lname !== "" && Email !== "" && Password !== "" && Course !== "" && Section !== "" && Birthday!== "" && Contact !== "" && GuardianN !== "" && GuardianCon !== "" ){
+    
         createUserAccount();
     }else{
         alertShowError.classList.add('show');
@@ -445,39 +446,40 @@ const sexRadio = (e) =>{
 const createUserAccount = (e) =>{
     
     isLoadingTrue(true)//Start the loading button
+    let Studentnumber = document.getElementById('newStudNum').value;
    
-    let Studentnumber = document.getElementById('newStudNum').value = "";
-
-    let Fname = document.getElementById('newFname').value = "";
-
-    let Mname = document.getElementById('newMname').value = "";
-   
-    let Lname = document.getElementById('newLname').value = "";
-
-    let Email = document.getElementById('newEmail').value = "";
- 
-    let Password = document.getElementById('newPassword').value = "";
+    let Studentnumberd = document.getElementById('newStudNum').value;
     
-    let Course = document.getElementById('newCourse').value = "";
+    let Fname = document.getElementById('newFname').value;
 
-    let Section = document.getElementById('newSection').value = "";
+    let Mname = document.getElementById('newMname').value;
+   
+    let Lname = document.getElementById('newLname').value;
 
-    let Birthday = document.getElementById('newBirthDay').value = "";
+    let Email = document.getElementById('newEmail').value;
+ 
+    let Password = document.getElementById('newPassword').value;
+    
+    let Course = document.getElementById('newCourse').value;
 
-    let Contact = document.getElementById('newContact').value = "";
+    let Section = document.getElementById('newSection').value;
 
-    let GuardianN = document.getElementById('newGuardianN').value = "";
+    let Birthday = document.getElementById('newBirthDay').value;
 
-    let GuardianCon = document.getElementById('newGuardianCon').value = "";
+    let Contact = document.getElementById('newContact').value;
+
+    let GuardianN = document.getElementById('newGuardianN').value;
+
+    let GuardianCon = document.getElementById('newGuardianCon').value;
 
     formData = new FormData();
-formData.append('Studentnumber', studentnumber);    
+formData.append('Studentnumber', Studentnumber);    
 formData.append('Fname', Fname);
 formData.append('Mname', Mname);
 formData.append('Lname', Lname);
 formData.append('Email', Email);
 formData.append('Password', Password);
-formData.append('Course', course);
+formData.append('Course', Course);
 formData.append('Section', Section);
 formData.append('Birthday', Birthday);
 formData.append('Contact', Contact);

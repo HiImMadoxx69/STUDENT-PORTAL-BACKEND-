@@ -90,7 +90,7 @@ if(getCurrentPassword ===  currentPassword && newPassword === confirmNewPassword
 function updateProfile(e){
 
     e.preventDefault();
-    let fileupload = document.getElementById('profileEdit');// fileupload
+  
   
     let firstname = document.getElementById('firstName').value;
     let lastname = document.getElementById('lastName').value;
@@ -107,17 +107,13 @@ function updateProfile(e){
     let linkedin = document.getElementById('Linkedin').value; 
 
 
- // Picking up files from the input .  .  .
- let files = fileupload.files;
 
- // Uploading only one file; multiple uploads are not allowed.
-  let imageFile = files[0]; 
 
    // Create a FormData object.
   formData = new FormData();
 
     // Add the file to the request.
-    formData.append('profileEdit', imageFile, imageFile.name);
+  
     console.log(currentId);
     formData.append('userId', currentId);
     formData.append('firstname', firstname);
@@ -169,4 +165,48 @@ xhr.onload = function(){
 
 
   };//onload
+}
+
+//change profile
+
+
+const changeProfile = async() =>{
+ 
+  let fileupload = document.getElementById('profileEdit');// fileupload
+
+
+ // Picking up files from the input .  .  .
+ let files = fileupload.files;
+
+ // Uploading only one file; multiple uploads are not allowed.
+  let imageFile = files[0]; 
+
+   // Create a FormData object.
+  formData = new FormData();
+
+  // Add the file to the request.
+  formData.append('profileEdit', imageFile, imageFile.name);
+  formData.append('userId', currentId);
+try{
+
+const fetchResponse = await fetch("../controller/user-edit-pic.php",{
+    method: "POST",
+    body:formData,
+});
+
+const receivedStatus = await fetchResponse.json();
+
+
+  console.log(receivedStatus.image)
+  let output = ''; 
+  output += `<img src="../../uploads/${receivedStatus.image}" alt="Profile" id ="currentPhoto" class="rounded-circle"/>`;
+  document.querySelector('#showMyProfilePic').innerHTML = output;
+  document.querySelector('#upperProfilepic').innerHTML = output;
+  document.querySelector('#profilePicture').innerHTML = output;
+
+
+
+}catch (e){
+console.log(e)
+}
 }

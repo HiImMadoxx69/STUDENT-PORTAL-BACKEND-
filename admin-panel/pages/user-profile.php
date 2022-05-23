@@ -226,11 +226,12 @@ $currentId = $user['id'];
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-
+<div id="upperProfilepic">
 <?php
 
 echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
 ?>
+</div>
                 <?php
                 echo '<span class="d-none d-md-block dropdown-toggle ps-2">'.$user['username'].'</span>' ;
                 ?>
@@ -374,10 +375,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             
-              
+              <div id ="profilePicture">
             <?php
               echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rounded-circle"  />';
             ?>
+              </div>
               <?php echo '<h2>'.$user['firstname'].' '.$user['lastname'].'</h2>' 
               ?>
               
@@ -485,7 +487,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <!-- PROFILE IMAGE -->
                     <div class="row mb-3">
                       <label for="currentPhoto" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-slg-9">
+                      <div class="col-md-8 col-slg-9" id ="showMyProfilePic">
                         
                         <?php
 
@@ -501,7 +503,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="row mb-3">
                   <label for="profileEdit" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                     <div class="col-md-8 col-lg-9">
-                    <input class="form-control" type ="file" name = "profileEdit" id ="profileEdit">
+                    <input class="form-control" type ="file" name = "profileEdit" id ="profileEdit" onchange="changeProfile()">
+                  
                     </div>
                 </div>
 

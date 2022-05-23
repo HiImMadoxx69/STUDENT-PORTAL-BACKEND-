@@ -19,11 +19,6 @@ $errors = []; // Store all foreseen and unforeseen errors here.
 
 // echo $uploadPath;
 
-//UPLOAD > PHP
-  $img_name = $_FILES['profileEdit']['name'];
-  $img_size = $_FILES['profileEdit']['size'];
-  $imgSize = $_FILES['profileEdit']['size'];
-  $tmp_name = $_FILES['profileEdit']['tmp_name'];
   $userCurrentId = $_POST['userId'];  
   $fname = $_POST['firstname'];
   $lname = $_POST['lastname'];
@@ -41,32 +36,16 @@ $errors = []; // Store all foreseen and unforeseen errors here.
   $linkedin = $_POST['linkedin'];
 
   
-if (isset($img_name)) {
+if (isset($userCurrentId)) {
 
-  
-  if ( $imgSize > 2000000) {
-    exit(json_encode(array("statusCode"=>201)));
-  }
-
-  if (empty($errors)) {
-
-                  $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-                  $img_ex_lc = strtolower($img_ex);
-
-                  $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                  $img_upload_path = '../../uploads/'.$new_img_name;
-                  move_uploaded_file($tmp_name, $img_upload_path);
-    
-    
-                  //Insert into database
-  
-                  $sql = "UPDATE tbl_admin SET profile_url = '$new_img_name',firstname = '$fname', lastname = '$lname', birthday = '$birthday', sex = '$sex',about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = '$facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id =  $userCurrentId";
+ try{
+                  $sql = "UPDATE tbl_admin SET firstname = '$fname', lastname = '$lname', birthday = '$birthday', sex = '$sex',about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = '$facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id =  $userCurrentId";
     
                   mysqli_query($con, $sql);
                   exit(json_encode(array("statusCode"=>200)));
-  } else {
-    exit(json_encode(array("statusCode"=>201)));
-  }
+ }catch(Exception $e){
+  exit(json_encode(array("statusCode"=>$e->getMessage())));
+ }
 } 
 
 //UPLOAD > PHP

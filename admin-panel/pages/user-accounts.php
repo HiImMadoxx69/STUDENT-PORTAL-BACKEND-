@@ -469,13 +469,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <fieldset class="col-md-3">
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="maleCheck" value="Male" onkeypress="sexRadio(Male)" >
+                      <input class="form-check-input" type="radio" name="gridRadios" id="maleCheck" value="Male">
                       <label class="form-check-label" for="gridRadios1">
                         Male
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="femaleCheck" value="Female" onkeypress="sexRadio(Female)"> 
+                      <input class="form-check-input" type="radio" name="gridRadios" id="femaleCheck" value="Female" > 
                       <label class="form-check-label" for="gridRadios2">
                         Female
                       </label>

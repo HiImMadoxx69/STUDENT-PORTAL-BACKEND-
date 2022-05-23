@@ -407,7 +407,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatinMname" placeholder="Middlename">
+                    <input type="text" class="form-control" id="newMname" placeholder="Middlename">
                     <label for="newMname">Middlename</label>
                   </div>
                 </div>
