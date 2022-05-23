@@ -149,7 +149,6 @@ function getAllDataAPI(){
 
 
 
-
 const bindAllDataIntoTable = function (){   
     let output ='';
 
@@ -177,7 +176,7 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     <td>${GVUResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "Profile"><i class="bi bi-upload"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "Profile" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-upload"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
     
@@ -191,6 +190,7 @@ numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results<
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }
+
 
 
 
@@ -269,7 +269,7 @@ const bindAllDataIntoTableSorted = function (){
         <td>${GVUResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "Profile"><i class="bi bi-upload"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "Profile" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-upload"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
     
@@ -283,6 +283,9 @@ const bindAllDataIntoTableSorted = function (){
     document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
+
+
+
 
 
 //Select bind data
@@ -575,6 +578,228 @@ for (var pair of formData.entries()) {
 }
 
 
+//Edit User Data Not sorted
+
+const editUserNotSorted = (a) =>{
+    for(let i =0 ; i< GVUResults.length;i++ ){
+        if(GVUResults[i].id == a){
+         
+         let Photo = document.getElementById('currentPhoto').src = "../../uploads/"+GVUResults[i].profile_url;    
+            
+         let Fname = document.getElementById('editFname').value = GVUResults[i].firstname;
+ 
+         let Mname = document.getElementById('editMname').value =    GVUResults[i].middlename;
+        
+         let Lname = document.getElementById('editLname').value =    GVUResults[i].lastname;
+     
+         let Email = document.getElementById('editEmail').value=     GVUResults[i].email ;
+      
+         let Username = document.getElementById('editUsername').value =  GVUResults[i].username;
+     
+         let Password = document.getElementById('editPassword').value =  GVUResults[i].password;
+         
+         let Job = document.getElementById('editJob').value =    GVUResults[i].position;
+     
+         let Birthday = document.getElementById('editBirthday').value =  GVUResults[i].birthday;
+         
+         let Sex = GVUResults[i].sex;
+         
+         if(Sex = "Male"){
+             document.getElementById('editmaleCheck').checked = true;
+         }
+         if(Sex = "Female"){
+             document.getElementById('editfemaleCheck').checked = true;
+         }
+     
+         let Contact = document.getElementById('editContact').value =    GVUResults[i].contact;
+     
+         let Address = document.getElementById('editAddress').value =    GVUResults[i].address;
+      
+         let About = document.getElementById('editAbout').value =    GVUResults[i].about;
+      console.log(GVUResults[i].twitterprofile)
+         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResults[i].twitterprofile;
+     
+         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResults[i].facebookprofile;
+      
+         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResults[i].instagramprofile;
+     
+         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResults[i].linkedinprofile;
+         break;
+     }
+    }
+ }
+ 
 
 
 
+//Edit User Data sorted
+
+const editUserSorted = (a) =>{
+    for(let i =0 ; i< GVUResultsSorted.length;i++ ){
+        if(GVUResults[i].id == a){
+
+         let Photo = document.getElementById('currentPhoto').src = "../../uploads/"+GVUResultsSorted[i].profile_url;   
+        
+         let Fname = document.getElementById('editFname').value = GVUResultsSorted[i].firstname;
+ 
+         let Mname = document.getElementById('editMname').value =    GVUResultsSorted[i].middlename;
+        
+         let Lname = document.getElementById('editLname').value =    GVUResultsSorted[i].lastname;
+     
+         let Email = document.getElementById('editEmail').value=     GVUResultsSorted[i].email ;
+      
+         let Username = document.getElementById('editUsername').value =  GVUResultsSorted[i].username;
+     
+         let Password = document.getElementById('editPassword').value =  GVUResultsSorted[i].password;
+         
+         let Job = document.getElementById('editJob').value =    GVUResultsSorted[i].position;
+     
+         let Birthday = document.getElementById('editBirthday').value =  GVUResultsSorted[i].birthday;
+         
+         let Sex = GVUResultsSorted[i].sex;
+         
+         if(Sex = "Male"){
+             document.getElementById('editmaleCheck').checked = true;
+         }
+         if(Sex = "Female"){
+             document.getElementById('editfemaleCheck').checked = true;
+         }
+     
+         let Contact = document.getElementById('editContact').value =    GVUResultsSorted[i].contact;
+     
+         let Address = document.getElementById('editAddress').value =    GVUResultsSorted[i].address;
+      
+         let About = document.getElementById('editAbout').value =    GVUResultsSorted[i].about;
+      
+         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResultsSorted[i].twitterprofile;
+     
+         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResultsSorted[i].facebookprofile;
+      
+         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResultsSorted[i].instagramprofile;
+     
+         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResultsSorted[i].linkedinprofile;
+         break;
+     }
+    }
+ }
+ 
+ const checkEditFields = () =>{
+    let Fname = document.getElementById('editFname').value  
+ 
+    let Mname = document.getElementById('editMname').value  
+   
+    let Lname = document.getElementById('editLname').value  
+
+    let Email = document.getElementById('editEmail').value  
+ 
+    let Username = document.getElementById('editUsername').value    
+
+    let Password = document.getElementById('editPassword').value    
+    
+    let Job = document.getElementById('editJob').value  
+
+    let Birthday = document.getElementById('editBirthday').value    
+
+    let Sex ="";
+
+    if(document.getElementById('editmaleCheck').checked === true){
+        Sex = "Male";
+    }
+    if(document.getElementById('editfemaleCheck').checked === true){
+        Sex = "Female";
+    }
+
+    let Contact = document.getElementById('editContact').value
+
+    let Address = document.getElementById('editAddress').value
+ 
+    let About = document.getElementById('editAbout').value 
+
+    let Twitter = document.getElementById('edittwitterprofileURL').value 
+
+    let Facebook = document.getElementById('editfacebookprofileURL').value 
+ 
+    let Instagram = document.getElementById('editinstagramprofileURL').value
+
+    let Linkedin = document.getElementById('editlinkedinprofileURL').value 
+
+    if(Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  "" && Twitter !==  "" && Facebook !==  "" && Instagram !==  "" &&Linkedin !==  "" ){
+       
+        updateUser();
+
+    }else{
+        console.log("Not Ok")
+    }
+
+ }
+
+
+const updateUser = async () =>{
+    let Fname = document.getElementById('editFname').value  
+ 
+    let Mname = document.getElementById('editMname').value  
+   
+    let Lname = document.getElementById('editLname').value  
+
+    let Email = document.getElementById('editEmail').value  
+ 
+    let Username = document.getElementById('editUsername').value    
+
+    let Password = document.getElementById('editPassword').value    
+    
+    let Job = document.getElementById('editJob').value  
+
+    let Birthday = document.getElementById('editBirthday').value    
+
+    let Sex ="";
+
+    if(document.getElementById('editmaleCheck').checked === true){
+        Sex = "Male";
+    }
+    if(document.getElementById('editfemaleCheck').checked === true){
+        Sex = "Female";
+    }
+
+    let Contact = document.getElementById('editContact').value
+
+    let Address = document.getElementById('editAddress').value
+ 
+    let About = document.getElementById('editAbout').value 
+
+    let Twitter = document.getElementById('edittwitterprofileURL').value 
+
+    let Facebook = document.getElementById('editfacebookprofileURL').value 
+ 
+    let Instagram = document.getElementById('editinstagramprofileURL').value
+
+    let Linkedin = document.getElementById('editlinkedinprofileURL').value 
+
+
+    formData = new FormData();
+formData.append('Fname', Fname);
+formData.append('Mname', Mname);
+formData.append('Lname', Lname);
+formData.append('Email', Email);
+formData.append('Username', Username);
+formData.append('Password', Password);
+formData.append('Job', Job);
+formData.append('Birthday', Birthday);
+formData.append('Sex', Sex);
+formData.append('Contact', Contact);
+formData.append('Address', Address);
+formData.append('About', About);
+formData.append('Twitter', Twitter);
+formData.append('Facebook', Facebook);
+formData.append('Instagram', Instagram);
+formData.append('Linkedin', Linkedin);
+for (var pair of formData.entries()) {
+    console.log(pair[0]+ ' - ' + pair[1]); 
+ }
+
+
+  const fetchEdit = await fetch("../controller/user-create-account.php",{
+        method: "POST",
+        body:formData,
+    });
+
+}

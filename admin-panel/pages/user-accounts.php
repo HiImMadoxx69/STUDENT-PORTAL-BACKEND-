@@ -538,6 +538,182 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div>
                 </div>
               </div><!-- End user Modal-->
+
+
+
+                <!--------------------------------------------Edit user Modal ------------------------------------------------------->
+              
+                <div class="modal fade" id="editusermodal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Accounts Form</h5>
+                      
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
+                      
+                    </div>
+                    <div class="modal-body">
+
+                    
+                <!--Error Alert -->
+            <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Please fill out all the fields!
+              </div><!--Error End of Alert -->
+
+              <!-- Success Alert -->
+              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Created Succesfully!
+              </div><!-- End of Alert -->
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3 needs-validation" id ="frmCreateUsers">
+              <div class="col-md-12" id="editUserPic">
+              <img src="" alt="Profile" id ="currentPhoto" class="rounded-circle" style ="width:100px;"/>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editFname" placeholder="Firstname" required>
+                    <label for="editFname">Firstname</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editMname" placeholder="Middlename">
+                    <label for="editMname">Middlename</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editLname" placeholder="Lastname">
+                    <label for="newLname">Lastname</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="editEmail" placeholder="Email">
+                    <label for="editEmail">Email</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editUsername" placeholder="Username">
+                    <label for="editUsername">Username</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="editPassword" placeholder="Password">
+                    <label for="editPassword">Password</label>
+                  </div>
+                </div>
+
+               
+                
+               
+                <div class="col-md-4">
+                <div class="form-floating mb-3">
+                      <select class="form-select" id="editJob" aria-label="Floating label select example">
+                        <option selected disabled>...</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Registrar">Registrar</option>
+                        <option value="Accountant">Accountant</option>
+                      </select>
+                      <label for="editJob">Position</label>
+                    </div>
+                </div>
+
+                <div class = "col-md-4">
+                  <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="editBirthday" placeholder="Birthday">
+                    <label for ="editBirthday">Birthdate</label>
+                  </div>
+                </div>
+
+                <div class = "col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editContact" placeholder="Contact">
+                    <label for="editContact">Contact</label>
+                  </div>
+                </div>
+
+                <div class="col-md-1">
+                  <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+                </div>
+
+                <fieldset class="col-md-3">
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="editmaleCheck" value="Male">
+                      <label class="form-check-label" for="gridRadios1">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="editfemaleCheck" value="Female" > 
+                      <label class="form-check-label" for="gridRadios2">
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+
+
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" id="editAddress" style="height: 100px;"></textarea>
+                    <label for="editAddress">Address</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="About" id="editAbout" style="height: 100px;"></textarea>
+                    <label for="editAbout">About</label>
+                  </div>
+                </div>
+              
+
+                    <label for="basic-url" class="form-label">Optional URL</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" >https://twitter.com/</span>
+                      <input type="text" class="form-control" id="edittwitterprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" >https://facebook.com/</span>
+                      <input type="text" class="form-control" id="editfacebookprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" >https://instagram.com/</span>
+                      <input type="text" class="form-control" id="editinstagramprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" >https://linkedin.com/</span>
+                      <input type="text" class="form-control" id="editlinkedinprofileURL" aria-describedby="basic-addon3">
+                    </div>
+              </form><!-- End floating Labels Form -->
+                    </div>
+                    <div class="modal-footer">
+                      
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsLoading" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Creating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      <button class="btn btn btn-success" type="button" disabled id ="btnSuccess" hidden>
+                      <i class="bi bi-check-circle me-1"></i>
+                      Created Succesfully!
+                      </button><!-- End of success button -->
+                      <button type="submit" class="btn btn-primary" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
+                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Edit user Modal-->
             
 
     <section class="section">

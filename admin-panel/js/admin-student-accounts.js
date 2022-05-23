@@ -230,6 +230,10 @@ if(GVSAIsSorted){
 }//Sort by id
 
 
+//Edit user 
+const editUser = (id) =>{
+    console.log(id)
+}
 
 
 
@@ -395,9 +399,9 @@ const checkAllFields = () =>{
 
     let GuardianCon = document.getElementById('newGuardianCon').value;
 
-    if(Studentnumber !== "" && Fname !== "" && Lname !== "" && Email !== "" && Password !== "" && Course !== "" && Section !== "" && Birthday!== "" && Contact !== "" && GuardianN !== "" && GuardianCon !== "" ){
+    if(Studentnumber !== "" && Fname !== "" && Mname !== "" && Lname !== "" && Email !== "" && Password !== "" && Course !== "" && Section !== "" && Birthday!== "" && Contact !== "" && GuardianN !== "" && GuardianCon !== "" ){
     
-        createUserAccount();
+        createStudentAccount();
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
