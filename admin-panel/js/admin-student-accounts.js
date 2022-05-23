@@ -443,12 +443,10 @@ const sexRadio = (e) =>{
 }
 
 //Create User
-const createUserAccount = (e) =>{
+const createStudentAccount = (e) =>{
     
     isLoadingTrue(true)//Start the loading button
     let Studentnumber = document.getElementById('newStudNum').value;
-   
-    let Studentnumberd = document.getElementById('newStudNum').value;
     
     let Fname = document.getElementById('newFname').value;
 

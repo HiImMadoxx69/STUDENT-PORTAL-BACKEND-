@@ -553,7 +553,7 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
 
 
                 <div class="row mb-3">
-                  <label class="col-md-4 col-lg-3 col-form-label">Job</label>
+                  <label class="col-md-4 col-lg-3 col-form-label">Position</label>
                   <div class="col-md-8 col-lg-9">
                     <select class="form-select" aria-label="Default select example" id= "Position">
                       <?php
