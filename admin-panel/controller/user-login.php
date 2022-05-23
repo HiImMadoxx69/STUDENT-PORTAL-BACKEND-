@@ -19,8 +19,7 @@ $con = connection();
   $total = $user->num_rows;
 
   if($total > 0){
-    
-    $_SESSION['UserLogin'] = $row['username'];
+    $_SESSION['ID'] = $row['id'];
     $_SESSION['Position'] = $row['position'];
     echo json_encode(array("statusCode"=>200));
   }else{

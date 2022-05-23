@@ -80,6 +80,22 @@ prevPage.addEventListener('click', prevpageCall);
 //Search bar
 userSearchBar = document.getElementById('userSearchBar');
 
+
+//JavaScript create account admin
+const btnCreateUsers = document.getElementById('btnCreateUsers');
+const frmCreateUsers = document.getElementById('frmCreateUsers');//form create account
+const btnIsLoading = document.getElementById('btnIsLoading');//LoadingButton
+const alertShowError = document.getElementById('alertError');//AlertError
+const alertShowSuccess = document.getElementById('alertSuccess');//Alert Success
+const btnError = document.getElementById('btnError');//Error button disabled
+const btnSuccess = document.getElementById('btnSuccess');//Succes button
+
+//Javascript edit account admin
+const btnEditError = document.getElementById('btnEditError');//Error button disabled
+const btnEditSuccess = document.getElementById('btnEditSuccess');//Succes button
+const btnIsUpdating = document.getElementById('btnIsUpdating');//updating button
+
+
 window.onload = function(){
     getAllDataAPI();
     selectNumPage();
@@ -147,6 +163,68 @@ function getAllDataAPI(){
     }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllDataAPI
 
+const editProfilePic = async () =>{
+    let value = document.getElementById('changePicUserID').value
+    let fileupload = document.getElementById('editUserPic');// fileupload
+
+
+    // Picking up files from the input .  .  .
+    let files = fileupload.files;
+   
+    // Uploading only one file; multiple uploads are not allowed.
+     let imageFile = files[0]; 
+   
+      // Create a FormData object.
+     formData = new FormData();
+   
+     // Add the file to the request.
+     formData.append('profileEdit', imageFile, imageFile.name);
+     formData.append('userId', value);
+   try{
+   
+   const fetchResponse = await fetch("../controller/move-only-image.php",{
+       method: "POST",
+       body:formData,
+   });
+   
+   const receivedStatus = await fetchResponse.json();
+   
+   
+     console.log(receivedStatus.image)
+     let output = ''; 
+     output += `<img src="../../uploads/${receivedStatus.image}" alt="Profile" height = "100%" width = "100%;"/>
+     `;
+     document.querySelector('#changePicModalBody').innerHTML = output;
+
+   
+   
+   
+   }catch (e){
+   console.log(e)
+   }
+  
+}
+
+const saveEditPic = async () =>{
+
+}
+
+//Change Profile Picture Modal
+const changePicModal = (id) =>{
+    let changePicUserID = document.getElementById('changePicUserID').value = id;
+    console.log(id)
+    let output = '';
+    for(let i =0 ; i< GVUdefaultRow;i++ ){
+        if(GVUResults[i].id == id){
+            console.log("true")
+            output += `<img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" max-height = "100%" max-width = "100%"/>
+            `;
+            
+            break;
+        }
+    }
+    document.querySelector('#changePicModalBody').innerHTML = output;
+}
 
 
 const bindAllDataIntoTable = function (){   
@@ -156,7 +234,7 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
  
     output += `<tr>
     <td>${GVUResults[i].id}</td>
-    <td><img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
+    <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVUResults[i].username}</td>
     <td>${GVUResults[i].firstname}</td>
     <td>${GVUResults[i].middlename}</td>
@@ -249,7 +327,7 @@ const bindAllDataIntoTableSorted = function (){
     for(let i = 0; i<GVUNumRows; i++){
         output += `<tr>
         <td>${GVUResultsSorted[i].id}</td>
-        <td><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></td>
+        <td><a href =""><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></a></td>
         <td>${GVUResultsSorted[i].username}</td>
         <td>${GVUResultsSorted[i].firstname}</td>
         <td>${GVUResultsSorted[i].middlename}</td>
@@ -340,14 +418,8 @@ if(userSearch !== ""){
 
 
 
-//JavaScript create account admin
-const btnCreateUsers = document.getElementById('btnCreateUsers');
-const frmCreateUsers = document.getElementById('frmCreateUsers');//form create account
-const btnIsLoading = document.getElementById('btnIsLoading');//LoadingButton
-const alertShowError = document.getElementById('alertError');//AlertError
-const alertShowSuccess = document.getElementById('alertSuccess');//Alert Success
-const btnError = document.getElementById('btnError');//Error button disabled
-const btnSuccess = document.getElementById('btnSuccess');//Succes button
+
+const btnEditUsers = document.getElementById('btnEditUsers');
 
 const resetFields = () =>{
     let Fname = document.getElementById('newFname').value = "";
@@ -456,24 +528,26 @@ const checkAllFields = () =>{
 }
 
 
+
 //Loading function for button
-const isLoadingTrue =(formStatus) =>{
+const IsLoadingTrue =(formStatus) =>{
     if(formStatus === true){
-        isLoadingTrue(false)//Start the loading button
+        IsLoadingTrue(false)//Start the loading button
     btnIsLoading.removeAttribute("hidden");//Is loading true
+    btnIsUpdating.removeAttribute("hidden");//Is Updating true
     btnCreateUsers.style.display = "none";
+    btnEditUsers.style.display = "none";
     }else{
     delayedStopLoading =() =>{
     btnIsLoading.setAttribute("hidden", "hidden");
+    btnIsUpdating.setAttribute("hidden", "hidden");
     btnCreateUsers.style.display = "inline-block";
- 
+    btnEditUsers.style.display = "inline-block";
     }
     setTimeout(delayedStopLoading, 3000);
     }
    
 }
-
-//Sex Radio Button
 
 
 
@@ -481,7 +555,7 @@ const isLoadingTrue =(formStatus) =>{
 //Create User
 const createUserAccount = (e) =>{
     
-    isLoadingTrue(true)//Start the loading button
+    IsLoadingTrue(true)//Start the loading button
    
     let Fname = document.getElementById('newFname').value;
 
@@ -577,22 +651,27 @@ for (var pair of formData.entries()) {
 
 }
 
+//Show picture
+const showPicture = () =>{
+let Image_Url = document.getElementById('editImage_Url').value;
+let Photo = document.getElementById('currentPhoto').src = Image_Url;
+}
+
 
 //Edit User Data Not sorted
-
 const editUserNotSorted = (a) =>{
     for(let i =0 ; i< GVUResults.length;i++ ){
         if(GVUResults[i].id == a){
-         
-         let Photo = document.getElementById('currentPhoto').src = "../../uploads/"+GVUResults[i].profile_url;    
-            
-         let Fname = document.getElementById('editFname').value = GVUResults[i].firstname;
- 
-         let Mname = document.getElementById('editMname').value =    GVUResults[i].middlename;
+           
+         let UserId = document.getElementById('editId').value =  GVUResults[i].id;    
+
+         let Fname = document.getElementById('editFname').value =  GVUResults[i].firstname;
         
-         let Lname = document.getElementById('editLname').value =    GVUResults[i].lastname;
+         let Mname = document.getElementById('editMname').value =  GVUResults[i].middlename;
+        
+         let Lname = document.getElementById('editLname').value =  GVUResults[i].lastname;
      
-         let Email = document.getElementById('editEmail').value=     GVUResults[i].email ;
+         let Email = document.getElementById('editEmail').value=   GVUResults[i].email ;
       
          let Username = document.getElementById('editUsername').value =  GVUResults[i].username;
      
@@ -616,7 +695,7 @@ const editUserNotSorted = (a) =>{
          let Address = document.getElementById('editAddress').value =    GVUResults[i].address;
       
          let About = document.getElementById('editAbout').value =    GVUResults[i].about;
-      console.log(GVUResults[i].twitterprofile)
+      
          let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResults[i].twitterprofile;
      
          let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResults[i].facebookprofile;
@@ -635,18 +714,19 @@ const editUserNotSorted = (a) =>{
 //Edit User Data sorted
 
 const editUserSorted = (a) =>{
-    for(let i =0 ; i< GVUResultsSorted.length;i++ ){
-        if(GVUResults[i].id == a){
-
-         let Photo = document.getElementById('currentPhoto').src = "../../uploads/"+GVUResultsSorted[i].profile_url;   
-        
-         let Fname = document.getElementById('editFname').value = GVUResultsSorted[i].firstname;
- 
-         let Mname = document.getElementById('editMname').value =    GVUResultsSorted[i].middlename;
-        
-         let Lname = document.getElementById('editLname').value =    GVUResultsSorted[i].lastname;
+    
+    for(let i =0 ; i< GVUNumRows;i++ ){
+        if(GVUResultsSorted[i].id == a){
+            console.log(GVUResults.id)
+         let UserId = document.getElementById('editId').value =  GVUResultsSorted[i].id;   
      
-         let Email = document.getElementById('editEmail').value=     GVUResultsSorted[i].email ;
+         let Fname = document.getElementById('editFname').value =  GVUResultsSorted[i].firstname;
+ 
+         let Mname = document.getElementById('editMname').value =  GVUResultsSorted[i].middlename;
+        
+         let Lname = document.getElementById('editLname').value =  GVUResultsSorted[i].lastname;
+     
+         let Email = document.getElementById('editEmail').value =   GVUResultsSorted[i].email ;
       
          let Username = document.getElementById('editUsername').value =  GVUResultsSorted[i].username;
      
@@ -684,6 +764,9 @@ const editUserSorted = (a) =>{
  }
  
  const checkEditFields = () =>{
+     
+    let UserId = document.getElementById('editId').value; 
+
     let Fname = document.getElementById('editFname').value  
  
     let Mname = document.getElementById('editMname').value  
@@ -723,18 +806,35 @@ const editUserSorted = (a) =>{
 
     let Linkedin = document.getElementById('editlinkedinprofileURL').value 
 
-    if(Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  "" && Twitter !==  "" && Facebook !==  "" && Instagram !==  "" &&Linkedin !==  "" ){
+    if(UserId !=="" && Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  "" && Twitter !==  "" && Facebook !==  "" && Instagram !==  "" &&Linkedin !==  "" ){
        
         updateUser();
 
     }else{
-        console.log("Not Ok")
+        alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
+        btnEditError.removeAttribute("hidden");
+        btnEditUsers.style.display = "none";
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
+            btnEditError.setAttribute("hidden", "hidden");//Is loading true
+            btnEditUsers.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 3000);
     }
-
+    
  }
 
 
 const updateUser = async () =>{
+
+    IsLoadingTrue(true)//Start the loading button
+
+    let UserId = document.getElementById('editId').value;
+
+    console.log(UserId)
+
     let Fname = document.getElementById('editFname').value  
  
     let Mname = document.getElementById('editMname').value  
@@ -776,6 +876,7 @@ const updateUser = async () =>{
 
 
     formData = new FormData();
+formData.append('UserId', UserId);   
 formData.append('Fname', Fname);
 formData.append('Mname', Mname);
 formData.append('Lname', Lname);
@@ -796,10 +897,42 @@ for (var pair of formData.entries()) {
     console.log(pair[0]+ ' - ' + pair[1]); 
  }
 
-
-  const fetchEdit = await fetch("../controller/user-create-account.php",{
+try{
+  const fetchEdit = await fetch("../controller/user-edit.php",{
         method: "POST",
-        body:formData,
+        body: formData,
     });
+
+
+    //Javascript edit account admin
+// const btnEditError = document.getElementById('btnEditError');//Error button disabled
+// const btnEditSuccess = document.getElementById('btnEditSuccess');//Succes button
+// const btnIsUpdating = document.getElementById('btnIsUpdating');//updating button
+    const fetchResponse = await fetchEdit.json();
+    
+    const showAnimation = await function(){
+
+        if(fetchResponse.statusCode === 200){
+            console.log(fetchResponse)
+            delayedShowAlert = () =>{
+        
+                alertShowSuccess.removeAttribute("hidden");
+                alertShowSuccess.classList.add('show');
+                
+            }
+            setTimeout(delayedShowAlert, 3000)
+            delayedRemoveAlert = () =>{   
+                alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.setAttribute("hidden", "hidden");
+            }
+            setTimeout(delayedRemoveAlert, 6000);
+          }
+        }
+    
+        showAnimation();
+     
+}catch (e){
+    console.log(e)
+}
 
 }

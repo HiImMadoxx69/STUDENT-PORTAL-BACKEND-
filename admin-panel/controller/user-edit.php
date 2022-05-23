@@ -19,35 +19,37 @@ $errors = []; // Store all foreseen and unforeseen errors here.
 
 // echo $uploadPath;
 
-  $userCurrentId = $_POST['userId'];  
-  $fname = $_POST['firstname'];
-  $lname = $_POST['lastname'];
-  $birthday = $_POST['birthday'];
+  $userCurrentId = $_POST['UserId'];  
+  $fname = $_POST['Fname'];
+  $mname = $_POST['Mname'];
+  $lname = $_POST['Lname'];
+  $birthday = $_POST['Birthday'];
   // exit(json_encode(array("statusCode"=>$birthday)));
-  $sex = $_POST['sex'];
-  $about = $_POST['about'];
-  $position = $_POST['position'];
-  $address = $_POST['address'];
-  $contact = $_POST['contact'];
-  $email = $_POST['email'];
-  $twitter = $_POST['twitter'];
-  $facebook = $_POST['facebook'];
-  $instagram = $_POST['instagram'];
-  $linkedin = $_POST['linkedin'];
+  $sex = $_POST['Sex'];
+  $about = $_POST['About'];
+  $position = $_POST['Job'];
+  $address = $_POST['Address'];
+  $contact = $_POST['Contact'];
+  $email = $_POST['Email'];
+  $username = $_POST['Username'];
+  $password = $_POST['Password'];
+  $twitter = $_POST['Twitter'];
+  $facebook = $_POST['Facebook'];
+  $instagram = $_POST['Instagram'];
+  $linkedin = $_POST['Linkedin'];
 
   
 if (isset($userCurrentId)) {
 
  try{
-                  $sql = "UPDATE tbl_admin SET firstname = '$fname', lastname = '$lname', birthday = '$birthday', sex = '$sex',about = '$about', position = '$position', address = '$address', contact = '$contact', email = '$email', twitterprofile = '$twitter', facebookprofile = '$facebook', instagramprofile = '$instagram', linkedinprofile = '$linkedin' WHERE id =  $userCurrentId";
+                  $sql = "UPDATE `tbl_admin` SET `email` = '$email',`username` = '$username',`password` = '$password', `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`id` = $userCurrentId;";
     
                   mysqli_query($con, $sql);
                   exit(json_encode(array("statusCode"=>200)));
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));
  }
-} 
-
+}
 //UPLOAD > PHP
 
 

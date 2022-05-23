@@ -4,7 +4,7 @@ if(!isset($_SESSION)){
   session_start();//if there is no session then start session
 } //Session lol
 
-if(isset($_SESSION['UserLogin'])){
+if(isset($_SESSION['ID'])){
   echo header("Location: admin-dashboard.php");
 }
 

@@ -1,12 +1,12 @@
 <?php
 session_start();
-if(!isset($_SESSION['UserLogin'])){
+if(!isset($_SESSION['ID'])){
   echo header("Location: admin-login.php");
 }
 include_once("../connections/connection.php");
 $con = connection();
 
-$sql = "SELECT * FROM tbl_admin WHERE username = '".$_SESSION['UserLogin']."';";
+$sql = "SELECT * FROM tbl_admin WHERE id = '".$_SESSION['ID']."';";
 
 $user = $con->query($sql) or die ($con->error);//if wrong query kill the connections (students is the query)
 
@@ -67,12 +67,7 @@ $currentId = $user['id'];
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+   
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">

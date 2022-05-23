@@ -1,12 +1,12 @@
 <?php
 session_start();
-if(!isset($_SESSION['UserLogin'])){
+if(!isset($_SESSION['ID'])){
   echo header("Location: admin-login.php");
 }
 include_once("../connections/connection.php");
 $con = connection();
 
-$sql = "SELECT * FROM tbl_admin WHERE username = '".$_SESSION['UserLogin']."';";
+$sql = "SELECT * FROM tbl_admin WHERE id = '".$_SESSION['ID']."';";
 
 $user = $con->query($sql) or die ($con->error);//if wrong query kill the connections (students is the query)
 
@@ -67,12 +67,7 @@ $currentId = $user['id'];
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -336,7 +331,17 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
   <main id="main" class="main">
             
+ <!--Error Alert -->
+ <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:40%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Please fill out all the fields!
+              </div><!--Error End of Alert -->
 
+              <!-- Success Alert -->
+              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:40%;"> 
+                <i class="bi bi-exclamation-octagon me-1"></i>
+          Created Succesfully!
+              </div><!-- End of Alert -->
     <div class="pagetitle">
       <h1>User Accounts</h1>
       <nav>
@@ -381,17 +386,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <div class="modal-body">
 
                     
-                <!--Error Alert -->
-            <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Please fill out all the fields!
-              </div><!--Error End of Alert -->
-
-              <!-- Success Alert -->
-              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Created Succesfully!
-              </div><!-- End of Alert -->
+               
 
               <!-- Floating Labels Form -->
               <form class="row g-3 needs-validation" id ="frmCreateUsers">
@@ -539,7 +534,33 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
               </div><!-- End user Modal-->
 
+                <!-- Change profile picture Modal -->
 
+              <div class="modal" id="changeProfileModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Change Profile Picture</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <input type ="hidden" id ="changePicUserID" ><!-- User id -->
+                    <div class="modal-body" >
+                      <div id="changePicModalBody">
+
+                      </div>
+                    <label for="editUserPic" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+              <div class="col-md-12 col-lg-9">
+             <input class="form-control" type ="file" name = "profileEdit" id ="editUserPic" onchange="editProfilePic()">
+            </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" onclick="saveEditPic()">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <!-- End of change profile picture Modal -->
 
                 <!--------------------------------------------Edit user Modal ------------------------------------------------------->
               
@@ -554,24 +575,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="modal-body">
 
-                    
-                <!--Error Alert -->
-            <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Please fill out all the fields!
-              </div><!--Error End of Alert -->
-
-              <!-- Success Alert -->
-              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 10;width:fit-content; left:40%; top:40%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Created Succesfully!
-              </div><!-- End of Alert -->
+              
 
               <!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" id ="frmCreateUsers">
-              <div class="col-md-12" id="editUserPic">
-              <img src="" alt="Profile" id ="currentPhoto" class="rounded-circle" style ="width:100px;"/>
-                </div>
+              <form class="row g-3 needs-validation" id ="frmEditUsers">
+              
+              <input type="hidden" id="editId">
+              
                 <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editFname" placeholder="Firstname" required>
@@ -695,21 +705,18 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="modal-footer">
                       
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
-                      <button class="btn btn-primary" type="button" disabled id ="btnIsLoading" hidden>
+                     
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      Creating...
+                      Updating...
                       </button><!--End of updating button-->
-                      <button class="btn btn btn-danger" type="button" disabled id ="btnError" hidden>
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
                       <i class="bi bi-exclamation-octagon"></i>
                       Error!
                       </button><!-- End of error button -->
-                      <button class="btn btn btn-success" type="button" disabled id ="btnSuccess" hidden>
-                      <i class="bi bi-check-circle me-1"></i>
-                      Created Succesfully!
-                      </button><!-- End of success button -->
+                      
                       <button type="submit" class="btn btn-primary" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
-                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
                     </div>
                   </div>
                 </div>
@@ -768,7 +775,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">Photo</a> </th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">Username</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">Firstname</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">Middlname</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">Middlename</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">Lastname</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">Email</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">Birthday</a></th>
