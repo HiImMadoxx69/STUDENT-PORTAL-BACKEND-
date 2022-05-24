@@ -190,14 +190,26 @@ const editProfilePic = async () =>{
    const receivedStatus = await fetchResponse.json();
    
    
-     console.log(receivedStatus.image)
-     let output = ''; 
-     output += `<img src="../../uploads/${receivedStatus.image}" alt="Profile" height = "100%" width = "100%;"/>
-     `;
-     document.querySelector('#changePicModalBody').innerHTML = output;
 
-   
-   
+   console.log(receivedStatus.statusCode)
+   if(receivedStatus.statusCode === 200){
+    let output = ''; 
+    output += `<img src="../../uploads/${receivedStatus.image}" alt="Profile" max-height = "350px" max-width = "350px"/>
+    `;
+    document.querySelector('#changePicModalBody').innerHTML = output;
+    
+    let showBtn = '';
+    showBtn += `<button type="button" class="btn btn-primary" onclick="saveChanges('`+value+`', '${receivedStatus.image}')">Save changes</button>
+    <script>
+    
+    </script>
+    `;
+   document.querySelector('#showSave').innerHTML = showBtn;
+   }
+    
+
+  
+ 
    
    }catch (e){
    console.log(e)
@@ -205,19 +217,44 @@ const editProfilePic = async () =>{
   
 }
 
-const saveEditPic = async () =>{
-
-}
+const saveChanges = async (...params) =>{
+        // Create a FormData object.
+    imageformData = new FormData();
+   
+    imageformData.append('userId', params[0]);
+    imageformData.append('Image_Url', params[1]);
+    try{
+       const fetchResponse = await fetch("../controller/user-edit-pic.php",{
+           method: "POST",
+           body:imageformData,
+       });
+       const receivedStatus = await fetchResponse.json();
+       if(receivedStatus.statusCode === 200){
+        delayedShowAlert = () =>{
+            alertShowSuccess.removeAttribute("hidden");
+            alertShowSuccess.classList.add('show');
+        }
+        setTimeout(delayedShowAlert, 3000)
+        delayedRemoveAlert = () =>{   
+            alertShowSuccess.classList.remove('show');  
+            alertShowSuccess.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 6000);
+      }
+    }catch(e){
+       console.log(e);
+    }
+  }
 
 //Change Profile Picture Modal
-const changePicModal = (id) =>{
+const changePicModal =  (id) =>{
     let changePicUserID = document.getElementById('changePicUserID').value = id;
     console.log(id)
     let output = '';
     for(let i =0 ; i< GVUdefaultRow;i++ ){
         if(GVUResults[i].id == id){
             console.log("true")
-            output += `<img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" max-height = "100%" max-width = "100%"/>
+            output += `<img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" style="max-width:350px; max-height:350px;" "/>
             `;
             
             break;

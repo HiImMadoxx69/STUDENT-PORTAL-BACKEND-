@@ -545,7 +545,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <input type ="hidden" id ="changePicUserID" ><!-- User id -->
                     <div class="modal-body" >
-                      <div id="changePicModalBody">
+                      <div id="changePicModalBody" >
 
                       </div>
                     <label for="editUserPic" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
@@ -555,7 +555,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" onclick="saveEditPic()">Save changes</button>
+                      <div id="showSave">
+                     
+                      </div>
                     </div>
                   </div>
                 </div>

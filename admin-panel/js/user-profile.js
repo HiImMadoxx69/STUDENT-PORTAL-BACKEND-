@@ -93,6 +93,7 @@ function updateProfile(e){
   
   
     let firstname = document.getElementById('firstName').value;
+    let middlename = document.getElementById('middleName').value;
     let lastname = document.getElementById('lastName').value;
     let birthday = document.getElementById('birthDay').value;
     let sex = document.getElementById('Sex').value;
@@ -115,27 +116,31 @@ function updateProfile(e){
     // Add the file to the request.
   
     console.log(currentId);
-    formData.append('userId', currentId);
-    formData.append('firstname', firstname);
-    formData.append('lastname', lastname);
-    formData.append('birthday', birthday);
-    formData.append('sex', sex);
-    formData.append('about', about);
-    formData.append('position', position);
-    formData.append('address', address);
-    formData.append('contact', contact);
-    formData.append('email', email);
-    formData.append('twitter', twitter);
-    formData.append('facebook', facebook);
-    formData.append('instagram', instagram);
-    formData.append('linkedin', linkedin);
+    formData.append('UserId', currentId);
+    formData.append('Fname', firstname);
+    formData.append('Mname', middlename);
+    formData.append('Lname', lastname);
+    formData.append('Birthday', birthday);
+    formData.append('Sex', sex);
+    formData.append('About', about);
+    formData.append('Job', position);
+    formData.append('Address', address);
+    formData.append('Contact', contact);
+    formData.append('Email', email);
+    formData.append('Twitter', twitter);
+    formData.append('Facebook', facebook);
+    formData.append('Instagram', instagram);
+    formData.append('Linkedin', linkedin);
     for (var pair of formData.entries()) {
       console.log(pair[0]+ ' - ' + pair[1]); 
    }
     var xhr = new XMLHttpRequest();
 
+    
     // Open the connection
-    xhr.open('POST', '../controller/user-edit.php', true);
+    xhr.open('POST', '../controller/user-profile-edit.php', true);
+
+
 
 xhr.onprogress = function (){
  
@@ -189,12 +194,22 @@ const changeProfile = async() =>{
   formData.append('userId', currentId);
 try{
 
-const fetchResponse = await fetch("../controller/user-edit-pic.php",{
+const fetchResponse = await fetch("../controller/move-only-image.php",{
     method: "POST",
     body:formData,
 });
 
 const receivedStatus = await fetchResponse.json();
+
+formImage_Url = new FormData();
+
+formImage_Url.append('Image_Url', receivedStatus.image);
+formImage_Url.append('userId', currentId);
+const autoUpload = await fetch("../controller/user-edit-pic.php",{
+method: "POST",
+body:formImage_Url,
+});
+
 
 
   console.log(receivedStatus.image)
