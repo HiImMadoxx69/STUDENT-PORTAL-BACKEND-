@@ -8,17 +8,13 @@ $userCurrentId = $_POST['userId'];
 
 
 if (isset($userCurrentId)) {
-  
     if (empty($errors)) {
 
                     $sql = "UPDATE tbl_admin SET `profile_url` = '$img_url' WHERE id =  $userCurrentId";
                     mysqli_query($con, $sql);
-                    exit(json_encode(array("statuCode"=>200)));
+                    exit(json_encode(array("statusCode"=>200)));
     } else {
       exit(json_encode(array("statusCode"=>201)));
     }
   } 
-  
-
-
 ?>

@@ -199,12 +199,12 @@ const editProfilePic = async () =>{
    console.log(receivedStatus.statusCode)
    if(receivedStatus.statusCode === 200){
     let output = ''; 
-    output += `<img src="../../uploads/${receivedStatus.image}" alt="Profile" max-height = "350px" max-width = "350px"/>
+    output += `<img src="../../uploads/${receivedStatus.image}" alt="Profile"style ="max-width:350px; max-height:350px;"/>
     `;
     document.querySelector('#changePicModalBody').innerHTML = output;
     
     let showBtn = '';
-    showBtn += `<button type="button" class="btn btn-primary" onclick="saveChanges('`+value+`', '${receivedStatus.image}')">Save changes</button>
+    showBtn += `<button type="button" id ="btnChangePic" class="btn btn-primary" onclick="saveChanges('`+value+`', '${receivedStatus.image}')">Save changes</button>
     <script>
     
     </script>
@@ -223,6 +223,7 @@ const editProfilePic = async () =>{
 }
 
 const saveChanges = async (...params) =>{
+    let btnChangePic = document.getElementById('btnChangePic');
         // Create a FormData object.
     imageformData = new FormData();
    
@@ -234,17 +235,16 @@ const saveChanges = async (...params) =>{
            body:imageformData,
        });
        const receivedStatus = await fetchResponse.json();
+       console.log(receivedStatus)
        if(receivedStatus.statusCode === 200){
-        delayedShowAlert = () =>{
-            alertShowSuccess.removeAttribute("hidden");
-            alertShowSuccess.classList.add('show');
-        }
-        setTimeout(delayedShowAlert, 3000)
+         alertShowSuccess.removeAttribute("hidden");
+         btnChangePic.setAttribute("disabled", "disabled");
+          alertShowSuccess.classList.add('show');
         delayedRemoveAlert = () =>{   
             alertShowSuccess.classList.remove('show');  
             alertShowSuccess.setAttribute("hidden", "hidden");
         }
-        setTimeout(delayedRemoveAlert, 6000);
+        setTimeout(delayedRemoveAlert, 3000);
       }
     }catch(e){
        console.log(e);
@@ -414,25 +414,25 @@ const bindAllDataIntoTableSorted = function (){
 const selectNumPage = function(){
     GVUIsSorted = false;//Default the not sorted
     if(selectPage.value === '5'){
-        console.log("TRAlSE")
         GVUIndexPage = 0;
         GVUNumRows = 5;
         GVURowPerPage = 5;
         GVUdefaultRow = 5;
-    }else if (selectPage.value === '10'){
+    }else if(selectPage.value === '10'){
         console.log("10")
         GVUNumRows = 10;
         GVUIndexPage = 0;
         GVURowPerPage = 10;
         GVUdefaultRow = 10;
-    }else if (selectPage.value === '25'){
+    }else if(selectPage.value === '25'){
         console.log("25")
         GVUNumRows = 25;
         GVUIndexPage = 0;
         GVURowPerPage = 25;
         GVUdefaultRow = 25;
     }else{
-        console.log(GVUAccLength)
+
+        GVUIndexPage = 0;
         GVUNumRows = GVUAccLength;
         GVURowPerPage = GVUAccLength;
         GVUdefaultRow = GVUAccLength;
@@ -510,6 +510,7 @@ const resetFields = () =>{
 
 //Call it to refresh the table
  refreshTable = () =>{
+     GVUIndexPage = 0;
     resetFields();
     getAllDataAPI();
 }
@@ -731,14 +732,13 @@ const editUserNotSorted = (a) =>{
          let Birthday = document.getElementById('editBirthday').value =  GVUResults[i].birthday;
          
          let Sex = GVUResults[i].sex;
-         
-         if(Sex = "Male"){
+      
+         if(Sex === "Male"){
              document.getElementById('editmaleCheck').checked = true;
          }
-         if(Sex = "Female"){
+         if(Sex === "Female"){
              document.getElementById('editfemaleCheck').checked = true;
          }
-     
          let Contact = document.getElementById('editContact').value =    GVUResults[i].contact;
      
          let Address = document.getElementById('editAddress').value =    GVUResults[i].address;
@@ -787,10 +787,10 @@ const editUserSorted = (a) =>{
          
          let Sex = GVUResultsSorted[i].sex;
          
-         if(Sex = "Male"){
+         if(Sex === "Male"){
              document.getElementById('editmaleCheck').checked = true;
          }
-         if(Sex = "Female"){
+         if(Sex === "Female"){
              document.getElementById('editfemaleCheck').checked = true;
          }
      

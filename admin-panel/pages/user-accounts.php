@@ -359,13 +359,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id ="modalMainMessage">Updated Succesfully!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
                       </div>
                     <div class="modal-body">
                      <p id="modalLogs"></p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" onClick ="reloadPage()"data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" onClick ="refreshTable()"data-bs-dismiss="modal">Close</button>
                       <script> function reloadPage(){location.reload()}</script>
                     </div>
                   </div>
@@ -541,7 +541,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Change Profile Picture</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
                     </div>
                     <input type ="hidden" id ="changePicUserID" ><!-- User id -->
                     <div class="modal-body" >
@@ -554,9 +554,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"onClick ="refreshTable()">Close</button>
                       <div id="showSave">
-                     
+                     <button type="button" disabled class="btn btn-primary" >Save changes</button>
                       </div>
                     </div>
                   </div>
@@ -572,7 +572,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <div class="modal-header">
                       <h5 class="modal-title">Accounts Form</h5>
                       
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
                       
                     </div>
                     <div class="modal-body">

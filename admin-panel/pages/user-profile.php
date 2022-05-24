@@ -587,7 +587,7 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
     
                         }else{
                           echo '<option selected value ="Female">Female</option>
-                          <option value="Males">Male</option>
+                          <option value="Male">Male</option>
                           ';
                         }
                       ?>
