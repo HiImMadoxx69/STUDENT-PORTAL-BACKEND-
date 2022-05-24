@@ -26,14 +26,19 @@ var GVURowPerPage = 0;
 
 //NextPage Call
 const nextpageCall = function nextPageCall(){
+
     if(((GVUAccLength - GVUdefaultRow) < 10) && GVULessThanRow === 0){
-        
+      console.log("LOL")
         GVULessThanRow = GVUAccLength - GVUdefaultRow;
         GVUdefaultRow += GVULessThanRow;
         bindAllDataIntoTable();
     }
-    if(GVUdefaultRow < GVUAccLength &&GVUIndexPage <= GVURowPerPage ){
+    console.log("LMAo")
+    console.log("next page GVUdefaultRow: "+GVUdefaultRow +" GVUAccLength:"+GVUAccLength+" GVUIndexPage:" +GVUIndexPage +" <= GVURowPerPage:"+GVURowPerPage);
+    if(GVUdefaultRow < GVUAccLength ){
+       
         GVUdefaultRow += GVURowPerPage;
+        console.log("next page GVUdefaultRow:"+GVUdefaultRow)
         GVUIndexPage +=GVURowPerPage;
         bindAllDataIntoTable();
     }
@@ -108,6 +113,7 @@ function getAllDataAPI(){
     .then(response => {
 
         GVUResults = response;//Store the responseJSON into GVUResults global var
+       
         GVUAccLength = response.length;//getThe totalLength
         GVUNumRows = 5;//Set Number of rows default
         
@@ -134,7 +140,6 @@ function getAllDataAPI(){
             <option value="10" selected>10</option>
             <option value="ALL">All</option>`;
         }else{
-           
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="ALL">All</option>`;
@@ -268,7 +273,7 @@ const bindAllDataIntoTable = function (){
     let output ='';
 
 for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
- 
+ console.log("GVUIndexPage: "+GVUIndexPage+"< GVUDefaultRow:" +GVUdefaultRow)
     output += `<tr>
     <td>${GVUResults[i].id}</td>
     <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
@@ -291,13 +296,14 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     <td>${GVUResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "Profile" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-upload"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
     
     </div>
     </th>
     </tr>`;
+    
 }
 
 let numberOfPages = '';
@@ -384,7 +390,7 @@ const bindAllDataIntoTableSorted = function (){
         <td>${GVUResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "Profile" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-upload"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
     
@@ -406,21 +412,27 @@ const bindAllDataIntoTableSorted = function (){
 //Select bind data
 
 const selectNumPage = function(){
-    
     GVUIsSorted = false;//Default the not sorted
     if(selectPage.value === '5'){
+        console.log("TRAlSE")
+        GVUIndexPage = 0;
         GVUNumRows = 5;
         GVURowPerPage = 5;
         GVUdefaultRow = 5;
     }else if (selectPage.value === '10'){
+        console.log("10")
         GVUNumRows = 10;
-        GVURowPerPage = 10
+        GVUIndexPage = 0;
+        GVURowPerPage = 10;
         GVUdefaultRow = 10;
     }else if (selectPage.value === '25'){
+        console.log("25")
         GVUNumRows = 25;
+        GVUIndexPage = 0;
         GVURowPerPage = 25;
         GVUdefaultRow = 25;
     }else{
+        console.log(GVUAccLength)
         GVUNumRows = GVUAccLength;
         GVURowPerPage = GVUAccLength;
         GVUdefaultRow = GVUAccLength;
@@ -754,7 +766,7 @@ const editUserSorted = (a) =>{
     
     for(let i =0 ; i< GVUNumRows;i++ ){
         if(GVUResultsSorted[i].id == a){
-            console.log(GVUResults.id)
+
          let UserId = document.getElementById('editId').value =  GVUResultsSorted[i].id;   
      
          let Fname = document.getElementById('editFname').value =  GVUResultsSorted[i].firstname;
@@ -869,8 +881,6 @@ const updateUser = async () =>{
     IsLoadingTrue(true)//Start the loading button
 
     let UserId = document.getElementById('editId').value;
-
-    console.log(UserId)
 
     let Fname = document.getElementById('editFname').value  
  
