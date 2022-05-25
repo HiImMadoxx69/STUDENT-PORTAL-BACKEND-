@@ -17,12 +17,11 @@ $currentId = $user['id'];
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Users / Profile - NiceAdmin Bootstrap Template</title>
+  <title>Student Accounts</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -303,27 +302,33 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed " href="user-profile.php">
-          <i class="bi bi-person"></i>
+        <a class="nav-link collapsed" href="user-profile.php">
+          <i class="bi bi-person-circle"></i>
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
-     
-
       <li class="nav-item">
-        <a class="nav-link collapsed " href="user-accounts.php">
-          <i class="bi bi-card-list"></i>
+        <a class="nav-link collapsed" href="user-accounts.php">
+          <i class="bi bi-people-fill"></i>
           <span>User Account</span>
         </a>
       </li><!-- End User Account Nav -->
-      
+
       <li class="nav-item">
-        <a class="nav-link " href="admin-student-accounts.php">
-          <i class="bi bi-card-list"></i>
+        <a class="nav-link collapsed " href="admin-student-accounts.php">
+          <i class="bi bi-person-square"></i>
           <span>Student Account</span>
         </a>
       </li><!-- End Student Account Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="archived-accounts.php">
+          <i class="bi bi-archive"></i>
+          <span>Archived Accounts</span>
+        </a>
+      </li><!-- End Archives Nav -->
      
     </ul>
 
