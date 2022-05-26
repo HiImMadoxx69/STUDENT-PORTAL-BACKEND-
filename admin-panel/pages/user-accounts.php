@@ -345,8 +345,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
               <!-- Success Alert -->
               <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Created Succesfully!
+                <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
       <h1>User Accounts</h1>
@@ -547,7 +546,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       </button><!-- End of error button -->
                       <button class="btn btn btn-success" type="button" disabled id ="btnSuccess" hidden>
                       <i class="bi bi-check-circle me-1"></i>
-                      Created Succesfully!
+                      Created
                       </button><!-- End of success button -->
                       <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
                       <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
@@ -760,7 +759,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <div class="row mb-3">
         <div class="col-sm-2">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
-                Add User
+              <i class="bi bi-person-plus"></i>  
+              Add User
               </button>
        </div>
        

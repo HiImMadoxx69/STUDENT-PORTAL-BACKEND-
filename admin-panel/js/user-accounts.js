@@ -115,10 +115,10 @@ function getAllDataAPI(){
         GVUResults = response;//Store the responseJSON into GVUResults global var
        
         GVUAccLength = response.length;//getThe totalLength
-        GVUNumRows = 5;//Set Number of rows default
+        GVUNumRows = 0;//Set Number of rows default
         
         let selectHolder = '';
-        if(GVUAccLength >= 500){
+        if(GVUAccLength >= 200){
            
             selectHolder += `
             <option value="5" selected>5</option>
@@ -126,7 +126,7 @@ function getAllDataAPI(){
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="ALL">All</option>`;
-        }else if (GVUAccLength >= 300){
+        }else if (GVUAccLength >= 100){
            
             selectHolder += `
             <option value="5" selected>5</option>
@@ -140,9 +140,9 @@ function getAllDataAPI(){
             <option value="10" selected>10</option>
             <option value="ALL">All</option>`;
         }else{
+            //if lower than 5 rows
             selectHolder += `
-            <option value="5" selected>5</option>
-            <option value="ALL">All</option>`;
+            <option value="ALL" selected>All</option>`;
         }
         document.querySelector('#selectPage').innerHTML = selectHolder;// set the rows per page
 
@@ -417,11 +417,14 @@ document.querySelector('#archive-modal-title').innerHTML = output;//change the t
 }
 
 //RemoveUserAccount when confirmed
-
 const removeUserAccount = async (id) =>{
-formData = new formData();
+    let message = '';// message alert
+ //get current date where removing was done
+ const removedDate = new Date();   
 
+formData = new FormData()
 formData.append('UserID', id);
+formData.append('Status', removedDate);
 
 try{
     const fetchRemove = await fetch("../controller/user-remove.php",{
@@ -430,8 +433,20 @@ try{
       });
   
       const fetchResponse = await fetchRemove.json();
+      if(fetchResponse.statusCode === 200){     
+            alertShowSuccess.removeAttribute("hidden");
+            alertShowSuccess.classList.add('show');
+            message += ` Removed Succesfully!`
+            refreshTable(); 
+        delayedRemoveAlert = () =>{   
+            alertShowSuccess.classList.remove('show');  
+            alertShowSuccess.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 3000);
+      }// end of if fetch === 200
+
       
-     console.log(fetchResponse)
+    document.querySelector('#alertSuccessMessage').innerHTML = message;
        
   }catch (e){
       console.log(e)
@@ -709,7 +724,10 @@ for (var pair of formData.entries()) {
     .then((res) => res.json())
         .then(response =>{
             console.log(response.statusCode)
+            let message = '';
           if(response.statusCode === 200){
+         message += ` Created Succesfully!`
+            document.querySelector('#alertSuccessMessage').innerHTML = message;
             delayedShowAlert = () =>{
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
@@ -987,11 +1005,12 @@ try{
     const fetchResponse = await fetchEdit.json();
     
     const showAnimation = await function(){
-
+let message = '';
         if(fetchResponse.statusCode === 200){
             console.log(fetchResponse)
             delayedShowAlert = () =>{
-        
+                message += ` Updated Succesfully!`
+                document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
                 

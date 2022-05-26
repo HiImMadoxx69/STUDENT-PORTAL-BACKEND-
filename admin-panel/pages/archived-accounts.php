@@ -366,8 +366,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
-                   
+                      <h6 id="totalUserArchives"></h6>
+                      <a href ="" onclick =""class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
                     </div>
                   </div>
                 </div>
@@ -522,6 +522,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- my javascript for user-prfile -->
+  <script src ="../js/user-archived.js?t=1491313943549"  type = "text/javascript"></script>
   <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
 
 </script>
