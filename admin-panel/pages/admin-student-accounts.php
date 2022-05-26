@@ -316,7 +316,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End User Account Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed " href="admin-student-accounts.php">
+        <a class="nav-link" href="admin-student-accounts.php">
           <i class="bi bi-person-square"></i>
           <span>Student Account</span>
         </a>

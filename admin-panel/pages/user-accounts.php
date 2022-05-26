@@ -310,7 +310,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
+        <a class="nav-link" href="user-accounts.php">
           <i class="bi bi-people-fill"></i>
           <span>User Account</span>
         </a>
@@ -338,13 +338,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   <main id="main" class="main">
             
  <!--Error Alert -->
- <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:40%;"> 
+ <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;"> 
                 <i class="bi bi-exclamation-octagon me-1"></i>
           Please fill out all the fields!
               </div><!--Error End of Alert -->
 
               <!-- Success Alert -->
-              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:40%;"> 
+              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;"> 
                 <i class="bi bi-exclamation-octagon me-1"></i>
           Created Succesfully!
               </div><!-- End of Alert -->
@@ -358,6 +358,22 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </ol>
       </nav>
     </div><!-- End Page Title -->
+
+
+     <!-- Are you sure you want to archived -->
+              <div class="modal fade" id="archivedModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="archive-modal-title">Are you sure archived this?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer" id="modal-footer-button">
+                     
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End  Are you sure you want to archived-->
 
 
     <div class="modal fade" id="basicModal" tabindex="-1">
@@ -376,7 +392,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                   </div>
                 </div>
-              </div><!-- End Basic Modal-->
+              </div><!-- End of change pic modal-->
 
                <!--add user Modal -->
               
@@ -827,9 +843,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <span aria-hidden="true">&laquo;</span>
                         </a>
                           </li>
-                          <li class="page-item"><a class="page-link" id= "page1">1</a></li>
+                          <!-- <li class="page-item"><a class="page-link" id= "page1">1</a></li>
                           <li class="page-item"><a class="page-link" id= "page2">2</a></li>
-                          <li class="page-item"><a class="page-link" id= "page3">3</a></li>
+                          <li class="page-item"><a class="page-link" id= "page3">3</a></li> -->
                           <li class="page-item">
                           <a class="page-link" aria-label="Next" id ="nextPage" >
                        <span aria-hidden="true">&raquo;</span>

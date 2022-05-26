@@ -298,7 +298,7 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     <div class = "pt-2">
     <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
     </th>
@@ -370,7 +370,7 @@ const bindAllDataIntoTableSorted = function (){
     for(let i = 0; i<GVUNumRows; i++){
         output += `<tr>
         <td>${GVUResultsSorted[i].id}</td>
-        <td><a href =""><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></a></td>
+        <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
         <td>${GVUResultsSorted[i].username}</td>
         <td>${GVUResultsSorted[i].firstname}</td>
         <td>${GVUResultsSorted[i].middlename}</td>
@@ -392,7 +392,7 @@ const bindAllDataIntoTableSorted = function (){
         <div class = "pt-2">
     <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
         </th>
@@ -405,9 +405,38 @@ const bindAllDataIntoTableSorted = function (){
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
 
+//Archived prompt ! are you sure you want to archive?
+const moveToArchive = async (...params) => {
+let output = '';
+output += `Are you sure you want to remove `+params[1]+` ?!`;
+let showButtons ='';
+showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-danger" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
+document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+}
 
+//RemoveUserAccount when confirmed
 
+const removeUserAccount = async (id) =>{
+formData = new formData();
 
+formData.append('UserID', id);
+
+try{
+    const fetchRemove = await fetch("../controller/user-remove.php",{
+          method: "POST",
+          body: formData,
+      });
+  
+      const fetchResponse = await fetchRemove.json();
+      
+     console.log(fetchResponse)
+       
+  }catch (e){
+      console.log(e)
+  }
+}
 
 //Select bind data
 

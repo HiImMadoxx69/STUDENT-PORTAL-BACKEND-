@@ -305,7 +305,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="user-profile.php">
+        <a class="nav-link" href="user-profile.php">
           <i class="bi bi-person-circle"></i>
           <span>Profile</span>
         </a>
