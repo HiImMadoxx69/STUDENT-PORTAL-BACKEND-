@@ -1,27 +1,28 @@
-
-//get all archived user accounts
-
 window.onload = function(){
     getAllArchiveUser();
 }//Onload page
 
-const getAllArchiveUser = async () =>{
 
+//get all archived user accounts
+const getAllArchiveUser = async () =>{
+let totalUserArchives = document.getElementById('totalUserArchives');
 try{
 const getUserArchives = await fetch('../controller/user-archived-table.php');
 
 const response = await getUserArchives.json();
 
-console.log(response)
+totalUserArchives = response.length;
 
 let output = '';
 
 output += ``+response.length+``;
 
 document.querySelector('#totalUserArchives').innerHTML = output;// print the total number of user archives
+console.log(totalUserArchives)
 
 }catch(error){
 console.log(error)
 }
 
 }
+
