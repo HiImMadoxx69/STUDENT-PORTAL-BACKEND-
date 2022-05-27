@@ -17,12 +17,9 @@ let output = '';
 
 output += ``+response.length+``;
 
-document.querySelector('#totalUserArchives').innerHTML = output;// print the total number of user archives
-console.log(totalUserArchives)
-
+document.querySelector('#totalUserArchives').innerHTML = output;// print the 
 }catch(error){
 console.log(error)
-}
-
+    }
 }
 

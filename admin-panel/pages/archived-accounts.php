@@ -351,7 +351,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <div class="row">
 
             <!-- User Accounts Card -->
@@ -367,7 +367,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="ps-3">
                       <h6 id="totalUserArchives"></h6>
-                      <a href ="" onclick =""class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
+                      <a href ="archived-user.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
                     </div>
                   </div>
                 </div>
@@ -396,28 +396,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               </div>
             </div><!-- End Revenue Card -->
 
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Others <span>| Archived</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>420</h6>
-                    
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
+          
 
   
 
@@ -425,138 +404,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </div><!-- End Left side columns -->
 
         <!-- Right side columns -->
-        <div class="col-lg-4">
-          <!-- Archived Graph -->
-          <div class="card">
-  <input type ="hidden" id="totalUserArchives">
-            <div class="card-body pb-0">
-              <h5 class="card-title">Archived Graph <span>| Total</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-              
-              <script>
-                 let totalUserArchives = document.getElementById('totalUserArchives').value;
-                console.log(totalUserArchives)
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 0,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 0,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 0,
-                          name: 'Email'
-                        },
-                        {
-                          value: 0,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 0,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-                window.addEventListener('load', function() {
-                  let totalUserArchives = document.getElementById('totalUserArchives').value;
-                console.log(totalUserArchives)
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: totalUserArchives,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-})
-              </script>
-
-            </div>
-          </div><!-- End Website Traffic -->
-
-
-        
-
-        
-
-        </div><!-- End Right side columns -->
-
+  
       </div>
     </section>
 
@@ -573,7 +421,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- my javascript for user-prfile -->
-  <script src ="../js/user-archived.js?t=1491313943549"  type = "text/javascript"></script>
+  <script src ="../js/archived-accounts.js?t=1491313943549"  type = "text/javascript"></script>
   <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
 
 </script>
