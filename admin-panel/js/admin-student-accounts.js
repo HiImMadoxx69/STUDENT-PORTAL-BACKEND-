@@ -521,3 +521,215 @@ for (var pair of formData.entries()) {
 
 }
 
+
+
+
+
+
+//Edit User Data Not sorted
+const editStudentAccontNotSorted = (a) =>{
+    for(let i =0 ; i< GVSAResults.length;i++ ){
+        if(GVSAResults[i].id == a){
+           
+         let UserId = document.getElementById('editId').value =  GVSAResults[i].id;    
+         
+         let Studentnumber = document.getElementById('editStudNum').value =  GVSAResults[i].studentnumber;   
+
+         let Fname = document.getElementById('editFname').value =  GVSAResults[i].firstname;
+        
+         let Mname = document.getElementById('editMname').value =  GVSAResults[i].middlename;
+        
+         let Lname = document.getElementById('editLname').value =  GVSAResults[i].lastname;
+     
+         let Email = document.getElementById('editEmail').value=   GVSAResults[i].email ;
+       
+         let Password = document.getElementById('editPassword').value =  GVSAResults[i].password;
+         
+         let Course = document.getElementById('editCourse').value =    GVSAResults[i].course;
+
+         let Section = document.getElementById('editSection').value =    GVSAResults[i].section;
+     
+         let Birthday = document.getElementById('editBirthDay').value =  GVSAResults[i].birthday;
+                 
+         let Contact = document.getElementById('editContact').value =    GVSAResults[i].contact;
+     
+         let GuardianN = document.getElementById('editGuardianN').value =    GVSAResults[i].GuardianN;
+          
+         let GuardianCon = document.getElementById('editGuardianCon').value =  GVSAResults[i].GuardianCon;
+         break;
+     }
+    }
+ }
+ 
+
+
+
+//Edit User Data sorted
+
+const editStudentAccountSorted = (a) =>{
+    
+    for(let i =0 ; i< GVSANumRows;i++ ){
+        if(GVSAResultsSorted[i].id == a){
+
+            let UserId = document.getElementById('editId').value =  GVSAResultsSorted[i].id;    
+         
+            let Studentnumber = document.getElementById('editStudNum').value =  GVSAResultsSorted[i].studentnumber;   
+   
+            let Fname = document.getElementById('editFname').value =  GVSAResultsSorted[i].firstname;
+           
+            let Mname = document.getElementById('editMname').value = GVSAResultsSorted[i].middlename;
+           
+            let Lname = document.getElementById('editLname').value =  GVSAResultsSorted[i].lastname;
+        
+            let Email = document.getElementById('editEmail').value=   GVSAResultsSorted[i].email ;
+          
+            let Password = document.getElementById('editPassword').value =  GVSAResultsSorted[i].password;
+            
+            let Course = document.getElementById('editCourse').value =    GVSAResultsSorted[i].course;
+   
+            let Section = document.getElementById('editSection').value =    GVSAResultsSorted[i].section;
+        
+            let Birthday = document.getElementById('editBirthDay').value =  GVSAResultsSorted[i].birthday;
+                    
+            let Contact = document.getElementById('editContact').value =    GVSAResultsSorted[i].contact;
+        
+            let GuardianN = document.getElementById('editGuardianN').value =   GVSAResultsSorted[i].GuardianN;
+             
+            let GuardianCon = document.getElementById('editGuardianCon').value =  GVSAResultsSorted[i].GuardianCon;
+         break;
+     }
+    }
+ }
+ 
+ const checkEditFields = () =>{
+     
+    let Studentnumber = document.getElementById('editStudNum').value;
+
+    let Fname = document.getElementById('editFname').value;
+
+    let Mname = document.getElementById('editMname').value;
+   
+    let Lname = document.getElementById('editLname').value;
+
+    let Email = document.getElementById('editEmail').value;
+ 
+    let Password = document.getElementById('editPassword').value;
+    
+    let Course = document.getElementById('editCourse').value;
+
+    let Section = document.getElementById('editSection').value;
+
+    let Birthday = document.getElementById('editBirthDay').value;
+
+    let Contact = document.getElementById('editContact').value;
+
+    let GuardianN = document.getElementById('editGuardianN').value;
+
+    let GuardianCon = document.getElementById('editGuardianCon').value;
+
+    if(Studentnumber !== "" && Fname !== "" && Mname !== "" && Lname !== "" && Email !== "" && Password !== "" && Course !== "" && Section !== "" && Birthday!== "" && Contact !== "" && GuardianN !== "" && GuardianCon !== "" ){
+       
+        updateStudentAccount();
+
+    }else{
+        alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
+        btnEditError.removeAttribute("hidden");
+        btnEditStudents.style.display = "none";
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
+            btnEditError.setAttribute("hidden", "hidden");//Is loading true
+            btnEditStudents.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 3000);
+    }
+    
+ }
+
+
+const updateStudentAccount = async () =>{
+
+    IsLoadingTrue(true)//Start the loading button
+
+    let Studentnumber = document.getElementById('editStudNum').value;
+
+    let Fname = document.getElementById('editFname').value;
+
+    let Mname = document.getElementById('editMname').value;
+   
+    let Lname = document.getElementById('editLname').value;
+
+    let Email = document.getElementById('editEmail').value;
+ 
+    let Password = document.getElementById('editPassword').value;
+    
+    let Course = document.getElementById('editCourse').value;
+
+    let Section = document.getElementById('editSection').value;
+
+    let Birthday = document.getElementById('editBirthDay').value;
+
+    let Contact = document.getElementById('editContact').value;
+
+    let GuardianN = document.getElementById('editGuardianN').value;
+
+    let GuardianCon = document.getElementById('editGuardianCon').value;
+
+    formData = new FormData();
+    formData.append('Studentnumber', Studentnumber);    
+    formData.append('Fname', Fname);
+    formData.append('Mname', Mname);
+    formData.append('Lname', Lname);
+    formData.append('Email', Email);
+    formData.append('Password', Password);
+    formData.append('Course', Course);
+    formData.append('Section', Section);
+    formData.append('Birthday', Birthday);
+    formData.append('Contact', Contact);
+    formData.append('GuardianN', GuardianN);
+    formData.append('GuardianCon', GuardianCon);
+for (var pair of formData.entries()) {
+    console.log(pair[0]+ ' - ' + pair[1]); 
+ }
+
+try{
+  const fetchEdit = await fetch("../controller/student-edit.php",{
+        method: "POST",
+        body: formData,
+    });
+
+
+    //Javascript edit account admin
+// const btnEditError = document.getElementById('btnEditError');//Error button disabled
+// const btnEditSuccess = document.getElementById('btnEditSuccess');//Succes button
+// const btnIsUpdating = document.getElementById('btnIsUpdating');//updating button
+    const fetchResponse = await fetchEdit.json();
+    
+    const showAnimation = await function(){
+let message = '';
+        if(fetchResponse.statusCode === 200){
+            console.log(fetchResponse)
+            delayedShowAlert = () =>{
+                message += ` Updated Succesfully!`
+                document.querySelector('#alertSuccessMessage').innerHTML = message;
+                alertShowSuccess.removeAttribute("hidden");
+                alertShowSuccess.classList.add('show');
+                
+            }
+            setTimeout(delayedShowAlert, 3000)
+            delayedRemoveAlert = () =>{   
+                alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.setAttribute("hidden", "hidden");
+            }
+            setTimeout(delayedRemoveAlert, 6000);
+          }
+        }
+    
+        showAnimation();
+     
+}catch (e){
+    console.log(e)
+}
+
+}

@@ -526,15 +526,17 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
-      <div class="row mb-3 justify-content-end">
-        <div class="col-sm-1">
+     
+      <div class="row mb-3">
+        <div class="col-sm-2">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
-                Add User
+              <i class="bi bi-person-plus"></i>  
+              Add User
               </button>
        </div>
-      </div>
 
-      <div class="row mb-3">
+
+           <div class="row mb-3">
                   <div class="col-sm-2">
                     <select class="form-select" aria-label="Default select example" id ="selectPage" onchange="selectNumPage()">
                     
