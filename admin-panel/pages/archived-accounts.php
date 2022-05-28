@@ -387,9 +387,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <i class="bi bi-person-square"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
-                      
-                    </div>
+                       <h6 id="totalStudentArchives"></h6>
+                      <a href ="archived-user.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
+                     </div>
                   </div>
                 </div>
 

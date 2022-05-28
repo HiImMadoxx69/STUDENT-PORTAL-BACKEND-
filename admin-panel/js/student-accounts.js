@@ -1,45 +1,45 @@
-//GLOBAL VARIABLES USER = GVU
+//GLOBAL VARIABLES STUDENT = GVS
 //Current number of rows
-var GVUdefaultRow = 0;
+var GVSdefaultRow = 0;
 //CurrentIndexPage global
-var GVUIndexPage = 0;
+var GVSIndexPage = 0;
 
 //Get the total length of table
-var GVUAccLength = 0;
+var GVSAccLength = 0;
 
 //JSON global results variable
-var GVUResults = {};
+var GVSResults = {};
 
 //JSON global result sorted variable
-var GVUResultsSorted = {};
+var GVSResultsSorted = {};
 
 //Check if already sorted
-var GVUIsSorted = false;
+var GVSIsSorted = false;
 //Default number of row global
-var GVUNumRows = 0;
+var GVSNumRows = 0;
 
 //If the default row is less than 10
-var GVULessThanRow = 0;
+var GVSLessThanRow = 0;
 
 //Get desired number of row per page
-var GVURowPerPage = 0;
+var GVSRowPerPage = 0;
 
 //NextPage Call
 const nextpageCall = function nextPageCall(){
 
-    if(((GVUAccLength - GVUdefaultRow) < 10) && GVULessThanRow === 0){
+    if(((GVSAccLength - GVSdefaultRow) < 10) && GVSLessThanRow === 0){
       console.log("LOL")
-        GVULessThanRow = GVUAccLength - GVUdefaultRow;
-        GVUdefaultRow += GVULessThanRow;
+        GVSLessThanRow = GVSAccLength - GVSdefaultRow;
+        GVSdefaultRow += GVSLessThanRow;
         bindAllDataIntoTable();
     }
     console.log("LMAo")
-    console.log("next page GVUdefaultRow: "+GVUdefaultRow +" GVUAccLength:"+GVUAccLength+" GVUIndexPage:" +GVUIndexPage +" <= GVURowPerPage:"+GVURowPerPage);
-    if(GVUdefaultRow < GVUAccLength ){
+    console.log("next page GVSdefaultRow: "+GVSdefaultRow +" GVSAccLength:"+GVSAccLength+" GVSIndexPage:" +GVSIndexPage +" <= GVSRowPerPage:"+GVSRowPerPage);
+    if(GVSdefaultRow < GVSAccLength ){
        
-        GVUdefaultRow += GVURowPerPage;
-        console.log("next page GVUdefaultRow:"+GVUdefaultRow)
-        GVUIndexPage +=GVURowPerPage;
+        GVSdefaultRow += GVSRowPerPage;
+        console.log("next page GVSdefaultRow:"+GVSdefaultRow)
+        GVSIndexPage +=GVSRowPerPage;
         bindAllDataIntoTable();
     }
 }
@@ -49,15 +49,15 @@ const nextpageCall = function nextPageCall(){
 //PrevPage Call
 const prevpageCall = function nextPageCall(){
   
-    // console.log('Less than row'+GVULessThanRow);
-    if(GVULessThanRow !== 0){
+    // console.log('Less than row'+GVSLessThanRow);
+    if(GVSLessThanRow !== 0){
     
-        GVUdefaultRow = GVUdefaultRow - GVULessThanRow;
-        GVULessThanRow = 0;
+        GVSdefaultRow = GVSdefaultRow - GVSLessThanRow;
+        GVSLessThanRow = 0;
     }
-    if(GVUIndexPage >= GVURowPerPage){
-        GVUdefaultRow -= GVURowPerPage;
-        GVUIndexPage -=GVURowPerPage;
+    if(GVSIndexPage >= GVSRowPerPage){
+        GVSdefaultRow -= GVSRowPerPage;
+        GVSIndexPage -=GVSRowPerPage;
         bindAllDataIntoTable();
     }
    
@@ -109,16 +109,16 @@ window.onload = function(){
 //getAllData Function
 function getAllDataAPI(){
     //get user accounts
-    fetch('../controller/user-table.php').then((res) => res.json())
+    fetch('../controller/student-table.php').then((res) => res.json())
     .then(response => {
 
-        GVUResults = response;//Store the responseJSON into GVUResults global var
+        GVSResults = response;//Store the responseJSON into GVSResults global var
        
-        GVUAccLength = response.length;//getThe totalLength
-        GVUNumRows = 0;//Set Number of rows default
+        GVSAccLength = response.length;//getThe totalLength
+        GVSNumRows = 0;//Set Number of rows default
         
         let selectHolder = '';
-        if(GVUAccLength >= 200){
+        if(GVSAccLength >= 200){
            
             selectHolder += `
             <option value="5" selected>5</option>
@@ -126,14 +126,14 @@ function getAllDataAPI(){
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="ALL">All</option>`;
-        }else if (GVUAccLength >= 100){
+        }else if (GVSAccLength >= 100){
            
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="ALL">All</option>`;
-        }else if(GVUAccLength >= 25){
+        }else if(GVSAccLength >= 25){
             
             selectHolder += `
             <option value="5" selected>5</option>
@@ -147,21 +147,21 @@ function getAllDataAPI(){
         document.querySelector('#selectPage').innerHTML = selectHolder;// set the rows per page
 
         if(selectPage.value === '5'){
-            GVUNumRows = 5;
-            GVURowPerPage = 5;
-            GVUdefaultRow = 5;
+            GVSNumRows = 5;
+            GVSRowPerPage = 5;
+            GVSdefaultRow = 5;
         }else if (selectPage.value === '10'){
-            GVUNumRows = 10;
-            GVURowPerPage = 10
-            GVUdefaultRow = 10;
+            GVSNumRows = 10;
+            GVSRowPerPage = 10
+            GVSdefaultRow = 10;
         }else if (selectPage.value === '25'){
-            GVUNumRows = 25;
-            GVURowPerPage = 25;
-            GVUdefaultRow = 25;
+            GVSNumRows = 25;
+            GVSRowPerPage = 25;
+            GVSdefaultRow = 25;
         }else{
-            GVUNumRows = GVUAccLength;
-            GVURowPerPage = GVUAccLength;
-            GVUdefaultRow = GVUAccLength;
+            GVSNumRows = GVSAccLength;
+            GVSRowPerPage = GVSAccLength;
+            GVSdefaultRow = GVSAccLength;
         }// rows condition
 
         bindAllDataIntoTable();//Bind the data into table once fetch successfull
@@ -231,7 +231,7 @@ const saveChanges = async (...params) =>{
     imageformData.append('Image_Url', params[1]);
     let message = '';
     try{
-       const fetchResponse = await fetch("../controller/user-edit-pic.php",{
+       const fetchResponse = await fetch("../controller/student-edit-pic.php",{
            method: "POST",
            body:imageformData,
        });
@@ -260,10 +260,10 @@ const changePicModal =  (id) =>{
     let changePicUserID = document.getElementById('changePicUserID').value = id;
     console.log(id)
     let output = '';
-    for(let i =0 ; i< GVUdefaultRow;i++ ){
-        if(GVUResults[i].id == id){
+    for(let i =0 ; i< GVSdefaultRow;i++ ){
+        if(GVSResults[i].id == id){
             console.log("true")
-            output += `<img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" style="max-width:350px; max-height:350px;" "/>
+            output += `<img src = "../../uploads/${GVSResults[i].profile_url} " alt="Profile" style="max-width:350px; max-height:350px;" "/>
             `;
             
             break;
@@ -276,33 +276,31 @@ const changePicModal =  (id) =>{
 const bindAllDataIntoTable = function (){   
     let output ='';
 
-for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
- console.log("GVUIndexPage: "+GVUIndexPage+"< GVUDefaultRow:" +GVUdefaultRow)
+for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
+ console.log("GVSIndexPage: "+GVSIndexPage+"< GVSDefaultRow:" +GVSdefaultRow)
     output += `<tr>
-    <td>${GVUResults[i].id}</td>
-    <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-    <td>${GVUResults[i].username}</td>
-    <td>${GVUResults[i].firstname}</td>
-    <td>${GVUResults[i].middlename}</td>
-    <td>${GVUResults[i].lastname}</td>
-    <td>${GVUResults[i].email}</td>
-    <td>${GVUResults[i].birthday}</td>
-    <td>${GVUResults[i].sex}</td>
-    <td>${GVUResults[i].password}</td>
-    <td>${GVUResults[i].position}</td>
-    <td>${GVUResults[i].address}</td>
-    <td>${GVUResults[i].contact}</td>
-    <td>${GVUResults[i].about}</td>
-    <td>${GVUResults[i].twitterprofile}</td>
-    <td>${GVUResults[i].facebookprofile}</td>
-    <td>${GVUResults[i].instagramprofile}</td>
-    <td>${GVUResults[i].linkedinprofile}</td>
-    <td>${GVUResults[i].added_at}</td>
+    <td>${GVSResults[i].id}</td>
+    <td><a href="#" onclick= "changePicModal(${GVSResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
+    <td>${GVSResults[i].studentnumber}</td>
+    <td>${GVSResults[i].firstname}</td>
+    <td>${GVSResults[i].middlename}</td>
+    <td>${GVSResults[i].lastname}</td>
+    <td>${GVSResults[i].email}</td>
+    <td>${GVSResults[i].birthday}</td>
+    <td>${GVSResults[i].sex}</td>
+    <td>${GVSResults[i].password}</td>
+    <td>${GVSResults[i].course}</td>
+    <td>${GVSResults[i].section}</td>
+    <td>${GVSResults[i].address}</td>
+    <td>${GVSResults[i].contact}</td>
+    <td>${GVSResults[i].guardian}</td>
+    <td>${GVSResults[i].guardian_contact}</td>
+    <td>${GVSResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
     </th>
@@ -311,7 +309,7 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
 }
 
 let numberOfPages = '';
-numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results</h8>`;
+numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results</h8>`;
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }
@@ -325,36 +323,36 @@ document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 const sortCurrentTable = (headerTitle) =>{
 
 
-    for(let i = 0; i<GVUNumRows; i++){
-        GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
-    }//Fill the GVUResultsSorted with GVUResults only needed
+    for(let i = 0; i<GVSNumRows; i++){
+        GVSResultsSorted[i] = GVSResults[GVSIndexPage+i];
+    }//Fill the GVSResultsSorted with GVSResults only needed
 
-if(GVUIsSorted){
+if(GVSIsSorted){
  
-    for(let i = 0; i<GVUNumRows-1; i++){
-        for(let j = 0; j<GVUNumRows-1; j++){
-         if(GVUResultsSorted[j][headerTitle]> GVUResultsSorted[j+1][headerTitle]){
-             // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
-             let temp = GVUResultsSorted[j];
-             GVUResultsSorted[j] = GVUResultsSorted[j+1];
-             GVUResultsSorted[j+1] = temp;
+    for(let i = 0; i<GVSNumRows-1; i++){
+        for(let j = 0; j<GVSNumRows-1; j++){
+         if(GVSResultsSorted[j][headerTitle]> GVSResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVSResultsSorted[j].id+" > "+" b = "+GVSResultsSorted[j+1].id);
+             let temp = GVSResultsSorted[j];
+             GVSResultsSorted[j] = GVSResultsSorted[j+1];
+             GVSResultsSorted[j+1] = temp;
       }
      }
    }
-   GVUIsSorted = false;//after sorted then reverse sort
+   GVSIsSorted = false;//after sorted then reverse sort
 }else{
   
-    for(let i = 0; i<GVUNumRows-1; i++){
-        for(let j = 0; j<GVUNumRows-1; j++){
-         if(GVUResultsSorted[j][headerTitle] < GVUResultsSorted[j+1][headerTitle]){
-             // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
-             let temp = GVUResultsSorted[j];
-             GVUResultsSorted[j] = GVUResultsSorted[j+1];
-             GVUResultsSorted[j+1] = temp;
+    for(let i = 0; i<GVSNumRows-1; i++){
+        for(let j = 0; j<GVSNumRows-1; j++){
+         if(GVSResultsSorted[j][headerTitle] < GVSResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVSResultsSorted[j].id+" > "+" b = "+GVSResultsSorted[j+1].id);
+             let temp = GVSResultsSorted[j];
+             GVSResultsSorted[j] = GVSResultsSorted[j+1];
+             GVSResultsSorted[j+1] = temp;
       }
      }
    }
-   GVUIsSorted = true;//after sorted then reverse sort
+   GVSIsSorted = true;//after sorted then reverse sort
 }
    
 
@@ -371,32 +369,30 @@ const bindAllDataIntoTableSorted = function (){
     
     let output ='';
     
-    for(let i = 0; i<GVUNumRows; i++){
+    for(let i = 0; i<GVSNumRows; i++){
         output += `<tr>
-        <td>${GVUResultsSorted[i].id}</td>
-        <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-        <td>${GVUResultsSorted[i].username}</td>
-        <td>${GVUResultsSorted[i].firstname}</td>
-        <td>${GVUResultsSorted[i].middlename}</td>
-        <td>${GVUResultsSorted[i].lastname}</td>
-        <td>${GVUResultsSorted[i].email}</td>
-        <td>${GVUResultsSorted[i].birthday}</td>
-        <td>${GVUResultsSorted[i].sex}</td>
-        <td>${GVUResultsSorted[i].password}</td>
-        <td>${GVUResultsSorted[i].position}</td>
-        <td>${GVUResultsSorted[i].address}</td>
-        <td>${GVUResultsSorted[i].contact}</td>
-        <td>${GVUResultsSorted[i].about}</td>
-        <td>${GVUResultsSorted[i].twitterprofile}</td>
-        <td>${GVUResultsSorted[i].facebookprofile}</td>
-        <td>${GVUResultsSorted[i].instagramprofile}</td>
-        <td>${GVUResultsSorted[i].linkedinprofile}</td>
-        <td>${GVUResultsSorted[i].added_at}</td>
+        <td>${GVSResultsSorted[i].id}</td>
+    <td><a href="#" onclick= "changePicModal(${GVSResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
+    <td>${GVSResultsSorted[i].studentnumber}</td>
+    <td>${GVSResultsSorted[i].firstname}</td>
+    <td>${GVSResultsSorted[i].middlename}</td>
+    <td>${GVSResultsSorted[i].lastname}</td>
+    <td>${GVSResultsSorted[i].email}</td>
+    <td>${GVSResultsSorted[i].birthday}</td>
+    <td>${GVSResultsSorted[i].sex}</td>
+    <td>${GVSResultsSorted[i].password}</td>
+    <td>${GVSResultsSorted[i].course}</td>
+    <td>${GVSResultsSorted[i].section}</td>
+    <td>${GVSResultsSorted[i].address}</td>
+    <td>${GVSResultsSorted[i].contact}</td>
+    <td>${GVSResultsSorted[i].guardian}</td>
+    <td>${GVSResultsSorted[i].guardian_contact}</td>
+    <td>${GVSResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
         </th>
@@ -404,7 +400,7 @@ const bindAllDataIntoTableSorted = function (){
     }
    
     let numberOfPages = '';
-    numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results</h8>`;
+    numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results</h8>`;
     document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
@@ -431,7 +427,7 @@ formData.append('UserID', id);
 formData.append('Status', removedDate);
 
 try{
-    const fetchRemove = await fetch("../controller/user-remove.php",{
+    const fetchRemove = await fetch("../controller/student-remove.php",{
           method: "POST",
           body: formData,
       });
@@ -459,30 +455,30 @@ try{
 //Select bind data
 
 const selectNumPage = function(){
-    GVUIsSorted = false;//Default the not sorted
+    GVSIsSorted = false;//Default the not sorted
     if(selectPage.value === '5'){
-        GVUIndexPage = 0;
-        GVUNumRows = 5;
-        GVURowPerPage = 5;
-        GVUdefaultRow = 5;
+        GVSIndexPage = 0;
+        GVSNumRows = 5;
+        GVSRowPerPage = 5;
+        GVSdefaultRow = 5;
     }else if(selectPage.value === '10'){
         console.log("10")
-        GVUNumRows = 10;
-        GVUIndexPage = 0;
-        GVURowPerPage = 10;
-        GVUdefaultRow = 10;
+        GVSNumRows = 10;
+        GVSIndexPage = 0;
+        GVSRowPerPage = 10;
+        GVSdefaultRow = 10;
     }else if(selectPage.value === '25'){
         console.log("25")
-        GVUNumRows = 25;
-        GVUIndexPage = 0;
-        GVURowPerPage = 25;
-        GVUdefaultRow = 25;
+        GVSNumRows = 25;
+        GVSIndexPage = 0;
+        GVSRowPerPage = 25;
+        GVSdefaultRow = 25;
     }else{
 
-        GVUIndexPage = 0;
-        GVUNumRows = GVUAccLength;
-        GVURowPerPage = GVUAccLength;
-        GVUdefaultRow = GVUAccLength;
+        GVSIndexPage = 0;
+        GVSNumRows = GVSAccLength;
+        GVSRowPerPage = GVSAccLength;
+        GVSdefaultRow = GVSAccLength;
     }
     bindAllDataIntoTable();
 }
@@ -494,17 +490,17 @@ console.log(userSearch !== "");
 if(userSearch !== ""){
     let results = [];//Temporary JSON
 
-    for(let i = 0; i<GVUResults.length;i++){
-        for( key in GVUResults[i]){
-            if(GVUResults[i][key].indexOf(userSearch) != -1){
-                results.push(GVUResults[i]);
+    for(let i = 0; i<GVSResults.length;i++){
+        for( key in GVSResults[i]){
+            if(GVSResults[i][key].indexOf(userSearch) != -1){
+                results.push(GVSResults[i]);
                 break;
             }
         }
     }//Put all match results in results obj
     
-    GVUNumRows = results.length;//set the value of numrows
-    GVUResultsSorted = results;
+    GVSNumRows = results.length;//set the value of numrows
+    GVSResultsSorted = results;
     bindAllDataIntoTableSorted();
 }else{
     bindAllDataIntoTable();
@@ -518,6 +514,9 @@ if(userSearch !== ""){
 const btnEditUsers = document.getElementById('btnEditUsers');
 
 const resetFields = () =>{
+   
+    let StudNum = document.getElementById('newStudNum').value = ""; 
+
     let Fname = document.getElementById('newFname').value = "";
 
     let Mname = document.getElementById('newMname').value = "";
@@ -526,38 +525,33 @@ const resetFields = () =>{
 
     let Email = document.getElementById('newEmail').value = "";
  
-    let Username = document.getElementById('newUsername').value = "";
-
     let Password = document.getElementById('newPassword').value = "";
     
-    let Job = document.getElementById('newJob').value = "";
 
     let Birthday = document.getElementById('newBirthday').value = "";
 
-    let SexMale = document.getElementById('maleCheck').checked = false;
-
-    let SexFemale = document.getElementById('femaleCheck').checked = false;
- 
     let Contact = document.getElementById('newContact').value = "";
 
     let Address = document.getElementById('newAddress').value = "";
  
-    let About = document.getElementById('newAbout').value = "";
+    let Course = document.getElementById('newCourse').value = "";
 
-    let Twitter = document.getElementById('newtwitterprofileURL').value = "";
+    let Section = document.getElementById('newSection').value = "";
 
-    let Facebook = document.getElementById('newfacebookprofileURL').value = "";
+    let Guardian = document.getElementById('newGuardian').value = "";
+
+    let GuardianNum = document.getElementById('newGuardianContact').value = "";
+    let SexMale = document.getElementById('maleCheck').checked = false;
+
+    let SexFemale = document.getElementById('femaleCheck').checked = false;
  
-    let Instagram = document.getElementById('newinstagramprofileURL').value = "";
-
-    let Linkedin = document.getElementById('newlinkedinprofileURL').value = "";
     btnSuccess.setAttribute("hidden", "hidden");//Is loading true
     btnCreateUsers.removeAttribute("hidden");
 }//Reset all the fields
 
 //Call it to refresh the table
  refreshTable = () =>{
-     GVUIndexPage = 0;
+     GVSIndexPage = 0;
     resetFields();
     getAllDataAPI();
 }
@@ -565,6 +559,8 @@ const resetFields = () =>{
 
 //Check all of the fields
 const checkAllFields = () =>{
+    let StudNum = document.getElementById('newStudNum').value; 
+
     let Fname = document.getElementById('newFname').value;
 
     let Mname = document.getElementById('newMname').value;
@@ -573,11 +569,11 @@ const checkAllFields = () =>{
 
     let Email = document.getElementById('newEmail').value;
  
-    let Username = document.getElementById('newUsername').value;
-
     let Password = document.getElementById('newPassword').value;
     
-    let Job = document.getElementById('newJob').value;
+    let Course = document.getElementById('newCourse').value;
+
+    let Section = document.getElementById('newSection').value;
 
     let Birthday = document.getElementById('newBirthday').value;
     
@@ -591,23 +587,14 @@ const checkAllFields = () =>{
         Sex = "Female";
     }
 
-    
-
     let Contact = document.getElementById('newContact').value;
 
     let Address = document.getElementById('newAddress').value;
  
-    let About = document.getElementById('newAbout').value;
+    let Guardian = document.getElementById('newGuardian').value;
 
-    let Twitter = document.getElementById('newtwitterprofileURL').value;
-
-    let Facebook = document.getElementById('newfacebookprofileURL').value;
- 
-    let Instagram = document.getElementById('newinstagramprofileURL').value;
-
-    let Linkedin = document.getElementById('newlinkedinprofileURL').value;
-
-    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
+    let GuardianNum = document.getElementById('newGuardianContact').value;
+    if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
         createUserAccount();
     }else{
         alertShowError.classList.add('show');
@@ -653,7 +640,8 @@ const IsLoadingTrue =(formStatus) =>{
 const createUserAccount = (e) =>{
     
     IsLoadingTrue(true)//Start the loading button
-   
+    let StudNum = document.getElementById('newStudNum').value; 
+
     let Fname = document.getElementById('newFname').value;
 
     let Mname = document.getElementById('newMname').value;
@@ -662,15 +650,13 @@ const createUserAccount = (e) =>{
 
     let Email = document.getElementById('newEmail').value;
  
-    let Username = document.getElementById('newUsername').value;
-
     let Password = document.getElementById('newPassword').value;
     
-    let Job = document.getElementById('newJob').value;
 
     let Birthday = document.getElementById('newBirthday').value;
-
+    
     let Sex ="";
+
     
     if(document.getElementById('maleCheck').checked === true){
         Sex = "Male";
@@ -683,43 +669,36 @@ const createUserAccount = (e) =>{
 
     let Address = document.getElementById('newAddress').value;
  
-    let About = document.getElementById('newAbout').value;
+    let Course = document.getElementById('newCourse').value;
 
-    let Twitter = document.getElementById('newtwitterprofileURL').value;
+    let Section = document.getElementById('newSection').value;
 
-    let Facebook = document.getElementById('newfacebookprofileURL').value;
- 
-    let Instagram = document.getElementById('newinstagramprofileURL').value;
+    let Guardian = document.getElementById('newGuardian').value;
 
-    let Linkedin = document.getElementById('newlinkedinprofileURL').value;
-
-    Twitter = "https://twitter.com/" + Twitter;
-    Facebook = "https://Facebook.com/" + Facebook;
-    Instagram = "https://Instagram.com/" + Instagram;
-    Linkedin = "https://Linked.com/" + Linkedin;
+    let GuardianNum = document.getElementById('newGuardianContact').value;
 formData = new FormData();
+formData.append('StudentNumber', StudNum);
 formData.append('Fname', Fname);
 formData.append('Mname', Mname);
 formData.append('Lname', Lname);
 formData.append('Email', Email);
-formData.append('Username', Username);
 formData.append('Password', Password);
-formData.append('Job', Job);
+formData.append('Course', Course);
+formData.append('Section', Section);
 formData.append('Birthday', Birthday);
 formData.append('Sex', Sex);
 formData.append('Contact', Contact);
 formData.append('Address', Address);
-formData.append('About', About);
-formData.append('Twitter', Twitter);
-formData.append('Facebook', Facebook);
-formData.append('Instagram', Instagram);
-formData.append('Linkedin', Linkedin);
+formData.append('Course', Course);
+formData.append('Section', Section);
+formData.append('Guardian', Guardian);
+formData.append('GuardianNum', GuardianNum);
 for (var pair of formData.entries()) {
     console.log(pair[0]+ ' - ' + pair[1]); 
  }
 
 
-    fetch("../controller/user-create-account.php",{
+    fetch("../controller/student-create-account.php",{
         method: "POST",
         body:formData,
     })
@@ -760,48 +739,48 @@ let Photo = document.getElementById('currentPhoto').src = Image_Url;
 
 //Edit User Data Not sorted
 const editUserNotSorted = (a) =>{
-    for(let i =0 ; i< GVUResults.length;i++ ){
-        if(GVUResults[i].id == a){
-           
-         let UserId = document.getElementById('editId').value =  GVUResults[i].id;    
+    for(let i =0 ; i< GVSResults.length;i++ ){
+        if(GVSResults[i].id == a){
 
-         let Fname = document.getElementById('editFname').value =  GVUResults[i].firstname;
+            document.getElementById('editId').value = GVSResults[i].id;
+           
+            let StudNum = document.getElementById('editStudNum').value = GVSResults[i].studentnumber; 
+
+            let Fname = document.getElementById('editFname').value = GVSResults[i].firstname;
         
-         let Mname = document.getElementById('editMname').value =  GVUResults[i].middlename;
+            let Mname = document.getElementById('editMname').value = GVSResults[i].middlename;
+           
+            let Lname = document.getElementById('editLname').value = GVSResults[i].lastname;
         
-         let Lname = document.getElementById('editLname').value =  GVUResults[i].lastname;
-     
-         let Email = document.getElementById('editEmail').value=   GVUResults[i].email ;
-      
-         let Username = document.getElementById('editUsername').value =  GVUResults[i].username;
-     
-         let Password = document.getElementById('editPassword').value =  GVUResults[i].password;
+            let Email = document.getElementById('editEmail').value = GVSResults[i].email;
          
-         let Job = document.getElementById('editJob').value =    GVUResults[i].position;
-     
-         let Birthday = document.getElementById('editBirthday').value =  GVUResults[i].birthday;
+            let Password = document.getElementById('editPassword').value = GVSResults[i].password;
+            
+        
+            let Birthday = document.getElementById('editBirthday').value = GVSResults[i].birthday;
+            
+            let Sex = GVSResults[i].sex;
+        console.log(Sex =="Male")
+            
+            if(Sex == "Male"){
+                console.log(Sex =="Male")
+                document.getElementById('editmaleCheck').checked = true;
+            }
+            if(Sex == "Female"){
+                document.getElementById('editfemaleCheck').checked = true;
+            }
+        
+            let Contact = document.getElementById('editContact').value = GVSResults[i].contact;
+        
+            let Address = document.getElementById('editAddress').value = GVSResults[i].address;
          
-         let Sex = GVUResults[i].sex;
-      
-         if(Sex === "Male"){
-             document.getElementById('editmaleCheck').checked = true;
-         }
-         if(Sex === "Female"){
-             document.getElementById('editfemaleCheck').checked = true;
-         }
-         let Contact = document.getElementById('editContact').value =    GVUResults[i].contact;
-     
-         let Address = document.getElementById('editAddress').value =    GVUResults[i].address;
-      
-         let About = document.getElementById('editAbout').value =    GVUResults[i].about;
-      
-         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResults[i].twitterprofile;
-     
-         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResults[i].facebookprofile;
-      
-         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResults[i].instagramprofile;
-     
-         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResults[i].linkedinprofile;
+            let Course = document.getElementById('editCourse').value = GVSResults[i].course;
+        
+            let Section = document.getElementById('editSection').value = GVSResults[i].section;
+        
+            let Guardian = document.getElementById('editGuardian').value = GVSResults[i].guardian;
+        
+            let GuardianNum = document.getElementById('editGuardianContact').value = GVSResults[i].guardian_contact;
          break;
      }
     }
@@ -814,49 +793,46 @@ const editUserNotSorted = (a) =>{
 
 const editUserSorted = (a) =>{
     
-    for(let i =0 ; i< GVUNumRows;i++ ){
-        if(GVUResultsSorted[i].id == a){
+    for(let i =0 ; i< GVSNumRows;i++ ){
+        if(GVSResultsSorted[i].id == a){
 
-         let UserId = document.getElementById('editId').value =  GVUResultsSorted[i].id;   
-     
-         let Fname = document.getElementById('editFname').value =  GVUResultsSorted[i].firstname;
- 
-         let Mname = document.getElementById('editMname').value =  GVUResultsSorted[i].middlename;
+            document.getElementById('editId').value = GVSResults[i].id;
+
+            let StudNum = document.getElementById('editStudNum').value = GVSResultsSorted[i].studentnumber; 
+
+            let Fname = document.getElementById('editFname').value = GVSResultsSorted[i].firstname;
         
-         let Lname = document.getElementById('editLname').value =  GVUResultsSorted[i].lastname;
-     
-         let Email = document.getElementById('editEmail').value =   GVUResultsSorted[i].email ;
-      
-         let Username = document.getElementById('editUsername').value =  GVUResultsSorted[i].username;
-     
-         let Password = document.getElementById('editPassword').value =  GVUResultsSorted[i].password;
+            let Mname = document.getElementById('editMname').value = GVSResultsSorted[i].middlename;
+           
+            let Lname = document.getElementById('editLname').value = GVSResultsSorted[i].lastname;
+        
+            let Email = document.getElementById('editEmail').value = GVSResultsSorted[i].email;
          
-         let Job = document.getElementById('editJob').value =    GVUResultsSorted[i].position;
-     
-         let Birthday = document.getElementById('editBirthday').value =  GVUResultsSorted[i].birthday;
+            let Password = document.getElementById('editPassword').value = GVSResultsSorted[i].password;
+            
+        
+            let Birthday = document.getElementById('editBirthday').value = GVSResultsSorted[i].birthday;
+            
+            let Sex = GVSResultsSorted[i].sex;
+        
+            if(Sex == "Male"){
+                document.getElementById('editmaleCheck').checked = true;
+            }
+            if(Sex == "Female"){
+                document.getElementById('editfemaleCheck').checked = true;
+            }
+        
+            let Contact = document.getElementById('editContact').value = GVSResultsSorted[i].contact;
+        
+            let Address = document.getElementById('editAddress').value = GVSResultsSorted[i].address;
          
-         let Sex = GVUResultsSorted[i].sex;
-         
-         if(Sex === "Male"){
-             document.getElementById('editmaleCheck').checked = true;
-         }
-         if(Sex === "Female"){
-             document.getElementById('editfemaleCheck').checked = true;
-         }
-     
-         let Contact = document.getElementById('editContact').value =    GVUResultsSorted[i].contact;
-     
-         let Address = document.getElementById('editAddress').value =    GVUResultsSorted[i].address;
-      
-         let About = document.getElementById('editAbout').value =    GVUResultsSorted[i].about;
-      
-         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResultsSorted[i].twitterprofile;
-     
-         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResultsSorted[i].facebookprofile;
-      
-         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResultsSorted[i].instagramprofile;
-     
-         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResultsSorted[i].linkedinprofile;
+            let Course = document.getElementById('editCourse').value = GVSResultsSorted[i].course;
+        
+            let Section = document.getElementById('editSection').value = GVSResultsSorted[i].section;
+        
+            let Guardian = document.getElementById('editGuardian').value = GVSResultsSorted[i].guardian;
+        
+            let GuardianNum = document.getElementById('editGuardianContact').value = GVSResultsSorted[i].guardian_contact;
          break;
      }
     }
@@ -864,48 +840,42 @@ const editUserSorted = (a) =>{
  
  const checkEditFields = () =>{
      
-    let UserId = document.getElementById('editId').value; 
+    let StudNum = document.getElementById('editStudNum').value; 
 
-    let Fname = document.getElementById('editFname').value  
- 
-    let Mname = document.getElementById('editMname').value  
+    let Fname = document.getElementById('editFname').value;
+
+    let Mname = document.getElementById('editMname').value;
    
-    let Lname = document.getElementById('editLname').value  
+    let Lname = document.getElementById('editLname').value;
 
-    let Email = document.getElementById('editEmail').value  
+    let Email = document.getElementById('editEmail').value;
  
-    let Username = document.getElementById('editUsername').value    
-
-    let Password = document.getElementById('editPassword').value    
+    let Password = document.getElementById('editPassword').value;
     
-    let Job = document.getElementById('editJob').value  
+    let Course = document.getElementById('editCourse').value;
 
-    let Birthday = document.getElementById('editBirthday').value    
+    let Section = document.getElementById('editSection').value;
 
+    let Birthday = document.getElementById('editBirthday').value;
+    
     let Sex ="";
 
-    if(document.getElementById('editmaleCheck').checked === true){
+    
+    if(document.getElementById('maleCheck').checked === true){
         Sex = "Male";
     }
-    if(document.getElementById('editfemaleCheck').checked === true){
+    if(document.getElementById('femaleCheck').checked === true){
         Sex = "Female";
     }
 
-    let Contact = document.getElementById('editContact').value
+    let Contact = document.getElementById('editContact').value;
 
-    let Address = document.getElementById('editAddress').value
+    let Address = document.getElementById('editAddress').value;
  
-    let About = document.getElementById('editAbout').value 
+    let Guardian = document.getElementById('editGuardian').value;
 
-    let Twitter = document.getElementById('edittwitterprofileURL').value 
-
-    let Facebook = document.getElementById('editfacebookprofileURL').value 
- 
-    let Instagram = document.getElementById('editinstagramprofileURL').value
-
-    let Linkedin = document.getElementById('editlinkedinprofileURL').value 
-
-    if(UserId !=="" && Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  "" && Twitter !==  "" && Facebook !==  "" && Instagram !==  "" &&Linkedin !==  "" ){
+    let GuardianNum = document.getElementById('editGuardianContact').value;
+    if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Birthday !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
        
         updateUser();
 
@@ -932,79 +902,68 @@ const updateUser = async () =>{
 
     let UserId = document.getElementById('editId').value;
 
-    let Fname = document.getElementById('editFname').value  
- 
-    let Mname = document.getElementById('editMname').value  
+    let StudNum = document.getElementById('editStudNum').value; 
+
+    let Fname = document.getElementById('editFname').value;
+
+    let Mname = document.getElementById('editMname').value;
    
-    let Lname = document.getElementById('editLname').value  
+    let Lname = document.getElementById('editLname').value;
 
-    let Email = document.getElementById('editEmail').value  
+    let Email = document.getElementById('editEmail').value;
  
-    let Username = document.getElementById('editUsername').value    
-
-    let Password = document.getElementById('editPassword').value    
+    let Password = document.getElementById('editPassword').value;
     
-    let Job = document.getElementById('editJob').value  
+    let Course = document.getElementById('editCourse').value;
 
-    let Birthday = document.getElementById('editBirthday').value    
+    let Section = document.getElementById('editSection').value;
 
+    let Birthday = document.getElementById('editBirthday').value;
+    
     let Sex ="";
 
-    if(document.getElementById('editmaleCheck').checked === true){
+    
+    if(document.getElementById('maleCheck').checked == true){
         Sex = "Male";
     }
-    if(document.getElementById('editfemaleCheck').checked === true){
+    if(document.getElementById('femaleCheck').checked == true){
         Sex = "Female";
     }
 
-    let Contact = document.getElementById('editContact').value
+    let Contact = document.getElementById('editContact').value;
 
-    let Address = document.getElementById('editAddress').value
+    let Address = document.getElementById('editAddress').value;
  
-    let About = document.getElementById('editAbout').value 
+    let Guardian = document.getElementById('editGuardian').value;
 
-    let Twitter = document.getElementById('edittwitterprofileURL').value 
-
-    let Facebook = document.getElementById('editfacebookprofileURL').value 
- 
-    let Instagram = document.getElementById('editinstagramprofileURL').value
-
-    let Linkedin = document.getElementById('editlinkedinprofileURL').value 
-
+    let GuardianNum = document.getElementById('editGuardianContact').value;
 
     formData = new FormData();
 formData.append('UserId', UserId);   
+formData.append('StudNum', StudNum);
 formData.append('Fname', Fname);
 formData.append('Mname', Mname);
 formData.append('Lname', Lname);
 formData.append('Email', Email);
-formData.append('Username', Username);
 formData.append('Password', Password);
-formData.append('Job', Job);
+formData.append('Course', Course);
+formData.append('Section', Section);
 formData.append('Birthday', Birthday);
 formData.append('Sex', Sex);
 formData.append('Contact', Contact);
 formData.append('Address', Address);
-formData.append('About', About);
-formData.append('Twitter', Twitter);
-formData.append('Facebook', Facebook);
-formData.append('Instagram', Instagram);
-formData.append('Linkedin', Linkedin);
+formData.append('Guardian', Guardian);
+formData.append('GuardianNum', GuardianNum);
 for (var pair of formData.entries()) {
     console.log(pair[0]+ ' - ' + pair[1]); 
  }
 
 try{
-  const fetchEdit = await fetch("../controller/user-edit.php",{
+  const fetchEdit = await fetch("../controller/student-edit.php",{
         method: "POST",
         body: formData,
     });
 
-
-    //Javascript edit account admin
-// const btnEditError = document.getElementById('btnEditError');//Error button disabled
-// const btnEditSuccess = document.getElementById('btnEditSuccess');//Succes button
-// const btnIsUpdating = document.getElementById('btnIsUpdating');//updating button
     const fetchResponse = await fetchEdit.json();
     
     const showAnimation = await function(){
@@ -1012,6 +971,7 @@ let message = '';
         if(fetchResponse.statusCode === 200){
             console.log(fetchResponse)
             delayedShowAlert = () =>{
+                console.log("SUCCESS")
                 message += ` Updated Succesfully!`
                 document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");
@@ -1024,6 +984,8 @@ let message = '';
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
             setTimeout(delayedRemoveAlert, 6000);
+          }else{
+              console.log(fetchResponse)
           }
         }
     

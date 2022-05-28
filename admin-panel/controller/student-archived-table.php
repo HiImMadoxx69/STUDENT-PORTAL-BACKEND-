@@ -3,7 +3,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$sql = mysqli_query($con, "SELECT * FROM tbl_studentinfo");
+$sql = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE `status` NOT LIKE 'active' ORDER BY `id` DESC");
 
 //store in result
 
