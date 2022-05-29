@@ -4,7 +4,7 @@ function connection(){
     $host = "localhost";
     $username = "root";
     $password = "admin";
-    $database = "db_studentportal";
+    $database = "db_admin";
     
     $con = new mysqli($host, $username, $password, $database,);
     

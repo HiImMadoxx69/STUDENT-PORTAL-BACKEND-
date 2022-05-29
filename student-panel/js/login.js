@@ -21,6 +21,8 @@ function logIn(e){
 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
+    console.log(params)
+
     //send
     xhr.send(params);
 
