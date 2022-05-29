@@ -22,7 +22,7 @@ $currentId = $user['id'];
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Archived / User</title>
+  <title>Archived / Results</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -354,13 +354,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
-      <h1>Archived User Accounts</h1>
+      <h1>Archived Results</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
           <li class="breadcrumb-item"><a href="archived-accounts.php">Archives</a></li>
-          <li class="breadcrumb-item active">Archived User Accounts</li>
+          <li class="breadcrumb-item active">Archived Results</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -637,25 +637,17 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id');return false;" class="th-a">ID</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">USERNAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FIRST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">MIDDLE NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">LAST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">EMAIL</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">BIRTHDAY</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('sex');return false;" class="th-a">SEX</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">PASSWORD</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position');return false;" class="th-a">POSITION</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">ADDRESS</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact');return false;" class="th-a">CONTACT</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about');return false;" class="th-a">ABOUT</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile');return false;" class="th-a">TWITTER</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile');return false;" class="th-a">FACEBOOK</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile');return false;" class="th-a">INSTAGRAM</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">LINKED IN</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE REMOVED</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentid');return false;" class="th-a">STUDENT ID</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('subject_name');return false;" class="th-a">SUBJECT NAME</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('subject_code');return false;" class="th-a">SUBJECT CODE</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('units');return false;" class="th-a">UNITS</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('grade');return false;" class="th-a">GRADE</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instructor');return false;" class="th-a">INSTRUCTOR</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('schedule');return false;" class="th-a">SCHEDULE</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('status');return false;" class="th-a">DATE REMOVED</a></th>
+
+
+
                     <th scope="col" class="table-info" id ="th-action">ACTION</th>
                     
                     
@@ -723,7 +715,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
   <!-- my javascript for user-prfile -->
   <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
-<script src ="../js/archived-user.js?t=1491313943549"  type = "text/javascript"></script>
+<script src ="../js/archived-results.js?t=1491313943549"  type = "text/javascript"></script>
 <!-- end of my javascript for user - profile -->
 
   <!-- Vendor JS Files -->

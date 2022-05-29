@@ -323,13 +323,21 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Student Account Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="subject.php">
+          <i class="bi bi-book"></i>
+          <span>Subjects</span>
+        </a>
+      </li><!-- End Subject Nav -->
 
       <li class="nav-item">
         <a class="nav-link" href="archived-accounts.php">
           <i class="bi bi-archive"></i>
-          <span>Archived Accounts</span>
+          <span>Archives</span>
         </a>
       </li><!-- End Archives Nav -->
+      
+
       
     </ul>
 
@@ -338,11 +346,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Archived Accounts</h1>
+      <h1>Archives</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
-          <li class="breadcrumb-item active">Archived Accounts</li>
+          <li class="breadcrumb-item">Pages</li>
+          <li class="breadcrumb-item active">Archives</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -355,7 +364,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <div class="row">
 
             <!-- User Accounts Card -->
-            <div class="col-xxl-4 col-md-6">
+            <div class="col-xxl-2 col-md-4">
               <div class="card info-card customers-card">
 
                 <div class="card-body">
@@ -376,7 +385,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             </div><!-- End Sales Card -->
 
             <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
+            <div class="col-xxl-2 col-md-4">
               <div class="card info-card customers-card">
 
                 <div class="card-body">
@@ -388,13 +397,55 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                     <div class="ps-3">
                        <h6 id="totalStudentArchives"></h6>
-                      <a href ="archived-user.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
+                      <a href ="archived-students.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
                      </div>
                   </div>
                 </div>
 
               </div>
             </div><!-- End Revenue Card -->
+
+            <!-- Subjects Archived Card -->
+            <div class="col-xxl-2 col-md-4">
+              <div class="card info-card customers-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Subjects <span>| Archived</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-book"></i>
+                    </div>
+                    <div class="ps-3">
+                       <h6 id="totalSubjectArchives"></h6>
+                      <a href ="archived-subjects.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
+                     </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Subjects Archived Card -->
+
+            <!-- Results Archived Card -->
+            <div class="col-xxl-2 col-md-4">
+              <div class="card info-card customers-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Results <span>| Archived</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-file-text"></i>
+                    </div>
+                    <div class="ps-3">
+                       <h6 id="totalResultsArchives"></h6>
+                      <a href ="archived-results.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
+                     </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Results Archived Card -->
 
           
 

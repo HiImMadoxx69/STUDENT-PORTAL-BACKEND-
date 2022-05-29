@@ -22,7 +22,7 @@ $currentId = $user['id'];
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Users / Accounts</title>
+  <title>Student / Accounts</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -325,12 +325,19 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="subject.php">
+          <i class="bi bi-book"></i>
+          <span>Subjects</span>
+        </a>
+      </li><!-- End Subject Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
           <i class="bi bi-archive"></i>
-          <span>Archived Accounts</span>
+          <span>Archives</span>
         </a>
       </li><!-- End Archives Nav -->
-     
+
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -348,12 +355,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
-      <h1>User Accounts</h1>
+      <h1>Student Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">User Accounts</li>
+          <li class="breadcrumb-item active">Student Accounts</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -734,6 +741,109 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div>
                 </div>
               </div><!-- End Edit user Modal-->
+
+
+                <!--------------------------------------------Grade and Result Modal ------------------------------------------------------->
+              
+                <div class="modal fade" id="gradesmodal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Grades Result and Schedule Form</h5>
+                      
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
+                      
+                    </div>
+                    <div class="modal-body">
+              
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3 needs-validation" id ="frmGradesStudents">
+              
+              <input type="hidden" id="gradesId">
+                 
+              <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" disabled class="form-control" id="gradesStudentNum" placeholder="Student Number" required>
+                    <label for="gradesStudentNum">Student Number</label>
+                  </div>
+                </div>
+               <div class ="col-md-6">
+               <div class="form-floating">
+                    <input type="text"  class="form-control" id="gradesSemester" placeholder="Semester" required>
+                    <label for="gradesSemester">Semester</label>
+                  </div>
+               </div> 
+               <div class="col-md-4">
+                <div class="form-floating mb-3">
+                      <select class="form-select" onchange="insertSubjects(this.value)" id="gradeSubject" aria-label="Floating label select example">
+
+                      </select>
+                      <label for="gradeSubject">Subjects</label>
+                    </div>
+                </div>
+                <div class ="col-md-4">
+                 <div class="form-floating">
+                    <input type="number"  class="form-control" id="gradesMarks" placeholder="Marks" required>
+                    <label for="gradesMarks">Marks</label>
+                 </div>
+               </div> 
+               <div class ="col-md-4">
+                 <div class="form-floating">
+                    <input type="text"  class="form-control" id="gradesInstructor" placeholder="Instructor" required>
+                    <label for="gradesInstructor">Instructor</label>
+                 </div>
+               </div> 
+               <div class ="col-md-6">
+                 <div class="form-floating">
+                    <input type="text"  class="form-control" id="gradesSchedule" placeholder="Schedule" required>
+                    <label for="gradesSchedule">Schedule</label>
+                 </div>
+               </div>
+              
+               <div class ="col-md-6">
+               <button type ="button" class="btn btn-primary" type="submit" onClick ="checkGradeFields()">Add Subject</button>
+               </div>
+              
+            <div id="table-wrapper">
+             <div id="table-scroll">
+               <table class="table table-hover"  id ="tblGrades">
+                <thead id ="tblThead">
+                  <tr class="table-primary">
+                    <th scope="col" class ="header-title">SUBJECT NAME</th>
+                    <th scope="col" class ="header-title">GRADE</th>
+                    <th scope="col" class ="header-title">INSTRUCTOR</th>
+                    <th scope="col" class ="header-title">SCHEDULE</th>
+                    <th scope="col" class ="header-title">DATE CREATED</th>
+                    <th scope="col" class="table-info" id ="th-action">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id ="tbody-student-subject">
+                 
+                </tbody>
+              </table>
+             </div>
+            </div>  
+
+               </form><!-- End floating Labels Form -->
+                    </div>
+                    <div class="modal-footer">
+                      
+                     
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Back</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Edit user Modal-->
             
 
     <section class="section">
@@ -742,7 +852,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">User Accounts Table</h5>
+            <h5 class="card-title">Student Accounts Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
@@ -750,7 +860,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         <div class="col-sm-2">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
-              Add Student
+             Student
               </button>
        </div>
        
@@ -778,8 +888,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div> 
       <!-- End of Select Entry Page -->
     
-              <div id="table-wrapper">
-                <div id="table-scroll">
+              <div id="gradetable-wrapper">
+                <div id="gradetable-scroll">
               <!-- Table -->
               
               <table class="table table-hover"  id ="tblUsers">

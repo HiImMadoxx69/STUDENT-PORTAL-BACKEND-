@@ -89,6 +89,7 @@ userSearchBar = document.getElementById('userSearchBar');
 //JavaScript create account admin
 const btnCreateUsers = document.getElementById('btnCreateUsers');
 const frmCreateUsers = document.getElementById('frmCreateUsers');//form create account
+const frmGradesStudents = document.getElementById('frmGradesStudents');//form create grades
 const btnIsLoading = document.getElementById('btnIsLoading');//LoadingButton
 const alertShowError = document.getElementById('alertError');//AlertError
 const alertShowSuccess = document.getElementById('alertSuccess');//Alert Success
@@ -118,7 +119,7 @@ function getAllDataAPI(){
         GVSNumRows = 0;//Set Number of rows default
         
         let selectHolder = '';
-        if(GVSAccLength >= 200){
+        if(GVSAccLength >= 75){
            
             selectHolder += `
             <option value="5" selected>5</option>
@@ -126,14 +127,14 @@ function getAllDataAPI(){
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="ALL">All</option>`;
-        }else if (GVSAccLength >= 100){
+        }else if (GVSAccLength >= 50){
            
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="ALL">All</option>`;
-        }else if(GVSAccLength >= 25){
+        }else if(GVSAccLength >= 15){
             
             selectHolder += `
             <option value="5" selected>5</option>
@@ -236,7 +237,7 @@ const saveChanges = async (...params) =>{
            body:imageformData,
        });
        const receivedStatus = await fetchResponse.json();
-       console.log(receivedStatus)
+
        if(receivedStatus.statusCode === 200){
          alertShowSuccess.removeAttribute("hidden");
          btnChangePic.setAttribute("disabled", "disabled");
@@ -258,7 +259,7 @@ const saveChanges = async (...params) =>{
 //Change Profile Picture Modal
 const changePicModal =  (id) =>{
     let changePicUserID = document.getElementById('changePicUserID').value = id;
-    console.log(id)
+
     let output = '';
     for(let i =0 ; i< GVSdefaultRow;i++ ){
         if(GVSResults[i].id == id){
@@ -297,8 +298,11 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
     <td>${GVSResults[i].guardian_contact}</td>
     <td>${GVSResults[i].added_at}</td>
     <th scope="col" class="table-info">
-    <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+    <div class = "pt-3">
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+
+    <a href="#" class ="btn btn-secondary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGrades('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
+
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
     
@@ -315,7 +319,229 @@ document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }
 
 
+//View, Edit Grades Not Sorted
+const viewGrades = (studID) =>{
+    for(let i =0 ; i< GVSResults.length;i++ ){
+        if(GVSResults[i].studentnumber == studID){
+            
+            let StudNum = document.getElementById('gradesStudentNum').value = GVSResults[i].studentnumber; 
+         break;
+  }
+ }
+ gradesClick();
+}
 
+//View, Edit Grades Sorted
+const viewGradesSorted = (studID) =>{
+    for(let i =0 ; i< GVSNumRows;i++ ){
+        if(GVSResultsSorted[i].studentnumber == studID){
+            let StudNum = document.getElementById('gradesStudentNum').value = GVSResultsSorted[i].studentnumber; 
+         break;
+  }
+ }
+ bindSubjects();
+}
+
+
+
+var GVSSubjects = {};
+
+const gradesClick = () =>{
+    GetAllSubjectPerStudent();
+    bindSubjects();
+}
+//Fill subject dropdown
+const bindSubjects = async ()=>{
+
+    //Dropdown
+    const subjectsResponse = await fetch('../controller/subject-table.php');
+    const getResponse = await subjectsResponse.json();
+    GVSSubjects = getResponse;
+
+    let output = '<option value="...">...</option>';
+
+    for(let i = 0; i <getResponse.length; i++){
+        output += `<option value="`+getResponse[i].subject_name+`">`+getResponse[i].subject_name+`</option>`;
+    }
+
+    document.querySelector('#gradeSubject').innerHTML = output;
+}
+
+var  objinsertSubjects ={};
+
+// insert the updated grades of students
+const insertSubjects = async (SubjectName) =>{
+try{
+    let gradeStudentNum = document.getElementById('gradesStudentNum').value;
+    for(let i = 0; i < GVSSubjects.length; i++){
+        if(SubjectName == GVSSubjects[i].subject_name){
+            objinsertSubjects[0]={"studentid": gradeStudentNum};
+            objinsertSubjects[0].subject_name = GVSSubjects[i].subject_name;
+            objinsertSubjects[0].subject_code = GVSSubjects[i].subject_code;
+            objinsertSubjects[0].units = GVSSubjects[i].units;
+            objinsertSubjects[0].grade = GVSSubjects[i].grades;
+            objinsertSubjects[0].instructor = GVSSubjects[i].instructor;
+            objinsertSubjects[0].schedule = GVSSubjects[i].schedule;
+            break;
+        }
+    }
+
+}catch(e){
+    alertShowError.classList.add('show');
+    alertShowError.removeAttribute("hidden");
+    btnError.removeAttribute("hidden");
+    btnCreateUsers.style.display = "none";
+    delayedAlert = () =>{
+        alertShowError.classList.remove('show');
+        alertShowError.setAttribute("hidden", "hidden");
+        btnError.setAttribute("hidden", "hidden");//Is loading true
+        btnCreateUsers.style.display = "inline-block";
+    }
+    setTimeout(delayedAlert, 3000);
+}
+     
+}
+
+const checkGradeFields = () =>{
+    let gradeStudentNum = document.getElementById('gradesStudentNum').value;
+    let Instructor = document.getElementById('gradesInstructor').value;
+    let Schedule = document.getElementById('gradesSchedule').value;
+    let Mark = document.getElementById('gradesMarks').value;
+    let gradeSubject = document.getElementById('gradeSubject').value;
+   
+    if(gradeStudentNum !=="" && Instructor !== "" &&  Schedule !== "" && Mark !== "" && gradeSubject !=="..." ){
+        btnInsertSubs();
+        // GetAllSubjectPerStudent(); 
+    }else{
+        alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
+        btnError.removeAttribute("hidden");
+        btnCreateUsers.style.display = "none";
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
+            btnError.setAttribute("hidden", "hidden");//Is loading true
+            btnCreateUsers.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 3000);
+    }
+}
+
+//Insert subject into studentinfo
+const btnInsertSubs = async () =>{
+    let gradeStudentNum = document.getElementById('gradesStudentNum').value;
+    let Instructor = document.getElementById('gradesInstructor').value;
+    let Schedule = document.getElementById('gradesSchedule').value;
+    let Mark = document.getElementById('gradesMarks').value;
+    formData = new FormData();
+
+    formData.append('StudentId', gradeStudentNum);
+    formData.append('Subject_name', objinsertSubjects[0].subject_name);
+    formData.append('Subject_code', objinsertSubjects[0].subject_code);
+    formData.append('Units', objinsertSubjects[0].units);
+    formData.append('Grade', Mark);
+    formData.append('Instructor', Instructor);
+    formData.append('Schedule', Schedule);
+
+    const fetchResponse = await fetch("../controller/student-subject.php",{
+        method: "POST",
+        body:formData,
+    });
+    
+    const getResponse = await fetchResponse.json();
+    if(getResponse.statusCode === 200){
+        let message = '';
+        alertShowSuccess.removeAttribute("hidden");
+        alertShowSuccess.classList.add('show'); 
+    
+        message += ` Added Succesfully!`
+
+        document.querySelector('#alertSuccessMessage').innerHTML = message;
+        refreshData = new FormData();
+        refreshData.append('StudentId', gradeStudentNum);
+    delayedRemoveAlert = () =>{   
+        alertShowSuccess.classList.remove('show');  
+        alertShowSuccess.setAttribute("hidden", "hidden");
+    }
+    setTimeout(delayedRemoveAlert, 3000);
+    
+    }
+    GetAllSubjectPerStudent();
+}
+
+
+
+//Get All Subject per students
+const GetAllSubjectPerStudent = async() =>{
+  //refresh table
+ let xgradeStudentNum = document.getElementById('gradesStudentNum').value;
+ refreshData = new FormData();
+ refreshData.append('StudentId', xgradeStudentNum);
+ for (var pair of refreshData.entries()) {
+    console.log(pair[0]+ ' - ' + pair[1]); 
+ }
+ const fetchResponse = await fetch("../controller/student-subject-table.php",{
+    method: "POST",
+    body: refreshData,
+});
+ 
+     const tableResponse = await fetchResponse.json();
+     console.log(tableResponse)
+ let myTable = '';
+     for(let i =0; i<tableResponse.length;i++){
+         myTable += `<tr>
+         <td>`+tableResponse[i].subject_name+`</td>
+         <td>`+tableResponse[i].grade+`</td>
+         <td>`+tableResponse[i].instructor+`</td>
+         <td>`+tableResponse[i].schedule+`</td>
+         <td>`+tableResponse[i].added_at+`</td>
+         <th scope="col" class="table-info">
+         <div class = "pt-1">
+         <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  onclick ="moveToArchiveSubject(`+tableResponse[i].id+`);return false;"><i class="bi bi-trash"></i></a>
+         </div>
+         </th>
+         </tr>`;     
+     }
+     document.querySelector('#tbody-student-subject').innerHTML = myTable;
+     delayedRemoveAlert = () =>{   
+        alertShowSuccess.classList.remove('show');  
+        alertShowSuccess.setAttribute("hidden", "hidden");
+    }
+    setTimeout(delayedRemoveAlert, 1000);
+}
+
+
+//Remove Subject
+const moveToArchiveSubject = async (id) =>{
+let RowId = id;
+let removedDate = new Date();
+
+formData = new FormData();
+
+formData.append('RowID', RowId);
+formData.append('Status',removedDate);
+
+
+try{
+const fetchResponse = await fetch("../controller/student-subject-remove.php",{
+    method: "POST",
+    body: formData,
+});
+
+
+const getResponse = await fetchResponse.json();
+let message = '';
+    if(getResponse.statusCode === 200){     
+        GetAllSubjectPerStudent();
+        alertShowSuccess.removeAttribute("hidden");
+        alertShowSuccess.classList.add('show');
+        message += ` Removed Succesfully!`
+    document.querySelector('#alertSuccessMessage').innerHTML = message;
+}
+}catch(e){
+
+}
+}
 
 
 
@@ -391,6 +617,8 @@ const bindAllDataIntoTableSorted = function (){
         <th scope="col" class="table-info">
         <div class = "pt-2">
     <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
+
+    <a href="#" class ="btn btn-secondary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGradesSorted('${GVSResultsSorted[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
     
@@ -486,7 +714,7 @@ const selectNumPage = function(){
 //Search bar function
 const userSearchKey = () =>{
 let userSearch = userSearchBar.value;
-console.log(userSearch !== "");
+
 if(userSearch !== ""){
     let results = [];//Temporary JSON
 
@@ -969,7 +1197,7 @@ try{
     const showAnimation = await function(){
 let message = '';
         if(fetchResponse.statusCode === 200){
-            console.log(fetchResponse)
+       
             delayedShowAlert = () =>{
                 console.log("SUCCESS")
                 message += ` Updated Succesfully!`

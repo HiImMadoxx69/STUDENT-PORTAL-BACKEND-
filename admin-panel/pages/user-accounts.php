@@ -323,13 +323,21 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Student Account Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="subject.php">
+          <i class="bi bi-book"></i>
+          <span>Subjects</span>
+        </a>
+      </li><!-- End Subject Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
           <i class="bi bi-archive"></i>
-          <span>Archived Accounts</span>
+          <span>Archives</span>
         </a>
       </li><!-- End Archives Nav -->
+
+   
      
     </ul>
 
@@ -760,7 +768,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         <div class="col-sm-2">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
-              Add User
+              User
               </button>
        </div>
        
