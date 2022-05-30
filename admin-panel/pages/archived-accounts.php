@@ -331,6 +331,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Subject Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed " href="courses.php">
+          <i class="bx bxs-graduation"></i>
+          <span>Courses</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link" href="archived-accounts.php">
           <i class="bi bi-archive"></i>
           <span>Archives</span>
@@ -404,6 +411,28 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
               </div>
             </div><!-- End Revenue Card -->
+
+             <!-- Course Archived Card -->
+             <div class="col-xxl-2 col-md-4">
+              <div class="card info-card customers-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Course <span>| Archived</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-book"></i>
+                    </div>
+                    <div class="ps-3">
+                       <h6 id="totalCourseArchives"></h6>
+                      <a href ="archived-course.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
+                     </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Course Archived Card -->
+
 
             <!-- Subjects Archived Card -->
             <div class="col-xxl-2 col-md-4">

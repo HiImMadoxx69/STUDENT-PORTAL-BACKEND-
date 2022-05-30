@@ -104,6 +104,7 @@ const btnIsUpdating = document.getElementById('btnIsUpdating');//updating button
 
 window.onload = function(){
     getAllDataAPI();
+    BindAllCourse();
     selectNumPage();
 }//Onload page
 
@@ -280,7 +281,6 @@ const bindAllDataIntoTable = function (){
 for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
  console.log("GVSIndexPage: "+GVSIndexPage+"< GVSDefaultRow:" +GVSdefaultRow)
     output += `<tr>
-    <td>${GVSResults[i].id}</td>
     <td><a href="#" onclick= "changePicModal(${GVSResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVSResults[i].studentnumber}</td>
     <td>${GVSResults[i].firstname}</td>
@@ -597,7 +597,6 @@ const bindAllDataIntoTableSorted = function (){
     
     for(let i = 0; i<GVSNumRows; i++){
         output += `<tr>
-        <td>${GVSResultsSorted[i].id}</td>
     <td><a href="#" onclick= "changePicModal(${GVSResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVSResultsSorted[i].studentnumber}</td>
     <td>${GVSResultsSorted[i].firstname}</td>
@@ -1223,4 +1222,23 @@ let message = '';
     console.log(e)
 }
 
+}
+
+//Bind all course
+const BindAllCourse = async () =>{
+    const fetchResponse = await fetch('../controller/course-table.php');
+
+    const getResponse = await fetchResponse.json();
+
+    console.log(getResponse)
+
+    let output = '';
+
+    output = '<option value="...">...</option>';
+    
+    for(let i = 0; i<getResponse.length;i++){
+        output += `<option value="`+getResponse[i].course_name+`">`+getResponse[i].course_name+`</option>`;
+    }
+    document.querySelector('#editCourse').innerHTML = output;
+    document.querySelector('#newCourse').innerHTML = output;
 }

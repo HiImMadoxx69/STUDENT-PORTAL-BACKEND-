@@ -279,8 +279,7 @@ const bindAllDataIntoTable = function (){
 for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
  console.log("GVSIndexPage: "+GVSIndexPage+"< GVSDefaultRow:" +GVSdefaultRow)
     output += `<tr>
-    <td>${GVSResults[i].id}</td>
-    <td>${GVSResults[i].subject_code}</td>
+   <td>${GVSResults[i].subject_code}</td>
     <td>${GVSResults[i].subject_name}</td>
     <td>${GVSResults[i].units}</td>
     <td>${GVSResults[i].added_at}</td>
@@ -359,8 +358,7 @@ const bindAllDataIntoTableSorted = function (){
     
     for(let i = 0; i<GVSNumRows; i++){
         output += `<tr>
-        <td>${GVSResultsSorted[i].id}</td>
-        <td>${GVSResultsSorted[i].subject_code}</td>
+         <td>${GVSResultsSorted[i].subject_code}</td>
         <td>${GVSResultsSorted[i].subject_name}</td>
         <td>${GVSResultsSorted[i].units}</td>
         <td>${GVSResultsSorted[i].added_at}</td>

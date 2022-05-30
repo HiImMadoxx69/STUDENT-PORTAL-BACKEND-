@@ -44,7 +44,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../img/favicon.png" rel="icon">
+  <link href="../img/globe-client-logo.png" rel="icon">
   <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

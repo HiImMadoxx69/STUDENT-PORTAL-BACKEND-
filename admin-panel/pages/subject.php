@@ -331,6 +331,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Subject Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed " href="courses.php">
+          <i class="bx bxs-graduation"></i>
+          <span>Courses</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
           <i class="bi bi-archive"></i>
           <span>Archives</span>
@@ -406,7 +413,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Accounts Form</h5>
+                      <h5 class="modal-title">Subject Create Form</h5>
                       
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
                       
@@ -497,7 +504,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Accounts Form</h5>
+                      <h5 class="modal-title">Subject Update Form</h5>
                       
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
                       
@@ -600,8 +607,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id');return false;" class="th-a">#</a></th>
-                    <th scope="col"class ="header-title" ><a href= "#" onclick ="sortCurrentTable('subject_code');return false;" class="th-a">SUBJECT CODE</a></th>
+                     <th scope="col"class ="header-title" ><a href= "#" onclick ="sortCurrentTable('subject_code');return false;" class="th-a">SUBJECT CODE</a></th>
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('subject_name');return false;" class="th-a">SUBJECT NAME</a></th>
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('units');return false;" class="th-a">UNITS</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>

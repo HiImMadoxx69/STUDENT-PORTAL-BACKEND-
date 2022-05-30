@@ -3,6 +3,7 @@ window.onload = function(){
     getAllArchiveStudent();
     getAllArchiveSubject();
     getAllArchiveResults();
+    getAllArchiveCourses();
 }//Onload page
 
 
@@ -87,6 +88,27 @@ const getAllArchiveResults = async () =>{
     console.log(error)
         }
     }
+
+       //get all archived courses
+const getAllArchiveCourses = async () =>{
+
+    try{
+    const getUserArchives = await fetch('../controller/course-archived-table.php');
+    
+    const response = await getUserArchives.json();
+    
+    totalUserArchives = response.length;
+    let output = '';
+    
+    output += ``+response.length+``;
+    
+    document.querySelector('#totalCourseArchives').innerHTML = output;// print the 
+    }catch(error){a
+    console.log(error)
+        }
+    }
+    
+    
     
     
 

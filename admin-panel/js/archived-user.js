@@ -275,8 +275,7 @@ const bindAllDataIntoTable = function (){
 for(let i = GVAUIndexPage; i<GVAUdefaultRow; i++){
  console.log("GVAUIndexPage: "+GVAUIndexPage+"< GVAUDefaultRow:" +GVAUdefaultRow)
     output += `<tr>
-    <td>${GVAUResults[i].id}</td>
-    <td><img src = "../../uploads/${GVAUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
+     <td><img src = "../../uploads/${GVAUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
     <td>${GVAUResults[i].username}</td>
     <td>${GVAUResults[i].firstname}</td>
     <td>${GVAUResults[i].middlename}</td>
@@ -366,8 +365,7 @@ const bindAllDataIntoTableSorted = function (){
     
     for(let i = 0; i<GVAUNumRows; i++){
         output += `<tr>
-        <td>${GVAUResultsSorted[i].id}</td>
-        <td><a href="#" onclick= "changePicModal(${GVAUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVAUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
+         <td><a href="#" onclick= "changePicModal(${GVAUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVAUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
         <td>${GVAUResultsSorted[i].username}</td>
         <td>${GVAUResultsSorted[i].firstname}</td>
         <td>${GVAUResultsSorted[i].middlename}</td>

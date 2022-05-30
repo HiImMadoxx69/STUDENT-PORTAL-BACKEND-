@@ -330,6 +330,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Subjects</span>
         </a>
       </li><!-- End Subject Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="courses.php">
+          <i class="bx bxs-graduation"></i>
+          <span>Courses</span>
+        </a>
+      </li><!-- End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
@@ -406,7 +412,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Accounts Form</h5>
+                      <h5 class="modal-title">Students Create Form</h5>
                       
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
                       
@@ -450,42 +456,34 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="newEmail">Email</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <input type="password" class="form-control" id="newPassword" placeholder="Password">
                     <label for="newPassword">Password</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="newCourse" aria-label="Floating label select example">
-                        <option selected disabled>...</option>
-                        <option value="Admin">Course</option>
-                        <option value="Registrar">Registrar</option>
-                        <option value="Accountant">Accountant</option>
+                        
                       </select>
                       <label for="newCourse">Course</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                 <div class="form-floating mb-3">
-                      <select class="form-select" id="newSection" aria-label="Floating label select example">
-                        <option selected disabled>...</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Registrar">Registrar</option>
-                        <option value="Accountant">Accountant</option>
-                      </select>
+                      <input type ="text" class = "form-control" id ="newSection" placeholder ="Section">
                       <label for="newSection">Section</label>
                     </div>
                 </div>
-                <div class = "col-md-4">
+                <div class = "col-md-6">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="newBirthday" placeholder="Birthday">
                     <label for ="newBirthday">Birthdate</label>
                   </div>
                 </div>
 
-                <div class = "col-md-4">
+                <div class = "col-md-6">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newContact" placeholder="Contact">
                     <label for="newContact">Contact</label>
@@ -595,7 +593,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Accounts Form</h5>
+                      <h5 class="modal-title">Students Update Form</h5>
                       
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
                       
@@ -640,13 +638,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="editEmail">Email</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <input type="password" class="form-control" id="editPassword" placeholder="Password">
                     <label for="editPassword">Password</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="editCourse" aria-label="Floating label select example">
                         <option selected disabled>...</option>
@@ -657,25 +655,20 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <label for="editCourse">Course</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                 <div class="form-floating mb-3">
-                      <select class="form-select" id="editSection" aria-label="Floating label select example">
-                        <option selected disabled>...</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Registrar">Registrar</option>
-                        <option value="Accountant">Accountant</option>
-                      </select>
+                <input type="date" class="form-control" id="editSection" placeholder="Section">
                       <label for="editSection">Section</label>
                     </div>
                 </div>
-                <div class = "col-md-4">
+                <div class = "col-md-6">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="editBirthday" placeholder="Birthday">
                     <label for ="editBirthday">Birthdate</label>
                   </div>
                 </div>
 
-                <div class = "col-md-4">
+                <div class = "col-md-6">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editContact" placeholder="Contact">
                     <label for="editContact">Contact</label>
@@ -895,7 +888,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id');return false;" class="th-a">ID</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentnumber');return false;" class="th-a">STUDENT NUMBER</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FIRST NAME</a></th>

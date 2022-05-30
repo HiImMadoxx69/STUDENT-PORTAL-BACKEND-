@@ -279,7 +279,6 @@ const bindAllDataIntoTable = function (){
 for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
  console.log("GVUIndexPage: "+GVUIndexPage+"< GVUDefaultRow:" +GVUdefaultRow)
     output += `<tr>
-    <td>${GVUResults[i].id}</td>
     <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVUResults[i].username}</td>
     <td>${GVUResults[i].firstname}</td>
@@ -373,7 +372,6 @@ const bindAllDataIntoTableSorted = function (){
     
     for(let i = 0; i<GVUNumRows; i++){
         output += `<tr>
-        <td>${GVUResultsSorted[i].id}</td>
         <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
         <td>${GVUResultsSorted[i].username}</td>
         <td>${GVUResultsSorted[i].firstname}</td>

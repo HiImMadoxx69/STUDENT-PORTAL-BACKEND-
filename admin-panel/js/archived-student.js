@@ -275,8 +275,7 @@ const bindAllDataIntoTable = function (){
 for(let i = GVASIndexPage; i<GVASdefaultRow; i++){
  console.log("GVASIndexPage: "+GVASIndexPage+"< GVASDefaultRow:" +GVASdefaultRow)
     output += `<tr>
-    <td>${GVASResults[i].id}</td>
-        <td><img src = "../../uploads/${GVASResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
+         <td><img src = "../../uploads/${GVASResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
         <td>${GVASResults[i].studentnumber}</td>
         <td>${GVASResults[i].firstname}</td>
         <td>${GVASResults[i].middlename}</td>
@@ -364,8 +363,7 @@ const bindAllDataIntoTableSorted = function (){
     
     for(let i = 0; i<GVASNumRows; i++){
         output += `<tr>
-        <td>${GVASResultsSorted[i].id}</td>
-        <td><img src = "../../uploads/${GVASResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
+         <td><img src = "../../uploads/${GVASResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
         <td>${GVASResultsSorted[i].studentnumber}</td>
         <td>${GVASResultsSorted[i].firstname}</td>
         <td>${GVASResultsSorted[i].middlename}</td>
