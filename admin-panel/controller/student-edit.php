@@ -23,11 +23,15 @@ $errors = []; // Store all foreseen and unforeseen errors here.
   $guardianNum = $_POST['GuardianNum'];
  
 if (isset($userCurrentId)) {
+
   
  try{
                   $sql = "UPDATE `tbl_studentinfo` SET `studentnumber` = '$studNum', `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `email` = '$email', `address` = '$address', `password` = '$password', `sex` = '$sex', `course` = '$course', `birthday` = '$birthday', `contact` = '$contact', `guardian` = '$guardian', `guardian_contact` = '$guardianNum' WHERE `tbl_studentinfo`.`id` = $userCurrentId;";
     
                   mysqli_query($con, $sql);
+
+                  $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('UPDATE: STUDENT rowID: $userCurrentId');";
+                  mysqli_query($con, $auditsql);
                   exit(json_encode(array("statusCode"=>200)));
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));

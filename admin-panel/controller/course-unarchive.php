@@ -14,6 +14,9 @@ if (isset($userCurrentId)) {
  try{
                   $sql = "UPDATE `tbl_course` SET `status` = '$status' WHERE `tbl_course`.`id` = $userCurrentId;";
                   mysqli_query($con, $sql);
+
+                  $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Unarchived: Course rowID: $userCurrentId');";
+                  mysqli_query($con, $auditsql);
                   exit(json_encode(array("statusCode"=>200)));
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));

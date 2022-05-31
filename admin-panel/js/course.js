@@ -495,8 +495,7 @@ const resetFields = () =>{
     let Credits = document.getElementById('newCredits').value = "";
 
   
-    btnSuccess.setAttribute("hidden", "hidden");//Is loading true
-    btnCreateUsers.removeAttribute("hidden");
+     btnCreateUsers.removeAttribute("hidden");
 }//Reset all the fields
 
 //Call it to refresh the table
@@ -518,7 +517,22 @@ const checkAllFields = () =>{
  
 
     if(Cname !== "" && Faculty !== "" && Credits !== ""){
-        createUserAccount();
+        if(isNaN(Credits) || Credits.length > 11 || Credits < 1){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Invalid Credits!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 1000);
+        }else{
+            createUserAccount();
+        }
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -548,10 +562,11 @@ const IsLoadingTrue =(formStatus) =>{
     delayedStopLoading =() =>{
     btnIsLoading.setAttribute("hidden", "hidden");
     btnIsUpdating.setAttribute("hidden", "hidden");
+    btnCreateUsers.removeAttribute("hidden");
     btnCreateUsers.style.display = "inline-block";
     btnEditUsers.style.display = "inline-block";
     }
-    setTimeout(delayedStopLoading, 3000);
+    setTimeout(delayedStopLoading, 1000);
     }
    
 }
@@ -562,7 +577,7 @@ const IsLoadingTrue =(formStatus) =>{
 //Create User
 const createUserAccount = (e) =>{
     
-    IsLoadingTrue(true)//Start the loading button
+    
    
     let Cname = document.getElementById('newCourseName').value;
 
@@ -588,23 +603,42 @@ for (var pair of formData.entries()) {
         .then(response =>{
             console.log(response.statusCode)
             let message = '';
+            IsLoadingTrue(true)//Start the loading button
           if(response.statusCode === 200){
          message += ` Created Succesfully!`
             document.querySelector('#alertSuccessMessage').innerHTML = message;
-            delayedShowAlert = () =>{
+IsLoadingTrue(false);
+
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-                btnSuccess.removeAttribute("hidden");
-            }
-            setTimeout(delayedShowAlert, 3000)
+                
+ 
+                
             delayedRemoveAlert = () =>{   
                 
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 6000);
+            setTimeout(delayedRemoveAlert, 3000);
           }
+
+          if(response.statusCode === 201){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Course Already Exist!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 1000);
+
+          }
+
             
         })
     .catch(err => console.log(err))
@@ -671,9 +705,22 @@ const editUserSorted = (a) =>{
 
 
     if(UserId !== "" && Cname !== "" && Faculty !== "" && Credits !==""){
-       
-        updateUser();
-
+       if(isNaN(Credits) || Credits.length > 11 || Credits < 1){
+        alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
+        btnCreateUsers.style.display = "none";
+        let output = '';
+        output += ` Invalid Credits!`
+        document.querySelector('#alertErrorMessage').innerHTML = output;
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
+            btnCreateUsers.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 1000);
+       }else{
+           updateUser();
+       }
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -731,21 +778,34 @@ try{
 let message = '';
         if(fetchResponse.statusCode === 200){
             console.log(fetchResponse)
-            delayedShowAlert = () =>{
                 message += ` Updated Succesfully!`
                 document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
                 
-            }
-            setTimeout(delayedShowAlert, 3000)
             delayedRemoveAlert = () =>{   
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 6000);
+            setTimeout(delayedRemoveAlert, 1000);
           }
         }
+
+        if(fetchResponse.statusCode === 201){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Course Already Exist!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 1000);
+
+          }
     
         showAnimation();
      

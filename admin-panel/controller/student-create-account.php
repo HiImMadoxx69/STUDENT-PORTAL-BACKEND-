@@ -18,9 +18,23 @@ $Guardian = $_POST['Guardian'];
 $GuardianContact = $_POST['GuardianNum'];
 if(isset($Fname)){
 
+    $sql = "SELECT * FROM tbl_studentinfo WHERE studentnumber = '$StudNum'";
+
+    $user = $con ->query($sql) or die ($con->error);
+    $row = $user->fetch_assoc();
+    $total = $user->num_rows;
+  
+    if($total > 0){
+        exit(json_encode(array("statusCode"=>201)));
+    }
+
 try{
     $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`, `studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `address`, `password`, `sex`, `course`, `section`, `birthday`, `contact`, `guardian`, `guardian_contact`) VALUES ('default_profile.jpg', '$StudNum', '$Fname', '$Mname', '$Lname', '$Email', '$Address', '$Password', '$Sex', '$Course', '$Section', '$Birthday', '$Contact', '$Guardian', '$GuardianContact');";
     mysqli_query($con, $sql);
+
+    $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created: New Account studentnumber: $StudNum');";
+    mysqli_query($con, $auditsql);
+
     exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));

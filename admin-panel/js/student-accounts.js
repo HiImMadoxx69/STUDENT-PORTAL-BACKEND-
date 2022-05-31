@@ -170,6 +170,39 @@ function getAllDataAPI(){
     }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllDataAPI
 
+
+//Check if valid image
+const checkIfImage = () =>{
+
+ 
+    
+    let file = document.getElementById('editUserPic');// fileupload
+ 
+             if(file.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
+                  console.log('Image has width, I think it is real image');
+                  editProfilePic();
+                  //TODO: upload to backend
+             }else{
+                  console.log("Not a image")
+                 alertError.classList.add('show');
+                 alertError.removeAttribute("hidden");
+                 btnError.removeAttribute("hidden");
+                 btnCreateUsers.style.display = "none";
+                 let output = '';
+                 output += ` Not a valid image!`
+                 document.querySelector('#alertErrorBody').innerHTML = output;
+                 delayedAlert = () =>{
+                    alertError.classList.remove('show');
+                    alertError.setAttribute("hidden", "hidden");
+                     btnError.setAttribute("hidden", "hidden");//Is loading true
+                     btnCreateUsers.style.display = "inline-block";
+                 }
+                 setTimeout(delayedAlert, 3000);
+             }
+ }
+
+
+ //Edit if valid image
 const editProfilePic = async () =>{
     let value = document.getElementById('changePicUserID').value
     let fileupload = document.getElementById('editUserPic');// fileupload
@@ -410,8 +443,23 @@ const checkGradeFields = () =>{
     let gradeSubject = document.getElementById('gradeSubject').value;
    
     if(gradeStudentNum !=="" && Instructor !== "" &&  Schedule !== "" && Mark !== "" && gradeSubject !=="..." ){
-        btnInsertSubs();
-        // GetAllSubjectPerStudent(); 
+
+        if(Mark > -1){
+            btnInsertSubs();
+        }else{
+            let message = '';
+            message += ` Invalid marks declare it 0 if there was no grade yet!`
+               document.querySelector('#alertErrorBody').innerHTML = message;
+                   alertError.removeAttribute("hidden");
+                   alertError.classList.add('show');       
+               delayedRemoveAlert = () =>{   
+                btnCreateUsers.removeAttribute("hidden");
+                   alertError.classList.remove('show');  
+                   alertError.setAttribute("hidden", "hidden");
+               }
+               setTimeout(delayedRemoveAlert, 2000);
+        }
+
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -449,6 +497,7 @@ const btnInsertSubs = async () =>{
     });
     
     const getResponse = await fetchResponse.json();
+    console.log(getResponse.statusCode)
     if(getResponse.statusCode === 200){
         let message = '';
         alertShowSuccess.removeAttribute("hidden");
@@ -457,15 +506,25 @@ const btnInsertSubs = async () =>{
         message += ` Added Succesfully!`
 
         document.querySelector('#alertSuccessMessage').innerHTML = message;
-        refreshData = new FormData();
-        refreshData.append('StudentId', gradeStudentNum);
     delayedRemoveAlert = () =>{   
         alertShowSuccess.classList.remove('show');  
         alertShowSuccess.setAttribute("hidden", "hidden");
     }
     setTimeout(delayedRemoveAlert, 3000);
-    
     }
+    if(getResponse.statusCode === 201){
+        let message = '';
+        message += ` Subject was already in student's list!`
+           document.querySelector('#alertErrorBody').innerHTML = message;
+               alertError.removeAttribute("hidden");
+               alertError.classList.add('show');       
+           delayedRemoveAlert = () =>{   
+            btnCreateUsers.removeAttribute("hidden");
+               alertError.classList.remove('show');  
+               alertError.setAttribute("hidden", "hidden");
+           }
+           setTimeout(delayedRemoveAlert, 1000);
+     }
     GetAllSubjectPerStudent();
 }
 
@@ -782,7 +841,14 @@ const resetFields = () =>{
     resetFields();
     getAllDataAPI();
 }
-
+//Validate Email
+const validateEmail = (mail) =>{
+    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(mail.match(mailformat))
+    {
+    return true;
+    }
+}
 
 //Check all of the fields
 const checkAllFields = () =>{
@@ -822,7 +888,55 @@ const checkAllFields = () =>{
 
     let GuardianNum = document.getElementById('newGuardianContact').value;
     if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
+     let message = "";
+        if(isNaN(Contact) || Contact.length > 11){
+        message += ` Please input valid contact number!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+
+       }else if(validateEmail(Email) !== true){
+           console.log(validateEmail(Email))
+        message += ` Please input a valid email!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+       }else if(isNaN(GuardianNum) || GuardianNum.length > 11){
+        message += ` Please input valid contact number!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+
+       }else{
         createUserAccount();
+       }
+       
+       
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -951,6 +1065,25 @@ for (var pair of formData.entries()) {
             }
             setTimeout(delayedRemoveAlert, 6000);
           }
+
+          if(response.statusCode === 201){
+            message += ` Student ID Already Exist!`
+               document.querySelector('#alertErrorBody').innerHTML = message;
+               delayedShowAlert = () =>{
+                   alertError.removeAttribute("hidden");
+                   alertError.classList.add('show');
+                
+               }
+               setTimeout(delayedShowAlert, 3000)
+               delayedRemoveAlert = () =>{   
+                btnCreateUsers.removeAttribute("hidden");
+                   alertError.classList.remove('show');  
+                   alertError.setAttribute("hidden", "hidden");
+               }
+               setTimeout(delayedRemoveAlert, 6000);
+             }
+
+          
             
         })
     .catch(err => console.log(err))
@@ -1104,8 +1237,55 @@ const editUserSorted = (a) =>{
     let GuardianNum = document.getElementById('editGuardianContact').value;
     if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Birthday !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
        
-        updateUser();
 
+
+        let message = "";
+        if(isNaN(Contact) || Contact.length > 11){
+        message += ` Please input valid contact number!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+
+       }else if(validateEmail(Email) !== true){
+           console.log(validateEmail(Email))
+        message += ` Please input a valid email!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+       }else if(isNaN(GuardianNum) || GuardianNum.length > 11){
+        message += ` Please input valid contact number!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+
+       }else{
+        updateUser();
+       }
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -1215,6 +1395,23 @@ let message = '';
               console.log(fetchResponse)
           }
         }
+        let message = '';
+        if(fetchResponse.statusCode === 201){
+            message += ` Student ID Already Exist!`
+               document.querySelector('#alertErrorBody').innerHTML = message;
+               delayedShowAlert = () =>{
+                   alertError.removeAttribute("hidden");
+                   alertError.classList.add('show');
+                
+               }
+               setTimeout(delayedShowAlert, 3000)
+               delayedRemoveAlert = () =>{   
+                btnCreateUsers.removeAttribute("hidden");
+                   alertError.classList.remove('show');  
+                   alertError.setAttribute("hidden", "hidden");
+               }
+               setTimeout(delayedRemoveAlert, 6000);
+             }
     
         showAnimation();
      

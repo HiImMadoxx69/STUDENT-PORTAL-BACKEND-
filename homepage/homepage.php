@@ -86,7 +86,7 @@
             </ul>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
-            <h1>Vission</h1>
+            <h1>Vision</h1>
             <p>Blah blah blah</p>
           </div>
         </div>
@@ -126,8 +126,7 @@
    <!-- ======= Portfolio Details Section ======= -->
    <section id="portfolio-details" class="portfolio-details">
       <div class="container">
-
-        <div class="row gy-4">
+     <div class="row gy-4">
 
           <div class="col-lg-6">
             <div class="portfolio-details-slider swiper">
@@ -152,9 +151,14 @@
 
           <div class="col-lg-4">
         
-              <h3>Facilities</h3>
-  
+          <div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+          <div class="col-xl-7 col-lg-10 text-center">
+          <h3>Facilities</h3>
+          </div>
+        </div>
+        
            
+          </div>
           </div>
 
         </div>

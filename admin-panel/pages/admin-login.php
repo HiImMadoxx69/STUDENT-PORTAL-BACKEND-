@@ -22,7 +22,7 @@ if(isset($_SESSION['ID'])){
 
   <!-- Favicons -->
   <link href="../img/globe-client-logo.png" rel="icon" >
-  <link href="../img/client-logo.png" rel="apple-touch-icon" >
+  <link href="../img/globe-client-logo.png" rel="apple-touch-icon" >
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect" type="text/css">
@@ -71,9 +71,12 @@ if(isset($_SESSION['ID'])){
               <div class="card mb-3">
 
                 <div class="card-body">
-
+             
+                 
                   <div class="pt-4 pb-2">
+                  <a href ="../../homepage/homepage.php"><i class ="bi bi-house-door"></i></a>
                   <div class="d-flex justify-content-center py-4">
+                    
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="../img/globe-client-logo.png" alt="">
                   <span class="d-none d-lg-block" style ="color:#08203c;">Employee Portal</span>
@@ -107,23 +110,8 @@ if(isset($_SESSION['ID'])){
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
-                    <!-- <div class="col-12">
-                    <div class="form-check form-switch">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showPassword()">
-                    </div>
-                    </div> -->
-                    <!-- <script>
-
-function showPassword() {
-  var x = document.getElementById("yourPassword");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-                    </script> -->
+      
+                    </script> 
                     <div class="col-12">
                     <button class="btn btn-primary w-100" type="button" disabled id ="btnChangeToLoading" hidden>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -131,8 +119,8 @@ function showPassword() {
               </button>
                       <button class="btn btn-primary w-100" type="submit"id ="btnLogin">Login</button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Forget your account? <a href="pages-register.html">Request for recovery</a></p>
+                     <div class="col-12">
+                      <p class="small mb-0">Forget your account? <a href="pages-register.html">Click Here</a></p>
                     </div>
                   </form>
 

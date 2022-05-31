@@ -493,8 +493,8 @@ const resetFields = () =>{
     let Subject_Name= document.getElementById('newSname').value ="";
    
     let Units = document.getElementById('newUnits').value = "";
-    btnSuccess.setAttribute("hidden", "hidden");//Is loading true
-    btnCreateUsers.removeAttribute("hidden");
+    btnCreateUsers.setAttribute("hidden", "hidden");
+    btnSuccess.removeAttribute("hidden");
 }//Reset all the fields
 
 //Call it to refresh the table
@@ -513,7 +513,23 @@ const checkAllFields = () =>{
    
     let Units = document.getElementById('newUnits').value;
     if(Subject_Code !== "" && Subject_Name !== "" && Units !== ""){
-        createUserAccount();
+        if(isNaN(Units)){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Invalid Units!`;
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 1000);
+        }else{
+            createUserAccount();
+        }
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -546,7 +562,7 @@ const IsLoadingTrue =(formStatus) =>{
     btnCreateUsers.style.display = "inline-block";
     btnEditUsers.style.display = "inline-block";
     }
-    setTimeout(delayedStopLoading, 3000);
+    setTimeout(delayedStopLoading, 1000);
     }
    
 }
@@ -586,21 +602,36 @@ for (var pair of formData.entries()) {
           if(response.statusCode === 200){
          message += ` Created Succesfully!`
             document.querySelector('#alertSuccessMessage').innerHTML = message;
-            delayedShowAlert = () =>{
+ 
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-                btnSuccess.removeAttribute("hidden");
-            }
-            setTimeout(delayedShowAlert, 3000)
-            delayedRemoveAlert = () =>{   
                 
+        
+    
+            delayedRemoveAlert = () =>{   
+                btnSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 6000);
+            setTimeout(delayedRemoveAlert, 1000);
           }
-            
+
+          if(response.statusCode === 201){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Subject Already Exist!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 1000);
+          }           
         })
     .catch(err => console.log(err))
 
@@ -622,7 +653,7 @@ const editUserNotSorted = (a) =>{
 
             let Subject_Code = document.getElementById('editScode').value = GVSResults[i].subject_code; 
          
-            let Subject_Name = document.getElementById('editSname').value = GVSResults[i].name;
+            let Subject_Name = document.getElementById('editSname').value = GVSResults[i].subject_name;
         
             let Units = document.getElementById('editUnits').value = GVSResults[i].units;
          break;
@@ -644,7 +675,7 @@ const editUserSorted = (a) =>{
 
             let Subject_Code = document.getElementById('editScode').value = GVSResultsSorted[i].subject_code; 
          
-            let Subject_Name = document.getElementById('editSname').value = GVSResultsSorted[i].name;
+            let Subject_Name = document.getElementById('editSname').value = GVSResultsSorted[i].subject_name;
         
             let Units = document.getElementById('editUnits').value = GVSResultsSorted[i].units;
          break;
@@ -663,9 +694,23 @@ const editUserSorted = (a) =>{
     let Units = document.getElementById('editUnits').value;
 
     if(SubjectId !== "" && Subject_Code !== "" && Subject_Name !== "" && Units !== ""){
-       
-        updateUser();
 
+        if(isNaN(Units) || Units.length > 6){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Invalid Units!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 1000);
+        }else{
+            updateUser();
+        }
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -719,24 +764,35 @@ try{
 let message = '';
         if(fetchResponse.statusCode === 200){
             console.log(fetchResponse)
-            delayedShowAlert = () =>{
+ 
                 message += ` Updated Succesfully!`
                 document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
                 
-            }
-            setTimeout(delayedShowAlert, 3000)
             delayedRemoveAlert = () =>{   
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 6000);
+            setTimeout(delayedRemoveAlert, 1000);
           }
-        }
-    
+        } 
+            
+        if(fetchResponse.statusCode === 201){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Subject Already Exist!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 1000);
+        }   
         showAnimation();
-     
 }catch (e){
     console.log(e)
 }

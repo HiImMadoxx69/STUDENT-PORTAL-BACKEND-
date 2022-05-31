@@ -22,7 +22,7 @@ $currentId = $user['id'];
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Archived / Results</title>
+  <title>Audits</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -192,17 +192,21 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Archives Nav -->
 
       <li class="nav-item">
-        <a class="nav-link" href="archived-accounts.php">
+        <a class="nav-link collapsed " href="archived-accounts.php">
           <i class="bi bi-archive"></i>
           <span>Archives</span>
         </a>
       </li><!-- End Archives Nav -->
+
       <li class="nav-item">
-        <a class="nav-link collapsed " href="audit.php">
+        <a class="nav-link" href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
           <span>Audit</span>
         </a>
       </li><!-- End Archives Nav -->
+
+   
+     
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -211,8 +215,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             
  <!--Error Alert -->
  <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Please fill out all the fields!
+                <i class="bi bi-exclamation-octagon me-1" id ="alertErrorMessage">Please fill out all the fields!</i>
               </div><!--Error End of Alert -->
 
               <!-- Success Alert -->
@@ -220,13 +223,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
-      <h1>Archived Results</h1>
+      <h1>User Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item"><a href="archived-accounts.php">Archives</a></li>
-          <li class="breadcrumb-item active">Archived Results</li>
+          <li class="breadcrumb-item active">User Accounts</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -266,7 +268,167 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
               </div><!-- End of change pic modal-->
 
+               <!--add user Modal -->
+              
+              <div class="modal fade" id="addusermodal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Accounts Form</h5>
+                      
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
+                      
+                    </div>
+                    <div class="modal-body">
+
+                    
                
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3 needs-validation" id ="frmCreateUsers">
+
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="newFname" placeholder="Firstname" required>
+                    <label for="newFname">Firstname</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="newMname" placeholder="Middlename">
+                    <label for="newMname">Middlename</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="newLname" placeholder="Lastname">
+                    <label for="newLname">Lastname</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="newEmail" placeholder="Email" >
+                    <label for="newEmail">Email</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="newUsername" placeholder="Username" onchage ="validateUsername(this.value)">
+                    <label for="newUsername">Username</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="newPassword" placeholder="Password">
+                    <label for="newPassword">Password</label>
+                  </div>
+                </div>
+
+               
+                
+               
+                <div class="col-md-4">
+                <div class="form-floating mb-3">
+                      <select class="form-select" id="newJob" aria-label="Floating label select example">
+                        <option selected disabled>...</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Registrar">Registrar</option>
+                        <option value="Accountant">Accountant</option>
+                      </select>
+                      <label for="newJob">Position</label>
+                    </div>
+                </div>
+
+                <div class = "col-md-4">
+                  <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="newBirthday" placeholder="Birthday">
+                    <label for ="newBirthday">Birthdate</label>
+                  </div>
+                </div>
+
+                <div class = "col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="newContact" placeholder="Contact">
+                    <label for="newContact">Contact</label>
+                  </div>
+                </div>
+
+                <div class="col-md-1">
+                  <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+                </div>
+
+                <fieldset class="col-md-3">
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="maleCheck" value="Male">
+                      <label class="form-check-label" for="gridRadios1">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="femaleCheck" value="Female" > 
+                      <label class="form-check-label" for="gridRadios2">
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+
+
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" id="newAddress" style="height: 100px;"></textarea>
+                    <label for="newAddress">Address</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="About" id="newAbout" style="height: 100px;"></textarea>
+                    <label for="newAbout">About</label>
+                  </div>
+                </div>
+              
+
+                    <label for="basic-url" class="form-label">Optional URL</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="twitterprofileURL">https://twitter.com/</span>
+                      <input type="text" class="form-control" id="newtwitterprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" id="facebookprofileURL">https://facebook.com/</span>
+                      <input type="text" class="form-control" id="newfacebookprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" id="instagramprofileURL">https://instagram.com/</span>
+                      <input type="text" class="form-control" id="newinstagramprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" id="linkedinprofileURL">https://linkedin.com/</span>
+                      <input type="text" class="form-control" id="newlinkedinprofileURL" aria-describedby="basic-addon3">
+                    </div>
+              </form><!-- End floating Labels Form -->
+                    </div>
+                    <div class="modal-footer">
+                      
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsLoading" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Creating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      <button class="btn btn btn-success" type="button" disabled id ="btnSuccess" hidden>
+                      <i class="bi bi-check-circle me-1"></i>
+                      Created
+                      </button><!-- End of success button -->
+                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
+                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End user Modal-->
 
                 <!-- Change profile picture Modal -->
 
@@ -465,13 +627,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">Archived User Table</h5>
+            <h5 class="card-title">User Accounts Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
       <div class="row mb-3">
       
-       
 
        </div>
 
@@ -503,21 +664,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentid');return false;" class="th-a">STUDENT ID</a></th>
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('subject_name');return false;" class="th-a">SUBJECT NAME</a></th>
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('subject_code');return false;" class="th-a">SUBJECT CODE</a></th>
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('units');return false;" class="th-a">UNITS</a></th>
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('grade');return false;" class="th-a">GRADE</a></th>
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instructor');return false;" class="th-a">INSTRUCTOR</a></th>
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('schedule');return false;" class="th-a">SCHEDULE</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('status');return false;" class="th-a">DATE REMOVED</a></th>
-
-
-
-                    <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
-                    
-                    
-                  </tr>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('action');return false;" class="th-a">ACTIONS</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE AND TIME</a></th>
                 </thead>
                 <tbody id ="tbody-user-accounts">
                  
@@ -581,7 +729,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
   <!-- my javascript for user-prfile -->
   <script src="../vendor/jquery-3.6.0.min.js?t=1491313943549"></script>
-<script src ="../js/archived-results.js?t=1491313943549"  type = "text/javascript"></script>
+<script src ="../js/audit.js?t=1491313943549"  type = "text/javascript"></script>
 <!-- end of my javascript for user - profile -->
 
   <!-- Vendor JS Files -->

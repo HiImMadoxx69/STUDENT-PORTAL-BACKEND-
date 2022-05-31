@@ -1,48 +1,48 @@
-//GLOBAL VARIABLES USER = GVU
+//GLOBAL VARIABLES AUDIT = GVAUD
 //Current number of rows
-var GVUdefaultRow = 0;
+var GVAUDdefaultRow = 0;
 //CurrentIndexPage global
-var GVUIndexPage = 0;
+var GVAUDIndexPage = 0;
 
 //Get the total length of table
-var GVUAccLength = 0;
+var GVAUDAccLength = 0;
 
 //JSON global results variable
-var GVUResults = {};
+var GVAUDResults = {};
 
 //JSON global result sorted variable
-var GVUResultsSorted = {};
+var GVAUDResultsSorted = {};
 
 //Check if already sorted
-var GVUIsSorted = false;
+var GVAUDIsSorted = false;
 //Default number of row global
-var GVUNumRows = 0;
+var GVAUDNumRows = 0;
 
 //If the default row is less than 10
-var GVULessThanRow = 0;
+var GVAUDLessThanRow = 0;
 
 //Get desired number of row per page
-var GVURowPerPage = 0;
+var GVAUDRowPerPage = 0;
 
 //Usernames
-var GVUUsernames = {};
+var GVAUDUsernames = {};
 
 //NextPage Call
 const nextpageCall = function nextPageCall(){
 
-    if(((GVUAccLength - GVUdefaultRow) < 10) && GVULessThanRow === 0){
+    if(((GVAUDAccLength - GVAUDdefaultRow) < 10) && GVAUDLessThanRow === 0){
       console.log("LOL")
-        GVULessThanRow = GVUAccLength - GVUdefaultRow;
-        GVUdefaultRow += GVULessThanRow;
+        GVAUDLessThanRow = GVAUDAccLength - GVAUDdefaultRow;
+        GVAUDdefaultRow += GVAUDLessThanRow;
         bindAllDataIntoTable();
     }
     console.log("LMAo")
-    console.log("next page GVUdefaultRow: "+GVUdefaultRow +" GVUAccLength:"+GVUAccLength+" GVUIndexPage:" +GVUIndexPage +" <= GVURowPerPage:"+GVURowPerPage);
-    if(GVUdefaultRow < GVUAccLength ){
+    console.log("next page GVAUDdefaultRow: "+GVAUDdefaultRow +" GVAUDAccLength:"+GVAUDAccLength+" GVAUDIndexPage:" +GVAUDIndexPage +" <= GVAUDRowPerPage:"+GVAUDRowPerPage);
+    if(GVAUDdefaultRow < GVAUDAccLength ){
        
-        GVUdefaultRow += GVURowPerPage;
-        console.log("next page GVUdefaultRow:"+GVUdefaultRow)
-        GVUIndexPage +=GVURowPerPage;
+        GVAUDdefaultRow += GVAUDRowPerPage;
+        console.log("next page GVAUDdefaultRow:"+GVAUDdefaultRow)
+        GVAUDIndexPage +=GVAUDRowPerPage;
         bindAllDataIntoTable();
     }
 }
@@ -52,15 +52,15 @@ const nextpageCall = function nextPageCall(){
 //PrevPage Call
 const prevpageCall = function nextPageCall(){
   
-    // console.log('Less than row'+GVULessThanRow);
-    if(GVULessThanRow !== 0){
+    // console.log('Less than row'+GVAUDLessThanRow);
+    if(GVAUDLessThanRow !== 0){
     
-        GVUdefaultRow = GVUdefaultRow - GVULessThanRow;
-        GVULessThanRow = 0;
+        GVAUDdefaultRow = GVAUDdefaultRow - GVAUDLessThanRow;
+        GVAUDLessThanRow = 0;
     }
-    if(GVUIndexPage >= GVURowPerPage){
-        GVUdefaultRow -= GVURowPerPage;
-        GVUIndexPage -=GVURowPerPage;
+    if(GVAUDIndexPage >= GVAUDRowPerPage){
+        GVAUDdefaultRow -= GVAUDRowPerPage;
+        GVAUDIndexPage -=GVAUDRowPerPage;
         bindAllDataIntoTable();
     }
    
@@ -118,16 +118,16 @@ const getAllUserName = async () =>{
 //getAllData Function
 function getAllDataAPI(){
     //get user accounts
-    fetch('../controller/user-table.php').then((res) => res.json())
+    fetch('../controller/audit-table.php').then((res) => res.json())
     .then(response => {
 
-        GVUResults = response;//Store the responseJSON into GVUResults global var
+        GVAUDResults = response;//Store the responseJSON into GVAUDResults global var
        
-        GVUAccLength = response.length;//getThe totalLength
-        GVUNumRows = 0;//Set Number of rows default
+        GVAUDAccLength = response.length;//getThe totalLength
+        GVAUDNumRows = 0;//Set Number of rows default
         
         let selectHolder = '';
-        if(GVUAccLength >= 100){
+        if(GVAUDAccLength >= 100){
            
             selectHolder += `
             <option value="5" selected>5</option>
@@ -135,14 +135,14 @@ function getAllDataAPI(){
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="ALL">All</option>`;
-        }else if (GVUAccLength >= 50){
+        }else if (GVAUDAccLength >= 50){
            
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="ALL">All</option>`;
-        }else if(GVUAccLength >= 15){
+        }else if(GVAUDAccLength >= 15){
             
             selectHolder += `
             <option value="5" selected>5</option>
@@ -156,59 +156,27 @@ function getAllDataAPI(){
         document.querySelector('#selectPage').innerHTML = selectHolder;// set the rows per page
 
         if(selectPage.value === '5'){
-            GVUNumRows = 5;
-            GVURowPerPage = 5;
-            GVUdefaultRow = 5;
+            GVAUDNumRows = 5;
+            GVAUDRowPerPage = 5;
+            GVAUDdefaultRow = 5;
         }else if (selectPage.value === '10'){
-            GVUNumRows = 10;
-            GVURowPerPage = 10
-            GVUdefaultRow = 10;
+            GVAUDNumRows = 10;
+            GVAUDRowPerPage = 10
+            GVAUDdefaultRow = 10;
         }else if (selectPage.value === '25'){
-            GVUNumRows = 25;
-            GVURowPerPage = 25;
-            GVUdefaultRow = 25;
+            GVAUDNumRows = 25;
+            GVAUDRowPerPage = 25;
+            GVAUDdefaultRow = 25;
         }else{
-            GVUNumRows = GVUAccLength;
-            GVURowPerPage = GVUAccLength;
-            GVUdefaultRow = GVUAccLength;
+            GVAUDNumRows = GVAUDAccLength;
+            GVAUDRowPerPage = GVAUDAccLength;
+            GVAUDdefaultRow = GVAUDAccLength;
         }// rows condition
 
         bindAllDataIntoTable();//Bind the data into table once fetch successfull
     }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllDataAPI
 
-//check if valid image
-
-const checkIfImage = () =>{
-
- 
-    
-   let file = document.getElementById('editUserPic');// fileupload
-
-            if(file.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
-                 console.log('Image has width, I think it is real image');
-                 editProfilePic();
-                 //TODO: upload to backend
-            }else{
-                 console.log("Not a image")
-                alertShowError.classList.add('show');
-                alertShowError.removeAttribute("hidden");
-                btnError.removeAttribute("hidden");
-                btnCreateUsers.style.display = "none";
-                let output = '';
-                output += ` Not a valid image!`
-                document.querySelector('#alertErrorMessage').innerHTML = output;
-                delayedAlert = () =>{
-                    alertShowError.classList.remove('show');
-                    alertShowError.setAttribute("hidden", "hidden");
-                    btnError.setAttribute("hidden", "hidden");//Is loading true
-                    btnCreateUsers.style.display = "inline-block";
-                }
-                setTimeout(delayedAlert, 3000);
-            }
-}
-
-//Move pic to server
 const editProfilePic = async () =>{
     let value = document.getElementById('changePicUserID').value
     let fileupload = document.getElementById('editUserPic');// fileupload
@@ -301,10 +269,10 @@ const changePicModal =  (id) =>{
     let changePicUserID = document.getElementById('changePicUserID').value = id;
     console.log(id)
     let output = '';
-    for(let i =0 ; i< GVUdefaultRow;i++ ){
-        if(GVUResults[i].id == id){
+    for(let i =0 ; i< GVAUDdefaultRow;i++ ){
+        if(GVAUDResults[i].id == id){
             console.log("true")
-            output += `<img src = "../../uploads/${GVUResults[i].profile_url} " alt="Profile" style="max-width:350px; max-height:350px;" "/>
+            output += `<img src = "../../uploads/${GVAUDResults[i].profile_url} " alt="Profile" style="max-width:350px; max-height:350px;" "/>
             `;
             
             break;
@@ -317,41 +285,17 @@ const changePicModal =  (id) =>{
 const bindAllDataIntoTable = function (){   
     let output ='';
 
-for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
- console.log("GVUIndexPage: "+GVUIndexPage+"< GVUDefaultRow:" +GVUdefaultRow)
+for(let i = GVAUDIndexPage; i<GVAUDdefaultRow; i++){
+ console.log("GVAUDIndexPage: "+GVAUDIndexPage+"< GVAUDDefaultRow:" +GVAUDdefaultRow)
     output += `<tr>
-    <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-    <td>${GVUResults[i].username}</td>
-    <td>${GVUResults[i].firstname}</td>
-    <td>${GVUResults[i].middlename}</td>
-    <td>${GVUResults[i].lastname}</td>
-    <td>${GVUResults[i].email}</td>
-    <td>${GVUResults[i].birthday}</td>
-    <td>${GVUResults[i].sex}</td>
-    <td>${GVUResults[i].password}</td>
-    <td>${GVUResults[i].position}</td>
-    <td>${GVUResults[i].address}</td>
-    <td>${GVUResults[i].contact}</td>
-    <td>${GVUResults[i].about}</td>
-    <td>${GVUResults[i].twitterprofile}</td>
-    <td>${GVUResults[i].facebookprofile}</td>
-    <td>${GVUResults[i].instagramprofile}</td>
-    <td>${GVUResults[i].linkedinprofile}</td>
-    <td>${GVUResults[i].added_at}</td>
-    <th scope="col" class="table-info">
-    <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
-
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="bi bi-trash"></i></a>
-    
-    </div>
-    </th>
-    </tr>`;
+    <td>${GVAUDResults[i].action}</td>
+    <td>${GVAUDResults[i].added_at}</td>
+     </tr>`;
     
 }
 
 let numberOfPages = '';
-numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results</h8>`;
+numberOfPages += `<h8>Showing `+GVAUDdefaultRow+` out of `+GVAUDAccLength+` results</h8>`;
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }
@@ -365,36 +309,36 @@ document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 const sortCurrentTable = (headerTitle) =>{
 
 
-    for(let i = 0; i<GVUNumRows; i++){
-        GVUResultsSorted[i] = GVUResults[GVUIndexPage+i];
-    }//Fill the GVUResultsSorted with GVUResults only needed
+    for(let i = 0; i<GVAUDNumRows; i++){
+        GVAUDResultsSorted[i] = GVAUDResults[GVAUDIndexPage+i];
+    }//Fill the GVAUDResultsSorted with GVAUDResults only needed
 
-if(GVUIsSorted){
+if(GVAUDIsSorted){
  
-    for(let i = 0; i<GVUNumRows-1; i++){
-        for(let j = 0; j<GVUNumRows-1; j++){
-         if(GVUResultsSorted[j][headerTitle]> GVUResultsSorted[j+1][headerTitle]){
-             // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
-             let temp = GVUResultsSorted[j];
-             GVUResultsSorted[j] = GVUResultsSorted[j+1];
-             GVUResultsSorted[j+1] = temp;
+    for(let i = 0; i<GVAUDNumRows-1; i++){
+        for(let j = 0; j<GVAUDNumRows-1; j++){
+         if(GVAUDResultsSorted[j][headerTitle]> GVAUDResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVAUDResultsSorted[j].id+" > "+" b = "+GVAUDResultsSorted[j+1].id);
+             let temp = GVAUDResultsSorted[j];
+             GVAUDResultsSorted[j] = GVAUDResultsSorted[j+1];
+             GVAUDResultsSorted[j+1] = temp;
       }
      }
    }
-   GVUIsSorted = false;//after sorted then reverse sort
+   GVAUDIsSorted = false;//after sorted then reverse sort
 }else{
   
-    for(let i = 0; i<GVUNumRows-1; i++){
-        for(let j = 0; j<GVUNumRows-1; j++){
-         if(GVUResultsSorted[j][headerTitle] < GVUResultsSorted[j+1][headerTitle]){
-             // console.log("a = "+GVUResultsSorted[j].id+" > "+" b = "+GVUResultsSorted[j+1].id);
-             let temp = GVUResultsSorted[j];
-             GVUResultsSorted[j] = GVUResultsSorted[j+1];
-             GVUResultsSorted[j+1] = temp;
+    for(let i = 0; i<GVAUDNumRows-1; i++){
+        for(let j = 0; j<GVAUDNumRows-1; j++){
+         if(GVAUDResultsSorted[j][headerTitle] < GVAUDResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVAUDResultsSorted[j].id+" > "+" b = "+GVAUDResultsSorted[j+1].id);
+             let temp = GVAUDResultsSorted[j];
+             GVAUDResultsSorted[j] = GVAUDResultsSorted[j+1];
+             GVAUDResultsSorted[j+1] = temp;
       }
      }
    }
-   GVUIsSorted = true;//after sorted then reverse sort
+   GVAUDIsSorted = true;//after sorted then reverse sort
 }
    
 
@@ -411,39 +355,15 @@ const bindAllDataIntoTableSorted = function (){
     
     let output ='';
     
-    for(let i = 0; i<GVUNumRows; i++){
+    for(let i = 0; i<GVAUDNumRows; i++){
         output += `<tr>
-        <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-        <td>${GVUResultsSorted[i].username}</td>
-        <td>${GVUResultsSorted[i].firstname}</td>
-        <td>${GVUResultsSorted[i].middlename}</td>
-        <td>${GVUResultsSorted[i].lastname}</td>
-        <td>${GVUResultsSorted[i].email}</td>
-        <td>${GVUResultsSorted[i].birthday}</td>
-        <td>${GVUResultsSorted[i].sex}</td>
-        <td>${GVUResultsSorted[i].password}</td>
-        <td>${GVUResultsSorted[i].position}</td>
-        <td>${GVUResultsSorted[i].address}</td>
-        <td>${GVUResultsSorted[i].contact}</td>
-        <td>${GVUResultsSorted[i].about}</td>
-        <td>${GVUResultsSorted[i].twitterprofile}</td>
-        <td>${GVUResultsSorted[i].facebookprofile}</td>
-        <td>${GVUResultsSorted[i].instagramprofile}</td>
-        <td>${GVUResultsSorted[i].linkedinprofile}</td>
-        <td>${GVUResultsSorted[i].added_at}</td>
-        <th scope="col" class="table-info">
-        <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
-
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="bi bi-trash"></i></a>
-    
-    </div>
-        </th>
+        <td>${GVAUDResults[i].action}</td>
+        <td>${GVAUDResultsSorted[i].added_at}</td>
         </tr>`;
     }
    
     let numberOfPages = '';
-    numberOfPages += `<h8>Showing `+GVUdefaultRow+` out of `+GVUAccLength+` results</h8>`;
+    numberOfPages += `<h8>Showing `+GVAUDdefaultRow+` out of `+GVAUDAccLength+` results</h8>`;
     document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
@@ -498,30 +418,30 @@ try{
 //Select bind data
 
 const selectNumPage = function(){
-    GVUIsSorted = false;//Default the not sorted
+    GVAUDIsSorted = false;//Default the not sorted
     if(selectPage.value === '5'){
-        GVUIndexPage = 0;
-        GVUNumRows = 5;
-        GVURowPerPage = 5;
-        GVUdefaultRow = 5;
+        GVAUDIndexPage = 0;
+        GVAUDNumRows = 5;
+        GVAUDRowPerPage = 5;
+        GVAUDdefaultRow = 5;
     }else if(selectPage.value === '10'){
         console.log("10")
-        GVUNumRows = 10;
-        GVUIndexPage = 0;
-        GVURowPerPage = 10;
-        GVUdefaultRow = 10;
+        GVAUDNumRows = 10;
+        GVAUDIndexPage = 0;
+        GVAUDRowPerPage = 10;
+        GVAUDdefaultRow = 10;
     }else if(selectPage.value === '25'){
         console.log("25")
-        GVUNumRows = 25;
-        GVUIndexPage = 0;
-        GVURowPerPage = 25;
-        GVUdefaultRow = 25;
+        GVAUDNumRows = 25;
+        GVAUDIndexPage = 0;
+        GVAUDRowPerPage = 25;
+        GVAUDdefaultRow = 25;
     }else{
 
-        GVUIndexPage = 0;
-        GVUNumRows = GVUAccLength;
-        GVURowPerPage = GVUAccLength;
-        GVUdefaultRow = GVUAccLength;
+        GVAUDIndexPage = 0;
+        GVAUDNumRows = GVAUDAccLength;
+        GVAUDRowPerPage = GVAUDAccLength;
+        GVAUDdefaultRow = GVAUDAccLength;
     }
     bindAllDataIntoTable();
 }
@@ -533,17 +453,17 @@ console.log(userSearch !== "");
 if(userSearch !== ""){
     let results = [];//Temporary JSON
 
-    for(let i = 0; i<GVUResults.length;i++){
-        for( key in GVUResults[i]){
-            if(GVUResults[i][key].indexOf(userSearch) != -1){
-                results.push(GVUResults[i]);
+    for(let i = 0; i<GVAUDResults.length;i++){
+        for( key in GVAUDResults[i]){
+            if(GVAUDResults[i][key].indexOf(userSearch) != -1){
+                results.push(GVAUDResults[i]);
                 break;
             }
         }
     }//Put all match results in results obj
     
-    GVUNumRows = results.length;//set the value of numrows
-    GVUResultsSorted = results;
+    GVAUDNumRows = results.length;//set the value of numrows
+    GVAUDResultsSorted = results;
     bindAllDataIntoTableSorted();
 }else{
     bindAllDataIntoTable();
@@ -596,21 +516,11 @@ const resetFields = () =>{
 
 //Call it to refresh the table
  refreshTable = () =>{
-     GVUIndexPage = 0;
+     GVAUDIndexPage = 0;
     resetFields();
     getAllDataAPI();
 }
 
-
-
-//Validate Email
-const validateEmail = (mail) =>{
-    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(mail.match(mailformat))
-    {
-    return true;
-    }
-}
 
 //Check all of the fields
 const checkAllFields = () =>{
@@ -657,8 +567,7 @@ const checkAllFields = () =>{
     let Linkedin = document.getElementById('newlinkedinprofileURL').value;
 
     if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
-    let message ="";
-        if(isNaN(Contact) || Contact.length > 11){
+     if(isNaN(Contact) || Contact.length > 11){
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
         btnError.removeAttribute("hidden");
@@ -673,26 +582,10 @@ const checkAllFields = () =>{
             btnCreateUsers.style.display = "inline-block";
         }
         setTimeout(delayedAlert, 3000);
-     }
-     else if(validateEmail(Email) !== true){
-        console.log(validateEmail(Email))
-     message += ` Please input a valid email!`
-     document.querySelector('#alertErrorMessage').innerHTML = message;
-
-         alertError.removeAttribute("hidden");
-         alertError.classList.add('show');
-      
-
-
-     delayedRemoveAlert = () =>{   
-         alertError.classList.remove('show');  
-         alertError.setAttribute("hidden", "hidden");
-     }
-     setTimeout(delayedRemoveAlert, 1000);
-    }else{
+     }else{
         createUserAccount();
      }
-
+        
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -830,7 +723,23 @@ for (var pair of formData.entries()) {
             setTimeout(delayedRemoveAlert, 6000);
           }
 
-          
+          if(response.statusCode === 201){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Username Already Exist!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnError.setAttribute("hidden", "hidden");//Is loading true
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 3000);
+
+          }
             
         })
     .catch(err => console.log(err))
@@ -846,28 +755,28 @@ let Photo = document.getElementById('currentPhoto').src = Image_Url;
 
 //Edit User Data Not sorted
 const editUserNotSorted = (a) =>{
-    for(let i =0 ; i< GVUResults.length;i++ ){
-        if(GVUResults[i].id == a){
+    for(let i =0 ; i< GVAUDResults.length;i++ ){
+        if(GVAUDResults[i].id == a){
            
-         let UserId = document.getElementById('editId').value =  GVUResults[i].id;    
+         let UserId = document.getElementById('editId').value =  GVAUDResults[i].id;    
 
-         let Fname = document.getElementById('editFname').value =  GVUResults[i].firstname;
+         let Fname = document.getElementById('editFname').value =  GVAUDResults[i].firstname;
         
-         let Mname = document.getElementById('editMname').value =  GVUResults[i].middlename;
+         let Mname = document.getElementById('editMname').value =  GVAUDResults[i].middlename;
         
-         let Lname = document.getElementById('editLname').value =  GVUResults[i].lastname;
+         let Lname = document.getElementById('editLname').value =  GVAUDResults[i].lastname;
      
-         let Email = document.getElementById('editEmail').value=   GVUResults[i].email ;
+         let Email = document.getElementById('editEmail').value=   GVAUDResults[i].email ;
       
-         let Username = document.getElementById('editUsername').value =  GVUResults[i].username;
+         let Username = document.getElementById('editUsername').value =  GVAUDResults[i].username;
      
-         let Password = document.getElementById('editPassword').value =  GVUResults[i].password;
+         let Password = document.getElementById('editPassword').value =  GVAUDResults[i].password;
          
-         let Job = document.getElementById('editJob').value =    GVUResults[i].position;
+         let Job = document.getElementById('editJob').value =    GVAUDResults[i].position;
      
-         let Birthday = document.getElementById('editBirthday').value =  GVUResults[i].birthday;
+         let Birthday = document.getElementById('editBirthday').value =  GVAUDResults[i].birthday;
          
-         let Sex = GVUResults[i].sex;
+         let Sex = GVAUDResults[i].sex;
       
          if(Sex === "Male"){
              document.getElementById('editmaleCheck').checked = true;
@@ -875,19 +784,19 @@ const editUserNotSorted = (a) =>{
          if(Sex === "Female"){
              document.getElementById('editfemaleCheck').checked = true;
          }
-         let Contact = document.getElementById('editContact').value =    GVUResults[i].contact;
+         let Contact = document.getElementById('editContact').value =    GVAUDResults[i].contact;
      
-         let Address = document.getElementById('editAddress').value =    GVUResults[i].address;
+         let Address = document.getElementById('editAddress').value =    GVAUDResults[i].address;
       
-         let About = document.getElementById('editAbout').value =    GVUResults[i].about;
+         let About = document.getElementById('editAbout').value =    GVAUDResults[i].about;
       
-         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResults[i].twitterprofile;
+         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVAUDResults[i].twitterprofile;
      
-         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResults[i].facebookprofile;
+         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVAUDResults[i].facebookprofile;
       
-         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResults[i].instagramprofile;
+         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVAUDResults[i].instagramprofile;
      
-         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResults[i].linkedinprofile;
+         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVAUDResults[i].linkedinprofile;
          break;
      }
     }
@@ -900,28 +809,28 @@ const editUserNotSorted = (a) =>{
 
 const editUserSorted = (a) =>{
     
-    for(let i =0 ; i< GVUNumRows;i++ ){
-        if(GVUResultsSorted[i].id == a){
+    for(let i =0 ; i< GVAUDNumRows;i++ ){
+        if(GVAUDResultsSorted[i].id == a){
 
-         let UserId = document.getElementById('editId').value =  GVUResultsSorted[i].id;   
+         let UserId = document.getElementById('editId').value =  GVAUDResultsSorted[i].id;   
      
-         let Fname = document.getElementById('editFname').value =  GVUResultsSorted[i].firstname;
+         let Fname = document.getElementById('editFname').value =  GVAUDResultsSorted[i].firstname;
  
-         let Mname = document.getElementById('editMname').value =  GVUResultsSorted[i].middlename;
+         let Mname = document.getElementById('editMname').value =  GVAUDResultsSorted[i].middlename;
         
-         let Lname = document.getElementById('editLname').value =  GVUResultsSorted[i].lastname;
+         let Lname = document.getElementById('editLname').value =  GVAUDResultsSorted[i].lastname;
      
-         let Email = document.getElementById('editEmail').value =   GVUResultsSorted[i].email ;
+         let Email = document.getElementById('editEmail').value =   GVAUDResultsSorted[i].email ;
       
-         let Username = document.getElementById('editUsername').value =  GVUResultsSorted[i].username;
+         let Username = document.getElementById('editUsername').value =  GVAUDResultsSorted[i].username;
      
-         let Password = document.getElementById('editPassword').value =  GVUResultsSorted[i].password;
+         let Password = document.getElementById('editPassword').value =  GVAUDResultsSorted[i].password;
          
-         let Job = document.getElementById('editJob').value =    GVUResultsSorted[i].position;
+         let Job = document.getElementById('editJob').value =    GVAUDResultsSorted[i].position;
      
-         let Birthday = document.getElementById('editBirthday').value =  GVUResultsSorted[i].birthday;
+         let Birthday = document.getElementById('editBirthday').value =  GVAUDResultsSorted[i].birthday;
          
-         let Sex = GVUResultsSorted[i].sex;
+         let Sex = GVAUDResultsSorted[i].sex;
          
          if(Sex === "Male"){
              document.getElementById('editmaleCheck').checked = true;
@@ -930,19 +839,19 @@ const editUserSorted = (a) =>{
              document.getElementById('editfemaleCheck').checked = true;
          }
      
-         let Contact = document.getElementById('editContact').value =    GVUResultsSorted[i].contact;
+         let Contact = document.getElementById('editContact').value =    GVAUDResultsSorted[i].contact;
      
-         let Address = document.getElementById('editAddress').value =    GVUResultsSorted[i].address;
+         let Address = document.getElementById('editAddress').value =    GVAUDResultsSorted[i].address;
       
-         let About = document.getElementById('editAbout').value =    GVUResultsSorted[i].about;
+         let About = document.getElementById('editAbout').value =    GVAUDResultsSorted[i].about;
       
-         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResultsSorted[i].twitterprofile;
+         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVAUDResultsSorted[i].twitterprofile;
      
-         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResultsSorted[i].facebookprofile;
+         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVAUDResultsSorted[i].facebookprofile;
       
-         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResultsSorted[i].instagramprofile;
+         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVAUDResultsSorted[i].instagramprofile;
      
-         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResultsSorted[i].linkedinprofile;
+         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVAUDResultsSorted[i].linkedinprofile;
          break;
      }
     }
@@ -992,7 +901,7 @@ const editUserSorted = (a) =>{
     let Linkedin = document.getElementById('editlinkedinprofileURL').value 
 
     if(UserId !=="" && Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  "" && Twitter !==  "" && Facebook !==  "" && Instagram !==  "" &&Linkedin !==  "" ){
-        let message ="";
+       
         if(isNaN(Contact) || Contact.length > 11){
             alertShowError.classList.add('show');
             alertShowError.removeAttribute("hidden");
@@ -1008,22 +917,7 @@ const editUserSorted = (a) =>{
                 btnCreateUsers.style.display = "inline-block";
             }
             setTimeout(delayedAlert, 3000);
-         }else if(validateEmail(Email) !== true){
-            console.log(validateEmail(Email))
-         message += ` Please input a valid email!`
-         document.querySelector('#alertErrorMessage').innerHTML = message;
-    
-             alertError.removeAttribute("hidden");
-             alertError.classList.add('show');
-          
-    
-    
-         delayedRemoveAlert = () =>{   
-             alertError.classList.remove('show');  
-             alertError.setAttribute("hidden", "hidden");
-         }
-         setTimeout(delayedRemoveAlert, 1000);
-        }else{
+         }else{
             updateUser();
          }
     }else{
@@ -1128,14 +1022,14 @@ let message = '';
                 document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-
+                
             }
             setTimeout(delayedShowAlert, 1000)
             delayedRemoveAlert = () =>{   
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 3000);
+            setTimeout(delayedRemoveAlert, 1000);
           }
         }
 

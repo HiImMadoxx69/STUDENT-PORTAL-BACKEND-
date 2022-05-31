@@ -65,10 +65,11 @@ if(isset($_SESSION['StudentID'])){
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
+                  <a href ="../../homepage/homepage.php" ><i class ="bi bi-house-door"></i></a>
                   <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="../img/globe-client-logo.png" alt="">
-                  <span class="d-none d-lg-block" style ="color:#08203c;">My Student Portal</span>
+                  <span class="d-none d-lg-block" style ="color:#08203c;">Student Portal</span>
                 </a>
               </div><!-- End Logo --><p class="text-center small">Enter your Student Id & Password to Login</p>
                   </div>
