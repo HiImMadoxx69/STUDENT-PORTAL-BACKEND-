@@ -96,28 +96,25 @@ const getAllCourses = async () =>{
         const twentyFourHrInMs = 24 * 60 * 60 * 1000;
 
         const twentyFourHoursAgo = Date.now() - twentyFourHrInMs;
-
         try{
-        let ouput = '';
+    
         const fetchResponse = await fetch('../controller/audit-table.php');
 
         const getResponse = await fetchResponse.json();
         
-
-let output = '';
+        let output = '';
 
         for(let i = 0; i < getResponse.length; i++){
-            if(i > 3){
-                break;
-            }
+        if(i < 5){
+            if(Date.parse(getResponse[i].added_at) > twentyFourHoursAgo){
                 output += `<div class="activity-item d-flex">
                 <div class="activite-label">`+getResponse[i].added_at+`</div>
                 <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
                 <div class="activity-content">`+getResponse[i].action+`
                 </div>
               </div>`;
-            
-            
+              }
+        }
         }
         document.querySelector('#activity-body-list').innerHTML = output;
     }catch(error){

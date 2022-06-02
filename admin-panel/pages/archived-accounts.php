@@ -194,6 +194,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Archives Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed " href="miscellaneous-fee.php">
+          <i class="bi bi-currency-dollar"></i>
+          <span>Miscellaneous Fee</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link" href="archived-accounts.php">
           <i class="bi bi-archive"></i>
           <span>Archives</span>

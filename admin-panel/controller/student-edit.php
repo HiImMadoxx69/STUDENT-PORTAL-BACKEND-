@@ -26,7 +26,7 @@ if (isset($userCurrentId)) {
 
   
  try{
-                  $sql = "UPDATE `tbl_studentinfo` SET `studentnumber` = '$studNum', `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `email` = '$email', `address` = '$address', `password` = '$password', `sex` = '$sex', `course` = '$course', `birthday` = '$birthday', `contact` = '$contact', `guardian` = '$guardian', `guardian_contact` = '$guardianNum' WHERE `tbl_studentinfo`.`id` = $userCurrentId;";
+                  $sql = "UPDATE `tbl_studentinfo` SET `studentnumber` = '$studNum', `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `email` = '$email', `address` = '$address', `password` = '$password', `sex` = '$sex', `course` = '$course',`section` = '$section', `birthday` = '$birthday', `contact` = '$contact', `guardian` = '$guardian', `guardian_contact` = '$guardianNum' WHERE `tbl_studentinfo`.`id` = $userCurrentId;";
     
                   mysqli_query($con, $sql);
 

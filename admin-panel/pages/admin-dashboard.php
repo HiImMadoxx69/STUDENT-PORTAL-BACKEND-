@@ -22,13 +22,12 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../img/globe-client-logo.png" rel="icon">
-  <link href="../img/globe-client-logo.png" rel="apple-touch-icon">
+  <link href="../img/globe-client-logo.png" width = "100px" height ="100px"rel="icon">
 
   <!-- Google Fonts -->
  <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -190,6 +189,20 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Archives Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed " href="miscellaneous-fee.php">
+          <i class="bi bi-currency-dollar"></i>
+          <span>Miscellaneous Fee</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="announcement.php">
+          <i class="bi bi-file-earmark-medical"></i>
+          <span>Announcement</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
           <i class="bi bi-archive"></i>
           <span>Archives</span>
@@ -237,7 +250,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-person-circle"></i>
+                      <i class="bi bi-people-fill"></i>
                     </div>
                     <div class="ps-3">
                       <h6 id ="totalUserAccounts"></h6>
@@ -299,7 +312,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-book"></i>
+                      <i class="bx bxs-graduation"></i>
                     </div>
                     <div class="ps-3">
                       <h6 id ="totalCourse"></h6>

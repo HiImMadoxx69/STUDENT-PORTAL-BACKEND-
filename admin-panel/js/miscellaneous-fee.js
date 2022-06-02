@@ -1,45 +1,45 @@
-//GLOBAL VARIABLES SUBJECT = GVS
+//GLOBAL VARIABLES MISCELLANEOUS FEE = GVMF
 //Current number of rows
-var GVSdefaultRow = 0;
+var GVMFdefaultRow = 0;
 //CurrentIndexPage global
-var GVSIndexPage = 0;
+var GVMFIndexPage = 0;
 
 //Get the total length of table
-var GVSAccLength = 0;
+var GVMFAccLength = 0;
 
 //JSON global results variable
-var GVSResults = {};
+var GVMFResults = {};
 
 //JSON global result sorted variable
-var GVSResultsSorted = {};
+var GVMFResultsSorted = {};
 
 //Check if already sorted
-var GVSIsSorted = false;
+var GVMFIsSorted = false;
 //Default number of row global
-var GVSNumRows = 0;
+var GVMFNumRows = 0;
 
 //If the default row is less than 10
-var GVSLessThanRow = 0;
+var GVMFLessThanRow = 0;
 
 //Get desired number of row per page
-var GVSRowPerPage = 0;
+var GVMFRowPerPage = 0;
 
 //NextPage Call
 const nextpageCall = function nextPageCall(){
 
-    if(((GVSAccLength - GVSdefaultRow) < 10) && GVSLessThanRow === 0){
+    if(((GVMFAccLength - GVMFdefaultRow) < 10) && GVMFLessThanRow === 0){
       console.log("LOL")
-        GVSLessThanRow = GVSAccLength - GVSdefaultRow;
-        GVSdefaultRow += GVSLessThanRow;
+        GVMFLessThanRow = GVMFAccLength - GVMFdefaultRow;
+        GVMFdefaultRow += GVMFLessThanRow;
         bindAllDataIntoTable();
     }
     console.log("LMAo")
-    console.log("next page GVSdefaultRow: "+GVSdefaultRow +" GVSAccLength:"+GVSAccLength+" GVSIndexPage:" +GVSIndexPage +" <= GVSRowPerPage:"+GVSRowPerPage);
-    if(GVSdefaultRow < GVSAccLength ){
+    console.log("next page GVMFdefaultRow: "+GVMFdefaultRow +" GVMFAccLength:"+GVMFAccLength+" GVMFIndexPage:" +GVMFIndexPage +" <= GVMFRowPerPage:"+GVMFRowPerPage);
+    if(GVMFdefaultRow < GVMFAccLength ){
        
-        GVSdefaultRow += GVSRowPerPage;
-        console.log("next page GVSdefaultRow:"+GVSdefaultRow)
-        GVSIndexPage +=GVSRowPerPage;
+        GVMFdefaultRow += GVMFRowPerPage;
+        console.log("next page GVMFdefaultRow:"+GVMFdefaultRow)
+        GVMFIndexPage +=GVMFRowPerPage;
         bindAllDataIntoTable();
     }
 }
@@ -49,15 +49,15 @@ const nextpageCall = function nextPageCall(){
 //PrevPage Call
 const prevpageCall = function nextPageCall(){
   
-    // console.log('Less than row'+GVSLessThanRow);
-    if(GVSLessThanRow !== 0){
+    // console.log('Less than row'+GVMFLessThanRow);
+    if(GVMFLessThanRow !== 0){
     
-        GVSdefaultRow = GVSdefaultRow - GVSLessThanRow;
-        GVSLessThanRow = 0;
+        GVMFdefaultRow = GVMFdefaultRow - GVMFLessThanRow;
+        GVMFLessThanRow = 0;
     }
-    if(GVSIndexPage >= GVSRowPerPage){
-        GVSdefaultRow -= GVSRowPerPage;
-        GVSIndexPage -=GVSRowPerPage;
+    if(GVMFIndexPage >= GVMFRowPerPage){
+        GVMFdefaultRow -= GVMFRowPerPage;
+        GVMFIndexPage -=GVMFRowPerPage;
         bindAllDataIntoTable();
     }
    
@@ -109,16 +109,16 @@ window.onload = function(){
 //getAllData Function
 function getAllDataAPI(){
     //get user accounts
-    fetch('../controller/subject-table.php').then((res) => res.json())
+    fetch('../controller/miscellaneous-fee-table.php').then((res) => res.json())
     .then(response => {
 
-        GVSResults = response;//Store the responseJSON into GVSResults global var
+        GVMFResults = response;//Store the responseJSON into GVMFResults global var
        
-        GVSAccLength = response.length;//getThe totalLength
-        GVSNumRows = 0;//Set Number of rows default
+        GVMFAccLength = response.length;//getThe totalLength
+        GVMFNumRows = 0;//Set Number of rows default
         
         let selectHolder = '';
-        if(GVSAccLength >= 75){
+        if(GVMFAccLength >= 75){
            
             selectHolder += `
             <option value="5" selected>5</option>
@@ -126,14 +126,14 @@ function getAllDataAPI(){
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="ALL">All</option>`;
-        }else if (GVSAccLength >= 50){
+        }else if (GVMFAccLength >= 50){
            
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="ALL">All</option>`;
-        }else if(GVSAccLength >= 15){
+        }else if(GVMFAccLength >= 15){
             
             selectHolder += `
             <option value="5" selected>5</option>
@@ -147,21 +147,21 @@ function getAllDataAPI(){
         document.querySelector('#selectPage').innerHTML = selectHolder;// set the rows per page
 
         if(selectPage.value === '5'){
-            GVSNumRows = 5;
-            GVSRowPerPage = 5;
-            GVSdefaultRow = 5;
+            GVMFNumRows = 5;
+            GVMFRowPerPage = 5;
+            GVMFdefaultRow = 5;
         }else if (selectPage.value === '10'){
-            GVSNumRows = 10;
-            GVSRowPerPage = 10
-            GVSdefaultRow = 10;
+            GVMFNumRows = 10;
+            GVMFRowPerPage = 10
+            GVMFdefaultRow = 10;
         }else if (selectPage.value === '25'){
-            GVSNumRows = 25;
-            GVSRowPerPage = 25;
-            GVSdefaultRow = 25;
+            GVMFNumRows = 25;
+            GVMFRowPerPage = 25;
+            GVMFdefaultRow = 25;
         }else{
-            GVSNumRows = GVSAccLength;
-            GVSRowPerPage = GVSAccLength;
-            GVSdefaultRow = GVSAccLength;
+            GVMFNumRows = GVMFAccLength;
+            GVMFRowPerPage = GVMFAccLength;
+            GVMFdefaultRow = GVMFAccLength;
         }// rows condition
 
         bindAllDataIntoTable();//Bind the data into table once fetch successfull
@@ -260,10 +260,10 @@ const changePicModal =  (id) =>{
     let changePicUserID = document.getElementById('changePicUserID').value = id;
     console.log(id)
     let output = '';
-    for(let i =0 ; i< GVSdefaultRow;i++ ){
-        if(GVSResults[i].id == id){
+    for(let i =0 ; i< GVMFdefaultRow;i++ ){
+        if(GVMFResults[i].id == id){
             console.log("true")
-            output += `<img src = "../../uploads/${GVSResults[i].profile_url} " alt="Profile" style="max-width:350px; max-height:350px;" "/>
+            output += `<img src = "../../uploads/${GVMFResults[i].profile_url} " alt="Profile" style="max-width:350px; max-height:350px;" "/>
             `;
             
             break;
@@ -276,19 +276,17 @@ const changePicModal =  (id) =>{
 const bindAllDataIntoTable = function (){   
     let output ='';
 
-for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
- console.log("GVSIndexPage: "+GVSIndexPage+"< GVSDefaultRow:" +GVSdefaultRow)
+for(let i = GVMFIndexPage; i<GVMFdefaultRow; i++){
+ console.log("GVMFIndexPage: "+GVMFIndexPage+"< GVMFDefaultRow:" +GVMFdefaultRow)
     output += `<tr>
-   <td>${GVSResults[i].subject_code}</td>
-    <td>${GVSResults[i].subject_name}</td>
-    <td>${GVSResults[i].units}</td>
-    <td>${GVSResults[i].amount}</td>
-    <td>${GVSResults[i].added_at}</td>
+    <td>${GVMFResults[i].name}</td>
+    <td>${GVMFResults[i].amount}</td>
+    <td>${GVMFResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVMFResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].subject_code}');return false;"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
     </th>
@@ -297,7 +295,7 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
 }
 
 let numberOfPages = '';
-numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results</h8>`;
+numberOfPages += `<h8>Showing `+GVMFdefaultRow+` out of `+GVMFAccLength+` results</h8>`;
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }
@@ -311,36 +309,36 @@ document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 const sortCurrentTable = (headerTitle) =>{
 
 
-    for(let i = 0; i<GVSNumRows; i++){
-        GVSResultsSorted[i] = GVSResults[GVSIndexPage+i];
-    }//Fill the GVSResultsSorted with GVSResults only needed
+    for(let i = 0; i<GVMFNumRows; i++){
+        GVMFResultsSorted[i] = GVMFResults[GVMFIndexPage+i];
+    }//Fill the GVMFResultsSorted with GVMFResults only needed
 
-if(GVSIsSorted){
+if(GVMFIsSorted){
  
-    for(let i = 0; i<GVSNumRows-1; i++){
-        for(let j = 0; j<GVSNumRows-1; j++){
-         if(GVSResultsSorted[j][headerTitle]> GVSResultsSorted[j+1][headerTitle]){
-             // console.log("a = "+GVSResultsSorted[j].id+" > "+" b = "+GVSResultsSorted[j+1].id);
-             let temp = GVSResultsSorted[j];
-             GVSResultsSorted[j] = GVSResultsSorted[j+1];
-             GVSResultsSorted[j+1] = temp;
+    for(let i = 0; i<GVMFNumRows-1; i++){
+        for(let j = 0; j<GVMFNumRows-1; j++){
+         if(GVMFResultsSorted[j][headerTitle]> GVMFResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVMFResultsSorted[j].id+" > "+" b = "+GVMFResultsSorted[j+1].id);
+             let temp = GVMFResultsSorted[j];
+             GVMFResultsSorted[j] = GVMFResultsSorted[j+1];
+             GVMFResultsSorted[j+1] = temp;
       }
      }
    }
-   GVSIsSorted = false;//after sorted then reverse sort
+   GVMFIsSorted = false;//after sorted then reverse sort
 }else{
   
-    for(let i = 0; i<GVSNumRows-1; i++){
-        for(let j = 0; j<GVSNumRows-1; j++){
-         if(GVSResultsSorted[j][headerTitle] < GVSResultsSorted[j+1][headerTitle]){
-             // console.log("a = "+GVSResultsSorted[j].id+" > "+" b = "+GVSResultsSorted[j+1].id);
-             let temp = GVSResultsSorted[j];
-             GVSResultsSorted[j] = GVSResultsSorted[j+1];
-             GVSResultsSorted[j+1] = temp;
+    for(let i = 0; i<GVMFNumRows-1; i++){
+        for(let j = 0; j<GVMFNumRows-1; j++){
+         if(GVMFResultsSorted[j][headerTitle] < GVMFResultsSorted[j+1][headerTitle]){
+             // console.log("a = "+GVMFResultsSorted[j].id+" > "+" b = "+GVMFResultsSorted[j+1].id);
+             let temp = GVMFResultsSorted[j];
+             GVMFResultsSorted[j] = GVMFResultsSorted[j+1];
+             GVMFResultsSorted[j+1] = temp;
       }
      }
    }
-   GVSIsSorted = true;//after sorted then reverse sort
+   GVMFIsSorted = true;//after sorted then reverse sort
 }
    
 
@@ -357,18 +355,16 @@ const bindAllDataIntoTableSorted = function (){
     
     let output ='';
     
-    for(let i = 0; i<GVSNumRows; i++){
+    for(let i = 0; i<GVMFNumRows; i++){
         output += `<tr>
-         <td>${GVSResultsSorted[i].subject_code}</td>
-        <td>${GVSResultsSorted[i].subject_name}</td>
-        <td>${GVSResultsSorted[i].units}</td>
-        <td>${GVSResultsSorted[i].amount}</td>
-        <td>${GVSResultsSorted[i].added_at}</td>
+        <td>${GVMFResultsSorted[i].name}</td>
+        <td>${GVMFResultsSorted[i].amount}</td>
+        <td>${GVMFResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVMFResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].subject_code}');return false;"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
         </th>
@@ -376,7 +372,7 @@ const bindAllDataIntoTableSorted = function (){
     }
    
     let numberOfPages = '';
-    numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results</h8>`;
+    numberOfPages += `<h8>Showing `+GVMFdefaultRow+` out of `+GVMFAccLength+` results</h8>`;
     document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
@@ -403,7 +399,7 @@ formData.append('UserID', id);
 formData.append('Status', removedDate);
 
 try{
-    const fetchRemove = await fetch("../controller/subject-remove.php",{
+    const fetchRemove = await fetch("../controller/miscellaneous-fee-remove.php",{
           method: "POST",
           body: formData,
       });
@@ -431,30 +427,30 @@ try{
 //Select bind data
 
 const selectNumPage = function(){
-    GVSIsSorted = false;//Default the not sorted
+    GVMFIsSorted = false;//Default the not sorted
     if(selectPage.value === '5'){
-        GVSIndexPage = 0;
-        GVSNumRows = 5;
-        GVSRowPerPage = 5;
-        GVSdefaultRow = 5;
+        GVMFIndexPage = 0;
+        GVMFNumRows = 5;
+        GVMFRowPerPage = 5;
+        GVMFdefaultRow = 5;
     }else if(selectPage.value === '10'){
         console.log("10")
-        GVSNumRows = 10;
-        GVSIndexPage = 0;
-        GVSRowPerPage = 10;
-        GVSdefaultRow = 10;
+        GVMFNumRows = 10;
+        GVMFIndexPage = 0;
+        GVMFRowPerPage = 10;
+        GVMFdefaultRow = 10;
     }else if(selectPage.value === '25'){
         console.log("25")
-        GVSNumRows = 25;
-        GVSIndexPage = 0;
-        GVSRowPerPage = 25;
-        GVSdefaultRow = 25;
+        GVMFNumRows = 25;
+        GVMFIndexPage = 0;
+        GVMFRowPerPage = 25;
+        GVMFdefaultRow = 25;
     }else{
 
-        GVSIndexPage = 0;
-        GVSNumRows = GVSAccLength;
-        GVSRowPerPage = GVSAccLength;
-        GVSdefaultRow = GVSAccLength;
+        GVMFIndexPage = 0;
+        GVMFNumRows = GVMFAccLength;
+        GVMFRowPerPage = GVMFAccLength;
+        GVMFdefaultRow = GVMFAccLength;
     }
     bindAllDataIntoTable();
 }
@@ -466,17 +462,17 @@ console.log(userSearch !== "");
 if(userSearch !== ""){
     let results = [];//Temporary JSON
 
-    for(let i = 0; i<GVSResults.length;i++){
-        for( key in GVSResults[i]){
-            if(GVSResults[i][key].indexOf(userSearch) != -1){
-                results.push(GVSResults[i]);
+    for(let i = 0; i<GVMFResults.length;i++){
+        for( key in GVMFResults[i]){
+            if(GVMFResults[i][key].indexOf(userSearch) != -1){
+                results.push(GVMFResults[i]);
                 break;
             }
         }
     }//Put all match results in results obj
     
-    GVSNumRows = results.length;//set the value of numrows
-    GVSResultsSorted = results;
+    GVMFNumRows = results.length;//set the value of numrows
+    GVMFResultsSorted = results;
     bindAllDataIntoTableSorted();
 }else{
     bindAllDataIntoTable();
@@ -490,12 +486,8 @@ if(userSearch !== ""){
 const btnEditUsers = document.getElementById('btnEditUsers');
 
 const resetFields = () =>{
-    let Subject_Code = document.getElementById('newScode').value = "";
-
-    let Subject_Name= document.getElementById('newSname').value ="";
-   
-    let Units = document.getElementById('newUnits').value = "";
-
+    let Id = document.getElementById('editId').value ="";
+    let Name = document.getElementById('editName').value ="";
     let Amount = document.getElementById('newAmount').value ="";
     btnCreateUsers.setAttribute("hidden", "hidden");
     btnSuccess.removeAttribute("hidden");
@@ -503,7 +495,7 @@ const resetFields = () =>{
 
 //Call it to refresh the table
  refreshTable = () =>{
-     GVSIndexPage = 0;
+     GVMFIndexPage = 0;
     resetFields();
     getAllDataAPI();
 }
@@ -511,19 +503,17 @@ const resetFields = () =>{
 
 //Check all of the fields
 const checkAllFields = () =>{
-    let Subject_Code = document.getElementById('newScode').value;
+    let Name = document.getElementById('newName').value;
 
-    let Subject_Name= document.getElementById('newSname').value;
-   
-    let Units = document.getElementById('newUnits').value;
     let Amount = document.getElementById('newAmount').value;
-    if(Subject_Code !== "" && Subject_Name !== "" && Units !== "" && Amount !==""){
-        if(isNaN(Units) || isNaN(Amount)){
+   
+    if(Name !== "" && Amount !==""){
+        if(isNaN(Amount) || Amount < 0){
             alertShowError.classList.add('show');
             alertShowError.removeAttribute("hidden");
             btnCreateUsers.style.display = "none";
             let output = '';
-            output += ` Invalid Units!`;
+            output += ` Invalid Amount!`;
             document.querySelector('#alertErrorMessage').innerHTML = output;
             delayedAlert = () =>{
                 alertShowError.classList.remove('show');
@@ -579,26 +569,20 @@ const IsLoadingTrue =(formStatus) =>{
 const createUserAccount = (e) =>{
     
     IsLoadingTrue(true)//Start the loading button
-   
-    let Subject_Code = document.getElementById('newScode').value;
 
-    let Subject_Name= document.getElementById('newSname').value;
-   
-    let Units = document.getElementById('newUnits').value;
+    let Name= document.getElementById('newName').value;
 
     let Amount = document.getElementById('newAmount').value;
 
 formData = new FormData();
-formData.append('Subject_Code', Subject_Code);
-formData.append('Subject_Name', Subject_Name);
-formData.append('Units', Units);
+formData.append('Name', Name);
 formData.append('Amount', Amount);
 for (var pair of formData.entries()) {
     console.log(pair[0]+ ' - ' + pair[1]); 
  }
 
 
-    fetch("../controller/subject-create.php",{
+    fetch("../controller/miscellaneous-fee-create.php",{
         method: "POST",
         body:formData,
     })
@@ -630,7 +614,7 @@ for (var pair of formData.entries()) {
             alertShowError.removeAttribute("hidden");
             btnCreateUsers.style.display = "none";
             let output = '';
-            output += ` Subject Already Exist!`
+            output += ` Miscellaneous Fee Already Exist!`
             document.querySelector('#alertErrorMessage').innerHTML = output;
             delayedAlert = () =>{
                 alertShowError.classList.remove('show');
@@ -654,18 +638,11 @@ let Photo = document.getElementById('currentPhoto').src = Image_Url;
 
 //Edit User Data Not sorted
 const editUserNotSorted = (a) =>{
-    for(let i =0 ; i< GVSResults.length;i++ ){
-        if(GVSResults[i].id == a){
-           
-            let SubjectId = document.getElementById('editId').value = GVSResults[i].id;
-
-            let Subject_Code = document.getElementById('editScode').value = GVSResults[i].subject_code; 
-         
-            let Subject_Name = document.getElementById('editSname').value = GVSResults[i].subject_name;
-        
-            let Units = document.getElementById('editUnits').value = GVSResults[i].units;
-
-            let Amount = document.getElementById('editAmount').value = GVSResults[i].amount;
+    for(let i =0 ; i< GVMFResults.length;i++ ){
+        if(GVMFResults[i].id == a){
+            let Id = document.getElementById('editId').value = GVMFResults[i].id;
+            let Name = document.getElementById('editName').value =  GVMFResults[i].name; 
+            let Amount = document.getElementById('editAmount').value = GVMFResults[i].amount;
          break;
      }
     }
@@ -678,43 +655,30 @@ const editUserNotSorted = (a) =>{
 
 const editUserSorted = (a) =>{
     
-    for(let i =0 ; i< GVSNumRows;i++ ){
-        if(GVSResultsSorted[i].id == a){
-
-            let SubjectId = document.getElementById('editId').value = GVSResultsSorted[i].id;
-
-            let Subject_Code = document.getElementById('editScode').value = GVSResultsSorted[i].subject_code; 
-         
-            let Subject_Name = document.getElementById('editSname').value = GVSResultsSorted[i].subject_name;
-        
-            let Units = document.getElementById('editUnits').value = GVSResultsSorted[i].units;
-
-            let Amount = document.getElementById('editAmount').value = GVSResultsSorted[i].amount;
+    for(let i =0 ; i< GVMFNumRows;i++ ){
+        if(GVMFResultsSorted[i].id == a){
+            let Id = document.getElementById('editId').value = GVMFResultsSorted[i].id;
+            let Name = document.getElementById('editName').value =  GVMFResultsSorted[i].name; 
+            let Amount = document.getElementById('editAmount').value = GVMFResultsSorted[i].amount;
          break;
      }
     }
  }
  
  const checkEditFields = () =>{
-     
-    let SubjectId = document.getElementById('editId').value;
-
-    let Subject_Code = document.getElementById('editScode').value  
- 
-    let Subject_Name = document.getElementById('editSname').value
-
-    let Units = document.getElementById('editUnits').value;
+    let Id = document.getElementById('editId').value;
+   let Name = document.getElementById('editName').value;
 
     let Amount = document.getElementById('editAmount').value;
 
-    if(SubjectId !== "" && Subject_Code !== "" && Subject_Name !== "" && Units !== "" && Amount !== ""){
+    if(Amount !== ""){
 
-        if(isNaN(Units) || Units.length > 6){
+        if(isNaN(Amount) || Amount < 1){
             alertShowError.classList.add('show');
             alertShowError.removeAttribute("hidden");
             btnCreateUsers.style.display = "none";
             let output = '';
-            output += ` Invalid Units!`
+            output += ` Invalid Amount!`
             document.querySelector('#alertErrorMessage').innerHTML = output;
             delayedAlert = () =>{
                 alertShowError.classList.remove('show');
@@ -722,21 +686,7 @@ const editUserSorted = (a) =>{
                 btnCreateUsers.style.display = "inline-block";
             }
             setTimeout(delayedAlert, 1000);
-        }else if (isNaN(Amount) || Amount < 1){
-            alertShowError.classList.add('show');
-            alertShowError.removeAttribute("hidden");
-            btnCreateUsers.style.display = "none";
-            let output = '';
-            output += ` Invalid Units!`
-            document.querySelector('#alertErrorMessage').innerHTML = output;
-            delayedAlert = () =>{
-                alertShowError.classList.remove('show');
-                alertShowError.setAttribute("hidden", "hidden");
-                btnCreateUsers.style.display = "inline-block";
-            }
-            setTimeout(delayedAlert, 1000);
-        }
-        else{
+        }else{
             updateUser();
         }
     }else{
@@ -762,19 +712,13 @@ const updateUser = async () =>{
 
     let SubjectId = document.getElementById('editId').value;
 
-    let Subject_Code = document.getElementById('editScode').value  
- 
-    let Subject_Name = document.getElementById('editSname').value  
-     
-    let Units = document.getElementById('editUnits').value;
-    
+    let Name = document.getElementById('editName').value;
+
     let Amount = document.getElementById('editAmount').value;
    
     formData = new FormData();
 formData.append('SubjectId', SubjectId);   
-formData.append('Subject_Code', Subject_Code);   
-formData.append('Subject_Name', Subject_Name); 
-formData.append('Units', Units);  
+formData.append('Name', Name);
 formData.append('Amount', Amount);
 
 for (var pair of formData.entries()) {
@@ -782,7 +726,7 @@ for (var pair of formData.entries()) {
  }
 
 try{
-  const fetchEdit = await fetch("../controller/subject-edit.php",{
+  const fetchEdit = await fetch("../controller/miscellaneous-fee-edit.php",{
         method: "POST",
         body: formData,
     });

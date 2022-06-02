@@ -190,6 +190,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Courses</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="miscellaneous-fee.php">
+          <i class="bi bi-currency-dollar"></i>
+          <span>Miscellaneous Fee</span>
+        </a>
+      </li><!-- End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link" href="archived-accounts.php">
@@ -197,6 +203,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Archives</span>
         </a>
       </li><!-- End Archives Nav -->
+
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>

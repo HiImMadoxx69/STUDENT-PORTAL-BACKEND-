@@ -5,14 +5,13 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  color: #444444;
 
-  height: 100%;
-  background: url('../img/bg-client.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  color: #444444;
+background-image: linear-gradient(to bottom right, #1e1e1e, #1859a4);
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 }
 
 a {
@@ -359,6 +358,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   background-color: #1859a4;
+  background-image: linear-gradient(to left, #1859a4 , #1e1e1e);
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
@@ -549,7 +549,8 @@ h1, h2, h3, h4, h5, h6 {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #1859a4;
+  background-image: linear-gradient(to bottom right, #1e1e1e, #1859a4);
+
 }
 @media (max-width: 1199px) {
   .sidebar {
@@ -622,7 +623,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .sidebar-nav .nav-link.collapsed {
   color: #d4d5da;
-  background: #1859a4;
+  background: transparent;
 }
 .sidebar-nav .nav-link.collapsed i {
   color: #899bbd;

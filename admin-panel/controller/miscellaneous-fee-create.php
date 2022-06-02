@@ -2,15 +2,13 @@
 include_once("../connections/connection.php");
 $con = connection();
 
-$subject_code = $_POST['Subject_Code'];
-$subject_name = $_POST['Subject_Name'];
-$units = $_POST['Units'];
+$name = $_POST['Name'];
 $amount = $_POST['Amount'];
 
-if(isset($subject_code)){
+if(isset($name)){
 
     
-$sql = "SELECT * FROM tbl_subject WHERE subject_code = '$subject_code' AND status = 'active'";
+$sql = "SELECT * FROM tbl_addfee WHERE name = '$name' AND status = 'active'";
 
 $user = $con ->query($sql) or die ($con->error);
 $row = $user->fetch_assoc();
@@ -20,11 +18,11 @@ if($total > 0){
     exit(json_encode(array("statusCode"=>201)));
 }
 try{
-    $sql = "INSERT INTO `tbl_subject` (`subject_code`, `subject_name`, `units`, `amount`) VALUES ('$subject_code', '$subject_name', '$units', '$amount');";
+    $sql = "INSERT INTO `tbl_addfee` (`name`, `amount`) VALUES ('$name', '$amount');";
     mysqli_query($con, $sql);
 
 
-    $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created: new subject');";
+    $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created: New miscellaneous fee');";
     mysqli_query($con, $auditsql);
     exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){

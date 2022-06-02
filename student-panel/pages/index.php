@@ -86,7 +86,80 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
+        <li class="nav-item dropdown">
 
+<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+  <i class="bi bi-bell"></i>
+  <span class="badge bg-primary badge-number">4</span>
+</a><!-- End Notification Icon -->
+
+<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+  <li class="dropdown-header">
+    You have 4 new notifications
+    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+  </li>
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+
+  <li class="notification-item">
+    <i class="bi bi-exclamation-circle text-warning"></i>
+    <div>
+      <h4>Lorem Ipsum</h4>
+      <p>Quae dolorem earum veritatis oditseno</p>
+      <p>30 min. ago</p>
+    </div>
+  </li>
+
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+
+  <li class="notification-item">
+    <i class="bi bi-x-circle text-danger"></i>
+    <div>
+      <h4>Atque rerum nesciunt</h4>
+      <p>Quae dolorem earum veritatis oditseno</p>
+      <p>1 hr. ago</p>
+    </div>
+  </li>
+
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+
+  <li class="notification-item">
+    <i class="bi bi-check-circle text-success"></i>
+    <div>
+      <h4>Sit rerum fuga</h4>
+      <p>Quae dolorem earum veritatis oditseno</p>
+      <p>2 hrs. ago</p>
+    </div>
+  </li>
+
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+
+  <li class="notification-item">
+    <i class="bi bi-info-circle text-primary"></i>
+    <div>
+      <h4>Dicta reprehenderit</h4>
+      <p>Quae dolorem earum veritatis oditseno</p>
+      <p>4 hrs. ago</p>
+    </div>
+  </li>
+
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+  <li class="dropdown-footer">
+    <a href="#">Show all notifications</a>
+  </li>
+
+</ul><!-- End Notification Dropdown Items -->
+
+</li><!-- End Notification Nav -->
        
 
         <li class="nav-item dropdown pe-3">
@@ -103,7 +176,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?php echo $user['firstname'].' '.$user['lastname']?></h6>
-              <span><?php echo $user['course'].' '.$user['section']?></span>
+              <span><?php echo $user['course']?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -213,7 +286,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Bills</button>
                 </li>
 
               </ul>
@@ -271,8 +344,8 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                      <tr>
                          <th>SUBJECT CODE</th>
                          <th>SUBJECT NAME</th>
-                         <th>GRADES</th>
                          <th>UNITS</th>
+                         <th>GRADES</th>
                        </tr>
                        </thead>
                        <tbody id="grade-table-body">
@@ -312,31 +385,22 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
                   <form>
-
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
+                  <table>
+                       <thead>
+                         <tr>
+                         <th colspan ="2" style="background-color:#4CA4F3;"><center>SUBJECTS</center></th>
+                         </tr>
+                     <tr>
+                         <th>NAME</th>
+                         <th>AMOUNT</th>
+                     </tr>
+                       </thead>
+                       <tbody id="subject-fee-table-body">
+               
+                       
+                       </tbody>
+                     </table>
+                   
                   </form><!-- End Change Password Form -->
 
                 </div>

@@ -16,6 +16,9 @@ console.log(studentNumber)
     const getResponse = await fetchResponse.json();
     console.log(getResponse)
     let output = '';
+    let myTable = '';
+    let count = 0;
+    let MyAverage = 0;
 for(let i =0; i<getResponse.length;i++){
     if(getResponse[i].grade == 0){
         getResponse[i].grade = "No Grade";
@@ -23,11 +26,22 @@ for(let i =0; i<getResponse.length;i++){
     output +=`<tr>
     <td>`+getResponse[i].subject_code+`</td>
     <td>`+getResponse[i].subject_name+`</td>
-    <td>`+getResponse[i].grade+`</td>
     <td>`+getResponse[i].units+`</td>
+    <td>`+getResponse[i].grade+`</td>
     </tr>`;
+    if(getResponse[i].grade > 0){
+        MyAverage = parseFloat(MyAverage) + parseFloat(getResponse[i].grade);
+        count++; 
+     }
 }
-  
+console.log(MyAverage)
+MyAverage = parseFloat(MyAverage) / parseFloat(count);
+MyAverage = MyAverage.toFixed(2)
+output +=`<tr>
+<td>Average</td>
+<td>-</td>
+<td>-</td>
+<td>`+MyAverage+`<td></tr>`;
 
 let schedules ='';
     for(let i =0; i<getResponse.length;i++){
@@ -45,3 +59,8 @@ let schedules ='';
 }
 
 
+//Get All Bills
+
+const getAllBills = async() =>{
+    
+}

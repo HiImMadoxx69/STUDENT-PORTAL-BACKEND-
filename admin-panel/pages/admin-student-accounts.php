@@ -191,6 +191,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Archives Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed " href="miscellaneous-fee.php">
+          <i class="bi bi-currency-dollar"></i>
+          <span>Miscellaneous Fee</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
           <i class="bi bi-archive"></i>
           <span>Archives</span>
@@ -516,7 +523,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
                 <div class="col-md-6">
                 <div class="form-floating mb-3">
-                <input type="date" class="form-control" id="editSection" placeholder="Section">
+                <input type="text" class="form-control" id="editSection" placeholder="Section">
                       <label for="editSection">Section</label>
                     </div>
                 </div>
@@ -696,6 +703,90 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div>
                 </div>
               </div><!-- End Edit user Modal-->
+
+                <!--------------------------------------------Miscellaneus Fee Modal ------------------------------------------------------->
+              
+                <div class="modal fade" id="feemodal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Miscellaneous Fee Form</h5>
+                      
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
+                      
+                    </div>
+                    <div class="modal-body">
+              
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3 needs-validation" id ="frmfeeStudents">
+              
+              <input type="hidden" id="feeId">
+                 
+              <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" disabled class="form-control" id="feeStudentNum" placeholder="Student Number" required>
+                    <label for="feeStudentNum">Student Number</label>
+                  </div>
+                </div>
+               <div class ="col-md-6">
+               <div class="form-floating">
+                    <input type="text"  class="form-control" id="feeSemester" placeholder="Semester" required>
+                    <label for="feeSemester">Semester</label>
+                  </div>
+               </div> 
+               <div class="col-md-6">
+                <div class="form-floating mbz-3">
+                      <select class="form-select" onchange="insertFee(this.value)" id="feeMiscellaneous" aria-label="Floating label select example">
+
+                      </select>
+                      <label for="feeMiscellaneous">Miscellaneous Fee</label>
+                    </div>
+                </div>
+
+               <div class ="col-md-6">
+               <button type ="button" class="btn btn-primary" type="submit" onClick ="checkFeeFields()">Add Miscellaneous Fee</button>
+               </div>
+              
+            <div  class="table-wrapper">
+             <div  class ="table-scroll">
+               <table class="table table-hover"  id ="tblFee">
+                <thead id ="tblThead">
+                  <tr class="table-primary">
+                  <th scope="col" class ="header-title">TYPE</th>
+                    <th scope="col" class ="header-title">NAME</th>
+                    <th scope="col" class ="header-title">AMOUNT</th>
+                    <th scope="col" class ="header-title">DATE CREATED</th>
+                    <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody id ="tbody-student-fee">
+                 
+                </tbody>
+              </table>
+             </div>
+            </div>  
+
+               </form><!-- End floating Labels Form -->
+                    </div>
+                    <div class="modal-footer">
+                      
+                     
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Back</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Miscellaneous Fee Modal-->
+            
             
 
     <section class="section">

@@ -189,6 +189,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Courses</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="miscellaneous-fee.php">
+          <i class="bi bi-currency-dollar"></i>
+          <span>Miscellaneous Fee</span>
+        </a>
+      </li><!-- End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
@@ -284,22 +290,28 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <!-- Floating Labels Form -->
               <form class="row g-3 needs-validation" id ="frmCreateUsers">
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newScode" placeholder="Subject Code" required>
                     <label for="newScode">Subject Code</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newSname" placeholder="Subject Name">
                     <label for="newSname">Subject Name</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="newUnits" placeholder="Units">
+                    <input type="number" class="form-control" id="newUnits" placeholder="Units">
                     <label for="newUnits">Units</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" id="newAmount" placeholder="Units">
+                    <label for="newAmount">Amount</label>
                   </div>
                 </div>
               </form><!-- End floating Labels Form -->
@@ -376,22 +388,28 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               
               <input type="hidden" id="editId">
               
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="editScode" placeholder="Subject Code" required>
+                    <input type="text" class="form-control"  disabled id="editScode" placeholder="Subject Code" required>
                     <label for="editScode">Subject Code</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editSname" placeholder="Subject Name">
                     <label for="editSname">Subject Name</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="editUnits" placeholder="Units">
+                    <input type="number" class="form-control" id="editUnits" placeholder="Units">
                     <label for="editUnits">Units</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" id="editAmount" placeholder="Amount">
+                    <label for="editAmount">Amount</label>
                   </div>
                 </div>
               </form><!-- End floating Labels Form -->
@@ -468,6 +486,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                      <th scope="col"class ="header-title" ><a href= "#" onclick ="sortCurrentTable('subject_code');return false;" class="th-a">SUBJECT CODE</a></th>
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('subject_name');return false;" class="th-a">SUBJECT NAME</a></th>
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('units');return false;" class="th-a">UNITS</a></th>
+                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('amount');return false;" class="th-a">AMOUNT</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
                     <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
                   </tr>

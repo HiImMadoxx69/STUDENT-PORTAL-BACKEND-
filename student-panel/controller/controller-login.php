@@ -9,7 +9,7 @@ $con = connection();
   $studentid =  mysqli_real_escape_string($con, $_POST['studentid']);
   $password =  mysqli_real_escape_string($con, $_POST['password']);
   
-  $sql = "SELECT * FROM tbl_studentinfo WHERE studentnumber = '$studentid' AND password = '$password'";
+  $sql = "SELECT * FROM tbl_studentinfo WHERE studentnumber = '$studentid' AND password = '$password' AND status = 'active'";
   
   $user = $con ->query($sql) or die ($con->error);
   $row = $user->fetch_assoc();

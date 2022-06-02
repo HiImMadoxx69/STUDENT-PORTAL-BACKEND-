@@ -90,6 +90,7 @@ userSearchBar = document.getElementById('userSearchBar');
 const btnCreateUsers = document.getElementById('btnCreateUsers');
 const frmCreateUsers = document.getElementById('frmCreateUsers');//form create account
 const frmGradesStudents = document.getElementById('frmGradesStudents');//form create grades
+const frmfeeStudents = document.getElementById('frmfeeStudents');//Form for fees
 const btnIsLoading = document.getElementById('btnIsLoading');//LoadingButton
 const alertShowError = document.getElementById('alertError');//AlertError
 const alertShowSuccess = document.getElementById('alertSuccess');//Alert Success
@@ -331,10 +332,12 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
     <td>${GVSResults[i].guardian_contact}</td>
     <td>${GVSResults[i].added_at}</td>
     <th scope="col" class="table-info">
-    <div class = "pt-3">
+    <div class = "pt-4">
     <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
 
     <a href="#" class ="btn btn-secondary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGrades('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
+
+    <a href="#" class ="btn btn-success btn-sm" title = "Fees" data-bs-toggle="modal" data-bs-target="#feemodal" onclick ="viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-currency-dollar"></i></a>
 
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
@@ -350,6 +353,27 @@ numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results<
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }
+
+//View, Edit Fee Not Sorted
+const viewFees = (studID) =>{
+    for(let i =0; i<GVSResults.length;i++){
+        if(GVSResults[i].studentnumber == studID){
+            let StudNum = document.getElementById('feeStudentNum').value = GVSResults[i].studentnumber;
+        }
+    }
+    feesClick();
+}
+
+//View, Edit Fee Sorted
+const viewFeesSorted = (studID) =>{
+    for(let i =0; i<GVSResultsSorted.length;i++){
+        if(GVSResultsSorted[i].studentnumber == studID){
+            let StudNum = document.getElementById('feesStudentNum').value = GVSResultsSorted[i].studentnumber;
+        }
+    }
+    feesClick();
+}
+
 
 
 //View, Edit Grades Not Sorted
@@ -372,9 +396,8 @@ const viewGradesSorted = (studID) =>{
          break;
   }
  }
- bindSubjects();
+ gradesClick();
 }
-
 
 
 var GVSSubjects = {};
@@ -383,6 +406,30 @@ const gradesClick = () =>{
     GetAllSubjectPerStudent();
     bindSubjects();
 }
+
+
+
+const feesClick = () => {
+    GetAllFeePerStudent();
+    bindMiscellaneousFee();
+}
+
+
+var GVSMiscellaneousFee = {};
+const bindMiscellaneousFee = async () =>{
+    const fetchResponse = await fetch('../controller/miscellaneous-fee-table.php');
+    
+    const getResponse = await fetchResponse.json();
+    GVSMiscellaneousFee = getResponse;
+    GVSMiscellaneousFee = getResponse;
+    let output = '<option value ="...">...</option>';
+    for(let i = 0; i<getResponse.length; i++){
+        output += `<option value = "`+getResponse[i].name+`">`+getResponse[i].name+`</option>`;
+    }
+
+    document.querySelector('#feeMiscellaneous').innerHTML = output;
+}
+
 //Fill subject dropdown
 const bindSubjects = async ()=>{
 
@@ -390,7 +437,7 @@ const bindSubjects = async ()=>{
     const subjectsResponse = await fetch('../controller/subject-table.php');
     const getResponse = await subjectsResponse.json();
     GVSSubjects = getResponse;
-
+    console.log(getResponse)
     let output = '<option value="...">...</option>';
 
     for(let i = 0; i <getResponse.length; i++){
@@ -400,8 +447,27 @@ const bindSubjects = async ()=>{
     document.querySelector('#gradeSubject').innerHTML = output;
 }
 
-var  objinsertSubjects ={};
 
+var objinsertFee ={};
+
+const insertFee = async (MiscName) =>{
+    console.log(GVSMiscellaneousFee)
+try{
+    let feeStudentNum = document.getElementById('feeStudentNum').value;
+for(let i = 0; i <GVSMiscellaneousFee.length;i++){
+    if(MiscName == GVSMiscellaneousFee[i].name){
+        objinsertFee[0]={"studentid": feeStudentNum};
+        objinsertFee[0].name = GVSMiscellaneousFee[i].name;
+        objinsertFee[0].amount = GVSMiscellaneousFee[i].amount;
+    }
+}
+
+}catch(e){
+console.log(e)
+}
+}
+
+var  objinsertSubjects ={};
 // insert the updated grades of students
 const insertSubjects = async (SubjectName) =>{
 try{
@@ -413,6 +479,7 @@ try{
             objinsertSubjects[0].subject_code = GVSSubjects[i].subject_code;
             objinsertSubjects[0].units = GVSSubjects[i].units;
             objinsertSubjects[0].grade = GVSSubjects[i].grades;
+            objinsertSubjects[0].amount = GVSSubjects[i].amount;
             objinsertSubjects[0].instructor = GVSSubjects[i].instructor;
             objinsertSubjects[0].schedule = GVSSubjects[i].schedule;
             break;
@@ -429,10 +496,31 @@ try{
         alertShowError.setAttribute("hidden", "hidden");
         btnError.setAttribute("hidden", "hidden");//Is loading true
         btnCreateUsers.style.display = "inline-block";
-    }
-    setTimeout(delayedAlert, 3000);
+   }
+setTimeout(delayedAlert, 3000); 
+ }   
 }
-     
+
+const checkFeeFields = () =>{
+
+    let feeStudentNum = document.getElementById('feeStudentNum').value;
+   
+    if(feeStudentNum !=="" ){
+        btnInsertFee();
+
+    }else{
+        alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
+        btnError.removeAttribute("hidden");
+        btnCreateUsers.style.display = "none";
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
+            btnError.setAttribute("hidden", "hidden");//Is loading true
+            btnCreateUsers.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 3000);
+    }
 }
 
 const checkGradeFields = () =>{
@@ -474,6 +562,62 @@ const checkGradeFields = () =>{
         setTimeout(delayedAlert, 3000);
     }
 }
+//Insert Miscellaneous Fee
+const btnInsertFee = async () =>{
+
+    let feeStudentNum = document.getElementById('feeStudentNum').value;
+    let Type = 'Miscellaneous Fee';
+
+    formData = new FormData();
+
+    formData.append('StudentId', feeStudentNum);
+    formData.append('FeeName', objinsertFee[0].name);
+    formData.append('Amount', objinsertFee[0].amount);
+    formData.append('Type', Type);
+    try{
+
+    const fetchResponse = await fetch('../controller/student-fee.php',{
+        method: "POST",
+        body:formData,
+    });
+
+    const getResponse = await fetchResponse.json();
+console.log(getResponse);
+
+if(getResponse.statusCode === 200){
+   let message = '';
+    alertShowSuccess.removeAttribute("hidden");
+    alertShowSuccess.classList.add('show'); 
+
+    message += ` Added Succesfully!`
+
+    document.querySelector('#alertSuccessMessage').innerHTML = message;
+
+delayedRemoveAlert = () =>{   
+    alertShowSuccess.classList.remove('show');  
+    alertShowSuccess.setAttribute("hidden", "hidden");
+}
+setTimeout(delayedRemoveAlert, 3000);
+}
+if(getResponse.statusCode === 201){
+    let message = '';
+    message += ` Subject was already in student's list!`
+       document.querySelector('#alertErrorBody').innerHTML = message;
+           alertError.removeAttribute("hidden");
+           alertError.classList.add('show');       
+       delayedRemoveAlert = () =>{   
+        btnCreateUsers.removeAttribute("hidden");
+           alertError.classList.remove('show');  
+           alertError.setAttribute("hidden", "hidden");
+       }
+       setTimeout(delayedRemoveAlert, 1000);
+ }
+
+ GetAllFeePerStudent();
+    }catch(e){
+        console.log(e)
+    }
+}
 
 //Insert subject into studentinfo
 const btnInsertSubs = async () =>{
@@ -481,6 +625,7 @@ const btnInsertSubs = async () =>{
     let Instructor = document.getElementById('gradesInstructor').value;
     let Schedule = document.getElementById('gradesSchedule').value;
     let Mark = document.getElementById('gradesMarks').value;
+    let Type = 'Subject';
     formData = new FormData();
 
     formData.append('StudentId', gradeStudentNum);
@@ -490,7 +635,10 @@ const btnInsertSubs = async () =>{
     formData.append('Grade', Mark);
     formData.append('Instructor', Instructor);
     formData.append('Schedule', Schedule);
-
+    formData.append('Amount',objinsertSubjects[0].amount);
+    formData.append('Type', Type);
+    formData.append('Amount',objinsertSubjects[0].amount);
+    formData.append('FeeName', objinsertSubjects[0].subject_code);
     const fetchResponse = await fetch("../controller/student-subject.php",{
         method: "POST",
         body:formData,
@@ -498,7 +646,17 @@ const btnInsertSubs = async () =>{
     
     const getResponse = await fetchResponse.json();
     console.log(getResponse.statusCode)
+    
     if(getResponse.statusCode === 200){
+
+
+        const fetchFeeResponse = await fetch("../controller/student-fee.php",{
+            method: "POST",
+            body:formData,
+        });
+        const getFeeResponse = await fetchFeeResponse.json();
+        
+    
         let message = '';
         alertShowSuccess.removeAttribute("hidden");
         alertShowSuccess.classList.add('show'); 
@@ -506,6 +664,7 @@ const btnInsertSubs = async () =>{
         message += ` Added Succesfully!`
 
         document.querySelector('#alertSuccessMessage').innerHTML = message;
+
     delayedRemoveAlert = () =>{   
         alertShowSuccess.classList.remove('show');  
         alertShowSuccess.setAttribute("hidden", "hidden");
@@ -528,7 +687,164 @@ const btnInsertSubs = async () =>{
     GetAllSubjectPerStudent();
 }
 
+//transform row into input
+const transform = (id) =>
+{
+    let editButton = document.getElementById('tdEdit'+id);
+    let Grade = document.getElementById('tdGrade'+id);
+    let Instructor = document.getElementById('tdInstructor'+id);
+    let Sched = document.getElementById('tdSched'+id);
+    let Update = document.getElementById('tdUpdate'+id);
+    
 
+    Grade.innerHTML = `<input type='number' id="transGrade`+id+`" value='`+Grade.innerHTML+`' />`;
+    Instructor.innerHTML = `<input type='text' id="transIns`+id+`" value='`+Instructor.innerHTML+`' />`;
+    Sched.innerHTML = `<input type='text' id ="transSched`+id+`" value='`+Sched.innerHTML+`' />`;
+    editButton.setAttribute("hidden", "hidden");
+    Update.removeAttribute("hidden");
+
+}
+
+//UpdateBtnGrade
+
+const updateBtn = async(...params) =>{
+    let Grade = document.getElementById('transGrade'+params[0]).value;
+    let Instructor = document.getElementById('transIns'+params[0]).value;
+    let Sched = document.getElementById('transSched'+params[0]).value;
+
+    console.log("Grade: "+Grade+ " Instructor: "+Instructor+" Sched:"+Sched);
+ console.log("StudiD: "+params[1]+" Subject Code: "+params[2]);
+
+ refreshData = new FormData();
+
+refreshData.append('StudentId', params[1]);
+refreshData.append('SubjectCode', params[2]);
+refreshData.append('Grades', Grade);
+refreshData.append('Instructor', Instructor);
+refreshData.append('Schedule', Sched);
+
+try{
+ const fetchResponse = await fetch("../controller/student-subject-edit.php",{
+    method: "POST",
+    body: refreshData,
+});
+for (var pair of refreshData.entries()) {
+    console.log(pair[0]+ ' - ' + pair[1]); 
+ }
+const getResponse = await fetchResponse.json();
+console.log(getResponse)
+
+let message = '';
+    if(getResponse.statusCode === 200){     
+        GetAllSubjectPerStudent();
+        alertShowSuccess.removeAttribute("hidden");
+        alertShowSuccess.classList.add('show');
+        message += ` Updated Succesfully!`
+    document.querySelector('#alertSuccessMessage').innerHTML = message;
+    }
+}catch(e){
+    message += ` `+e+``
+    document.querySelector('#alertErrorBody').innerHTML = message;
+        alertError.removeAttribute("hidden");
+        alertError.classList.add('show');
+    delayedRemoveAlert = () =>{   
+     btnCreateUsers.removeAttribute("hidden");
+        alertError.classList.remove('show');  
+        alertError.setAttribute("hidden", "hidden");
+    }
+    setTimeout(delayedRemoveAlert, 3000);
+}
+
+}
+
+
+//Remove Fee
+
+const moveToArchiveFee = async (...params) =>{
+
+    let removedDate = new Date();
+    
+    formData = new FormData();
+    
+    formData.append('RowID', params[0]);
+    formData.append('Name', params[1])
+    formData.append('StudID', params[2]);
+    formData.append('Status',removedDate);
+    
+    
+    try{
+    const fetchResponse = await fetch("../controller/student-fee-remove.php",{
+        method: "POST",
+        body: formData,
+    });
+    
+    
+    const getResponse = await fetchResponse.json();
+    let message = '';
+        if(getResponse.statusCode === 200){     
+            GetAllSubjectPerStudent();
+            alertShowSuccess.removeAttribute("hidden");
+            alertShowSuccess.classList.add('show');
+            message += ` Removed Succesfully!`
+        document.querySelector('#alertSuccessMessage').innerHTML = message;
+    }
+    GetAllFeePerStudent();
+    }catch(e){
+    console.log(e);
+    GetAllFeePerStudent();
+    }
+    }
+
+const GetAllFeePerStudent = async () =>{
+    let feeStudentNum = document.getElementById('feeStudentNum').value;
+
+    formData = new FormData();
+    formData.append('StudentId', feeStudentNum);
+    for (let pair of formData.entries()) {
+        console.log(pair[0]+ ' - '+ pair[1]);
+    }
+
+    const fetchResponse = await fetch("../controller/student-fee-table.php",{
+        method: "POST",
+        body: formData,
+    });
+
+    const tableResponse = await fetchResponse.json();
+    console.log(tableResponse)
+    let myTable = '';
+   
+  
+    let totalAmount = 0;
+        for(let i =0; i<tableResponse.length;i++){
+            myTable += `<tr>
+            <td>`+tableResponse[i].type+`</td>
+            <td id ="tdName`+i+`">`+tableResponse[i].billname+`</td>
+            <td id ="tdGrade`+i+`">`+tableResponse[i].amount+`</td>
+            <td>`+tableResponse[i].added_at+`</td>
+            <th scope="col" class="table-info">
+            <div class = "pt-4">
+            <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].name+`'); return false;"><i class="bi bi-check-circle"></i></a>
+            <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  onclick ="moveToArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="bi bi-trash"></i></a>
+            </div>
+            </th>
+            </tr>`;    
+            if(parseFloat(tableResponse[i].amount) > 0){
+               totalAmount = parseFloat(totalAmount) + parseFloat(tableResponse[i].amount);
+            }
+        }
+     myTable += `<tr>
+     <td>Total Amount</td>
+     <td></td>
+     <td>`+totalAmount+`</td>
+     </tr>`;
+
+        document.querySelector('#tbody-student-fee').innerHTML = myTable;
+        delayedRemoveAlert = () =>{   
+           alertShowSuccess.classList.remove('show');  
+           alertShowSuccess.setAttribute("hidden", "hidden");
+       }
+       setTimeout(delayedRemoveAlert, 1000);
+}
 
 //Get All Subject per students
 const GetAllSubjectPerStudent = async() =>{
@@ -547,20 +863,41 @@ const GetAllSubjectPerStudent = async() =>{
      const tableResponse = await fetchResponse.json();
      console.log(tableResponse)
  let myTable = '';
+
+ let count = 0;
+ let MyAverage = 0;
      for(let i =0; i<tableResponse.length;i++){
          myTable += `<tr>
-         <td>`+tableResponse[i].subject_name+`</td>
-         <td>`+tableResponse[i].grade+`</td>
-         <td>`+tableResponse[i].instructor+`</td>
-         <td>`+tableResponse[i].schedule+`</td>
+         <td id ="tdName`+i+`">`+tableResponse[i].subject_name+`</td>
+         <td id ="tdGrade`+i+`">`+tableResponse[i].grade+`</td>
+         <td id ="tdInstructor`+i+`">`+tableResponse[i].instructor+`</td>
+         <td id ="tdSched`+i+`">`+tableResponse[i].schedule+`</td>
          <td>`+tableResponse[i].added_at+`</td>
          <th scope="col" class="table-info">
-         <div class = "pt-1">
+         <div class = "pt-4">
+         <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].subject_code+`'); return false;"><i class="bi bi-check-circle"></i></a>
+         <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bi bi-eye"></i></a>
          <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  onclick ="moveToArchiveSubject(`+tableResponse[i].id+`);return false;"><i class="bi bi-trash"></i></a>
          </div>
          </th>
-         </tr>`;     
+         </tr>`;    
+         if(tableResponse[i].grade > 0){
+            MyAverage = parseFloat(MyAverage) + parseFloat(tableResponse[i].grade);
+            count++; 
+         }
      }
+
+console.log(MyAverage)
+     MyAverage = parseFloat(MyAverage) / parseFloat(count);
+
+myTable += `<tr>
+<td>Average</td>
+<td>`+MyAverage.toFixed(2)+`<td>
+<td></td>
+<td></td>
+<td></td>
+</tr>`;
+
      document.querySelector('#tbody-student-subject').innerHTML = myTable;
      delayedRemoveAlert = () =>{   
         alertShowSuccess.classList.remove('show');  
@@ -568,7 +905,6 @@ const GetAllSubjectPerStudent = async() =>{
     }
     setTimeout(delayedRemoveAlert, 1000);
 }
-
 
 //Remove Subject
 const moveToArchiveSubject = async (id) =>{
@@ -676,7 +1012,10 @@ const bindAllDataIntoTableSorted = function (){
         <div class = "pt-2">
     <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-secondary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGradesSorted('${GVSResultsSorted[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
+    <a href="#" class ="btn btn-secondary btn-sm" title = "Subjects" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGradesSorted('${GVSResultsSorted[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
+
+    <a href="#" class ="btn btn-success btn-sm" title = "Fees" data-bs-toggle="modal" data-bs-target="#feemodal" onclick ="viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
+
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
     
@@ -734,7 +1073,23 @@ try{
     document.querySelector('#alertSuccessMessage').innerHTML = message;
        
   }catch (e){
-      console.log(e)
+    
+
+    message += ` `+e+``
+               document.querySelector('#alertErrorBody').innerHTML = message;
+               delayedShowAlert = () =>{
+                   alertError.removeAttribute("hidden");
+                   alertError.classList.add('show');
+                
+               }
+               setTimeout(delayedShowAlert, 3000)
+               delayedRemoveAlert = () =>{   
+                btnCreateUsers.removeAttribute("hidden");
+                   alertError.classList.remove('show');  
+                   alertError.setAttribute("hidden", "hidden");
+               }
+               setTimeout(delayedRemoveAlert, 6000);
+
   }
 }
 
@@ -1330,10 +1685,10 @@ const updateUser = async () =>{
     let Sex ="";
 
     
-    if(document.getElementById('maleCheck').checked == true){
+    if(document.getElementById('editmaleCheck').checked == true){
         Sex = "Male";
     }
-    if(document.getElementById('femaleCheck').checked == true){
+    if(document.getElementById('editfemaleCheck').checked == true){
         Sex = "Female";
     }
 
@@ -1344,7 +1699,7 @@ const updateUser = async () =>{
     let Guardian = document.getElementById('editGuardian').value;
 
     let GuardianNum = document.getElementById('editGuardianContact').value;
-
+console.log('edit api'+Section)
     formData = new FormData();
 formData.append('UserId', UserId);   
 formData.append('StudNum', StudNum);
@@ -1426,8 +1781,6 @@ const BindAllCourse = async () =>{
     const fetchResponse = await fetch('../controller/course-table.php');
 
     const getResponse = await fetchResponse.json();
-
-    console.log(getResponse)
 
     let output = '';
 
