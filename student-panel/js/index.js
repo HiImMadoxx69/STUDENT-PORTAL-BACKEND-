@@ -1,6 +1,7 @@
 
 window.onload = function() {
     getAllResults();
+    getAllBills();
 }
 
 //getAllResults
@@ -62,5 +63,47 @@ let schedules ='';
 //Get All Bills
 
 const getAllBills = async() =>{
-    
+    let studentNumber = document.getElementById('studentNumber').value;
+    console.log(studentNumber)
+        formData = new FormData();
+        formData.append('studentNumber', studentNumber);
+        const fetchResponse = await fetch("../controller/student-fee-table.php",{
+            method: "POST",
+            body:formData,
+        });
+        const getResponse = await fetchResponse.json();
+        console.log(getResponse)
+        
+        let output = '';
+        let miscFee = '';
+        let count = 0;
+        let balance = 0;
+for(let i = 0; i<getResponse.length;i++){
+    if(getResponse[i].type ==='Subject'){
+        output += `<tr>
+        <td>`+getResponse[i].billcode+`</td>
+        <td></td>
+        <td>`+getResponse[i].amount+`</td>
+        </tr>`;
+    }
+    if(getResponse[i].type === 'Miscellaneous Fee'){
+        miscFee += `<tr>
+        <td>`+getResponse[i].billcode+`</td>
+        <td></td>
+        <td>`+getResponse[i].amount+`</td>
+        </tr>`;
+      }
+      balance += parseFloat(getResponse[i].amount); 
+}
+     
+miscFee += `<tr>
+<td style="background-color:#0dff98">Total</td>
+<td style="background-color:#0dff98"></td>
+<td style="background-color:#0dff98">`+balance+`</td>
+</tr style="background-color:#0dff98">`;
+
+ document.querySelector('#subject-fee-table-body').innerHTML = output;
+ document.querySelector('#misc-fee-table-body').innerHTML = miscFee;
+
+ 
 }

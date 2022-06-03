@@ -747,7 +747,22 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                <div class ="col-md-6">
                <button type ="button" class="btn btn-primary" type="submit" onClick ="checkFeeFields()">Add Miscellaneous Fee</button>
                </div>
-              
+              <hr>
+              <div class ="col-md-4">
+                <div class="form-floating">
+                   <input type="number"  class="form-control" id="feeBalance" placeholder="Balance" disabled>
+                  <label for="feeBalance">Balance</label>
+                </div>
+              </div>
+              <div class ="col-md-4">
+                <div class="form-floating">
+                   <input type="number"  class="form-control" id="feePayment" placeholder="Payment">
+                  <label for="feePayment">Payment</label>
+                </div>
+              </div>
+              <div class ="col-md-4">
+              <button type ="button" class="btn btn-primary" type="submit" onClick ="checkPayment()">Add Payment</button>
+              </div>
             <div  class="table-wrapper">
              <div  class ="table-scroll">
                <table class="table table-hover"  id ="tblFee">

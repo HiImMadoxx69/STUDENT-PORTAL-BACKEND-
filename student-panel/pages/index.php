@@ -23,7 +23,8 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
     border : 1px solid #4CA4F3;
   }
   th, td{
-    text-align: left;
+    
+    margin: 0;
     padding: 8px;
     border-bottom: 1px solid #4CA4F3;
   }
@@ -388,10 +389,13 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                   <table>
                        <thead>
                          <tr>
-                         <th colspan ="2" style="background-color:#4CA4F3;"><center>SUBJECTS</center></th>
+                           <th style="background-color:#4CA4F3"></th>
+                         <th style="background-color:#4CA4F3;" ><center>SUBJECTS</center></th>
+                         <th style="background-color:#4CA4F3"></th>
                          </tr>
                      <tr>
                          <th>NAME</th>
+                         <th></th>
                          <th>AMOUNT</th>
                      </tr>
                        </thead>
@@ -399,7 +403,25 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                
                        
                        </tbody>
+                       <thead>
+                       <th style="background-color:#4CA4F3"></th>
+                         <th style="background-color:#4CA4F3"><center>MISCELLANEOUS FEE</center></th>
+                         <th style="background-color:#4CA4F3"></th>
+                         <tr>
+                         <th>NAME</th>
+                         <th></th>
+                         <th>AMOUNT</th>
+                         </tr>
+                     </tr>
+                       </thead>
+                       <tbody id="misc-fee-table-body">
+               
+                       
+                       </tbody>
                      </table>
+
+                  
+
                    
                   </form><!-- End Change Password Form -->
 

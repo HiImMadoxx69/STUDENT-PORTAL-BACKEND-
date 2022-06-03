@@ -32,6 +32,12 @@ try{
     $sql = "INSERT INTO `tbl_grades` (`studentid`, `subject_name`, `subject_code`, `units`, `grade`, `instructor`, `schedule`) VALUES ('$StudID', '$SubName', '$SubCode', '$Units', '$Grade', '$Instructor', '$Schedule');";
     mysqli_query($con, $sql);
 
+    
+    $sqlAdd = "UPDATE `tbl_studentinfo` SET balance = balance+$Amount WHERE `tbl_studentinfo`.`studentnumber` = $StudID;";
+    
+    mysqli_query($con, $sqlAdd);
+
+
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created: new subject: $SubName to User Id: $StudID');";
     mysqli_query($con, $auditsql);
 

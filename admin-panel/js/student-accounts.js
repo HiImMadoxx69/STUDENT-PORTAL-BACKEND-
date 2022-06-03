@@ -359,8 +359,10 @@ const viewFees = (studID) =>{
     for(let i =0; i<GVSResults.length;i++){
         if(GVSResults[i].studentnumber == studID){
             let StudNum = document.getElementById('feeStudentNum').value = GVSResults[i].studentnumber;
+            let Balance = document.getElementById('feeBalance').value = GVSResults[i].balance;
         }
     }
+    
     feesClick();
 }
 
@@ -369,6 +371,7 @@ const viewFeesSorted = (studID) =>{
     for(let i =0; i<GVSResultsSorted.length;i++){
         if(GVSResultsSorted[i].studentnumber == studID){
             let StudNum = document.getElementById('feesStudentNum').value = GVSResultsSorted[i].studentnumber;
+            let Balance = document.getElementById('feeBalance').value = GVSResultsSorted[i].balance;
         }
     }
     feesClick();
@@ -412,6 +415,7 @@ const gradesClick = () =>{
 const feesClick = () => {
     GetAllFeePerStudent();
     bindMiscellaneousFee();
+    balanceRefresh();
 }
 
 
@@ -585,10 +589,26 @@ const btnInsertFee = async () =>{
 console.log(getResponse);
 
 if(getResponse.statusCode === 200){
-   let message = '';
+    try{
+        formData.append('StudNum', feeStudentNum);
+        formData.append('Balance', objinsertFee[0].amount);
+        console.log(objinsertFee[0].amount)
+        const addResponse = await fetch('../controller/add-student-fee.php',{
+            method: "POST",
+            body:formData,
+        });
+    
+        const getAddRespose = await addResponse.json();
+    
+    }catch(e){
+        console.log(e)
+    }
+    
+
+    let message = '';
     alertShowSuccess.removeAttribute("hidden");
     alertShowSuccess.classList.add('show'); 
-
+    feesClick()//Refresh Balance
     message += ` Added Succesfully!`
 
     document.querySelector('#alertSuccessMessage').innerHTML = message;
@@ -839,11 +859,84 @@ const GetAllFeePerStudent = async () =>{
      </tr>`;
 
         document.querySelector('#tbody-student-fee').innerHTML = myTable;
-        delayedRemoveAlert = () =>{   
-           alertShowSuccess.classList.remove('show');  
-           alertShowSuccess.setAttribute("hidden", "hidden");
-       }
-       setTimeout(delayedRemoveAlert, 1000);
+       
+     
+      
+
+}
+
+//Check Payment Fields
+
+const checkPayment = () =>{
+    let Payment = document.getElementById('feePayment').value;
+    
+    if(Payment > 0){
+        updatePayment();
+    }
+}
+
+//Update Payment
+const updatePayment = async () =>{
+    let Payment = document.getElementById('feePayment').value;
+    let StudentNum = document.getElementById('feeStudentNum').value;
+
+    let Balance = document.getElementById('feeBalance').value;
+
+    let newBalance = parseFloat(Balance) - parseFloat(Payment);
+
+    if(newBalance <0){
+        newBalance = 0;
+    }
+
+    console.log(newBalance)
+    formData = new FormData();
+
+    formData.append('StudNum', StudentNum);
+    formData.append('Balance', newBalance);
+    try{
+    const fetchPayment = await fetch("../controller/student-balance.php",{
+        method: "POST",
+        body: formData,
+    });
+   
+    const getResponse = await fetchPayment.json();
+    let message ='';
+    if(getResponse.statusCode === 200){    
+        feesClick();//Refresh Balance 
+        alertShowSuccess.removeAttribute("hidden");
+        alertShowSuccess.classList.add('show');
+       
+    delayedRemoveAlert = () =>{   
+        alertShowSuccess.classList.remove('show');  
+        alertShowSuccess.setAttribute("hidden", "hidden");
+    }
+    setTimeout(delayedRemoveAlert, 3000);
+  }//
+}catch (e){
+    console.log(e)
+}
+}
+
+//UpdateBalanceShow
+const balanceRefresh = async () =>{
+
+  let StudentNum = document.getElementById('feeStudentNum').value;
+
+    formData = new FormData();
+    formData.append('StudentId', StudentNum);
+   try{
+    const fetchResponse =  await fetch("../controller/student-get-balance.php",{
+        method: "POST",
+        body: formData,
+    });
+const getResponse = await fetchResponse.json();
+console.log("This is balance:");
+console.log(getResponse)
+document.getElementById('feeBalance').value = getResponse[0].balance;
+   }catch(e){
+console.error(e)
+   }
+   
 }
 
 //Get All Subject per students
