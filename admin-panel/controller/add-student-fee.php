@@ -16,7 +16,7 @@ if (isset($studNum)) {
 
    
 
-                 $sql = "UPDATE `tbl_studentinfo` SET balance = balance+$balance WHERE `tbl_studentinfo`.`studentnumber` = $studNum;";
+                 $sql = "UPDATE `tbl_studentinfo` SET balance = balance+$balance WHERE `tbl_studentinfo`.`studentnumber` = '$studNum'";
     
                   mysqli_query($con, $sql);
 

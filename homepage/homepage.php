@@ -227,6 +227,7 @@
           <h2>Location</h2>
         </div>
 
+        
         <div>
         <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3865.7244800834733!2d120.9377102!3d14.3274301!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d4ffdbe37135%3A0x8dca38a749b62b55!2sAISAT%20College%20-%20Dasmari%C3%B1as!5e0!3m2!1sen!2sph!4v1653895797627!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
         </div>

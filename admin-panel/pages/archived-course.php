@@ -156,17 +156,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-profile.php">
-          <i class="bi bi-person-circle"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
+     
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="user-accounts.php">
           <i class="bi bi-people-fill"></i>
-          <span>User Account</span>
+          <span>Employee Account</span>
         </a>
       </li><!-- End User Account Nav -->
 
@@ -196,6 +191,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Miscellaneous Fee</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="announcement.php">
+          <i class="bi bi-megaphone-fill"></i>
+          <span>Announcement</span>
+        </a>
+      </li><!-- End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link" href="archived-accounts.php">
@@ -210,6 +211,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Audit</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-heading">Settings</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="user-profile.php">
+    <i class="bi bi-person-circle"></i>
+    <span>Profile</span>
+  </a>
+</li><!-- End Profile Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->

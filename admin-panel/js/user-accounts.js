@@ -656,7 +656,7 @@ const checkAllFields = () =>{
 
     let Linkedin = document.getElementById('newlinkedinprofileURL').value;
 
-    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
+    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== ""){
     let message ="";
         if(isNaN(Contact) || Contact.length > 11){
         alertShowError.classList.add('show');
@@ -991,7 +991,7 @@ const editUserSorted = (a) =>{
 
     let Linkedin = document.getElementById('editlinkedinprofileURL').value 
 
-    if(UserId !=="" && Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  "" && Twitter !==  "" && Facebook !==  "" && Instagram !==  "" &&Linkedin !==  "" ){
+    if(UserId !=="" && Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  ""){
         let message ="";
         if(isNaN(Contact) || Contact.length > 11){
             alertShowError.classList.add('show');

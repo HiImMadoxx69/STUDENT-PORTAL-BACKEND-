@@ -91,69 +91,19 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
   <i class="bi bi-bell"></i>
-  <span class="badge bg-primary badge-number">4</span>
+  <span class="badge bg-primary badge-number" id ="notif-badge">0</span>
 </a><!-- End Notification Icon -->
 
 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-  <li class="dropdown-header">
-    You have 4 new notifications
+  <li class="dropdown-header" id="notif-counter">
+    You have 0 notifications
     <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
   </li>
   <li>
     <hr class="dropdown-divider">
   </li>
+<div id="notif-content">
 
-  <li class="notification-item">
-    <i class="bi bi-exclamation-circle text-warning"></i>
-    <div>
-      <h4>Lorem Ipsum</h4>
-      <p>Quae dolorem earum veritatis oditseno</p>
-      <p>30 min. ago</p>
-    </div>
-  </li>
-
-  <li>
-    <hr class="dropdown-divider">
-  </li>
-
-  <li class="notification-item">
-    <i class="bi bi-x-circle text-danger"></i>
-    <div>
-      <h4>Atque rerum nesciunt</h4>
-      <p>Quae dolorem earum veritatis oditseno</p>
-      <p>1 hr. ago</p>
-    </div>
-  </li>
-
-  <li>
-    <hr class="dropdown-divider">
-  </li>
-
-  <li class="notification-item">
-    <i class="bi bi-check-circle text-success"></i>
-    <div>
-      <h4>Sit rerum fuga</h4>
-      <p>Quae dolorem earum veritatis oditseno</p>
-      <p>2 hrs. ago</p>
-    </div>
-  </li>
-
-  <li>
-    <hr class="dropdown-divider">
-  </li>
-
-  <li class="notification-item">
-    <i class="bi bi-info-circle text-primary"></i>
-    <div>
-      <h4>Dicta reprehenderit</h4>
-      <p>Quae dolorem earum veritatis oditseno</p>
-      <p>4 hrs. ago</p>
-    </div>
-  </li>
-
-  <li>
-    <hr class="dropdown-divider">
-  </li>
   <li class="dropdown-footer">
     <a href="#">Show all notifications</a>
   </li>
@@ -256,12 +206,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
               <?php echo '<h2>'.$user['firstname'].' '.$user['lastname'].'</h2>' 
               ?>
               
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+           
             </div>
           </div>
 

@@ -7,7 +7,7 @@ $StudID = $_POST['StudentId'];
 $Name = $_POST['FeeName'];
 $Amount = $_POST['Amount'];
 $Type = $_POST['Type'];
-
+$Editor = $_POST['Editor'];
 if(isset($StudID)){
 
     
@@ -21,12 +21,14 @@ if(isset($StudID)){
         exit(json_encode(array("statusCode"=>201)));
     }
 
-    // $Deletesql = "DELETE FROM `tbl_grades` WHERE `tbl_bills`.`studentid` = '$StudID' AND `tbl_grades`.`subject_code` = '$SubCode' AND status != 'active'";
-    // mysqli_query($con, $Deletesql);
+  
   
 try{
     $sql = "INSERT INTO `tbl_bills` (`studentid`, `billcode`,`billname`, `amount`, `type`) VALUES ('$StudID', '$Name', '$Name','$Amount','$Type');";
     mysqli_query($con, $sql);
+
+    $xsql = "INSERT INTO `tbl_announcement` (`editor`, `category`, `message`,`target`) VALUES ('$Editor', 'Warning', 'Check you bills now!','$StudID');";
+    mysqli_query($con, $xsql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created: new fee: $Name to User Id: $StudID');";
     mysqli_query($con, $auditsql);

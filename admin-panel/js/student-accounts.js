@@ -571,9 +571,10 @@ const btnInsertFee = async () =>{
 
     let feeStudentNum = document.getElementById('feeStudentNum').value;
     let Type = 'Miscellaneous Fee';
-
+    let UserPosition = document.getElementById('getUserPosition').value;
     formData = new FormData();
-
+    console.log(UserPosition)
+    formData.append('Editor', UserPosition);
     formData.append('StudentId', feeStudentNum);
     formData.append('FeeName', objinsertFee[0].name);
     formData.append('Amount', objinsertFee[0].amount);
@@ -599,6 +600,8 @@ if(getResponse.statusCode === 200){
         });
     
         const getAddRespose = await addResponse.json();
+        console.log('Add fee response')
+        console.log(getAddRespose)
     
     }catch(e){
         console.log(e)
@@ -621,7 +624,7 @@ setTimeout(delayedRemoveAlert, 3000);
 }
 if(getResponse.statusCode === 201){
     let message = '';
-    message += ` Subject was already in student's list!`
+    message += ` Miscellaneous Fee was already in student's list!`
        document.querySelector('#alertErrorBody').innerHTML = message;
            alertError.removeAttribute("hidden");
            alertError.classList.add('show');       
@@ -646,6 +649,7 @@ const btnInsertSubs = async () =>{
     let Schedule = document.getElementById('gradesSchedule').value;
     let Mark = document.getElementById('gradesMarks').value;
     let Type = 'Subject';
+    let Editor = document.getElementById('getUserPosition').value;
     formData = new FormData();
 
     formData.append('StudentId', gradeStudentNum);
@@ -653,6 +657,7 @@ const btnInsertSubs = async () =>{
     formData.append('Subject_code', objinsertSubjects[0].subject_code);
     formData.append('Units', objinsertSubjects[0].units);
     formData.append('Grade', Mark);
+    formData.append('Editor', Editor);
     formData.append('Instructor', Instructor);
     formData.append('Schedule', Schedule);
     formData.append('Amount',objinsertSubjects[0].amount);
@@ -668,15 +673,43 @@ const btnInsertSubs = async () =>{
     console.log(getResponse.statusCode)
     
     if(getResponse.statusCode === 200){
-
-
-        const fetchFeeResponse = await fetch("../controller/student-fee.php",{
-            method: "POST",
-            body:formData,
-        });
-        const getFeeResponse = await fetchFeeResponse.json();
         
-    
+
+        let billForm = new FormData();
+        billForm.append('StudentId',gradeStudentNum);
+        billForm.append('FeeName', objinsertSubjects[0].subject_code);
+        billForm.append('Amount', objinsertSubjects[0].amount);
+        billForm.append('Type',Type);
+        try{
+
+            const fetchResponse = await fetch('../controller/student-fee.php',{
+                method: "POST",
+                body:billForm,
+            });
+        
+            const getResponse = await fetchResponse.json();
+        }catch(e){
+            console.error(e);
+        } 
+
+
+        try{
+            formData.append('StudNum', gradeStudentNum);
+            formData.append('Balance', objinsertSubjects[0].amount);
+            const addResponse = await fetch('../controller/add-student-fee.php',{
+                method: "POST",
+                body:formData,
+            });
+        
+            const getAddRespose = await addResponse.json();
+            console.log('Add fee response')
+            console.log(getAddRespose)
+        
+        }catch(e){
+            console.log(e)
+        }
+
+        
         let message = '';
         alertShowSuccess.removeAttribute("hidden");
         alertShowSuccess.classList.add('show'); 
@@ -731,7 +764,7 @@ const updateBtn = async(...params) =>{
     let Grade = document.getElementById('transGrade'+params[0]).value;
     let Instructor = document.getElementById('transIns'+params[0]).value;
     let Sched = document.getElementById('transSched'+params[0]).value;
-
+    let Editor = document.getElementById('getUserPosition').value;
     console.log("Grade: "+Grade+ " Instructor: "+Instructor+" Sched:"+Sched);
  console.log("StudiD: "+params[1]+" Subject Code: "+params[2]);
 
@@ -742,6 +775,7 @@ refreshData.append('SubjectCode', params[2]);
 refreshData.append('Grades', Grade);
 refreshData.append('Instructor', Instructor);
 refreshData.append('Schedule', Sched);
+refreshData.append('Editor', Editor);
 
 try{
  const fetchResponse = await fetch("../controller/student-subject-edit.php",{
@@ -763,7 +797,7 @@ let message = '';
     document.querySelector('#alertSuccessMessage').innerHTML = message;
     }
 }catch(e){
-    message += ` `+e+``
+    message += ``+e+``;
     document.querySelector('#alertErrorBody').innerHTML = message;
         alertError.removeAttribute("hidden");
         alertError.classList.add('show');
@@ -881,16 +915,16 @@ const updatePayment = async () =>{
     let StudentNum = document.getElementById('feeStudentNum').value;
 
     let Balance = document.getElementById('feeBalance').value;
-
+    let Editor = document.getElementById('getUserPosition').value;
     let newBalance = parseFloat(Balance) - parseFloat(Payment);
-
+    console.log("Payment: "+Payment+ " Balance: "+newBalance)
     if(newBalance <0){
         newBalance = 0;
     }
 
     console.log(newBalance)
     formData = new FormData();
-
+    formData.append('Editor', Editor);
     formData.append('StudNum', StudentNum);
     formData.append('Balance', newBalance);
     try{
@@ -901,7 +935,22 @@ const updatePayment = async () =>{
    
     const getResponse = await fetchPayment.json();
     let message ='';
-    if(getResponse.statusCode === 200){    
+    if(getResponse.statusCode === 200){
+
+        try{
+            formData.append('Payment', Payment);
+            const fetchResponse = await fetch("../controller/totalFee.php",{
+                method: "POST",
+                body:formData,
+        });
+           const getResponse = await fetchResponse.json();
+
+           console.log(getResponse);
+        }catch(e){
+            console.error(e);
+        }
+
+        message += ` Added Payment Succesfully!`;    
         feesClick();//Refresh Balance 
         alertShowSuccess.removeAttribute("hidden");
         alertShowSuccess.classList.add('show');
@@ -911,6 +960,7 @@ const updatePayment = async () =>{
         alertShowSuccess.setAttribute("hidden", "hidden");
     }
     setTimeout(delayedRemoveAlert, 3000);
+    document.querySelector('#alertSuccessMessage').innerHTML = message;
   }//
 }catch (e){
     console.log(e)
@@ -1337,7 +1387,7 @@ const checkAllFields = () =>{
     let GuardianNum = document.getElementById('newGuardianContact').value;
     if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
      let message = "";
-        if(isNaN(Contact) || Contact.length > 11){
+        if(isNaN(Contact) || Contact.length > 12){
         message += ` Please input valid contact number!`
         document.querySelector('#alertErrorBody').innerHTML = message;
 
@@ -1366,8 +1416,8 @@ const checkAllFields = () =>{
             alertError.setAttribute("hidden", "hidden");
         }
         setTimeout(delayedRemoveAlert, 1000);
-       }else if(isNaN(GuardianNum) || GuardianNum.length > 11){
-        message += ` Please input valid contact number!`
+       }else if(isNaN(GuardianNum) || GuardianNum.length > 12){
+        message += ` Please input valid guardian contact number!`
         document.querySelector('#alertErrorBody').innerHTML = message;
 
             alertError.removeAttribute("hidden");

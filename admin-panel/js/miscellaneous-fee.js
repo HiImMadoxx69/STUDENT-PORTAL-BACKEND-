@@ -489,8 +489,8 @@ const resetFields = () =>{
     let Id = document.getElementById('editId').value ="";
     let Name = document.getElementById('editName').value ="";
     let Amount = document.getElementById('newAmount').value ="";
-    btnCreateUsers.setAttribute("hidden", "hidden");
-    btnSuccess.removeAttribute("hidden");
+    btnCreateUsers.removeAttribute("hidden");
+   
 }//Reset all the fields
 
 //Call it to refresh the table
@@ -594,9 +594,8 @@ for (var pair of formData.entries()) {
           if(response.statusCode === 200){
          message += ` Created Succesfully!`
             document.querySelector('#alertSuccessMessage').innerHTML = message;
- 
+                  alertShowSuccess.removeAttribute("hidden");
                 btnCreateUsers.setAttribute("hidden", "hidden");
-                alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
                 
         

@@ -153,17 +153,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-profile.php">
-          <i class="bi bi-person-circle"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="user-accounts.php">
           <i class="bi bi-people-fill"></i>
-          <span>User Account</span>
+          <span>Employee Account</span>
         </a>
       </li><!-- End User Account Nav -->
 
@@ -197,7 +191,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="announcement.php">
-          <i class="bi bi-file-earmark-medical"></i>
+          <i class="bi bi-megaphone-fill"></i>
           <span>Announcement</span>
         </a>
       </li><!-- End Archives Nav -->
@@ -215,6 +209,14 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Audit</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-heading">Settings</li>
+
+<li class="nav-item">
+  <a class="nav-link collapsed" href="user-profile.php">
+    <i class="bi bi-person-circle"></i>
+    <span>Profile</span>
+  </a>
+</li><!-- End Profile Page Nav -->
       
     </ul>
 
@@ -246,7 +248,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
              
 
                 <div class="card-body">
-                  <h5 class="card-title">User Accounts <span>| Active</span></h5>
+                  <h5 class="card-title">Employee Accounts <span>| Active</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -323,6 +325,45 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               </div>
             </div>
            
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card customers-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Unpaid Students <span>| Active</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id ="totalUnpaid"></h6>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Collected Fee</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id ="totalCollectedFee"></h6>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
 
            
         

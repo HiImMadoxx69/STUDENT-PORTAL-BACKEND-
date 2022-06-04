@@ -4,6 +4,8 @@ window.onload = function(){
     getAllSubject();
     getAllCourses();
     getRecentActivity();
+    getAllUnpaid();
+    getTotalCollectedFee();
 }//Onload page
 
 
@@ -105,7 +107,6 @@ const getAllCourses = async () =>{
         let output = '';
 
         for(let i = 0; i < getResponse.length; i++){
-        if(i < 5){
             if(Date.parse(getResponse[i].added_at) > twentyFourHoursAgo){
                 output += `<div class="activity-item d-flex">
                 <div class="activite-label">`+getResponse[i].added_at+`</div>
@@ -114,7 +115,7 @@ const getAllCourses = async () =>{
                 </div>
               </div>`;
               }
-        }
+        
         }
         document.querySelector('#activity-body-list').innerHTML = output;
     }catch(error){
@@ -122,5 +123,30 @@ const getAllCourses = async () =>{
     }
     }
     
-    
+//get all unpaid student
+const getAllUnpaid = async () =>{
+    const fetchResponse = await fetch('../controller/students-unpaid-table.php');
 
+    const getResponse = await fetchResponse.json();
+    console.log(getResponse)
+    let message = '';
+
+    message += ``+getResponse.length+``;
+
+    document.querySelector('#totalUnpaid').innerHTML = message;
+}
+
+//get Total Collected Fee
+const getTotalCollectedFee = async () =>{
+    try{
+        const fetchResponse = await fetch('../controller/getTotalFee.php');
+        const getResponse = await fetchResponse.json();
+        console.log(getResponse);
+        let message = '';
+        message += ``+getResponse[0].collectedfees+``;
+        document.querySelector('#totalCollectedFee').innerHTML = message;
+    
+    }catch(e){
+        console.error(e);
+    }
+}

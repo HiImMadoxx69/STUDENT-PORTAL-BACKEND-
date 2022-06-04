@@ -155,17 +155,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-profile.php">
-          <i class="bi bi-person-circle"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="user-accounts.php">
           <i class="bi bi-people-fill"></i>
-          <span>User Account</span>
+          <span>Employee Account</span>
         </a>
       </li><!-- End User Account Nav -->
 
@@ -196,6 +190,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Miscellaneous Fee</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="announcement.php">
+          <i class="bi bi-megaphone-fill"></i>
+          <span>Announcement</span>
+        </a>
+      </li><!-- End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
@@ -210,6 +210,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Audit</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-heading">Settings</li> 
+<li class="nav-item">
+  <a class="nav-link collapsed" href="user-profile.php">
+    <i class="bi bi-person-circle"></i>
+    <span>Profile</span>
+  </a>
+</li><!-- End Profile Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -278,7 +285,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Subject Create Form</h5>
+                      <h5 class="modal-title">Miscellaneous Fee Create Form</h5>
                       
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick ="refreshTable()"></button>
                       
@@ -425,7 +432,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         <div class="col-sm-2">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
-              Subject
+              Misc Fee
               </button>
        </div>
        

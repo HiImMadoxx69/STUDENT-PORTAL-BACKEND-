@@ -11,6 +11,7 @@ $Instructor = $_POST['Instructor'];
 $Schedule = $_POST['Schedule'];
 $Amount = $_POST['Amount'];
 $Type = $_POST['Type'];
+$Editor = $_POST['Editor'];
 
 if(isset($StudID)){
 
@@ -24,7 +25,7 @@ if(isset($StudID)){
     if($total > 0){
         exit(json_encode(array("statusCode"=>201)));
     }
-
+    //if archived subject overwrite
     $Deletesql = "DELETE FROM `tbl_grades` WHERE `tbl_grades`.`studentid` = '$StudID' AND `tbl_grades`.`subject_code` = '$SubCode' AND status != 'active'";
     mysqli_query($con, $Deletesql);
   
@@ -37,6 +38,8 @@ try{
     
     mysqli_query($con, $sqlAdd);
 
+    $sql = "INSERT INTO `tbl_announcement` (`editor`, `category`, `message`,`target`) VALUES ('$Editor', 'Warning', 'Check you bills now!','$StudID');";
+    mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created: new subject: $SubName to User Id: $StudID');";
     mysqli_query($con, $auditsql);

@@ -22,7 +22,7 @@ $currentId = $user['id'];
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Users / Accounts</title>
+  <title>Employee / Accounts</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -155,17 +155,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-profile.php">
-          <i class="bi bi-person-circle"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link" href="user-accounts.php">
           <i class="bi bi-people-fill"></i>
-          <span>User Account</span>
+          <span>Employee Account</span>
         </a>
       </li><!-- End User Account Nav -->
 
@@ -195,6 +189,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Miscellaneous Fee</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="announcement.php">
+          <i class="bi bi-megaphone-fill"></i>
+          <span>Announcement</span>
+        </a>
+      </li><!-- End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="archived-accounts.php">
@@ -208,6 +208,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Audit</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-heading">Settings</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="user-profile.php">
+    <i class="bi bi-person-circle"></i>
+    <span>Profile</span>
+  </a>
+</li><!-- End Profile Page Nav -->
    
      
     </ul>
@@ -226,12 +233,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
-      <h1>User Accounts</h1>
+      <h1>Employee Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">User Accounts</li>
+          <li class="breadcrumb-item active">Employee Accounts</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -336,7 +343,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                         <option selected disabled>...</option>
                         <option value="Admin">Admin</option>
                         <option value="Registrar">Registrar</option>
-                        <option value="Accountant">Accountant</option>
                       </select>
                       <label for="newJob">Position</label>
                     </div>
@@ -529,7 +535,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                         <option selected disabled>...</option>
                         <option value="Admin">Admin</option>
                         <option value="Registrar">Registrar</option>
-                        <option value="Accountant">Accountant</option>
                       </select>
                       <label for="editJob">Position</label>
                     </div>
@@ -630,7 +635,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">User Accounts Table</h5>
+            <h5 class="card-title">Employee Accounts Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      

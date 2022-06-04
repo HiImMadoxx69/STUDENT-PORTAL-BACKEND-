@@ -118,7 +118,7 @@ const getAllUserName = async () =>{
 //getAllData Function
 function getAllDataAPI(){
     //get user accounts
-    fetch('../controller/user-table.php').then((res) => res.json())
+    fetch('../controller/announcement-table.php').then((res) => res.json())
     .then(response => {
 
         GVUResults = response;//Store the responseJSON into GVUResults global var
@@ -318,35 +318,31 @@ const bindAllDataIntoTable = function (){
     let output ='';
 
 for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
- console.log("GVUIndexPage: "+GVUIndexPage+"< GVUDefaultRow:" +GVUdefaultRow)
-    output += `<tr>
-    <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-    <td>${GVUResults[i].username}</td>
-    <td>${GVUResults[i].firstname}</td>
-    <td>${GVUResults[i].middlename}</td>
-    <td>${GVUResults[i].lastname}</td>
-    <td>${GVUResults[i].email}</td>
-    <td>${GVUResults[i].birthday}</td>
-    <td>${GVUResults[i].sex}</td>
-    <td>${GVUResults[i].password}</td>
-    <td>${GVUResults[i].position}</td>
-    <td>${GVUResults[i].address}</td>
-    <td>${GVUResults[i].contact}</td>
-    <td>${GVUResults[i].about}</td>
-    <td>${GVUResults[i].twitterprofile}</td>
-    <td>${GVUResults[i].facebookprofile}</td>
-    <td>${GVUResults[i].instagramprofile}</td>
-    <td>${GVUResults[i].linkedinprofile}</td>
+ if(GVUResults[i].category == "Info"){
+    output += `<tr class ="table-info">
+    <td>${GVUResults[i].editor}</td>
+    <td>${GVUResults[i].message}</td>
     <td>${GVUResults[i].added_at}</td>
-    <th scope="col" class="table-info">
-    <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
-
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="bi bi-trash"></i></a>
-    
-    </div>
-    </th>
     </tr>`;
+ }else if(GVUResults[i].category == "Success"){
+    output += `<tr class ="table-success">
+    <td>${GVUResults[i].editor}</td>
+    <td>${GVUResults[i].message}</td>
+    <td>${GVUResults[i].added_at}</td>
+    </tr>`;
+ }else if(GVUResults[i].category == "Warning"){
+    output += `<tr class ="table-warning">
+    <td>${GVUResults[i].editor}</td>
+    <td>${GVUResults[i].message}</td>
+    <td>${GVUResults[i].added_at}</td>
+    </tr>`;
+ }else{
+    output += `<tr class ="table-danger">
+    <td>${GVUResults[i].editor}</td>
+    <td>${GVUResults[i].message}</td>
+    <td>${GVUResults[i].added_at}</td>
+    </tr>`;
+ }
     
 }
 
@@ -396,9 +392,6 @@ if(GVUIsSorted){
    }
    GVUIsSorted = true;//after sorted then reverse sort
 }
-   
-
-  
     bindAllDataIntoTableSorted();
 }//Sort by id
 
@@ -412,34 +405,31 @@ const bindAllDataIntoTableSorted = function (){
     let output ='';
     
     for(let i = 0; i<GVUNumRows; i++){
-        output += `<tr>
-        <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-        <td>${GVUResultsSorted[i].username}</td>
-        <td>${GVUResultsSorted[i].firstname}</td>
-        <td>${GVUResultsSorted[i].middlename}</td>
-        <td>${GVUResultsSorted[i].lastname}</td>
-        <td>${GVUResultsSorted[i].email}</td>
-        <td>${GVUResultsSorted[i].birthday}</td>
-        <td>${GVUResultsSorted[i].sex}</td>
-        <td>${GVUResultsSorted[i].password}</td>
-        <td>${GVUResultsSorted[i].position}</td>
-        <td>${GVUResultsSorted[i].address}</td>
-        <td>${GVUResultsSorted[i].contact}</td>
-        <td>${GVUResultsSorted[i].about}</td>
-        <td>${GVUResultsSorted[i].twitterprofile}</td>
-        <td>${GVUResultsSorted[i].facebookprofile}</td>
-        <td>${GVUResultsSorted[i].instagramprofile}</td>
-        <td>${GVUResultsSorted[i].linkedinprofile}</td>
-        <td>${GVUResultsSorted[i].added_at}</td>
-        <th scope="col" class="table-info">
-        <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
-
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="bi bi-trash"></i></a>
-    
-    </div>
-        </th>
-        </tr>`;
+        if(GVUResults[i].category == "Info"){
+            output += `<tr class ="table-info">
+            <td>${GVUResults[i].editor}</td>
+            <td>${GVUResults[i].message}</td>
+            <td>${GVUResults[i].added_at}</td>
+            </tr>`;
+         }else if(GVUResults[i].category == "Success"){
+            output += `<tr class ="table-success">
+            <td>${GVUResults[i].editor}</td>
+            <td>${GVUResults[i].message}</td>
+            <td>${GVUResults[i].added_at}</td>
+            </tr>`;
+         }else if(GVUResults[i].category == "Warning"){
+            output += `<tr class ="table-warning">
+            <td>${GVUResults[i].editor}</td>
+            <td>${GVUResults[i].message}</td>
+            <td>${GVUResults[i].added_at}</td>
+            </tr>`;
+         }else{
+            output += `<tr class ="table-danger">
+            <td>${GVUResults[i].editor}</td>
+            <td>${GVUResults[i].message}</td>
+            <td>${GVUResults[i].added_at}</td>
+            </tr>`;
+         }
     }
    
     let numberOfPages = '';
@@ -557,39 +547,9 @@ if(userSearch !== ""){
 const btnEditUsers = document.getElementById('btnEditUsers');
 
 const resetFields = () =>{
-    let Fname = document.getElementById('newFname').value = "";
-
-    let Mname = document.getElementById('newMname').value = "";
-   
-    let Lname = document.getElementById('newLname').value = "";
-
-    let Email = document.getElementById('newEmail').value = "";
- 
-    let Username = document.getElementById('newUsername').value = "";
-
-    let Password = document.getElementById('newPassword').value = "";
-    
-    let Job = document.getElementById('newJob').value = "";
-
-    let Birthday = document.getElementById('newBirthday').value = "";
-
-    let SexMale = document.getElementById('maleCheck').checked = false;
-
-    let SexFemale = document.getElementById('femaleCheck').checked = false;
- 
-    let Contact = document.getElementById('newContact').value = "";
-
-    let Address = document.getElementById('newAddress').value = "";
- 
-    let About = document.getElementById('newAbout').value = "";
-
-    let Twitter = document.getElementById('newtwitterprofileURL').value = "";
-
-    let Facebook = document.getElementById('newfacebookprofileURL').value = "";
- 
-    let Instagram = document.getElementById('newinstagramprofileURL').value = "";
-
-    let Linkedin = document.getElementById('newlinkedinprofileURL').value = "";
+    let Target = document.getElementById('newAudience').value ="";
+    let Category = document.getElementById('newCategory').value ="";
+    let Message = document.getElementById('newMessage').value ="";
     btnSuccess.setAttribute("hidden", "hidden");//Is loading true
     btnCreateUsers.removeAttribute("hidden");
 }//Reset all the fields
@@ -614,57 +574,19 @@ const validateEmail = (mail) =>{
 
 //Check all of the fields
 const checkAllFields = () =>{
-    let Fname = document.getElementById('newFname').value;
+    let Editor = document.getElementById('newEditor').value;
+    let Category = document.getElementById('newEditor').value;
+    let Message = document.getElementById('newEditor').value;
 
-    let Mname = document.getElementById('newMname').value;
-   
-    let Lname = document.getElementById('newLname').value;
-
-    let Email = document.getElementById('newEmail').value;
- 
-    let Username = document.getElementById('newUsername').value;
-
-    let Password = document.getElementById('newPassword').value;
-    
-    let Job = document.getElementById('newJob').value;
-
-    let Birthday = document.getElementById('newBirthday').value;
-    
-    let Sex ="";
-
-    
-    if(document.getElementById('maleCheck').checked === true){
-        Sex = "Male";
-    }
-    if(document.getElementById('femaleCheck').checked === true){
-        Sex = "Female";
-    }
-
-    
-
-    let Contact = document.getElementById('newContact').value;
-
-    let Address = document.getElementById('newAddress').value;
- 
-    let About = document.getElementById('newAbout').value;
-
-    let Twitter = document.getElementById('newtwitterprofileURL').value;
-
-    let Facebook = document.getElementById('newfacebookprofileURL').value;
- 
-    let Instagram = document.getElementById('newinstagramprofileURL').value;
-
-    let Linkedin = document.getElementById('newlinkedinprofileURL').value;
-
-    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
+    if(Editor !== "" && Category !== "..." && Message !==""){
     let message ="";
-        if(isNaN(Contact) || Contact.length > 11){
+        if(Message.length > 1000000){
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
         btnError.removeAttribute("hidden");
         btnCreateUsers.style.display = "none";
         let output = '';
-        output += ` Input a correct contact number!`
+        output += ` Message to large!`
         document.querySelector('#alertErrorMessage').innerHTML = output;
         delayedAlert = () =>{
             alertShowError.classList.remove('show');
@@ -673,23 +595,7 @@ const checkAllFields = () =>{
             btnCreateUsers.style.display = "inline-block";
         }
         setTimeout(delayedAlert, 3000);
-     }
-     else if(validateEmail(Email) !== true){
-        console.log(validateEmail(Email))
-     message += ` Please input a valid email!`
-     document.querySelector('#alertErrorMessage').innerHTML = message;
-
-         alertError.removeAttribute("hidden");
-         alertError.classList.add('show');
-      
-
-
-     delayedRemoveAlert = () =>{   
-         alertError.classList.remove('show');  
-         alertError.setAttribute("hidden", "hidden");
-     }
-     setTimeout(delayedRemoveAlert, 1000);
-    }else{
+     }else{
         createUserAccount();
      }
 
@@ -737,73 +643,22 @@ const IsLoadingTrue =(formStatus) =>{
 const createUserAccount = (e) =>{
     
     IsLoadingTrue(true)//Start the loading button
-   
-    let Fname = document.getElementById('newFname').value;
-
-    let Mname = document.getElementById('newMname').value;
-   
-    let Lname = document.getElementById('newLname').value;
-
-    let Email = document.getElementById('newEmail').value;
- 
-    let Username = document.getElementById('newUsername').value;
-
-    let Password = document.getElementById('newPassword').value;
-    
-    let Job = document.getElementById('newJob').value;
-
-    let Birthday = document.getElementById('newBirthday').value;
-
-    let Sex ="";
-    
-    if(document.getElementById('maleCheck').checked === true){
-        Sex = "Male";
-    }
-    if(document.getElementById('femaleCheck').checked === true){
-        Sex = "Female";
-    }
-
-    let Contact = document.getElementById('newContact').value;
-
-    let Address = document.getElementById('newAddress').value;
- 
-    let About = document.getElementById('newAbout').value;
-
-    let Twitter = document.getElementById('newtwitterprofileURL').value;
-
-    let Facebook = document.getElementById('newfacebookprofileURL').value;
- 
-    let Instagram = document.getElementById('newinstagramprofileURL').value;
-
-    let Linkedin = document.getElementById('newlinkedinprofileURL').value;
-
-    Twitter = "https://twitter.com/" + Twitter;
-    Facebook = "https://Facebook.com/" + Facebook;
-    Instagram = "https://Instagram.com/" + Instagram;
-    Linkedin = "https://Linked.com/" + Linkedin;
+    let Target = document.getElementById('newAudience').value;
+    let Editor = document.getElementById('newEditor').value;
+    let Category = document.getElementById('newCategory').value;
+    let Message = document.getElementById('newMessage').value;
 formData = new FormData();
-formData.append('Fname', Fname);
-formData.append('Mname', Mname);
-formData.append('Lname', Lname);
-formData.append('Email', Email);
-formData.append('Username', Username);
-formData.append('Password', Password);
-formData.append('Job', Job);
-formData.append('Birthday', Birthday);
-formData.append('Sex', Sex);
-formData.append('Contact', Contact);
-formData.append('Address', Address);
-formData.append('About', About);
-formData.append('Twitter', Twitter);
-formData.append('Facebook', Facebook);
-formData.append('Instagram', Instagram);
-formData.append('Linkedin', Linkedin);
+
+formData.append('Target', Target);
+formData.append('Editor', Editor);
+formData.append('Category', Category);
+formData.append('Message', Message);
 for (var pair of formData.entries()) {
     console.log(pair[0]+ ' - ' + pair[1]); 
  }
 
 
-    fetch("../controller/user-create-account.php",{
+    fetch("../controller/create-announcement.php",{
         method: "POST",
         body:formData,
     })

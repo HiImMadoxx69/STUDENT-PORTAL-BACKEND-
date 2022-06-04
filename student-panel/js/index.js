@@ -2,12 +2,177 @@
 window.onload = function() {
     getAllResults();
     getAllBills();
+    getAllNotifications();
 }
+
+//get all notitifications
+
+const getAllNotifications = async () =>{
+    let studentNumber = document.getElementById('studentNumber').value;
+    formData = new FormData();
+    formData.append('studentNumber', studentNumber);
+    const fetchResponse = await fetch("../controller/student-notification.php",{
+        method: "POST",
+        body:formData,
+    });
+
+    const getResponse = await fetchResponse.json();
+
+    console.log(getResponse);
+
+    let notificationCounter = '';
+
+    notificationCounter += `You have `+getResponse.length+` notifications`;
+
+    document.querySelector('#notif-counter').innerHTML = notificationCounter;
+    document.querySelector('#notif-badge').innerHTML = getResponse.length;
+
+    //Dropdown
+    let notificationDrop = '';
+    for(let i =0; i< getResponse.length; i++){
+        if(i < 4) {
+            if(getResponse[i].category == "Warning"){
+                notificationDrop += ` 
+                <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                  <p>`+getResponse[i].message+`</p>
+                  <p>`+getResponse[i].added_at+`</p>
+                </div>
+              </li>
+            
+              <li>
+                <hr class="dropdown-divider">
+              </li>`;
+               }else if(getResponse[i].category == "Danger"){
+                   notificationDrop += `
+                   <li class="notification-item">
+                   <i class="bi bi-x-circle text-danger"></i>
+                   <div>
+                     <p>`+getResponse[i].message+`</p>
+                     <p>`+getResponse[i].added_at+`</p>
+                   </div>
+                 </li>
+               
+                 <li>
+                   <hr class="dropdown-divider">
+                 </li>`;
+               }else if(getResponse[i].category == "Success"){
+                   notificationDrop += `
+                   <li class="notification-item">
+                   <i class="bi bi-check-circle text-success"></i>
+                   <div>
+                     <p>`+getResponse[i].message+`</p>
+                     <p>`+getResponse[i].added_at+`</p>
+                   </div>
+                 </li>
+               
+                 <li>
+                   <hr class="dropdown-divider">
+                 </li>`;
+               }else{
+                   notificationDrop += `
+                   <li class="notification-item">
+                   <i class="bi bi-info-circle text-primary"></i>
+                   <div>
+                     <p>`+getResponse[i].message+`</p>
+                     <p>`+getResponse[i].added_at+`</p>
+                   </div>
+                 </li>
+               
+                 <li>
+                   <hr class="dropdown-divider">
+                 </li>`;
+               }
+        }
+       
+    }
+    notificationDrop += `<li class="dropdown-footer">
+    <a href="#" onClick="showAllNotif(); return false;">Show all notifications</a>
+  </li>`;
+    document.querySelector('#notif-content').innerHTML =notificationDrop;
+}
+
+//Show All Notification
+const showAllNotif = async () =>{
+    let studentNumber = document.getElementById('studentNumber').value;
+    formData = new FormData();
+    formData.append('studentNumber', studentNumber);
+    const fetchResponse = await fetch("../controller/student-notification.php",{
+        method: "POST",
+        body:formData,
+    });
+
+    const getResponse = await fetchResponse.json();
+
+    console.log(getResponse);
+
+    let notificationCounter = '';
+
+       //Dropdown
+    let notificationDrop = '';
+    for(let i =0; i< getResponse.length; i++){
+        if(i < 4) {
+                 notificationDrop += ` 
+                <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                  <p>`+getResponse[i].message+`</p>
+                  <p>`+getResponse[i].added_at+`</p>
+                </div>
+              </li>
+            
+              <li>
+                <hr class="dropdown-divider">
+              </li>`;
+               }else if(getResponse[i].category == "Danger"){
+                   notificationDrop += `
+                   <li class="notification-item">
+                   <i class="bi bi-x-circle text-danger"></i>
+                   <div>
+                     <p>`+getResponse[i].message+`</p>
+                     <p>`+getResponse[i].added_at+`</p>
+                   </div>
+                 </li>
+               
+                 <li>
+                   <hr class="dropdown-divider">
+                 </li>`;
+               }else if(getResponse[i].category == "Success"){
+                   notificationDrop += `
+                   <li class="notification-item">
+                   <i class="bi bi-check-circle text-success"></i>
+                   <div>
+                     <p>`+getResponse[i].message+`</p>
+                     <p>`+getResponse[i].added_at+`</p>
+                   </div>
+                 </li>
+               
+                 <li>
+                   <hr class="dropdown-divider">
+                 </li>`;
+               }else{
+                   notificationDrop += `
+                   <li class="notification-item">
+                   <i class="bi bi-info-circle text-primary"></i>
+                   <div>
+                     <p>`+getResponse[i].message+`</p>
+                     <p>`+getResponse[i].added_at+`</p>
+                   </div>
+                 </li>
+               
+                 <li>
+                   <hr class="dropdown-divider">
+                 </li>`;
+              }
+        }
+    document.querySelector('#notif-content').innerHTML =notificationDrop;
+}
+
 
 //getAllResults
 const getAllResults = async () =>{
     let studentNumber = document.getElementById('studentNumber').value;
-console.log(studentNumber)
     formData = new FormData();
     formData.append('studentNumber', studentNumber);
     const fetchResponse = await fetch("../controller/student-grade-table.php",{
