@@ -669,7 +669,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                </div>
               
                <div class ="col-md-6">
-               <button type ="button" class="btn btn-primary" type="submit" onClick ="checkGradeFields()">Add Subject</button>
+               <button class="btn btn-primary" type="button" disabled id ="btnIsUpdatingGrades" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                </button><!--End of updating button-->
+               <button type ="button" class="btn btn-primary" type="submit" onClick ="checkGradeFields()" id ="btnAddGrade">Add Subject</button>
+               
                </div>
               
             <div id="table-wrapper">
@@ -753,7 +758,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
 
                <div class ="col-md-6">
-               <button type ="button" class="btn btn-primary" type="submit" onClick ="checkFeeFields()">Add Miscellaneous Fee</button>
+               <button class="btn btn-primary" type="button" disabled id = "btnIsUpdatingFee" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                </button><!--End of updating button-->
+               <button type ="button" class="btn btn-primary" id ="btnAddMisc" type="submit" onClick ="checkFeeFields()">Add Miscellaneous Fee</button>
                </div>
               <hr>
               <div class ="col-md-4">
@@ -769,7 +778,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
               </div>
               <div class ="col-md-4">
-              <button type ="button" class="btn btn-primary" type="submit" onClick ="checkPayment()">Add Payment</button>
+              <button class="btn btn-primary" type="button" disabled id = "btnIsUpdatingPayment" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                </button><!--End of updating button-->
+              <button type ="button" class="btn btn-primary" type="submit"  id ="btnPaymentClick"onClick ="checkPayment()">Add Payment</button>
               </div>
             <div  class="table-wrapper">
              <div  class ="table-scroll">

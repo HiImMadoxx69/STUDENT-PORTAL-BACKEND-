@@ -285,7 +285,7 @@ for(let i = GVACIndexPage; i<GVACdefaultRow; i++){
     <td>${GVACResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVACResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVACResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVACResults[i].id}', '${GVACResults[i].course_name}');return false;"><i class="bi bi-trash"></i></a>
     
@@ -364,7 +364,7 @@ const bindAllDataIntoTableSorted = function (){
         <td>${GVACResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVACResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVACResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVACResultsSorted[i].id}', '${GVACResultsSorted[i].course_name}');return false;"><i class="bi bi-trash"></i></a>
     

@@ -333,7 +333,7 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
     <td>${GVSResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-4">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
 
     <a href="#" class ="btn btn-secondary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGrades('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
 
@@ -568,7 +568,11 @@ const checkGradeFields = () =>{
 }
 //Insert Miscellaneous Fee
 const btnInsertFee = async () =>{
+    btnIsUpdatingFee = document.getElementById('btnIsUpdatingFee');
+    btnAddMisc = document.getElementById('btnAddMisc');
 
+    btnIsUpdatingFee.removeAttribute("hidden");
+    btnAddMisc.setAttribute("hidden", "hidden");
     let feeStudentNum = document.getElementById('feeStudentNum').value;
     let Type = 'Miscellaneous Fee';
     let UserPosition = document.getElementById('getUserPosition').value;
@@ -606,8 +610,8 @@ if(getResponse.statusCode === 200){
     }catch(e){
         console.log(e)
     }
-    
-
+    btnAddMisc.removeAttribute("hidden");
+    btnIsUpdatingFee.setAttribute("hidden", "hidden");
     let message = '';
     alertShowSuccess.removeAttribute("hidden");
     alertShowSuccess.classList.add('show'); 
@@ -644,6 +648,11 @@ if(getResponse.statusCode === 201){
 
 //Insert subject into studentinfo
 const btnInsertSubs = async () =>{
+    btnIsUpdatingGrades = document.getElementById('btnIsUpdatingGrades');
+    btnAddGrade = document.getElementById('btnAddGrade');
+    btnIsUpdatingGrades.removeAttribute("hidden");
+    btnAddGrade.setAttribute("hidden", "hidden");
+
     let gradeStudentNum = document.getElementById('gradesStudentNum').value;
     let Instructor = document.getElementById('gradesInstructor').value;
     let Schedule = document.getElementById('gradesSchedule').value;
@@ -673,8 +682,8 @@ const btnInsertSubs = async () =>{
     console.log(getResponse.statusCode)
     
     if(getResponse.statusCode === 200){
-        
-
+        btnAddGrade.removeAttribute("hidden");
+        btnIsUpdatingGrades.setAttribute("hidden", "hidden");
         let billForm = new FormData();
         billForm.append('StudentId',gradeStudentNum);
         billForm.append('FeeName', objinsertSubjects[0].subject_code);
@@ -890,6 +899,8 @@ const GetAllFeePerStudent = async () =>{
      <td>Total Amount</td>
      <td></td>
      <td>`+totalAmount+`</td>
+     <td></td>
+     <td></td>
      </tr>`;
 
         document.querySelector('#tbody-student-fee').innerHTML = myTable;
@@ -911,6 +922,11 @@ const checkPayment = () =>{
 
 //Update Payment
 const updatePayment = async () =>{
+    let btnIsUpdatingPayment = document.getElementById('btnIsUpdatingPayment');
+    let btnPaymentClick = document.getElementById('btnPaymentClick');
+
+    btnIsUpdatingPayment.removeAttribute("hidden");
+    btnPaymentClick.setAttribute("hidden", "hidden");
     let Payment = document.getElementById('feePayment').value;
     let StudentNum = document.getElementById('feeStudentNum').value;
 
@@ -949,7 +965,8 @@ const updatePayment = async () =>{
         }catch(e){
             console.error(e);
         }
-
+        btnPaymentClick.removeAttribute("hidden");
+        btnIsUpdatingPayment.setAttribute("hidden", "hidden");
         message += ` Added Payment Succesfully!`;    
         feesClick();//Refresh Balance 
         alertShowSuccess.removeAttribute("hidden");
@@ -1019,11 +1036,12 @@ const GetAllSubjectPerStudent = async() =>{
          <th scope="col" class="table-info">
          <div class = "pt-4">
          <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].subject_code+`'); return false;"><i class="bi bi-check-circle"></i></a>
-         <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bi bi-eye"></i></a>
+         <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bx bx-edit"></i></a>
          <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  onclick ="moveToArchiveSubject(`+tableResponse[i].id+`);return false;"><i class="bi bi-trash"></i></a>
          </div>
          </th>
          </tr>`;    
+         
          if(tableResponse[i].grade > 0){
             MyAverage = parseFloat(MyAverage) + parseFloat(tableResponse[i].grade);
             count++; 
@@ -1153,7 +1171,7 @@ const bindAllDataIntoTableSorted = function (){
     <td>${GVSResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
 
     <a href="#" class ="btn btn-secondary btn-sm" title = "Subjects" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGradesSorted('${GVSResultsSorted[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
 
