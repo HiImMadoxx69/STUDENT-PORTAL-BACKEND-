@@ -477,7 +477,247 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               
 
               <!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" id ="frmEditUsers">
+            
+                    </div>
+                    <div class="modal-footer">
+                      
+                     
+                     
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Edit user Modal-->
+
+
+                <!--------------------------------------------Grade and Result Modal ------------------------------------------------------->
+              
+                <div class="modal fade" id="gradesmodal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Grades Result and Schedule Form</h5>
+                      
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
+                      
+                    </div>
+                    <div class="modal-body">
+              
+
+            
+                    </div>
+                    <div class="modal-footer">
+                      
+                     
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Back</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Edit user Modal-->
+
+                <!--------------------------------------------Miscellaneus Fee Modal ------------------------------------------------------->
+              
+                <div class="modal fade" id="feemodal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Miscellaneous Fee Form</h5>
+                      
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
+                      
+                    </div>
+                    <div class="modal-body">
+              
+
+         
+                    </div>
+                    <div class="modal-footer">
+                      
+                     
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Back</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Miscellaneous Fee Modal-->
+            
+            
+
+    <section class="section" id ="StudentTable">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" >
+            <div class="card-body" >
+            <h5 class="card-title">Student Accounts Table</h5>
+      <!-- scroll table --> 
+      <!-- Select Entry Page -->  
+     
+      <div class="row mb-3">
+        <div class="col-sm-2">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
+              <i class="bi bi-person-plus"></i>  
+             Student
+              </button>
+       </div>
+       
+
+       </div>
+
+      <div class="row mb-3">
+                  <div class="col-sm-2">
+                    <select class="form-select" aria-label="Default select example" id ="selectPage" onchange="selectNumPage()">
+                    
+                    </select>
+                  </div>
+                  <label for ="selectPage"class="col-sm-2 col-form-label">Rows</label>
+
+                <!-- Space between rows and searchbar -->
+                  <div class="col-sm-5 col-lg-3">
+                  </div>
+                  <!-- End of Space between rows and searchbar -->
+                  <!-- Search bar -->
+                  <div class="col-sm-2 col-lg-5">
+                    <div class ="search-bar">
+                      <input class="form-control" type ="text" placeholder="Search..." title="Enter search keyword" id="userSearchBar" onkeyup="userSearchKey()" >
+                     </div>
+                    </div><!--End of search bar-->
+                  </div> 
+      <!-- End of Select Entry Page -->
+    
+              <div id="gradetable-wrapper">
+                <div id="gradetable-scroll">
+              <!-- Table -->
+              
+              <table class="table table-hover"  id ="tblUsers">
+                <thead id ="tblThead">
+                  <tr class="table-primary">
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentnumber');return false;" class="th-a">STUDENT NUMBER</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FULL NAME</a></th>
+                
+                    <th scope="col"id ="th-action">ACTION</th>
+                    
+                    
+                  </tr>
+                </thead>
+                <tbody id ="tbody-user-accounts">
+                 
+                </tbody>
+              </table>
+              <!-- Table -->
+
+  </div>
+  </div>
+  <!-- End for scroll table -->
+  <div class ="row g-3">
+   <div class="col-6" id ="showNumberOfPage">
+         
+     </div>
+     
+     
+   <!-- Pagination with icons -->
+
+              <div class="col-6">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item" >
+                  <a class="page-link" aria-label="Previous" id="prevPage">
+                    <span aria-hidden="true">&laquo;</span>
+                        </a>
+                          </li>
+                          <!-- <li class="page-item"><a class="page-link" id= "page1">1</a></li>
+                          <li class="page-item"><a class="page-link" id= "page2">2</a></li>
+                          <li class="page-item"><a class="page-link" id= "page3">3</a></li> -->
+                          <li class="page-item">
+                          <a class="page-link" aria-label="Next" id ="nextPage" >
+                       <span aria-hidden="true">&raquo;</span>
+                    </a> 
+                  </li>
+                </ul>      
+            </div>
+  </div><!-- row g-3 -->
+              <!-- End Pagination with icons -->
+
+
+
+  <!-- practiec-->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+<!-- student table -->
+
+<!-- View Student Info -->
+
+<section class="section profile" id ="ViewStudentInfo" hidden>
+
+      <div class="row">
+        <div class="col-xl-12">
+
+          <div class="card">
+          <button type="button" class="btn btn-secondary" style="margin:10px;width:10%;" onClick ="backToTable();return false;"><i class ="ri-arrow-go-back-fill"></i> Back</button>
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" id="viewProfileCard">
+
+            
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-12">
+
+          <div class="card">
+            <div class="card-body pt-3" >
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" id="swipeEditProfile">Edit Profile</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-grades" >Grades and Schedules</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-bills">Bills</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  
+
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                  <!-- Profile Edit Form -->
+                  <form class="row g-3 needs-validation" id ="frmEditUsers">
               
               <input type="hidden" id="editId">
                  
@@ -549,7 +789,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div>
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-3">
                   <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
                 </div>
 
@@ -588,12 +828,10 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div>
                 </div>
 
-              </form><!-- End floating Labels Form -->
-                    </div>
-                    <div class="modal-footer">
-                      
-                     
-                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
+         
+                    <div class="text-center">
+
+                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdatingEdit" hidden>
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       Updating...
                       </button><!--End of updating button-->
@@ -602,29 +840,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       Error!
                       </button><!-- End of error button -->
                       
-                      <button type="submit" class="btn btn-primary" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
+                      <button type="button" class="btn btn-success" id ="btnEditUsers" onClick ="checkEditFields()">Save Changes</button>
                     </div>
-                  </div>
+                  </form><!-- End Profile Edit Form -->
+
                 </div>
-              </div><!-- End Edit user Modal-->
 
+                <div class="tab-pane fade pt-3" id="profile-grades">
 
-                <!--------------------------------------------Grade and Result Modal ------------------------------------------------------->
-              
-                <div class="modal fade" id="gradesmodal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Grades Result and Schedule Form</h5>
-                      
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
-                      
-                    </div>
-                    <div class="modal-body">
-              
-
-              <!-- Floating Labels Form -->
+                  <!-- Floating Labels Form -->
               <form class="row g-3 needs-validation" id ="frmGradesStudents">
               
               <input type="hidden" id="gradesId">
@@ -673,14 +897,14 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       Updating...
                 </button><!--End of updating button-->
-               <button type ="button" class="btn btn-primary" type="submit" onClick ="checkGradeFields()" id ="btnAddGrade">Add Subject</button>
+               <button type ="button" class="btn btn-success" type="submit" onClick ="checkGradeFields()" id ="btnAddGrade">Add Subject</button>
                
                </div>
               
             <div id="table-wrapper">
              <div id="table-scroll">
                <table class="table table-hover"  id ="tblGrades">
-                <thead id ="tblThead">
+                <thead>
                   <tr class="table-primary">
                     <th scope="col" class ="header-title">SUBJECT NAME</th>
                     <th scope="col" class ="header-title">GRADE</th>
@@ -698,40 +922,10 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             </div>  
 
                </form><!-- End floating Labels Form -->
-                    </div>
-                    <div class="modal-footer">
-                      
-                     
-                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      Updating...
-                      </button><!--End of updating button-->
-                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
-                      <i class="bi bi-exclamation-octagon"></i>
-                      Error!
-                      </button><!-- End of error button -->
-                      
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Back</button>
-                    </div>
-                  </div>
                 </div>
-              </div><!-- End Edit user Modal-->
 
-                <!--------------------------------------------Miscellaneus Fee Modal ------------------------------------------------------->
-              
-                <div class="modal fade" id="feemodal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Miscellaneous Fee Form</h5>
-                      
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick ="refreshTable()"></button>
-                      
-                    </div>
-                    <div class="modal-body">
-              
-
-              <!-- Floating Labels Form -->
+                <div class="tab-pane fade pt-3" id="profile-bills">  <!-- Change Bills Form -->
+                    <!-- Floating Labels Form -->
               <form class="row g-3 needs-validation" id ="frmfeeStudents">
               
               <input type="hidden" id="feeId">
@@ -762,7 +956,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       Updating...
                 </button><!--End of updating button-->
-               <button type ="button" class="btn btn-primary" id ="btnAddMisc" type="submit" onClick ="checkFeeFields()">Add Miscellaneous Fee</button>
+               <button type ="button" class="btn btn-success" id ="btnAddMisc" type="submit" onClick ="checkFeeFields()">Add Miscellaneous Fee</button>
                </div>
               <hr>
               <div class ="col-md-4">
@@ -782,12 +976,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       Updating...
                 </button><!--End of updating button-->
-              <button type ="button" class="btn btn-primary" type="submit"  id ="btnPaymentClick"onClick ="checkPayment()">Add Payment</button>
+              <button type ="button" class="btn btn-success" type="submit"  id ="btnPaymentClick"onClick ="checkPayment()">Add Payment</button>
               </div>
             <div  class="table-wrapper">
              <div  class ="table-scroll">
                <table class="table table-hover"  id ="tblFee">
-                <thead id ="tblThead">
+                <thead >
                   <tr class="table-primary">
                   <th scope="col" class ="header-title">TYPE</th>
                     <th scope="col" class ="header-title">NAME</th>
@@ -804,146 +998,21 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
             </div>  
 
                </form><!-- End floating Labels Form -->
-                    </div>
-                    <div class="modal-footer">
-                      
-                     
-                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      Updating...
-                      </button><!--End of updating button-->
-                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
-                      <i class="bi bi-exclamation-octagon"></i>
-                      Error!
-                      </button><!-- End of error button -->
-                      
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Back</button>
-                    </div>
-                  </div>
+
                 </div>
-              </div><!-- End Miscellaneous Fee Modal-->
-            
-            
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+              </div><!-- End Bordered Tabs -->
 
-          <div class="card" >
-            <div class="card-body" >
-            <h5 class="card-title">Student Accounts Table</h5>
-      <!-- scroll table --> 
-      <!-- Select Entry Page -->  
-     
-      <div class="row mb-3">
-        <div class="col-sm-2">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
-              <i class="bi bi-person-plus"></i>  
-             Student
-              </button>
-       </div>
-       
-
-       </div>
-
-      <div class="row mb-3">
-                  <div class="col-sm-2">
-                    <select class="form-select" aria-label="Default select example" id ="selectPage" onchange="selectNumPage()">
-                    
-                    </select>
-                  </div>
-                  <label for ="selectPage"class="col-sm-2 col-form-label">Rows</label>
-
-                <!-- Space between rows and searchbar -->
-                  <div class="col-sm-5 col-lg-3">
-                  </div>
-                  <!-- End of Space between rows and searchbar -->
-                  <!-- Search bar -->
-                  <div class="col-sm-2 col-lg-5">
-                    <div class ="search-bar">
-                      <input class="form-control" type ="text" placeholder="Search..." title="Enter search keyword" id="userSearchBar" onkeyup="userSearchKey()" >
-                     </div>
-                    </div><!--End of search bar-->
-                  </div> 
-      <!-- End of Select Entry Page -->
-    
-              <div id="gradetable-wrapper">
-                <div id="gradetable-scroll">
-              <!-- Table -->
-              
-              <table class="table table-hover"  id ="tblUsers">
-                <thead id ="tblThead">
-                  <tr class="table-primary">
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentnumber');return false;" class="th-a">STUDENT NUMBER</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FIRST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">MIDDLE NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">LAST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">EMAIL</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">BIRTHDAY</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('sex');return false;" class="th-a">SEX</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">PASSWORD</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('course');return false;" class="th-a">COURSE</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('section');return false;" class="th-a">SECTION</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">ADDRESS</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact');return false;" class="th-a">CONTACT</a></th>
-
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('guardian');return false;" class="th-a">GUARDIAN</a></th>
-
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('guardian_contact');return false;" class="th-a">GUARDIAN CONTACT</a></th>
-                 
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
-                    <th scope="col" class="table-info" id ="th-action">ACTION</th>
-                    
-                    
-                  </tr>
-                </thead>
-                <tbody id ="tbody-user-accounts">
-                 
-                </tbody>
-              </table>
-              <!-- Table -->
-
-  </div>
-  </div>
-  <!-- End for scroll table -->
-  <div class ="row g-3">
-   <div class="col-6" id ="showNumberOfPage">
-         
-     </div>
-     
-     
-   <!-- Pagination with icons -->
-
-              <div class="col-6">
-                <ul class="pagination justify-content-end">
-                  <li class="page-item" >
-                  <a class="page-link" aria-label="Previous" id="prevPage">
-                    <span aria-hidden="true">&laquo;</span>
-                        </a>
-                          </li>
-                          <!-- <li class="page-item"><a class="page-link" id= "page1">1</a></li>
-                          <li class="page-item"><a class="page-link" id= "page2">2</a></li>
-                          <li class="page-item"><a class="page-link" id= "page3">3</a></li> -->
-                          <li class="page-item">
-                          <a class="page-link" aria-label="Next" id ="nextPage" >
-                       <span aria-hidden="true">&raquo;</span>
-                    </a> 
-                  </li>
-                </ul>      
-            </div>
-  </div><!-- row g-3 -->
-              <!-- End Pagination with icons -->
-
-
-
-  <!-- practiec-->
             </div>
           </div>
 
         </div>
       </div>
     </section>
+
+
+<!-- End of View Student Info -->
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

@@ -110,7 +110,7 @@ window.onload = function(){
 }//Onload page
 
 //getAllData Function
-function getAllDataAPI(){
+function getAllDataAPI(a){
     //get user accounts
     fetch('../controller/student-table.php').then((res) => res.json())
     .then(response => {
@@ -166,12 +166,14 @@ function getAllDataAPI(){
             GVSRowPerPage = GVSAccLength;
             GVSdefaultRow = GVSAccLength;
         }// rows condition
-
+        if(infoOpen === true){
+            refreshInfo(a);
+        }
         bindAllDataIntoTable();//Bind the data into table once fetch successfull
     }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllDataAPI
 
-
+var infoOpen = false;
 //Check if valid image
 const checkIfImage = () =>{
 
@@ -235,8 +237,10 @@ const editProfilePic = async () =>{
    console.log(receivedStatus.statusCode)
    if(receivedStatus.statusCode === 200){
     let output = ''; 
+    
     output += `<img src="../../uploads/${receivedStatus.image}" alt="Profile"style ="max-width:350px; max-height:350px;"/>
     `;
+  
     document.querySelector('#changePicModalBody').innerHTML = output;
     
     let showBtn = '';
@@ -258,6 +262,8 @@ const editProfilePic = async () =>{
   
 }
 
+
+
 const saveChanges = async (...params) =>{
     let btnChangePic = document.getElementById('btnChangePic');
         // Create a FormData object.
@@ -274,6 +280,8 @@ const saveChanges = async (...params) =>{
        const receivedStatus = await fetchResponse.json();
 
        if(receivedStatus.statusCode === 200){
+        let UserId = document.getElementById('editId').value;
+        getAllDataAPI(UserId);
          alertShowSuccess.removeAttribute("hidden");
          btnChangePic.setAttribute("disabled", "disabled");
           alertShowSuccess.classList.add('show');
@@ -317,28 +325,10 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
     output += `<tr>
     <td><a href="#" onclick= "changePicModal(${GVSResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVSResults[i].studentnumber}</td>
-    <td>${GVSResults[i].firstname}</td>
-    <td>${GVSResults[i].middlename}</td>
-    <td>${GVSResults[i].lastname}</td>
-    <td>${GVSResults[i].email}</td>
-    <td>${GVSResults[i].birthday}</td>
-    <td>${GVSResults[i].sex}</td>
-    <td>${GVSResults[i].password}</td>
-    <td>${GVSResults[i].course}</td>
-    <td>${GVSResults[i].section}</td>
-    <td>${GVSResults[i].address}</td>
-    <td>${GVSResults[i].contact}</td>
-    <td>${GVSResults[i].guardian}</td>
-    <td>${GVSResults[i].guardian_contact}</td>
-    <td>${GVSResults[i].added_at}</td>
-    <th scope="col" class="table-info">
+    <td>${GVSResults[i].firstname} ${GVSResults[i].middlename} ${GVSResults[i].lastname}</td>
+    <th scope="col" >
     <div class = "pt-4">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
-
-    <a href="#" class ="btn btn-secondary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGrades('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
-
-    <a href="#" class ="btn btn-success btn-sm" title = "Fees" data-bs-toggle="modal" data-bs-target="#feemodal" onclick ="viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-currency-dollar"></i></a>
-
+    <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserNotSorted(${GVSResults[i].id});viewGrades('${GVSResults[i].studentnumber}');viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-eye"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
     
@@ -352,6 +342,8 @@ let numberOfPages = '';
 numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results</h8>`;
 document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
 document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
+
+return true;
 }
 
 //View, Edit Fee Not Sorted
@@ -367,11 +359,13 @@ const viewFees = (studID) =>{
 }
 
 //View, Edit Fee Sorted
-const viewFeesSorted = (studID) =>{
-    for(let i =0; i<GVSResultsSorted.length;i++){
-        if(GVSResultsSorted[i].studentnumber == studID){
-            let StudNum = document.getElementById('feesStudentNum').value = GVSResultsSorted[i].studentnumber;
-            let Balance = document.getElementById('feeBalance').value = GVSResultsSorted[i].balance;
+const viewFeesSorted = (tstudID) =>{
+    for(let i =0; i < GVSNumRows; i++){
+        if(GVSResultsSorted[i].studentnumber == tstudID){
+            let StudNum = document.getElementById('feeStudentNum');
+            let Balance = document.getElementById('feeBalance');
+            StudNum.value = tstudID;
+            Balance.value = GVSResultsSorted[i].balance;
         }
     }
     feesClick();
@@ -426,7 +420,7 @@ const bindMiscellaneousFee = async () =>{
     const getResponse = await fetchResponse.json();
     GVSMiscellaneousFee = getResponse;
     GVSMiscellaneousFee = getResponse;
-    let output = '<option value ="...">...</option>';
+    let output = '<option selected value ="..." disabled>...</option>';
     for(let i = 0; i<getResponse.length; i++){
         output += `<option value = "`+getResponse[i].name+`">`+getResponse[i].name+`</option>`;
     }
@@ -442,7 +436,7 @@ const bindSubjects = async ()=>{
     const getResponse = await subjectsResponse.json();
     GVSSubjects = getResponse;
     console.log(getResponse)
-    let output = '<option value="...">...</option>';
+    let output = '<option selected value="..." disabled>...</option>';
 
     for(let i = 0; i <getResponse.length; i++){
         output += `<option value="`+getResponse[i].subject_name+`">`+getResponse[i].subject_name+`</option>`;
@@ -506,12 +500,13 @@ setTimeout(delayedAlert, 3000);
 }
 
 const checkFeeFields = () =>{
-
     let feeStudentNum = document.getElementById('feeStudentNum').value;
-   
-    if(feeStudentNum !=="" ){
+    let Misc = document.getElementById('feeMiscellaneous').value;
+    let Type = 'Miscellaneous Fee';
+    let UserPosition = document.getElementById('getUserPosition').value;
+    let Semester = document.getElementById('feeSemester').value;
+    if(feeStudentNum !=="" && Type !== "" && UserPosition !==""&& Semester !=="" &&Misc !== "..."){
         btnInsertFee();
-
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -615,7 +610,10 @@ if(getResponse.statusCode === 200){
     let message = '';
     alertShowSuccess.removeAttribute("hidden");
     alertShowSuccess.classList.add('show'); 
+   
     feesClick()//Refresh Balance
+    console.log("Imclicked")
+   
     message += ` Added Succesfully!`
 
     document.querySelector('#alertSuccessMessage').innerHTML = message;
@@ -636,8 +634,10 @@ if(getResponse.statusCode === 201){
         btnCreateUsers.removeAttribute("hidden");
            alertError.classList.remove('show');  
            alertError.setAttribute("hidden", "hidden");
+           btnAddMisc.removeAttribute("hidden");
+           btnIsUpdatingFee.setAttribute("hidden", "hidden");
        }
-       setTimeout(delayedRemoveAlert, 1000);
+       setTimeout(delayedRemoveAlert, 500);
  }
 
  GetAllFeePerStudent();
@@ -688,20 +688,24 @@ const btnInsertSubs = async () =>{
         billForm.append('StudentId',gradeStudentNum);
         billForm.append('FeeName', objinsertSubjects[0].subject_code);
         billForm.append('Amount', objinsertSubjects[0].amount);
+        billForm.append('Editor', Editor);
         billForm.append('Type',Type);
+        for (var pair of billForm.entries()) {
+            console.log(pair[0]+ ' - ' + pair[1]); 
+         }
         try{
 
             const fetchResponse = await fetch('../controller/student-fee.php',{
                 method: "POST",
                 body:billForm,
             });
-        
+            console.log("ONLY SHITS")
+            let UserId = document.getElementById('editId').value;
+            getAllDataAPI(UserId);
             const getResponse = await fetchResponse.json();
         }catch(e){
             console.error(e);
         } 
-
-
         try{
             formData.append('StudNum', gradeStudentNum);
             formData.append('Balance', objinsertSubjects[0].amount);
@@ -734,6 +738,12 @@ const btnInsertSubs = async () =>{
     setTimeout(delayedRemoveAlert, 3000);
     }
     if(getResponse.statusCode === 201){
+
+        btnIsUpdatingGrades = document.getElementById('btnIsUpdatingGrades');
+    btnAddGrade = document.getElementById('btnAddGrade');
+    btnIsUpdatingGrades.setAttribute("hidden","hidden");
+    btnAddGrade.removeAttribute("hidden");
+
         let message = '';
         message += ` Subject was already in student's list!`
            document.querySelector('#alertErrorBody').innerHTML = message;
@@ -965,6 +975,8 @@ const updatePayment = async () =>{
         }catch(e){
             console.error(e);
         }
+        let UserId = document.getElementById('editId').value;
+        getAllDataAPI(UserId);
         btnPaymentClick.removeAttribute("hidden");
         btnIsUpdatingPayment.setAttribute("hidden", "hidden");
         message += ` Added Payment Succesfully!`;    
@@ -1155,29 +1167,12 @@ const bindAllDataIntoTableSorted = function (){
         output += `<tr>
     <td><a href="#" onclick= "changePicModal(${GVSResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVSResultsSorted[i].studentnumber}</td>
-    <td>${GVSResultsSorted[i].firstname}</td>
-    <td>${GVSResultsSorted[i].middlename}</td>
-    <td>${GVSResultsSorted[i].lastname}</td>
-    <td>${GVSResultsSorted[i].email}</td>
-    <td>${GVSResultsSorted[i].birthday}</td>
-    <td>${GVSResultsSorted[i].sex}</td>
-    <td>${GVSResultsSorted[i].password}</td>
-    <td>${GVSResultsSorted[i].course}</td>
-    <td>${GVSResultsSorted[i].section}</td>
-    <td>${GVSResultsSorted[i].address}</td>
-    <td>${GVSResultsSorted[i].contact}</td>
-    <td>${GVSResultsSorted[i].guardian}</td>
-    <td>${GVSResultsSorted[i].guardian_contact}</td>
-    <td>${GVSResultsSorted[i].added_at}</td>
-        <th scope="col" class="table-info">
+    <td>${GVSResultsSorted[i].firstname} ${GVSResultsSorted[i].middlename} ${GVSResultsSorted[i].lastname}</td>
+        <th scope="col" >
         <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserSorted(${GVSResultsSorted[i].id});viewGradesSorted('${GVSResultsSorted[i].studentnumber}'); viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-eye"></i></a>
 
-    <a href="#" class ="btn btn-secondary btn-sm" title = "Subjects" data-bs-toggle="modal" data-bs-target="#gradesmodal" onclick ="viewGradesSorted('${GVSResultsSorted[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
-
-    <a href="#" class ="btn btn-success btn-sm" title = "Fees" data-bs-toggle="modal" data-bs-target="#feemodal" onclick ="viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;" ><i class="bi bi-file-text"></i></a>
-
-
+    
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
@@ -1356,6 +1351,7 @@ const resetFields = () =>{
      GVSIndexPage = 0;
     resetFields();
     getAllDataAPI();
+   
 }
 //Validate Email
 const validateEmail = (mail) =>{
@@ -1615,8 +1611,70 @@ let Photo = document.getElementById('currentPhoto').src = Image_Url;
 
 //Edit User Data Not sorted
 const editUserNotSorted = (a) =>{
+    infoOpen = true;
     for(let i =0 ; i< GVSResults.length;i++ ){
         if(GVSResults[i].id == a){
+
+            //Get Profile Part
+            let viewOutput = '';
+            viewOutput += `<a href="#" onclick= "changePicModal(${GVSResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResults[i].profile_url}" alt="Profile"class ="rounded-circle"/></a>
+            <h2>${GVSResults[i].firstname} ${GVSResults[i].lastname}</h2>
+            <h3>${GVSResults[i].studentnumber}</h3>
+           `;
+        
+            document.querySelector('#viewProfileCard').innerHTML = viewOutput;
+            //End of Profile part
+
+            //profile-overview part
+
+            let overviewProfile = '';
+
+            overviewProfile = `<h5 class="card-title">Profile Details</h5>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Student Number</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].studentnumber}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">Full Name</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].firstname} ${GVSResults[i].middlename} ${GVSResults[i].lastname}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Course</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].course}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Section</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].section}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Address</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].address}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Phone</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].contact}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Email</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].email}</div>
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Date Created</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].added_at}</div>
+            </div>`;
+
+            
+
+            document.querySelector('#profile-overview').innerHTML = overviewProfile;
+
+            //End of profile-overview
 
             document.getElementById('editId').value = GVSResults[i].id;
            
@@ -1660,6 +1718,11 @@ const editUserNotSorted = (a) =>{
          break;
      }
     }
+    let StudentTable = document.getElementById('StudentTable');
+    StudentTable.setAttribute("hidden", "hidden");
+    let ViewStudentInfo = document.getElementById('ViewStudentInfo');
+    ViewStudentInfo.removeAttribute("hidden");
+    
  }
  
 
@@ -1668,11 +1731,71 @@ const editUserNotSorted = (a) =>{
 //Edit User Data sorted
 
 const editUserSorted = (a) =>{
-    
+    infoOpen = true;
     for(let i =0 ; i< GVSNumRows;i++ ){
         if(GVSResultsSorted[i].id == a){
 
-            document.getElementById('editId').value = GVSResults[i].id;
+             //Get Profile Part
+             let viewOutput = '';
+             viewOutput += `<a href="#" onclick= "changePicModal(${GVSResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResultsSorted[i].profile_url}" alt="Profile"class ="rounded-circle"/></a>
+             <h2>${GVSResultsSorted[i].firstname} ${GVSResultsSorted[i].lastname}</h2>
+             <h3>${GVSResultsSorted[i].studentnumber}</h3>
+            `;
+         
+             document.querySelector('#viewProfileCard').innerHTML = viewOutput;
+             //End of Profile part
+ 
+             //profile-overview part
+ 
+             let overviewProfile = '';
+ 
+             overviewProfile = `<h5 class="card-title">Profile Details</h5>
+             <div class="row">
+               <div class="col-lg-3 col-md-4 label">Student Number</div>
+               <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].studentnumber}</div>
+             </div>
+ 
+             <div class="row">
+             <div class="col-lg-3 col-md-4 label ">Full Name</div>
+             <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].firstname} ${GVSResultsSorted[i].middlename} ${GVSResultsSorted[i].lastname}</div>
+           </div>
+
+           <div class="row">
+             <div class="col-lg-3 col-md-4 label">Course</div>
+             <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].course}</div>
+           </div>
+
+           <div class="row">
+             <div class="col-lg-3 col-md-4 label">Section</div>
+             <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].section}</div>
+           </div>
+
+           <div class="row">
+             <div class="col-lg-3 col-md-4 label">Address</div>
+             <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].address}</div>
+           </div>
+
+           <div class="row">
+             <div class="col-lg-3 col-md-4 label">Phone</div>
+             <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].contact}</div>
+           </div>
+
+           <div class="row">
+             <div class="col-lg-3 col-md-4 label">Email</div>
+             <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].email}</div>
+           </div>
+           
+           <div class="row">
+             <div class="col-lg-3 col-md-4 label">Date Created</div>
+             <div class="col-lg-9 col-md-8">${GVSResultsSorted[i].added_at}</div>
+           </div>`;
+ 
+             document.querySelector('#profile-overview').innerHTML = overviewProfile;
+ 
+             //End of profile-overview
+ 
+
+            document.getElementById('editId').value = GVSResultsSorted[i].id;
 
             let StudNum = document.getElementById('editStudNum').value = GVSResultsSorted[i].studentnumber; 
 
@@ -1712,10 +1835,25 @@ const editUserSorted = (a) =>{
          break;
      }
     }
+    let StudentTable = document.getElementById('StudentTable');
+    StudentTable.setAttribute("hidden", "hidden");
+    let ViewStudentInfo = document.getElementById('ViewStudentInfo');
+    ViewStudentInfo.removeAttribute("hidden");
  }
- 
+
+ //Back to student table
+
+ const backToTable = () =>{
+    let StudentTable = document.getElementById('StudentTable');
+    StudentTable.removeAttribute("hidden");
+    let ViewStudentInfo = document.getElementById('ViewStudentInfo');
+    ViewStudentInfo.setAttribute("hidden","hidden");
+ }
+
  const checkEditFields = () =>{
-     
+    let Updating = document.getElementById('btnIsUpdatingEdit');
+    Updating.removeAttribute("hidden");
+
     let StudNum = document.getElementById('editStudNum').value; 
 
     let Fname = document.getElementById('editFname').value;
@@ -1759,7 +1897,8 @@ const editUserSorted = (a) =>{
         if(isNaN(Contact) || Contact.length > 11){
         message += ` Please input valid contact number!`
         document.querySelector('#alertErrorBody').innerHTML = message;
-
+        let Updating = document.getElementById('btnIsUpdatingEdit');
+        Updating.setAttribute("hidden","hidden");
             alertError.removeAttribute("hidden");
             alertError.classList.add('show');
          
@@ -1771,6 +1910,8 @@ const editUserSorted = (a) =>{
         setTimeout(delayedRemoveAlert, 1000);
 
        }else if(validateEmail(Email) !== true){
+        let Updating = document.getElementById('btnIsUpdatingEdit');
+        Updating.setAttribute("hidden","hidden");
            console.log(validateEmail(Email))
         message += ` Please input a valid email!`
         document.querySelector('#alertErrorBody').innerHTML = message;
@@ -1786,6 +1927,10 @@ const editUserSorted = (a) =>{
         }
         setTimeout(delayedRemoveAlert, 1000);
        }else if(isNaN(GuardianNum) || GuardianNum.length > 11){
+
+        let Updating = document.getElementById('btnIsUpdatingEdit');
+         Updating.setAttribute("hidden","hidden");
+
         message += ` Please input valid contact number!`
         document.querySelector('#alertErrorBody').innerHTML = message;
 
@@ -1803,15 +1948,15 @@ const editUserSorted = (a) =>{
         updateUser();
        }
     }else{
+        let Updating = document.getElementById('btnIsUpdatingEdit');
+        Updating.setAttribute("hidden","hidden");
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
         btnEditError.removeAttribute("hidden");
-        btnEditUsers.style.display = "none";
         delayedAlert = () =>{
             alertShowError.classList.remove('show');
             alertShowError.setAttribute("hidden", "hidden");
             btnEditError.setAttribute("hidden", "hidden");//Is loading true
-            btnEditUsers.style.display = "inline-block";
         }
         setTimeout(delayedAlert, 3000);
     }
@@ -1821,7 +1966,7 @@ const editUserSorted = (a) =>{
 
 const updateUser = async () =>{
 
-    IsLoadingTrue(true)//Start the loading button
+    btnEditUsers.setAttribute("hidden", "hidden");
 
     let UserId = document.getElementById('editId').value;
 
@@ -1892,14 +2037,18 @@ try{
     const showAnimation = await function(){
 let message = '';
         if(fetchResponse.statusCode === 200){
-       
+          
             delayedShowAlert = () =>{
+                getAllDataAPI(UserId);
                 console.log("SUCCESS")
                 message += ` Updated Succesfully!`
                 document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
                 
+                btnEditUsers.removeAttribute("hidden");
+                let Updating = document.getElementById('btnIsUpdatingEdit');
+                Updating.setAttribute("hidden","hidden");
             }
             setTimeout(delayedShowAlert, 3000)
             delayedRemoveAlert = () =>{   
@@ -1908,12 +2057,16 @@ let message = '';
             }
             setTimeout(delayedRemoveAlert, 6000);
           }else{
-              console.log(fetchResponse)
+            let Updating = document.getElementById('btnIsUpdatingEdit');
+            Updating.setAttribute("hidden","hidden");
+                       console.log(fetchResponse)
           }
         }
         let message = '';
         if(fetchResponse.statusCode === 201){
-            message += ` Student ID Already Exist!`
+            let Updating = document.getElementById('btnIsUpdatingEdit');
+                  Updating.setAttribute("hidden","hidden");
+                message += ` Student ID Already Exist!`
                document.querySelector('#alertErrorBody').innerHTML = message;
                delayedShowAlert = () =>{
                    alertError.removeAttribute("hidden");
@@ -1932,10 +2085,133 @@ let message = '';
         showAnimation();
      
 }catch (e){
+    let Updating = document.getElementById('btnIsUpdatingEdit');
+    Updating.setAttribute("hidden","hidden");
     console.log(e)
 }
 
 }
+
+
+
+const refreshInfo = (a) =>{
+    for(let i =0 ; i< GVSResults.length;i++ ){
+        if(GVSResults[i].id == a){
+
+            //Get Profile Part
+            let viewOutput = '';
+            viewOutput += `<a href="#" onclick= "changePicModal(${GVSResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResults[i].profile_url}" alt="Profile"class ="rounded-circle"/></a>
+            <h2>${GVSResults[i].firstname} ${GVSResults[i].lastname}</h2>
+            <h3>${GVSResults[i].studentnumber}</h3>
+           `;
+        
+            document.querySelector('#viewProfileCard').innerHTML = viewOutput;
+            //End of Profile part
+
+            //profile-overview part
+
+            let overviewProfile = '';
+
+            overviewProfile = `<h5 class="card-title">Profile Details</h5>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Student Number</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].studentnumber}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">Full Name</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].firstname} ${GVSResults[i].middlename} ${GVSResults[i].lastname}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Course</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].course}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Section</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].section}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Address</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].address}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Phone</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].contact}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Email</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].email}</div>
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Date Created</div>
+              <div class="col-lg-9 col-md-8">${GVSResults[i].added_at}</div>
+            </div>`;
+
+            
+
+            document.querySelector('#profile-overview').innerHTML = overviewProfile;
+
+            //End of profile-overview
+
+            document.getElementById('editId').value = GVSResults[i].id;
+           
+            let StudNum = document.getElementById('editStudNum').value = GVSResults[i].studentnumber; 
+
+            let Fname = document.getElementById('editFname').value = GVSResults[i].firstname;
+        
+            let Mname = document.getElementById('editMname').value = GVSResults[i].middlename;
+           
+            let Lname = document.getElementById('editLname').value = GVSResults[i].lastname;
+        
+            let Email = document.getElementById('editEmail').value = GVSResults[i].email;
+         
+            let Password = document.getElementById('editPassword').value = GVSResults[i].password;
+            
+        
+            let Birthday = document.getElementById('editBirthday').value = GVSResults[i].birthday;
+            
+            let Sex = GVSResults[i].sex;
+        console.log(Sex =="Male")
+            
+            if(Sex == "Male"){
+                console.log(Sex =="Male")
+                document.getElementById('editmaleCheck').checked = true;
+            }
+            if(Sex == "Female"){
+                document.getElementById('editfemaleCheck').checked = true;
+            }
+        
+            let Contact = document.getElementById('editContact').value = GVSResults[i].contact;
+        
+            let Address = document.getElementById('editAddress').value = GVSResults[i].address;
+         
+            let Course = document.getElementById('editCourse').value = GVSResults[i].course;
+        
+            let Section = document.getElementById('editSection').value = GVSResults[i].section;
+        
+            let Guardian = document.getElementById('editGuardian').value = GVSResults[i].guardian;
+        
+            let GuardianNum = document.getElementById('editGuardianContact').value = GVSResults[i].guardian_contact;
+            let Balance = document.getElementById('feeBalance').value = GVSResults[i].balance;
+            console.log("Fee Balance")
+            console.log(Balance)
+            break;
+     }
+    }
+    
+    let StudentTable = document.getElementById('StudentTable');
+    StudentTable.setAttribute("hidden", "hidden");
+    let ViewStudentInfo = document.getElementById('ViewStudentInfo');
+    ViewStudentInfo.removeAttribute("hidden");
+}
+
+
 
 //Bind all course
 const BindAllCourse = async () =>{
@@ -1945,7 +2221,7 @@ const BindAllCourse = async () =>{
 
     let output = '';
 
-    output = '<option value="...">...</option>';
+    output = '<option selected value="..." disabled >...</option>';
     
     for(let i = 0; i<getResponse.length;i++){
         output += `<option value="`+getResponse[i].course_name+`">`+getResponse[i].course_name+`</option>`;
