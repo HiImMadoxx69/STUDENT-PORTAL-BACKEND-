@@ -160,12 +160,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
    
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link collapsed" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -187,6 +190,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Courses</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
@@ -201,17 +211,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link" href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
+    
       
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -244,27 +249,29 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">
+<?php if($_SESSION['Position'] == 'Admin'){
+echo '<!-- User Accounts Card -->
+<div class="col-xxl-2 col-md-4">
+  <div class="card info-card customers-card">
 
-            <!-- User Accounts Card -->
-            <div class="col-xxl-2 col-md-4">
-              <div class="card info-card customers-card">
+    <div class="card-body">
+      <h5 class="card-title">Employee Accounts <span>| Archived</span></h5>
 
-                <div class="card-body">
-                  <h5 class="card-title">Employee Accounts <span>| Archived</span></h5>
+      <div class="d-flex align-items-center">
+      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+          <i class="bi bi-people"></i>
+        </div>
+        <div class="ps-3">
+          <h6 id="totalUserArchives"></h6>
+          <a href ="archived-user.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
+        </div>
+      </div>
+    </div>
 
-                  <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id="totalUserArchives"></h6>
-                      <a href ="archived-user.php" class="text-info small pt-1 fw-bold">View</a> <span class="text-muted small pt-2 ps-1">in table</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
+  </div>
+</div><!-- End Sales Card -->';
+}?>
+            
 
             <!-- Revenue Card -->
             <div class="col-xxl-2 col-md-4">

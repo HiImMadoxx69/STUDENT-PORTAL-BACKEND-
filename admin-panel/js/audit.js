@@ -357,7 +357,7 @@ const bindAllDataIntoTableSorted = function (){
     
     for(let i = 0; i<GVAUDNumRows; i++){
         output += `<tr>
-        <td>${GVAUDResults[i].action}</td>
+        <td>${GVAUDResultsSorted[i].action}</td>
         <td>${GVAUDResultsSorted[i].added_at}</td>
         </tr>`;
     }

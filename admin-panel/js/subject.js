@@ -497,8 +497,6 @@ const resetFields = () =>{
     let Units = document.getElementById('newUnits').value = "";
 
     let Amount = document.getElementById('newAmount').value ="";
-    btnCreateUsers.setAttribute("hidden", "hidden");
-    btnSuccess.removeAttribute("hidden");
 }//Reset all the fields
 
 //Call it to refresh the table
@@ -610,15 +608,14 @@ for (var pair of formData.entries()) {
           if(response.statusCode === 200){
          message += ` Created Succesfully!`
             document.querySelector('#alertSuccessMessage').innerHTML = message;
- 
+            resetFields();
+            $('#addusermodal').modal('hide');
+            refreshTable();
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-                
-        
-    
             delayedRemoveAlert = () =>{   
-                btnSuccess.removeAttribute("hidden");
+                btnCreateUsers.removeAttribute("hidden");
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }

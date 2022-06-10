@@ -277,19 +277,7 @@ for(let i = GVASIndexPage; i<GVASdefaultRow; i++){
     output += `<tr>
          <td><img src = "../../uploads/${GVASResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
         <td>${GVASResults[i].studentnumber}</td>
-        <td>${GVASResults[i].firstname}</td>
-        <td>${GVASResults[i].middlename}</td>
-        <td>${GVASResults[i].lastname}</td>
-        <td>${GVASResults[i].email}</td>
-        <td>${GVASResults[i].birthday}</td>
-        <td>${GVASResults[i].sex}</td>
-        <td>${GVASResults[i].password}</td>
-        <td>${GVASResults[i].address}</td>
-        <td>${GVASResults[i].contact}</td>
-        <td>${GVASResults[i].course}</td>
-        <td>${GVASResults[i].section}</td>
-        <td>${GVASResults[i].guardian}</td>
-        <td>${GVASResults[i].guardian_contact}</td>
+        <td>${GVASResults[i].firstname} ${GVASResults[i].middlename} ${GVASResults[i].lastname}</td>
         <td>${GVASResults[i].status}</td>
         <th scope="col" class="table-info">
         <div class = "pt-1">
@@ -365,19 +353,7 @@ const bindAllDataIntoTableSorted = function (){
         output += `<tr>
          <td><img src = "../../uploads/${GVASResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
         <td>${GVASResultsSorted[i].studentnumber}</td>
-        <td>${GVASResultsSorted[i].firstname}</td>
-        <td>${GVASResultsSorted[i].middlename}</td>
-        <td>${GVASResultsSorted[i].lastname}</td>
-        <td>${GVASResultsSorted[i].email}</td>
-        <td>${GVASResultsSorted[i].birthday}</td>
-        <td>${GVASResultsSorted[i].sex}</td>
-        <td>${GVASResultsSorted[i].password}</td>
-        <td>${GVASResultsSorted[i].address}</td>
-        <td>${GVASResultsSorted[i].contact}</td>
-        <td>${GVASResultsSorted[i].course}</td>
-        <td>${GVASResultsSorted[i].section}</td>
-        <td>${GVASResultsSorted[i].guardian}</td>
-        <td>${GVASResultsSorted[i].guardian_contact}</td>
+        <td>${GVASResultsSorted[i].firstname} ${GVASResultsSorted[i].middlename} ${GVASResultsSorted[i].lastname}</td>
         <td>${GVASResultsSorted[i].status}</td>
         <th scope="col" class="table-info">
     <div class = "pt-1">

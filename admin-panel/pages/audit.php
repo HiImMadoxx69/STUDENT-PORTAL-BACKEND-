@@ -158,12 +158,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
 
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link collapsed" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -186,6 +189,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
@@ -198,17 +208,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
+    
 
       <li class="nav-item">
         <a class="nav-link" href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -236,12 +241,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
-      <h1>User Accounts</h1>
+      <h1>Activity Log</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">User Accounts</li>
+          <li class="breadcrumb-item active">Activity Log</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

@@ -605,18 +605,16 @@ for (var pair of formData.entries()) {
             let message = '';
             IsLoadingTrue(true)//Start the loading button
           if(response.statusCode === 200){
+            $('#addusermodal').modal('hide');
+            resetFields();
+            refreshTable();
          message += ` Created Succesfully!`
             document.querySelector('#alertSuccessMessage').innerHTML = message;
-IsLoadingTrue(false);
-
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-                
- 
-                
             delayedRemoveAlert = () =>{   
-                
+                btnCreateUsers.removeAttribute("hidden")
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }

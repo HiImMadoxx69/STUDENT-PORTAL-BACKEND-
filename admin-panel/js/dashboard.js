@@ -1,4 +1,5 @@
 window.onload = function(){
+    getTotalSections();
     getAllUser();
     getAllStudent();
     getAllSubject();
@@ -134,6 +135,19 @@ const getAllUnpaid = async () =>{
     message += ``+getResponse.length+``;
 
     document.querySelector('#totalUnpaid').innerHTML = message;
+}
+
+//get total section
+const getTotalSections = async () =>{
+    try{
+       const fetchResponse = await fetch('../controller/section-table.php');
+       const getResponse = await fetchResponse.json();
+       let message = '';
+        message += ``+getResponse.length+``;
+        document.querySelector('#totalSection').innerHTML = message;
+    }catch(e){
+        console.log(e);
+    }
 }
 
 //get Total Collected Fee

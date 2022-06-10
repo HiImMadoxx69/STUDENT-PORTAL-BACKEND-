@@ -34,9 +34,9 @@ function getSuccessModal(){
 }
 
 function getFailedModal(){
-  modalHeading.innerHTML = 'Action failed!';
+  modalHeading.innerHTML = 'Change Password Failed!';
   $("#basicModal").modal('toggle');//toggle the modal
-  modalMessage.innerText = 'Failed!';
+  modalMessage.innerText = 'Check your inputs and try again!';
 }
 
 //Change password function
@@ -47,8 +47,11 @@ let newPassword = document.getElementById('newPassword').value;
 let confirmNewPassword = document.getElementById('renewPassword').value;
 
 console.log('currentpass' + getCurrentPassword +'; currentPasword ' +currentPassword+ '; newPass' + newPassword+ + '; cnfirmPass '+ confirmNewPassword);
-
-if(getCurrentPassword ===  currentPassword && newPassword === confirmNewPassword){
+if(newPassword < 6){
+  btnUserChangePass.style.display = "inline-block";
+  btnChangeToLoadingPassword.setAttribute("hidden", "hidden");
+  getFailedModal();
+}else if(getCurrentPassword ===  currentPassword && newPassword === confirmNewPassword){
   var xhr = new XMLHttpRequest();
   // Create a FormData object.
   formData = new FormData();

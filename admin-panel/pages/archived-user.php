@@ -158,12 +158,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
    
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -186,6 +189,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
@@ -199,16 +209,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link" href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
+   
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -240,8 +245,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item"><a href="archived-accounts.php">Archives</a></li>
-          <li class="breadcrumb-item active">Archived Employee Accounts</li>
+           <li class="breadcrumb-item active">Archived Employee Accounts</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -480,7 +484,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">Archived User Table</h5>
+            <h5 class="card-title">Archived Employee Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
@@ -489,7 +493,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
        
 
        </div>
-
+       <div class ="row mb-1">
+<div class ="col-sm-2">
+          <a href ="user-accounts.php" class="btn btn-secondary" style ="margin:5px;">
+              <i class="ri-arrow-go-back-fill"></i> 
+              </a>
+            </div>
+</div>
       <div class="row mb-3">
                   <div class="col-sm-2">
                     <select class="form-select" aria-label="Default select example" id ="selectPage" onchange="selectNumPage()">
@@ -521,21 +531,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">USERNAME</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FIRST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">MIDDLE NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">LAST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">EMAIL</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">BIRTHDAY</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('sex');return false;" class="th-a">SEX</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">PASSWORD</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position');return false;" class="th-a">POSITION</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">ADDRESS</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact');return false;" class="th-a">CONTACT</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about');return false;" class="th-a">ABOUT</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile');return false;" class="th-a">TWITTER</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile');return false;" class="th-a">FACEBOOK</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile');return false;" class="th-a">INSTAGRAM</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">LINKED IN</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE REMOVED</a></th>
+                   <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE REMOVED</a></th>
                     <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
                     
                     

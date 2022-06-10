@@ -156,12 +156,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-heading">Pages</li>
 
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link collapsed" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -184,6 +187,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
@@ -195,18 +205,10 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Announcement</span>
         </a>
       </li><!-- End Archives Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
-     
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -338,9 +340,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <i class="bi bi-check-circle me-1"></i>
                       Created
                       </button><!-- End of success button -->
-                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
-                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
-                    </div>
+                      <button type="submit" class="btn btn-success" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
+                      </div>
                   </div>
                 </div>
               </div><!-- End user Modal-->
@@ -433,7 +434,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       Error!
                       </button><!-- End of error button -->
                       
-                      <button type="submit" class="btn btn-primary" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
+                      <button type="submit" class="btn btn-success" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
                     </div>
                   </div>
@@ -447,16 +448,20 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">User Accounts Table</h5>
+            <h5 class="card-title">Subjects Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
       <div class="row mb-3">
-        <div class="col-sm-2">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
+        <div class="col-sm-4">
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
               Subject
               </button>
+            
+              <a href ="archived-subjects.php" class="btn btn-warning" >
+              <i class="bi bi-recycle"></i> 
+              </a>
        </div>
        
 

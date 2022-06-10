@@ -160,12 +160,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
      
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link collapsed" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -188,6 +191,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
@@ -200,17 +210,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -441,24 +445,19 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
 
 
                 <div class="row mb-3">
-                  <label class="col-md-4 col-lg-3 col-form-label">Position</label>
+                  <label class="col-md-4 col-lg-3 col-form-label" >Position</label>
                   <div class="col-md-8 col-lg-9">
-                    <select class="form-select" aria-label="Default select example" id= "Position">
+                    <select class="form-select" aria-label="Default select example" disabled id= "Position">
                       <?php
                         if($user['position'] == 'Admin'){
                           echo '<option selected value ="Admin">Admin</option>
                           <option value="Registar">Registar</option>
-                          <option value="Accountant">Accountant</option>
-                          ';
-                        }else if($user['position'] == 'Registar'){
-                          echo '<option selected value ="Registrar">Registrar</option>
-                          <option value="Admin">Admin</option>
-                          <option value="Accountant">Accountant</option>
+                      
                           ';
                         }else{
-                          echo '<option selected value ="Accountant">Accountant</option>
+                          echo '<option selected value ="Registrar">Registrar</option>
                           <option value="Admin">Admin</option>
-                          <option value="Registrar">Registrar</option>
+                        
                           ';
                         }
                       ?>
@@ -516,7 +515,7 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                     <?php echo '<input name="email" type="email" class="form-control" id="Email" value ="'.$user['email'].'"/>' 
+                     <?php echo '<input name="email" type="email" disabled class="form-control" id="Email" value ="'.$user['email'].'"/>' 
               ?>  
                     </div>
                     </div>

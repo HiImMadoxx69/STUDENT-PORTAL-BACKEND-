@@ -116,7 +116,7 @@ const getAllUserName = async () =>{
 }
 
 //getAllData Function
-function getAllDataAPI(){
+function getAllDataAPI(a){
     //get user accounts
     fetch('../controller/user-table.php').then((res) => res.json())
     .then(response => {
@@ -172,17 +172,120 @@ function getAllDataAPI(){
             GVURowPerPage = GVUAccLength;
             GVUdefaultRow = GVUAccLength;
         }// rows condition
-
+        
+        if(infoOpen === true){
+            refreshInfo(a);
+        }
         bindAllDataIntoTable();//Bind the data into table once fetch successfull
     }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllDataAPI
 
-//check if valid image
 
+const refreshInfo = (a) =>{ 
+    for(let i =0 ; i< GVUResults.length;i++ ){
+        if(GVUResults[i].id == a){
+           
+         let UserId = document.getElementById('editId').value =  GVUResults[i].id;    
+
+         let Fname = document.getElementById('editFname').value =  GVUResults[i].firstname;
+        
+         let Mname = document.getElementById('editMname').value =  GVUResults[i].middlename;
+        
+         let Lname = document.getElementById('editLname').value =  GVUResults[i].lastname;
+     
+         let Email = document.getElementById('editEmail').value=   GVUResults[i].email ;
+      
+         let Username = document.getElementById('editUsername').value =  GVUResults[i].username;
+     
+         let Password = document.getElementById('editPassword').value =  GVUResults[i].password;
+         
+         let Job = document.getElementById('editJob').value =    GVUResults[i].position;
+     
+         let Birthday = document.getElementById('editBirthday').value =  GVUResults[i].birthday;
+         
+         let Sex = GVUResults[i].sex;
+      
+         if(Sex === "Male"){
+             document.getElementById('editmaleCheck').checked = true;
+         }
+         if(Sex === "Female"){
+             document.getElementById('editfemaleCheck').checked = true;
+         }
+         let Contact = document.getElementById('editContact').value =    GVUResults[i].contact;
+     
+         let Address = document.getElementById('editAddress').value =    GVUResults[i].address;
+      
+         let About = document.getElementById('editAbout').value =    GVUResults[i].about;
+      
+         let Twitter = document.getElementById('edittwitterprofileURL').value =  GVUResults[i].twitterprofile;
+     
+         let Facebook = document.getElementById('editfacebookprofileURL').value =    GVUResults[i].facebookprofile;
+      
+         let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResults[i].instagramprofile;
+     
+         let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResults[i].linkedinprofile;
+    
+         let output = '';
+
+         output += `<a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile"class ="rounded-circle"/></a>
+         <h2>${GVUResults[i].firstname} ${GVUResults[i].lastname}</h2>
+         <h3>${GVUResults[i].username}</h3>
+         <div class="social-links mt-2">
+           <a href="${GVUResults[i].twitterprofile}" class="twitter"><i class="bi bi-twitter"></i></a>
+           <a href="${GVUResults[i].facebookprofile}" class="facebook"><i class="bi bi-facebook"></i></a>
+           <a href="${GVUResults[i].instagramprofile}" class="instagram"><i class="bi bi-instagram"></i></a>
+           <a href="${GVUResults[i].linkedinprofile}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+         </div>`;
+         document.querySelector('#profileBox').innerHTML = output;
+
+
+         let overiewPanel = '';
+
+         overiewPanel += `<h5 class="card-title">About</h5>
+         <p class="small fst-italic">${GVUResults[i].about}</p>
+
+         <h5 class="card-title">Profile Details</h5>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label ">Full Name</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].firstname} ${GVUResults[i].middlename} ${GVUResults[i].lastname}</div>
+         </div>
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Company</div>
+           <div class="col-lg-9 col-md-8">Asian Insitute of Science and Technology</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Position</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].position}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Address</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].address}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Contact</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].contact}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Email</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].email}</div>
+         </div>`;
+
+         document.querySelector('#profile-overview').innerHTML = overiewPanel;
+
+         break;
+
+     }
+    }
+}
+
+//check if valid image
 const checkIfImage = () =>{
 
- 
-    
    let file = document.getElementById('editUserPic');// fileupload
 
             if(file.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
@@ -252,15 +355,18 @@ const editProfilePic = async () =>{
     `;
    document.querySelector('#showSave').innerHTML = showBtn;
    }
-    
-
-  
- 
    
    }catch (e){
    console.log(e)
    }
   
+}
+
+const backToTable = () =>{
+  let viewProfile= document.getElementById('viewProfile');
+  let EmployeeTable = document.getElementById('EmployeeTable');
+  viewProfile.setAttribute("hidden", "hidden");
+  EmployeeTable.removeAttribute("hidden");
 }
 
 const saveChanges = async (...params) =>{
@@ -279,6 +385,7 @@ const saveChanges = async (...params) =>{
        const receivedStatus = await fetchResponse.json();
        console.log(receivedStatus)
        if(receivedStatus.statusCode === 200){
+        getAllDataAPI(params[0]);
          alertShowSuccess.removeAttribute("hidden");
          btnChangePic.setAttribute("disabled", "disabled");
           alertShowSuccess.classList.add('show');
@@ -321,26 +428,10 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
  console.log("GVUIndexPage: "+GVUIndexPage+"< GVUDefaultRow:" +GVUdefaultRow)
     output += `<tr>
     <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-    <td>${GVUResults[i].username}</td>
-    <td>${GVUResults[i].firstname}</td>
-    <td>${GVUResults[i].middlename}</td>
-    <td>${GVUResults[i].lastname}</td>
-    <td>${GVUResults[i].email}</td>
-    <td>${GVUResults[i].birthday}</td>
-    <td>${GVUResults[i].sex}</td>
-    <td>${GVUResults[i].password}</td>
-    <td>${GVUResults[i].position}</td>
-    <td>${GVUResults[i].address}</td>
-    <td>${GVUResults[i].contact}</td>
-    <td>${GVUResults[i].about}</td>
-    <td>${GVUResults[i].twitterprofile}</td>
-    <td>${GVUResults[i].facebookprofile}</td>
-    <td>${GVUResults[i].instagramprofile}</td>
-    <td>${GVUResults[i].linkedinprofile}</td>
-    <td>${GVUResults[i].added_at}</td>
-    <th scope="col" class="table-info">
+    <td>${GVUResults[i].firstname} ${GVUResults[i].middlename} ${GVUResults[i].lastname}</td>
+    <th scope="col" >
     <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="bi bi-trash"></i></a>
     
@@ -414,26 +505,10 @@ const bindAllDataIntoTableSorted = function (){
     for(let i = 0; i<GVUNumRows; i++){
         output += `<tr>
         <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-        <td>${GVUResultsSorted[i].username}</td>
-        <td>${GVUResultsSorted[i].firstname}</td>
-        <td>${GVUResultsSorted[i].middlename}</td>
-        <td>${GVUResultsSorted[i].lastname}</td>
-        <td>${GVUResultsSorted[i].email}</td>
-        <td>${GVUResultsSorted[i].birthday}</td>
-        <td>${GVUResultsSorted[i].sex}</td>
-        <td>${GVUResultsSorted[i].password}</td>
-        <td>${GVUResultsSorted[i].position}</td>
-        <td>${GVUResultsSorted[i].address}</td>
-        <td>${GVUResultsSorted[i].contact}</td>
-        <td>${GVUResultsSorted[i].about}</td>
-        <td>${GVUResultsSorted[i].twitterprofile}</td>
-        <td>${GVUResultsSorted[i].facebookprofile}</td>
-        <td>${GVUResultsSorted[i].instagramprofile}</td>
-        <td>${GVUResultsSorted[i].linkedinprofile}</td>
-        <td>${GVUResultsSorted[i].added_at}</td>
-        <th scope="col" class="table-info">
+        <td>${GVUResultsSorted[i].firstname} ${GVUResultsSorted[i].middlename} ${GVUResultsSorted[i].lastname}</td>
+   <th scope="col">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
+    <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="bi bi-trash"></i></a>
     
@@ -590,7 +665,7 @@ const resetFields = () =>{
     let Instagram = document.getElementById('newinstagramprofileURL').value = "";
 
     let Linkedin = document.getElementById('newlinkedinprofileURL').value = "";
-    btnSuccess.setAttribute("hidden", "hidden");//Is loading true
+
     btnCreateUsers.removeAttribute("hidden");
 }//Reset all the fields
 
@@ -656,7 +731,7 @@ const checkAllFields = () =>{
 
     let Linkedin = document.getElementById('newlinkedinprofileURL').value;
 
-    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== ""){
+    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== ""  && Job !== "..." && Contact !== "" && Address !== "" && About !== ""){
     let message ="";
         if(isNaN(Contact) || Contact.length > 11){
         alertShowError.classList.add('show');
@@ -689,7 +764,19 @@ const checkAllFields = () =>{
          alertError.setAttribute("hidden", "hidden");
      }
      setTimeout(delayedRemoveAlert, 1000);
-    }else{
+    }else if(Contact.length !== 11 || isNaN(Contact)){
+        let message ='';
+        message += ` Please input a valid contact!`
+        document.querySelector('#alertErrorMessage').innerHTML = message;
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+    }
+    else{
         createUserAccount();
      }
 
@@ -746,11 +833,13 @@ const createUserAccount = (e) =>{
 
     let Email = document.getElementById('newEmail').value;
  
-    let Username = document.getElementById('newUsername').value;
+    let Password = Math.floor((Math.random() * 1000000) + 100000);
 
-    let Password = document.getElementById('newPassword').value;
+    Password += Fname;
     
     let Job = document.getElementById('newJob').value;
+
+    let Username = Email;
 
     let Birthday = document.getElementById('newBirthday').value;
 
@@ -813,25 +902,36 @@ for (var pair of formData.entries()) {
             console.log(response.statusCode)
             let message = '';
           if(response.statusCode === 200){
+            refreshTable();
          message += ` Created Succesfully!`
             document.querySelector('#alertSuccessMessage').innerHTML = message;
-            delayedShowAlert = () =>{
+            $('#addusermodal').modal('hide');
+        resetFields();
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-                btnSuccess.removeAttribute("hidden");
-            }
-            setTimeout(delayedShowAlert, 3000)
             delayedRemoveAlert = () =>{   
-                
+                btnCreateUsers.removeAttribute("hidden");
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 6000);
+            setTimeout(delayedRemoveAlert, 2000);
           }
 
-          
-            
+          let showMyError = document.getElementById('alertError');
+          if(response.statusCode === 201){
+            message += ` Email Already Exist!`
+               document.querySelector('#alertErrorMessage').innerHTML = message;
+                   btnCreateUsers.setAttribute("hidden", "hidden");
+                   showMyError.removeAttribute("hidden");
+                   showMyError.classList.add('show');
+               delayedRemoveAlert = () =>{   
+                btnCreateUsers.removeAttribute("hidden");
+                showMyError.classList.remove('show');  
+                showMyError.setAttribute("hidden", "hidden");
+               }
+               setTimeout(delayedRemoveAlert, 3000);
+             }
         })
     .catch(err => console.log(err))
 
@@ -846,6 +946,13 @@ let Photo = document.getElementById('currentPhoto').src = Image_Url;
 
 //Edit User Data Not sorted
 const editUserNotSorted = (a) =>{
+    infoOpen = true;
+    let viewProfile = document.getElementById('viewProfile');
+    let EmployeeTable = document.getElementById('EmployeeTable');
+    EmployeeTable.setAttribute("hidden", "hidden");
+    viewProfile.removeAttribute("hidden");
+
+
     for(let i =0 ; i< GVUResults.length;i++ ){
         if(GVUResults[i].id == a){
            
@@ -888,7 +995,61 @@ const editUserNotSorted = (a) =>{
          let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResults[i].instagramprofile;
      
          let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResults[i].linkedinprofile;
+    
+         let output = '';
+
+         output += `<a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile"class ="rounded-circle"/></a>
+         <h2>${GVUResults[i].firstname} ${GVUResults[i].lastname}</h2>
+         <h3>${GVUResults[i].username}</h3>
+         <div class="social-links mt-2">
+           <a href="${GVUResults[i].twitterprofile}" class="twitter"><i class="bi bi-twitter"></i></a>
+           <a href="${GVUResults[i].facebookprofile}" class="facebook"><i class="bi bi-facebook"></i></a>
+           <a href="${GVUResults[i].instagramprofile}" class="instagram"><i class="bi bi-instagram"></i></a>
+           <a href="${GVUResults[i].linkedinprofile}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+         </div>`;
+         document.querySelector('#profileBox').innerHTML = output;
+
+
+         let overiewPanel = '';
+
+         overiewPanel += `<h5 class="card-title">About</h5>
+         <p class="small fst-italic">${GVUResults[i].about}</p>
+
+         <h5 class="card-title">Profile Details</h5>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label ">Full Name</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].firstname} ${GVUResults[i].middlename} ${GVUResults[i].lastname}</div>
+         </div>
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Company</div>
+           <div class="col-lg-9 col-md-8">Asian Insitute of Science and Technology</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Position</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].position}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Address</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].address}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Contact</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].contact}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Email</div>
+           <div class="col-lg-9 col-md-8">${GVUResults[i].email}</div>
+         </div>`;
+
+         document.querySelector('#profile-overview').innerHTML = overiewPanel;
+
          break;
+
      }
     }
  }
@@ -899,7 +1060,11 @@ const editUserNotSorted = (a) =>{
 //Edit User Data sorted
 
 const editUserSorted = (a) =>{
-    
+    infoOpen = true;
+    let viewProfile = document.getElementById('viewProfile');
+    let EmployeeTable = document.getElementById('EmployeeTable');
+    EmployeeTable.setAttribute("hidden", "hidden");
+    viewProfile.removeAttribute("hidden");
     for(let i =0 ; i< GVUNumRows;i++ ){
         if(GVUResultsSorted[i].id == a){
 
@@ -943,10 +1108,69 @@ const editUserSorted = (a) =>{
          let Instagram = document.getElementById('editinstagramprofileURL').value =  GVUResultsSorted[i].instagramprofile;
      
          let Linkedin = document.getElementById('editlinkedinprofileURL').value =    GVUResultsSorted[i].linkedinprofile;
+        
+
+         let output = '';
+
+         output += `<a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile"class ="rounded-circle"/></a>
+         <h2>${GVUResultsSorted[i].firstname} ${GVUResultsSorted[i].lastname}</h2>
+         <h3>${GVUResultsSorted[i].username}</h3>
+         <div class="social-links mt-2">
+           <a href="${GVUResultsSorted[i].twitterprofile}" class="twitter"><i class="bi bi-twitter"></i></a>
+           <a href="${GVUResultsSorted[i].facebookprofile}" class="facebook"><i class="bi bi-facebook"></i></a>
+           <a href="${GVUResultsSorted[i].instagramprofile}" class="instagram"><i class="bi bi-instagram"></i></a>
+           <a href="${GVUResultsSorted[i].linkedinprofile}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+         </div>`;
+         document.querySelector('#profileBox').innerHTML = output;
+
+
+         let overiewPanel = '';
+
+         overiewPanel += `<h5 class="card-title">About</h5>
+         <p class="small fst-italic">${GVUResultsSorted[i].about}</p>
+
+         <h5 class="card-title">Profile Details</h5>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label ">Full Name</div>
+           <div class="col-lg-9 col-md-8">${GVUResultsSorted[i].firstname} ${GVUResultsSorted[i].middlename} ${GVUResultsSorted[i].lastname}</div>
+         </div>
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Company</div>
+           <div class="col-lg-9 col-md-8">Asian Insitute of Science and Technology</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Position</div>
+           <div class="col-lg-9 col-md-8">${GVUResultsSorted[i].position}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Address</div>
+           <div class="col-lg-9 col-md-8">${GVUResultsSorted[i].address}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Contact</div>
+           <div class="col-lg-9 col-md-8">${GVUResultsSorted[i].contact}</div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-3 col-md-4 label">Email</div>
+           <div class="col-lg-9 col-md-8">${GVUResultsSorted[i].email}</div>
+         </div>`;
+
+         document.querySelector('#profile-overview').innerHTML = overiewPanel;
+
+        
+        
+        
          break;
      }
     }
  }
+
+ var infoOpen = false;
  
  const checkEditFields = () =>{
      
@@ -1124,6 +1348,7 @@ let message = '';
         if(fetchResponse.statusCode === 200){
             console.log(fetchResponse)
             delayedShowAlert = () =>{
+                getAllDataAPI(UserId);
                 message += ` Updated Succesfully!`
                 document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");

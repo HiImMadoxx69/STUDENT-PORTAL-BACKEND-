@@ -550,8 +550,7 @@ const resetFields = () =>{
     let Target = document.getElementById('newAudience').value ="";
     let Category = document.getElementById('newCategory').value ="";
     let Message = document.getElementById('newMessage').value ="";
-    btnSuccess.setAttribute("hidden", "hidden");//Is loading true
-    btnCreateUsers.removeAttribute("hidden");
+
 }//Reset all the fields
 
 //Call it to refresh the table
@@ -668,21 +667,18 @@ for (var pair of formData.entries()) {
             console.log(response.statusCode)
             let message = '';
           if(response.statusCode === 200){
-         message += ` Created Succesfully!`
+            $('#addusermodal').modal('hide');
+         resetFields();
+         refreshTable();
+         message += ` Created Succesfully!`;
             document.querySelector('#alertSuccessMessage').innerHTML = message;
-            delayedShowAlert = () =>{
-                btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-                btnSuccess.removeAttribute("hidden");
-            }
-            setTimeout(delayedShowAlert, 3000)
             delayedRemoveAlert = () =>{   
-                
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 6000);
+            setTimeout(delayedRemoveAlert, 2000);
           }
 
           

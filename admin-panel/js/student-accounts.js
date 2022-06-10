@@ -106,6 +106,7 @@ const btnIsUpdating = document.getElementById('btnIsUpdating');//updating button
 window.onload = function(){
     getAllDataAPI();
     BindAllCourse();
+    BindAllSection();
     selectNumPage();
 }//Onload page
 
@@ -285,6 +286,7 @@ const saveChanges = async (...params) =>{
          alertShowSuccess.removeAttribute("hidden");
          btnChangePic.setAttribute("disabled", "disabled");
           alertShowSuccess.classList.add('show');
+          $('#changeProfileModal').modal('hide');
           message += ` Updated Succesfully!`
         
         delayedRemoveAlert = () =>{   
@@ -327,7 +329,7 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
     <td>${GVSResults[i].studentnumber}</td>
     <td>${GVSResults[i].firstname} ${GVSResults[i].middlename} ${GVSResults[i].lastname}</td>
     <th scope="col" >
-    <div class = "pt-4">
+    <div class = "pt-2">
     <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserNotSorted(${GVSResults[i].id});viewGrades('${GVSResults[i].studentnumber}');viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-eye"></i></a>
 
     <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
@@ -1373,8 +1375,6 @@ const checkAllFields = () =>{
     let Lname = document.getElementById('newLname').value;
 
     let Email = document.getElementById('newEmail').value;
- 
-    let Password = document.getElementById('newPassword').value;
     
     let Course = document.getElementById('newCourse').value;
 
@@ -1399,9 +1399,9 @@ const checkAllFields = () =>{
     let Guardian = document.getElementById('newGuardian').value;
 
     let GuardianNum = document.getElementById('newGuardianContact').value;
-    if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
+    if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
      let message = "";
-        if(isNaN(Contact) || Contact.length > 12){
+        if(isNaN(Contact) || Contact.length !== 11){
         message += ` Please input valid contact number!`
         document.querySelector('#alertErrorBody').innerHTML = message;
 
@@ -1415,7 +1415,21 @@ const checkAllFields = () =>{
         }
         setTimeout(delayedRemoveAlert, 1000);
 
-       }else if(validateEmail(Email) !== true){
+       }if(isNaN(GuardianNum) || GuardianNum.length !== 11){
+        message += ` Please input valid guardian contact number!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+       }
+       else if(validateEmail(Email) !== true){
            console.log(validateEmail(Email))
         message += ` Please input a valid email!`
         document.querySelector('#alertErrorBody').innerHTML = message;
@@ -1430,8 +1444,22 @@ const checkAllFields = () =>{
             alertError.setAttribute("hidden", "hidden");
         }
         setTimeout(delayedRemoveAlert, 1000);
-       }else if(isNaN(GuardianNum) || GuardianNum.length > 12){
-        message += ` Please input valid guardian contact number!`
+       }else if(isNaN(StudNum) || StudNum.length !== 6){
+        message += ` Please input a valid Student number!`
+        document.querySelector('#alertErrorBody').innerHTML = message;
+
+            alertError.removeAttribute("hidden");
+            alertError.classList.add('show');
+         
+
+        delayedRemoveAlert = () =>{   
+            alertError.classList.remove('show');  
+            alertError.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 1000);
+       }
+       else if(isNaN(GuardianNum) || GuardianNum.length > 12){
+        message += ` Please input a valid guardian contact number!`
         document.querySelector('#alertErrorBody').innerHTML = message;
 
             alertError.removeAttribute("hidden");
@@ -1491,8 +1519,15 @@ const IsLoadingTrue =(formStatus) =>{
 
 //Create User
 const createUserAccount = (e) =>{
+ 
+       
+    btnIsLoading.removeAttribute("hidden");//Is loading true
+    btnIsUpdating.removeAttribute("hidden");//Is Updating true
+    btnCreateUsers.style.display = "none";
+    btnEditUsers.style.display = "none";
+
     
-    IsLoadingTrue(true)//Start the loading button
+   
     let StudNum = document.getElementById('newStudNum').value; 
 
     let Fname = document.getElementById('newFname').value;
@@ -1504,7 +1539,10 @@ const createUserAccount = (e) =>{
     let Email = document.getElementById('newEmail').value;
  
     let Password = document.getElementById('newPassword').value;
+
+    Password = Math.floor((Math.random() * 1000000) + 100000);
     
+    Password += Fname;
 
     let Birthday = document.getElementById('newBirthday').value;
     
@@ -1561,7 +1599,15 @@ for (var pair of formData.entries()) {
             console.log(response.statusCode)
             let message = '';
           if(response.statusCode === 200){
+            resetFields();
+            refreshTable();
+            $('#addusermodal').modal('hide');
+            
          message += ` Created Succesfully!`
+         btnIsLoading.setAttribute("hidden", "hidden");
+    btnIsUpdating.setAttribute("hidden", "hidden");
+    btnCreateUsers.style.display = "inline-block";
+    btnEditUsers.style.display = "inline-block";
             document.querySelector('#alertSuccessMessage').innerHTML = message;
             delayedShowAlert = () =>{
                 btnCreateUsers.setAttribute("hidden", "hidden");
@@ -1579,6 +1625,10 @@ for (var pair of formData.entries()) {
           }
 
           if(response.statusCode === 201){
+            btnIsLoading.setAttribute("hidden", "hidden");
+            btnIsUpdating.setAttribute("hidden", "hidden");
+            btnCreateUsers.style.display = "inline-block";
+            btnEditUsers.style.display = "inline-block";
             message += ` Student ID Already Exist!`
                document.querySelector('#alertErrorBody').innerHTML = message;
                delayedShowAlert = () =>{
@@ -1894,7 +1944,7 @@ const editUserSorted = (a) =>{
 
 
         let message = "";
-        if(isNaN(Contact) || Contact.length > 11){
+        if(isNaN(Contact) || Contact.length !== 11){
         message += ` Please input valid contact number!`
         document.querySelector('#alertErrorBody').innerHTML = message;
         let Updating = document.getElementById('btnIsUpdatingEdit');
@@ -2211,6 +2261,22 @@ const refreshInfo = (a) =>{
     ViewStudentInfo.removeAttribute("hidden");
 }
 
+//Bind all section
+const BindAllSection = async () =>{
+    const fetchResponse = await fetch('../controller/section-table.php');
+
+    const getResponse = await fetchResponse.json();
+
+    let output = '';
+
+    output = '<option selected value="..." disabled >...</option>';
+    
+    for(let i = 0; i<getResponse.length;i++){
+        output += `<option value="`+getResponse[i].name+`">`+getResponse[i].name+`</option>`;
+    }
+    document.querySelector('#editSection').innerHTML = output;
+    document.querySelector('#newSection').innerHTML = output;
+}
 
 
 //Bind all course

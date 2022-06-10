@@ -51,24 +51,17 @@
   }
   #userSearchBar{
     left:0;
-   
   }
 
   #tblUsers th,td{
     white-space: nowrap;
-  
-    }
-  
-
-
-
-
-
-
+  }
+ 
   #table-wrapper table {
     width:100%;
   
   }
+
   #table-wrapper table thead th .text {
     position:absolute;   
     top:-20px;
@@ -78,10 +71,10 @@
     border:1px solid red;
   }
 
-
   #gradetable-wrapper {
     position:relative;
   }
+  
   #gradetable-scroll {
     height:400px;
     overflow: scroll;

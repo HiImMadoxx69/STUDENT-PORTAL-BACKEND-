@@ -93,7 +93,6 @@ const btnIsLoading = document.getElementById('btnIsLoading');//LoadingButton
 const alertShowError = document.getElementById('alertError');//AlertError
 const alertShowSuccess = document.getElementById('alertSuccess');//Alert Success
 const btnError = document.getElementById('btnError');//Error button disabled
-const btnSuccess = document.getElementById('btnSuccess');//Succes button
 
 //Javascript edit account admin
 const btnEditError = document.getElementById('btnEditError');//Error button disabled
@@ -242,7 +241,7 @@ const saveChanges = async (...params) =>{
          btnChangePic.setAttribute("disabled", "disabled");
           alertShowSuccess.classList.add('show');
           message += ` Updated Succesfully!`
-        
+         
         delayedRemoveAlert = () =>{   
             alertShowSuccess.classList.remove('show');  
             alertShowSuccess.setAttribute("hidden", "hidden");
@@ -487,9 +486,8 @@ const btnEditUsers = document.getElementById('btnEditUsers');
 
 const resetFields = () =>{
     let Id = document.getElementById('editId').value ="";
-    let Name = document.getElementById('editName').value ="";
+    let Name = document.getElementById('newName').value ="";
     let Amount = document.getElementById('newAmount').value ="";
-    btnCreateUsers.removeAttribute("hidden");
    
 }//Reset all the fields
 
@@ -594,15 +592,17 @@ for (var pair of formData.entries()) {
           if(response.statusCode === 200){
          message += ` Created Succesfully!`
             document.querySelector('#alertSuccessMessage').innerHTML = message;
+            $('#addusermodal').modal('hide');
+           
                   alertShowSuccess.removeAttribute("hidden");
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.classList.add('show');
                 
-        
+                refreshTable();
     
-            delayedRemoveAlert = () =>{   
-                btnSuccess.removeAttribute("hidden");
-                alertShowSuccess.classList.remove('show');  
+            delayedRemoveAlert = () =>{  
+                btnCreateUsers.removeAttribute("hidden"); 
+                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
             setTimeout(delayedRemoveAlert, 1000);
@@ -737,7 +737,7 @@ try{
 let message = '';
         if(fetchResponse.statusCode === 200){
             console.log(fetchResponse)
- 
+            $('#editusermodal').modal('hide');
                 message += ` Updated Succesfully!`
                 document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");

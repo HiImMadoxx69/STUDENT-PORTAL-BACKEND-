@@ -1,11 +1,17 @@
 
 window.onload = function() {
+   getAllStudentData();
     getAllResults();
     getAllBills();
     getAllNotifications();
 }
+window.setInterval('getAllResults()', 2000);
+window.setInterval('getAllBills()', 2000);
+window.setInterval('getAllNotifications()', 2000);
 
 //get all notitifications
+var StudentInfo = {};
+
 
 const getAllNotifications = async () =>{
     let studentNumber = document.getElementById('studentNumber').value;
@@ -92,6 +98,12 @@ const getAllNotifications = async () =>{
   </li>`;
     document.querySelector('#notif-content').innerHTML =notificationDrop;
 }
+
+
+// Refresh or reload page.
+// function refresh() {
+//     window.location.reload();
+// }
 
 //Show All Notification
 const showAllNotif = async () =>{
@@ -241,7 +253,7 @@ const getAllBills = async() =>{
         
         let output = '';
         let miscFee = '';
-        let count = 0;
+        let totalAmount = 0;
         let balance = 0;
 for(let i = 0; i<getResponse.length;i++){
     if(getResponse[i].type ==='Subject'){
@@ -250,6 +262,7 @@ for(let i = 0; i<getResponse.length;i++){
         <td></td>
         <td>`+getResponse[i].amount+`</td>
         </tr>`;
+        totalAmount += parseFloat(getResponse[i].amount);
     }
     if(getResponse[i].type === 'Miscellaneous Fee'){
         miscFee += `<tr>
@@ -258,17 +271,70 @@ for(let i = 0; i<getResponse.length;i++){
         <td>`+getResponse[i].amount+`</td>
         </tr>`;
       }
-      balance += parseFloat(getResponse[i].amount); 
+      totalAmount += parseFloat(getResponse[i].amount);
 }
      
 miscFee += `<tr>
 <td style="background-color:#0dff98">Total</td>
 <td style="background-color:#0dff98"></td>
-<td style="background-color:#0dff98">`+balance+`</td>
-</tr style="background-color:#0dff98">`;
+<td style="background-color:#0dff98">`+totalAmount+`</td>
+</tr style="background-color:#0dff98">
+`;
 
  document.querySelector('#subject-fee-table-body').innerHTML = output;
  document.querySelector('#misc-fee-table-body').innerHTML = miscFee;
 
  
+}
+
+//fetchData
+const getAllStudentData = async () =>{
+  let studentID = document.getElementById("studentIDHolder").value;
+
+  formData = new FormData();
+  formData.append("StudentID", studentID);
+
+  const fetchStudentInfo = await fetch("../controller/student-table.php",{
+    method: "POST",
+    body: formData,
+});
+
+const getResponse = await fetchStudentInfo.json();
+
+StudentInfo = getResponse;
+}
+
+//Change Password
+const changePassword = async () =>{
+  let studentID = document.getElementById("studentIDHolder").value;
+  let currentPass = StudentInfo[0].password;
+  let currentPassword = document.getElementById('currentPassword').value;
+  let newPassword = document.getElementById('newPassword').value;
+  let confirmPassword = document.getElementById('confirmPassword').value;
+
+  if(currentPass !== currentPassword){
+    alert("Wrong Pass");
+  }else if(newPassword !== confirmPassword){
+    alert("New Password and Confirm Password Doesnt match!");
+  }else if(newPassword === currentPass){
+    alert("Your new password is still the same!");
+  }
+  else if (newPassword.length <6){
+    alert("Your password is too short!");
+  }else{
+    formData = new FormData();
+    formData.append("StudentID", studentID);
+    formData.append("NewPassword", confirmPassword);
+    const fetchEditPassword = await fetch("../controller/edit-password.php",{
+      method: "POST",
+      body: formData,
+  });
+
+  const getResponse = await fetchEditPassword.json();
+
+  if(getResponse.statusCode == 200){
+    $('#verticalycentered').modal('hide');
+    alert("Change Succesfully!");
+    }
+  }
 }

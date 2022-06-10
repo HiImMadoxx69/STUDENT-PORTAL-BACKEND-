@@ -152,14 +152,16 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
 
       <li class="nav-heading">Pages</li>
-
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+<?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link collapsed" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
+    
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -183,6 +185,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Archives Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
@@ -196,17 +205,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
+      
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -241,28 +245,32 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+          <?php if($_SESSION['Position'] == 'Admin'){
+echo '<!-- Sales Card -->
+<div class="col-xxl-4 col-md-6">
+  <div class="card info-card sales-card">
 
-             
+ 
 
-                <div class="card-body">
-                  <h5 class="card-title">Employee Accounts <span>| Active</span></h5>
+    <div class="card-body">
+      <h5 class="card-title">Employee Accounts <span>| Active</span></h5>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id ="totalUserAccounts"></h6>
-                    
-                    </div>
-                  </div>
-                </div>
+      <div class="d-flex align-items-center">
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+          <i class="bi bi-people-fill"></i>
+        </div>
+        <div class="ps-3">
+          <h6 id ="totalUserAccounts"></h6>
+        
+        </div>
+      </div>
+    </div>
 
-              </div>
-            </div><!-- End Sales Card -->
+  </div>
+</div><!-- End Sales Card -->';
+
+          }?>
+        
 
             <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
@@ -324,6 +332,27 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
               </div>
             </div>
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Section<span> | Active</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-person-lines-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id ="totalSection"></h6>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Revenue Card -->
            
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card customers-card">

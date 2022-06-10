@@ -156,13 +156,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-heading">Pages</li>
 
      
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link collapsed" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link" href="admin-student-accounts.php">
@@ -186,6 +188,14 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Archives Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
@@ -199,16 +209,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
+      
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -330,13 +335,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="newEmail">Email</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" hidden>
                   <div class="form-floating">
                     <input type="password" class="form-control" id="newPassword" placeholder="Password">
                     <label for="newPassword">Password</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="newCourse" aria-label="Floating label select example">
                         
@@ -344,20 +349,22 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <label for="newCourse">Course</label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                 <div class="form-floating mb-3">
-                      <input type ="text" class = "form-control" id ="newSection" placeholder ="Section">
+                      <select class="form-select" id="newSection" aria-label="Floating label select example">
+                        
+                      </select>
                       <label for="newSection">Section</label>
                     </div>
                 </div>
-                <div class = "col-md-6">
+                <div class = "col-md-12">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="newBirthday" placeholder="Birthday">
                     <label for ="newBirthday">Birthdate</label>
                   </div>
                 </div>
 
-                <div class = "col-md-6">
+                <div class = "col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newContact" placeholder="Contact">
                     <label for="newContact">Contact</label>
@@ -370,13 +377,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                 <fieldset class="col-md-3">
                   <div class="col-sm-10">
-                    <div class="form-check">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="radio" name="gridRadios" id="maleCheck" value="Male">
                       <label class="form-check-label" for="gridRadios1">
                         Male
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="radio" name="gridRadios" id="femaleCheck" value="Female" > 
                       <label class="form-check-label" for="gridRadios2">
                         Female
@@ -424,9 +431,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <i class="bi bi-check-circle me-1"></i>
                       Created
                       </button><!-- End of success button -->
-                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
-                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
-                    </div>
+                      <button type="submit" class="btn btn-success" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
+                     </div>
                   </div>
                 </div>
               </div><!-- End user Modal-->
@@ -571,15 +577,24 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <!-- Select Entry Page -->  
      
       <div class="row mb-3">
-        <div class="col-sm-2">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
+        <div class="col-sm-4">
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
              Student
               </button>
+              <a href ="archived-students.php" class="btn btn-warning" >
+              <i class="bi bi-recycle"></i> 
+              </a>
        </div>
-       
+   
+       <!-- Recycle -->
+       <div class="col-sm-2">
+              
+       </div>
+       <!-- End of Recycle -->
+       </div>
 
-       </div>
+       
 
       <div class="row mb-3">
                   <div class="col-sm-2">
@@ -613,7 +628,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentnumber');return false;" class="th-a">STUDENT NUMBER</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FULL NAME</a></th>
                 
-                    <th scope="col"id ="th-action">ACTION</th>
+                    <th scope="col"id ="th-action" style = "position:sticky; right:0%; position: -webkit-sticky; top: 0px;">ACTION</th>
                     
                     
                   </tr>
@@ -748,11 +763,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="editEmail" placeholder="Email">
+                    <input type="email" class="form-control" disabled id="editEmail" placeholder="Email">
                     <label for="editEmail">Email</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" hidden>
                   <div class="form-floating">
                     <input type="password" class="form-control" id="editPassword" placeholder="Password">
                     <label for="editPassword">Password</label>
@@ -771,7 +786,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
                 <div class="col-md-6">
                 <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="editSection" placeholder="Section">
+                      <select class="form-select" id="editSection" aria-label="Floating label select example">
+                        <option selected disabled>...</option>
+                        <option value="Admin">Course</option>
+                        <option value="Registrar">Registrar</option>
+                        <option value="Accountant">Accountant</option>
+                      </select>
                       <label for="editSection">Section</label>
                     </div>
                 </div>
@@ -795,13 +815,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                 <fieldset class="col-md-3">
                   <div class="col-sm-10">
-                    <div class="form-check">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="radio" name="gridRadios" id="editmaleCheck" value="Male">
                       <label class="form-check-label" for="gridRadios1">
                         Male
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="radio" name="gridRadios" id="editfemaleCheck" value="Female" > 
                       <label class="form-check-label" for="gridRadios2">
                         Female
@@ -898,7 +918,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       Updating...
                 </button><!--End of updating button-->
                <button type ="button" class="btn btn-success" type="submit" onClick ="checkGradeFields()" id ="btnAddGrade">Add Subject</button>
-               
+               <a href ="archived-results.php" class="btn btn-warning" >
+              <i class="bi bi-recycle"></i> 
+              </a>
                </div>
               
             <div id="table-wrapper">

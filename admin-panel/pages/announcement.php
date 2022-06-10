@@ -157,12 +157,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
      
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link collapsed" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -184,6 +187,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Courses</span>
         </a>
       </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
@@ -200,15 +210,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
      
 
       <li class="nav-item">
-        <a class="nav-link collapsed " href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
-      <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -354,9 +358,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <i class="bi bi-check-circle me-1"></i>
                       Created
                       </button><!-- End of success button -->
-                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
-                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
-                    </div>
+                      <button type="submit" class="btn btn-success" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
+                      </div>
                   </div>
                 </div>
               </div><!-- End user Modal-->
@@ -564,7 +567,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
      
       <div class="row mb-3">
         <div class="col-sm-2 col-lg-5">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
               Announcement
               </button>
@@ -599,9 +602,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('editor');return false;" class="th-a">EDITOR</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('message');return false;" class="th-a">MESSAGE</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
+                    <th scope="col" class ="header-title" style="z-index:99;"><a href= "#" onclick ="sortCurrentTable('editor');return false;" class="th-a">EDITOR</a></th>
+                    <th scope="col" class ="header-title" style="z-index:99;"><a href= "#" onclick ="sortCurrentTable('message');return false;" class="th-a">MESSAGE</a></th>
+                    <th scope="col" class ="header-title" style="z-index:99;"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
                   </tr>
                 </thead>
                 <tbody id ="tbody-user-accounts">

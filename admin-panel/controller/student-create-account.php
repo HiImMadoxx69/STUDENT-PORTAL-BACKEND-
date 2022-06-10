@@ -1,4 +1,16 @@
 <?php
+
+// includes/PHPMailer.php
+//Inclue required phpmailerfiles
+require '../PHPMailer/includes/PHPMailer.php';
+require '../PHPMailer/includes/SMTP.php';
+require '../PHPMailer/includes/Exception.php';
+//Define name spaces
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
 include_once("../connections/connection.php");
 $con = connection();
 
@@ -34,6 +46,44 @@ try{
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created: New Account studentnumber: $StudNum');";
     mysqli_query($con, $auditsql);
+
+
+
+
+//Create instance of phpmailer
+$mail = new PHPMailer();
+//Set mailer to use smtp
+$mail->isSMTP();
+//define smtp host
+$mail->Host = "smtp.gmail.com";
+//enable smtp authentication
+$mail->SMTPAuth = "true";
+//set type of encryption (ssl/tls)
+$mail->SMTPSecure = "tls";
+//set port to connect smtp
+$mail->Port = "587";
+//set gmail username
+$mail->Username = "nocumadoxx@gmail.com";
+//set gmail password
+$mail->Password = "pzectockhpctciww";
+//set email subject
+$mail->Subject = "Test Email Using PHPMailer";
+//set sender email
+$mail->setFrom("nocumadoxx@gmail.com");
+//Enable HTML
+$mail->isHTML(true);
+//Email body
+$mail->Body ="<h1>HI! Our School Now Have A New Student! </h1> <h2>Welcome to our Family!</h2>
+<p>You can now login to our Student Portal portal: Your Student Number = $StudNum and Your Password = $Password</p>";
+//Add recipient
+$mail->addAddress($Email);
+//Finally send email
+$mail->Send();
+//Closing smtp connection
+$mail->smtpClose();
+
+//Host user = iplm.haribon@gmail.com
+//Host password = iplm2022
 
     exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){

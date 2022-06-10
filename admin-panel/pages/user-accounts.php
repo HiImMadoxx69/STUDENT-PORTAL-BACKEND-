@@ -156,12 +156,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-heading">Pages</li>
 
 
-      <li class="nav-item">
-        <a class="nav-link" href="user-accounts.php">
-          <i class="bi bi-people-fill"></i>
-          <span>Employee Account</span>
-        </a>
-      </li><!-- End User Account Nav -->
+      <?php if($_SESSION['Position'] == 'Admin'){
+  echo '<li class="nav-item">
+  <a class="nav-link" href="user-accounts.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Employee Account</span>
+  </a>
+</li><!-- End User Account Nav -->';
+}
+?>
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
@@ -184,6 +187,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-item">
+        <a class="nav-link collapsed " href="section.php">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Section</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
@@ -197,15 +207,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Archives Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed " href="archived-accounts.php">
-          <i class="bi bi-archive"></i>
-          <span>Archives</span>
-        </a>
-      </li><!-- End Archives Nav -->
-      <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Audit</span>
+          <span>Activity Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -321,13 +325,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="newEmail">Email</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" hidden>
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newUsername" placeholder="Username" onchage ="validateUsername(this.value)">
                     <label for="newUsername">Username</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" hidden>
                   <div class="form-floating">
                     <input type="password" class="form-control" id="newPassword" placeholder="Password">
                     <label for="newPassword">Password</label>
@@ -337,7 +341,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                
                 
                
-                <div class="col-md-4">
+                <div class="col-md-12">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="newJob" aria-label="Floating label select example">
                         <option selected disabled>...</option>
@@ -348,14 +352,14 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                 </div>
 
-                <div class = "col-md-4">
+                <div class = "col-md-12">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="newBirthday" placeholder="Birthday">
                     <label for ="newBirthday">Birthdate</label>
                   </div>
                 </div>
 
-                <div class = "col-md-4">
+                <div class = "col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newContact" placeholder="Contact">
                     <label for="newContact">Contact</label>
@@ -368,13 +372,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
                 <fieldset class="col-md-3">
                   <div class="col-sm-10">
-                    <div class="form-check">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="radio" name="gridRadios" id="maleCheck" value="Male">
                       <label class="form-check-label" for="gridRadios1">
                         Male
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="radio" name="gridRadios" id="femaleCheck" value="Female" > 
                       <label class="form-check-label" for="gridRadios2">
                         Female
@@ -432,8 +436,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <i class="bi bi-check-circle me-1"></i>
                       Created
                       </button><!-- End of success button -->
-                      <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
-                      <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
+                      <button type="submit" class="btn btn-success" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
                     </div>
                   </div>
                 </div>
@@ -484,144 +487,11 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
               
 
-              <!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" id ="frmEditUsers">
-              
-              <input type="hidden" id="editId">
-              
-                <div class="col-md-4">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="editFname" placeholder="Firstname" required>
-                    <label for="editFname">Firstname</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="editMname" placeholder="Middlename">
-                    <label for="editMname">Middlename</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="editLname" placeholder="Lastname">
-                    <label for="newLname">Lastname</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="email" class="form-control" id="editEmail" placeholder="Email">
-                    <label for="editEmail">Email</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" disabled id="editUsername" placeholder="Username">
-                    <label for="editUsername">Username</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-floating">
-                    <input type="password" class="form-control" id="editPassword" placeholder="Password">
-                    <label for="editPassword">Password</label>
-                  </div>
-                </div>
-
-               
-                
-               
-                <div class="col-md-4">
-                <div class="form-floating mb-3">
-                      <select class="form-select" id="editJob" aria-label="Floating label select example">
-                        <option selected disabled>...</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Registrar">Registrar</option>
-                      </select>
-                      <label for="editJob">Position</label>
-                    </div>
-                </div>
-
-                <div class = "col-md-4">
-                  <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="editBirthday" placeholder="Birthday">
-                    <label for ="editBirthday">Birthdate</label>
-                  </div>
-                </div>
-
-                <div class = "col-md-4">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="editContact" placeholder="Contact">
-                    <label for="editContact">Contact</label>
-                  </div>
-                </div>
-
-                <div class="col-md-1">
-                  <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
-                </div>
-
-                <fieldset class="col-md-3">
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="editmaleCheck" value="Male">
-                      <label class="form-check-label" for="gridRadios1">
-                        Male
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="editfemaleCheck" value="Female" > 
-                      <label class="form-check-label" for="gridRadios2">
-                        Female
-                      </label>
-                    </div>
-                  </div>
-                </fieldset>
-
-
-                <div class="col-12">
-                  <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="editAddress" style="height: 100px;"></textarea>
-                    <label for="editAddress">Address</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-floating">
-                    <textarea class="form-control" placeholder="About" id="editAbout" style="height: 100px;"></textarea>
-                    <label for="editAbout">About</label>
-                  </div>
-                </div>
-              
-
-                    <label for="basic-url" class="form-label">Optional URL</label>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" >https://twitter.com/</span>
-                      <input type="text" class="form-control" id="edittwitterprofileURL" aria-describedby="basic-addon3">
-                    </div>
-                    <div class ="input-group mb-3">
-                      <span class="input-group-text" >https://facebook.com/</span>
-                      <input type="text" class="form-control" id="editfacebookprofileURL" aria-describedby="basic-addon3">
-                    </div>
-                    <div class ="input-group mb-3">
-                      <span class="input-group-text" >https://instagram.com/</span>
-                      <input type="text" class="form-control" id="editinstagramprofileURL" aria-describedby="basic-addon3">
-                    </div>
-                    <div class ="input-group mb-3">
-                      <span class="input-group-text" >https://linkedin.com/</span>
-                      <input type="text" class="form-control" id="editlinkedinprofileURL" aria-describedby="basic-addon3">
-                    </div>
-              </form><!-- End floating Labels Form -->
+            
                     </div>
                     <div class="modal-footer">
                       
-                     
-                      <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      Updating...
-                      </button><!--End of updating button-->
-                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
-                      <i class="bi bi-exclamation-octagon"></i>
-                      Error!
-                      </button><!-- End of error button -->
-                      
-                      <button type="submit" class="btn btn-primary" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
+                    
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick ="refreshTable()">Cancel</button>
                     </div>
                   </div>
@@ -629,7 +499,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               </div><!-- End Edit user Modal-->
             
 
-    <section class="section">
+    <section class="section" id ="EmployeeTable">
       <div class="row">
         <div class="col-lg-12">
 
@@ -641,10 +511,14 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
      
       <div class="row mb-3">
         <div class="col-sm-2">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
               User
               </button>
+              </button>
+              <a href ="archived-user.php" class="btn btn-warning" >
+              <i class="bi bi-recycle"></i> 
+              </a>
        </div>
        
 
@@ -679,26 +553,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <thead id ="tblThead">
                   <tr class="table-primary">
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">USERNAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FIRST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">MIDDLE NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">LAST NAME</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">EMAIL</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">BIRTHDAY</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('sex');return false;" class="th-a">SEX</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">PASSWORD</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position');return false;" class="th-a">POSITION</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">ADDRESS</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact');return false;" class="th-a">CONTACT</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about');return false;" class="th-a">ABOUT</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile');return false;" class="th-a">TWITTER</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile');return false;" class="th-a">FACEBOOK</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile');return false;" class="th-a">INSTAGRAM</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">LINKED IN</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
-                    <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
-                    
-                    
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FULL NAME</a></th>
+                    <th scope="col" class="header-title" style = "position:sticky; right:0%; position: -webkit-sticky; top: 0px; z-index:99;">ACTIONS</th>
                   </tr>
                 </thead>
                 <tbody id ="tbody-user-accounts">
@@ -741,6 +597,199 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
 
   <!-- practiec-->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section profile" id="viewProfile" hidden>
+    <div class="row">
+        <div class="col-xl-12">
+
+          <div class="card">
+          <button type="button" class="btn btn-secondary" style="margin:10px;width:10%;" onClick ="backToTable();return false;"><i class ="ri-arrow-go-back-fill"></i> Back</button>
+         
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" hidden id ="profileBox">
+
+              
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-12">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                </li>
+
+
+              </ul>
+              <div class="tab-content pt-2" >
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                 <!-- Floating Labels Form -->
+              <form class="row g-3 needs-validation" id ="frmEditUsers">
+              
+              <input type="hidden" id="editId">
+              
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editFname" placeholder="Firstname" required>
+                    <label for="editFname">Firstname</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editMname" placeholder="Middlename">
+                    <label for="editMname">Middlename</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editLname" placeholder="Lastname">
+                    <label for="newLname">Lastname</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="email" class="form-control"disabled id="editEmail" placeholder="Email">
+                    <label for="editEmail">Email</label>
+                  </div>
+                </div>
+                <div class="col-md-4"hidden>
+                  <div class="form-floating">
+                    <input type="text" class="form-control"  disabled id="editUsername" placeholder="Username">
+                    <label for="editUsername">Username</label>
+                  </div>
+                </div>
+                <div class="col-md-4" hidden>
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="editPassword" placeholder="Password">
+                    <label for="editPassword">Password</label>
+                  </div>
+                </div>
+
+               
+                
+               
+                <div class="col-md-4">
+                <div class="form-floating mb-3">
+                      <select class="form-select" id="editJob" aria-label="Floating label select example">
+                        <option selected disabled>...</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Registrar">Registrar</option>
+                      </select>
+                      <label for="editJob">Position</label>
+                    </div>
+                </div>
+
+                <div class = "col-md-4">
+                  <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="editBirthday" placeholder="Birthday">
+                    <label for ="editBirthday">Birthdate</label>
+                  </div>
+                </div>
+
+                <div class = "col-md-4">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="editContact" placeholder="Contact">
+                    <label for="editContact">Contact</label>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+                </div>
+
+                <fieldset class="col-md-3" >
+                  <div class="col-sm-10">
+                    <div class="form-check form-switch"> 
+                      <input class="form-check-input" type="radio" name="gridRadios" id="editmaleCheck" value="Male">
+                      <label class="form-check-label" for="gridRadios1">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="editfemaleCheck" value="Female" > 
+                      <label class="form-check-label" for="gridRadios2">
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+
+
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" id="editAddress" style="height: 100px;"></textarea>
+                    <label for="editAddress">Address</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="About" id="editAbout" style="height: 100px;"></textarea>
+                    <label for="editAbout">About</label>
+                  </div>
+                </div>
+              
+
+                    <label for="basic-url" class="form-label">Optional URL</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" >https://twitter.com/</span>
+                      <input type="text" class="form-control" id="edittwitterprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" >https://facebook.com/</span>
+                      <input type="text" class="form-control" id="editfacebookprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" >https://instagram.com/</span>
+                      <input type="text" class="form-control" id="editinstagramprofileURL" aria-describedby="basic-addon3">
+                    </div>
+                    <div class ="input-group mb-3">
+                      <span class="input-group-text" >https://linkedin.com/</span>
+                      <input type="text" class="form-control" id="editlinkedinprofileURL" aria-describedby="basic-addon3">
+                    </div>
+       
+
+                    <div class="text-center">
+                      
+                    <button class="btn btn-primary" type="button" disabled id ="btnIsUpdating" hidden>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Updating...
+                      </button><!--End of updating button-->
+                      <button class="btn btn btn-danger" type="button" disabled id ="btnEditError" hidden>
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Error!
+                      </button><!-- End of error button -->
+                      
+                      <button type="button" class="btn btn-primary" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
+                    </div>
+                  </form><!-- End Profile Edit Form -->
+
+                </div>
+
+         
+
+              </div><!-- End Bordered Tabs -->
+
             </div>
           </div>
 

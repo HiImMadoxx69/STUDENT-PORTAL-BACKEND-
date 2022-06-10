@@ -277,21 +277,7 @@ for(let i = GVAUIndexPage; i<GVAUdefaultRow; i++){
     output += `<tr>
      <td><img src = "../../uploads/${GVAUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></td>
     <td>${GVAUResults[i].username}</td>
-    <td>${GVAUResults[i].firstname}</td>
-    <td>${GVAUResults[i].middlename}</td>
-    <td>${GVAUResults[i].lastname}</td>
-    <td>${GVAUResults[i].email}</td>
-    <td>${GVAUResults[i].birthday}</td>
-    <td>${GVAUResults[i].sex}</td>
-    <td>${GVAUResults[i].password}</td>
-    <td>${GVAUResults[i].position}</td>
-    <td>${GVAUResults[i].address}</td>
-    <td>${GVAUResults[i].contact}</td>
-    <td>${GVAUResults[i].about}</td>
-    <td>${GVAUResults[i].twitterprofile}</td>
-    <td>${GVAUResults[i].facebookprofile}</td>
-    <td>${GVAUResults[i].instagramprofile}</td>
-    <td>${GVAUResults[i].linkedinprofile}</td>
+    <td>${GVAUResults[i].firstname} ${GVAUResults[i].middlename} ${GVAUResults[i].lastname}</td>
     <td>${GVAUResults[i].status}</td>
     <th scope="col" class="table-info">
     <div class = "pt-1">
@@ -367,21 +353,7 @@ const bindAllDataIntoTableSorted = function (){
         output += `<tr>
          <td><a href="#" onclick= "changePicModal(${GVAUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVAUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
         <td>${GVAUResultsSorted[i].username}</td>
-        <td>${GVAUResultsSorted[i].firstname}</td>
-        <td>${GVAUResultsSorted[i].middlename}</td>
-        <td>${GVAUResultsSorted[i].lastname}</td>
-        <td>${GVAUResultsSorted[i].email}</td>
-        <td>${GVAUResultsSorted[i].birthday}</td>
-        <td>${GVAUResultsSorted[i].sex}</td>
-        <td>${GVAUResultsSorted[i].password}</td>
-        <td>${GVAUResultsSorted[i].position}</td>
-        <td>${GVAUResultsSorted[i].address}</td>
-        <td>${GVAUResultsSorted[i].contact}</td>
-        <td>${GVAUResultsSorted[i].about}</td>
-        <td>${GVAUResultsSorted[i].twitterprofile}</td>
-        <td>${GVAUResultsSorted[i].facebookprofile}</td>
-        <td>${GVAUResultsSorted[i].instagramprofile}</td>
-        <td>${GVAUResultsSorted[i].linkedinprofile}</td>
+        <td>${GVAUResultsSorted[i].firstname} ${GVAUResultsSorted[i].middlename} ${GVAUResultsSorted[i].lastname}</td>
         <td>${GVAUResultsSorted[i].status}</td>
         <th scope="col" class="table-info">
         <div class = "pt-1">

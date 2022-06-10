@@ -63,7 +63,9 @@ if(isset($_SESSION['ID'])){
     
           <!-- End of Error Modal -->
           <div class="container" id ="containerLogin">
+            
           <div class="row justify-content-center">
+
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
     
@@ -77,11 +79,11 @@ if(isset($_SESSION['ID'])){
                   <a href ="../../homepage/homepage.php"><i class ="bi bi-house-door"></i></a>
                   <div class="d-flex justify-content-center py-4">
                     
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                <a href="admin-login.php" class="logo d-flex align-items-center w-auto">
                   <img src="../img/globe-client-logo.png" alt="">
                   <span class="d-none d-lg-block" style ="color:#08203c;">Employee Portal</span>
                 </a>
-              </div><!-- End Logo -->  <p class="text-center small">Enter your username & password to login</p>
+              </div><!-- End Logo -->  <p class="text-center small">Enter your Email & Password to Login</p>
                   </div>
 <!-- alert -->
 
@@ -93,15 +95,14 @@ if(isset($_SESSION['ID'])){
             </div>
       </div>
 </div>
-<!-- end of alert -->
                   <form class="row g-3 needs-validation" id ="loginForm">
 
                     <div class="col-12">
                       
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <div class="invalid-feedback">Please enter your email.</div>
                       </div>
                     </div>
                     
@@ -120,7 +121,7 @@ if(isset($_SESSION['ID'])){
                       <button class="btn btn-primary w-100" type="submit"id ="btnLogin">Login</button>
                     </div>
                      <div class="col-12">
-                      <p class="small mb-0">Forget your account? <a href="pages-register.html">Click Here</a></p>
+                      <p class="small mb-0">Forget your password? <a href="#" data-bs-toggle="modal" data-bs-target="#verticalycentered">Click Here</a></p>
                     </div>
                   </form>
 
@@ -131,6 +132,27 @@ if(isset($_SESSION['ID'])){
             </div>
           </div>
         </div>
+        <div class="modal fade" id="verticalycentered" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Recover Your Password</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <div class="col-12">
+                      <label for="recoverEmail" class="form-label">Email</label>
+                      <input type="email" name="recoverEmail" class="form-control" id="recoverEmail" required>
+                      <div class="invalid-feedback">Please enter your Email!</div>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-success" onclick="recoverPass(); return false;">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Vertically centered Modal-->
 
       </section>
 
