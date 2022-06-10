@@ -26,7 +26,7 @@ if (isset($img_name)) {
                     $img_upload_path = '../../uploads/'.$new_img_name;
                     move_uploaded_file($tmp_name, $img_upload_path);
       
-      
+                   
                     exit(json_encode(array("image"=>$new_img_name,"statusCode"=>200)));
     } else {
       exit(json_encode(array("statusCode"=>201)));

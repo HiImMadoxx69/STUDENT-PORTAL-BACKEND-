@@ -6,7 +6,7 @@ if(!isset($_SESSION['StudentID'])){
 include_once("../connections/connection.php");
 $con = connection();
 
-$sql = "SELECT * FROM tbl_studentinfo WHERE studentid = '".$_SESSION['StudentID']."';";
+$sql = "SELECT * FROM tbl_studentinfo WHERE studentnumber = '".$_SESSION['StudentID']."';";
 
 $user = $con->query($sql) or die ($con->error);//if wrong query kill the connections (students is the query)
 
@@ -23,7 +23,8 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
     border : 1px solid #4CA4F3;
   }
   th, td{
-    text-align: left;
+    
+    margin: 0;
     padding: 8px;
     border-bottom: 1px solid #4CA4F3;
   }
@@ -44,7 +45,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../img/favicon.png" rel="icon">
+  <link href="../img/globe-client-logo.png" rel="icon">
   <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -77,13 +78,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
-
+   
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
@@ -92,147 +87,31 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
-
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
+<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+  <i class="bi bi-bell"></i>
+  <span class="badge bg-primary badge-number" id ="notif-badge">0</span>
+</a><!-- End Notification Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+  <li class="dropdown-header" id="notif-counter">
+    You have 0 notifications
+    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+  </li>
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+<div id="notif-content">
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
+  <li class="dropdown-footer">
+    <a href="#">Show all notifications</a>
+  </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+</ul><!-- End Notification Dropdown Items -->
 
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
+</li><!-- End Notification Nav -->
+       
 
         <li class="nav-item dropdown pe-3">
 
@@ -248,20 +127,13 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?php echo $user['firstname'].' '.$user['lastname']?></h6>
-              <span><?php echo $user['course'].' '.$user['section']?></span>
+              <span><?php echo $user['course']?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
+        
             </li>
 
            
@@ -293,12 +165,6 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
 
  
 
@@ -340,12 +206,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
               <?php echo '<h2>'.$user['firstname'].' '.$user['lastname'].'</h2>' 
               ?>
               
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+           
             </div>
           </div>
 
@@ -371,7 +232,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Bills</button>
                 </li>
 
               </ul>
@@ -382,7 +243,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                   
 
                   <h5 class="card-title">Profile Details</h5>
-
+                  <input type ="hidden" id="studentNumber" value ="<?php echo $_SESSION['StudentID']?>">
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
                     <?php echo '<div class="col-lg-9 col-md-8">'.$user['firstname'].' '.$user['lastname'].'</div>' 
@@ -390,8 +251,8 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Student Number</div>
-                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['studentid'].'</div>' 
+                    <div class="col-lg-3 col-md-4 label" >Student Number</div>
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['studentnumber'].'</div>' 
                ?>
                   </div>
 
@@ -423,137 +284,18 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
 
                   <form method="POST" action="#" >
+               
                   <table>
                        <thead>
                      <tr>
                          <th>SUBJECT CODE</th>
-                         <th>SUBJECT DESCRIPTION</th>
+                         <th>SUBJECT NAME</th>
                          <th>UNITS</th>
+                         <th>GRADES</th>
                        </tr>
                        </thead>
-                       <tbody>
-                       <?php 
-                     if ($user['subject1'] != NULL && $user['subject_code1']!= NULL && $user['units1'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code1'].'</td>
-                         <td> '.$user['subject1'].'</td>
-                         <td> '.$user['units1'].'</td>
-                       </tr>';}
-                       ?>
-                    
-                    <?php 
-                     if ($user['subject2'] != NULL && $user['subject_code2']!= NULL && $user['units2'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code2'].'</td>
-                         <td> '.$user['subject2'].'</td>
-                         <td> '.$user['units2'].'</td>
-                       </tr>';}
-                       ?>
-
-                      <?php 
-                     if ($user['subject3'] != NULL && $user['subject_code3']!= NULL && $user['units3'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code3'].'</td>
-                         <td> '.$user['subject3'].'</td>
-                         <td> '.$user['units3'].'</td>
-                       </tr>';}
-                       ?>
-                      <?php 
-                     if ($user['subject4'] != NULL && $user['subject_code4']!= NULL && $user['units4'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code4'].'</td>
-                         <td> '.$user['subject4'].'</td>
-                         <td> '.$user['units4'].'</td>
-                       </tr>';}
-                       ?>
-                       <?php 
-                     if ($user['subject5'] != NULL && $user['subject_code5']!= NULL && $user['units5'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code5'].'</td>
-                         <td> '.$user['subject5'].'</td>
-                         <td> '.$user['units5'].'</td>
-                       </tr>';}
-                       ?>
-                       <?php 
-                     if ($user['subject6'] != NULL && $user['subject_code6']!= NULL && $user['units6'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code6'].'</td>
-                         <td> '.$user['subject6'].'</td>
-                         <td> '.$user['units6'].'</td>
-                       </tr>';}
-                       ?>
-                       <?php 
-                     if ($user['subject7'] != NULL && $user['subject_code7']!= NULL && $user['units7'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code7'].'</td>
-                         <td> '.$user['subject7'].'</td>
-                         <td> '.$user['units7'].'</td>
-                       </tr>';}
-                       ?>
-                      <?php 
-                     if ($user['subject8'] != NULL && $user['subject_code8']!= NULL && $user['units8'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code8'].'</td>
-                         <td> '.$user['subject8'].'</td>
-                         <td> '.$user['units8'].'</td>
-                       </tr>';}
-                       ?>
-                       <?php 
-                     if ($user['subject9'] != NULL && $user['subject_code9']!= NULL && $user['units9'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code9'].'</td>
-                         <td> '.$user['subject9'].'</td>
-                         <td> '.$user['units9'].'</td>
-                       </tr>';}
-                       ?>
-                      <?php 
-                     if ($user['subject10'] != NULL && $user['subject_code10']!= NULL && $user['units10'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code10'].'</td>
-                         <td> '.$user['subject10'].'</td>
-                         <td> '.$user['units10'].'</td>
-                       </tr>';}
-                       ?>
-                       <?php 
-                     if ($user['subject11'] != NULL && $user['subject_code11']!= NULL && $user['units11'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code11'].'</td>
-                         <td> '.$user['subject11'].'</td>
-                         <td> '.$user['units11'].'</td>
-                       </tr>';}
-                       ?>
-                      <?php 
-                     if ($user['subject12'] != NULL && $user['subject_code12']!= NULL && $user['units12'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code12'].'</td>
-                         <td> '.$user['subject12'].'</td>
-                         <td> '.$user['units12'].'</td>
-                       </tr>';}
-                       ?>
-                       <?php 
-                     if ($user['subject13'] != NULL && $user['subject_code13']!= NULL && $user['units13'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code13'].'</td>
-                         <td> '.$user['subject13'].'</td>
-                         <td> '.$user['units13'].'</td>
-                       </tr>';}
-                       ?>
-                   <?php 
-                     if ($user['subject14'] != NULL && $user['subject_code14']!= NULL && $user['units14'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code14'].'</td>
-                         <td> '.$user['subject14'].'</td>
-                         <td> '.$user['units14'].'</td>
-                       </tr>';}
-                       ?>
-                     <?php 
-                     if ($user['subject15'] != NULL && $user['subject_code15']!= NULL && $user['units15'] != NULL){echo 
-                       '<tr>
-                         <td> '.$user['subject_code15'].'</td>
-                         <td> '.$user['subject15'].'</td>
-                         <td> '.$user['units15'].'</td>
-                       </tr>';}
-                       ?>
+                       <tbody id="grade-table-body">
+               
                        
                        </tbody>
                      </table>
@@ -569,39 +311,19 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                   <!-- Settings Form -->
                   <form>
 
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">
-                            Changes made to your account
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new products and services
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                          <label class="form-check-label" for="securityNotify">
-                            Security alerts
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
+                  <table>
+                       <thead>
+                     <tr>
+                         <th>SUBJECT NAME</th>
+                         <th>SCHEDULE</th>
+                         <th>INSTRUCTOR</th>
+                     </tr>
+                       </thead>
+                       <tbody id="schedule-table-body">
+               
+                       
+                       </tbody>
+                     </table>
                   </form><!-- End settings Form -->
 
                 </div>
@@ -609,31 +331,43 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
                   <form>
+                  <table>
+                       <thead>
+                         <tr>
+                           <th style="background-color:#4CA4F3"></th>
+                         <th style="background-color:#4CA4F3;" ><center>SUBJECTS</center></th>
+                         <th style="background-color:#4CA4F3"></th>
+                         </tr>
+                     <tr>
+                         <th>NAME</th>
+                         <th></th>
+                         <th>AMOUNT</th>
+                     </tr>
+                       </thead>
+                       <tbody id="subject-fee-table-body">
+               
+                       
+                       </tbody>
+                       <thead>
+                       <th style="background-color:#4CA4F3"></th>
+                         <th style="background-color:#4CA4F3"><center>MISCELLANEOUS FEE</center></th>
+                         <th style="background-color:#4CA4F3"></th>
+                         <tr>
+                         <th>NAME</th>
+                         <th></th>
+                         <th>AMOUNT</th>
+                         </tr>
+                     </tr>
+                       </thead>
+                       <tbody id="misc-fee-table-body">
+               
+                       
+                       </tbody>
+                     </table>
 
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
+                  
 
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
+                   
                   </form><!-- End Change Password Form -->
 
                 </div>
@@ -648,6 +382,11 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
     </section>
 
   </main><!-- End #main -->
+
+  <!-- MY JAVASCRIPT -->
+  <script src ="../js/index.js?t=1491313943549"  type = "text/javascript"></script>
+
+  <!-- END OF MY JAVASCRIPT -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

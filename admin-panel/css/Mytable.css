@@ -11,6 +11,17 @@
     position: sticky;
     top: 0;
   }
+
+  .table-scroll {
+    height:400px;
+    overflow: scroll;
+    margin-top:20px;
+  }
+  .tblThead .header-title {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
   
   tbody #tblThead {
     position: -webkit-sticky;
@@ -67,3 +78,12 @@
     border:1px solid red;
   }
 
+
+  #gradetable-wrapper {
+    position:relative;
+  }
+  #gradetable-scroll {
+    height:400px;
+    overflow: scroll;
+    margin-top:20px;
+  }

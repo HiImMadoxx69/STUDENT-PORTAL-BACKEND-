@@ -43,6 +43,12 @@ if (isset($userCurrentId)) {
                   $sql = "UPDATE `tbl_admin` SET `email` = '$email', `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`id` = $userCurrentId;";
     
                   mysqli_query($con, $sql);
+
+                  $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Edited: User Account rowID: $userCurrentId');";
+                  mysqli_query($con, $auditsql);
+
+
+                  
                   exit(json_encode(array("statusCode"=>200)));
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));

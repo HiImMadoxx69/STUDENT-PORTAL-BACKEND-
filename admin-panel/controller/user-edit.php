@@ -40,11 +40,16 @@ $errors = []; // Store all foreseen and unforeseen errors here.
 
   
 if (isset($userCurrentId)) {
-
+ 
+ 
  try{
                   $sql = "UPDATE `tbl_admin` SET `email` = '$email',`username` = '$username',`password` = '$password', `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`id` = $userCurrentId;";
     
                   mysqli_query($con, $sql);
+
+
+                  $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Updated: User Account rowID: $userCurrentId');";
+                  mysqli_query($con, $auditsql);
                   exit(json_encode(array("statusCode"=>200)));
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));

@@ -22,17 +22,17 @@ $currentId = $user['id'];
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Users / Profile - NiceAdmin Bootstrap Template</title>
+  <title>Employee / Accounts</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../img/favicon.png" rel="icon">
-  <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../img/globe-client-logo.png" rel="icon">
+  <link href="../img/globe-client-logo.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <!-- <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"
 
   <!-- Vendor CSS Files -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -62,7 +62,7 @@ $currentId = $user['id'];
     <div class="d-flex align-items-center justify-content-between">
       <a href="admin-dashboard.php" class="logo d-flex align-items-center">
         <img src="../img/globe-client-logo.png" alt="">
-        <span class="d-none d-lg-block">Student Portal</span>
+        <span class="d-none d-lg-block">Employee Portal</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -78,147 +78,7 @@ $currentId = $user['id'];
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
+      
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -247,14 +107,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
+          
             </li>
 
             <li>
@@ -302,35 +155,75 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="user-profile.php">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-     
 
       <li class="nav-item">
-        <a class="nav-link " href="user-accounts.php">
-          <i class="bi bi-card-list"></i>
-          <span>User Account</span>
+        <a class="nav-link" href="user-accounts.php">
+          <i class="bi bi-people-fill"></i>
+          <span>Employee Account</span>
         </a>
       </li><!-- End User Account Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="admin-student-accounts.php">
-          <i class="bi bi-card-list"></i>
+          <i class="bi bi-person-square"></i>
           <span>Student Account</span>
         </a>
       </li><!-- End Student Account Nav -->
 
       <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link collapsed " href="admin-curriculum.php">
           <i class="bi bi-card-list"></i>
           <span>Curriculum</span>
         </a>
       </li><!-- End Curriculum Nav -->
+=======
+        <a class="nav-link collapsed" href="subject.php">
+          <i class="bi bi-book"></i>
+          <span>Subjects</span>
+        </a>
+      </li><!-- End Subject Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="courses.php">
+          <i class="bx bxs-graduation"></i>
+          <span>Courses</span>
+        </a>
+      </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="miscellaneous-fee.php">
+          <i class="bi bi-currency-dollar"></i>
+          <span>Miscellaneous Fee</span>
+        </a>
+      </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="announcement.php">
+          <i class="bi bi-megaphone-fill"></i>
+          <span>Announcement</span>
+        </a>
+      </li><!-- End Archives Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="archived-accounts.php">
+          <i class="bi bi-archive"></i>
+          <span>Archives</span>
+        </a>
+      </li><!-- End Archives Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="audit.php">
+          <i class="bi bi-file-earmark-medical"></i>
+          <span>Audit</span>
+        </a>
+      </li><!-- End Archives Nav -->
+      <li class="nav-heading">Settings</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="user-profile.php">
+    <i class="bi bi-person-circle"></i>
+    <span>Profile</span>
+  </a>
+</li><!-- End Profile Page Nav -->
+   
+>>>>>>> a872ad1a176f7a41a0e4d4c1d7d0f0677759e850
      
     </ul>
 
@@ -339,26 +232,40 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   <main id="main" class="main">
             
  <!--Error Alert -->
- <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:40%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Please fill out all the fields!
+ <div class="alert alert-danger alert-dismissible fade" hidden role="alert" id="alertError" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;"> 
+                <i class="bi bi-exclamation-octagon me-1" id ="alertErrorMessage">Please fill out all the fields!</i>
               </div><!--Error End of Alert -->
 
               <!-- Success Alert -->
-              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:40%;"> 
-                <i class="bi bi-exclamation-octagon me-1"></i>
-          Created Succesfully!
+              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;"> 
+                <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
-      <h1>User Accounts</h1>
+      <h1>Employee Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">User Accounts</li>
+          <li class="breadcrumb-item active">Employee Accounts</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
+
+
+     <!-- Are you sure you want to archived -->
+              <div class="modal fade" id="archivedModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="archive-modal-title">Are you sure archived this?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer" id="modal-footer-button">
+                     
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End  Are you sure you want to archived-->
 
 
     <div class="modal fade" id="basicModal" tabindex="-1">
@@ -377,7 +284,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                   </div>
                 </div>
-              </div><!-- End Basic Modal-->
+              </div><!-- End of change pic modal-->
 
                <!--add user Modal -->
               
@@ -418,13 +325,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="newEmail" placeholder="Email">
+                    <input type="email" class="form-control" id="newEmail" placeholder="Email" >
                     <label for="newEmail">Email</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="newUsername" placeholder="Username">
+                    <input type="text" class="form-control" id="newUsername" placeholder="Username" onchage ="validateUsername(this.value)">
                     <label for="newUsername">Username</label>
                   </div>
                 </div>
@@ -444,7 +351,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                         <option selected disabled>...</option>
                         <option value="Admin">Admin</option>
                         <option value="Registrar">Registrar</option>
-                        <option value="Accountant">Accountant</option>
                       </select>
                       <label for="newJob">Position</label>
                     </div>
@@ -532,7 +438,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       </button><!-- End of error button -->
                       <button class="btn btn btn-success" type="button" disabled id ="btnSuccess" hidden>
                       <i class="bi bi-check-circle me-1"></i>
-                      Created Succesfully!
+                      Created
                       </button><!-- End of success button -->
                       <button type="submit" class="btn btn-primary" id ="btnCreateUsers" onClick ="checkAllFields()">Submit</button>
                       <button type="button" class="btn btn-secondary" onClick="resetFields()">Reset</button>
@@ -557,7 +463,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       </div>
                     <label for="editUserPic" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
               <div class="col-md-12 col-lg-9">
-             <input class="form-control" type ="file" name = "profileEdit" id ="editUserPic" onchange="editProfilePic()">
+             <input class="form-control" type ="file" name = "profileEdit" id ="editUserPic" onchange="checkIfImage()">
             </div>
                     </div>
                     <div class="modal-footer">
@@ -617,7 +523,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="editUsername" placeholder="Username">
+                    <input type="text" class="form-control" disabled id="editUsername" placeholder="Username">
                     <label for="editUsername">Username</label>
                   </div>
                 </div>
@@ -637,7 +543,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                         <option selected disabled>...</option>
                         <option value="Admin">Admin</option>
                         <option value="Registrar">Registrar</option>
-                        <option value="Accountant">Accountant</option>
                       </select>
                       <label for="editJob">Position</label>
                     </div>
@@ -738,14 +643,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">User Accounts Table</h5>
+            <h5 class="card-title">Employee Accounts Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
       <div class="row mb-3">
         <div class="col-sm-2">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addusermodal">
-                Add User
+              <i class="bi bi-person-plus"></i>  
+              User
               </button>
        </div>
        
@@ -780,26 +686,25 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <table class="table table-hover"  id ="tblUsers">
                 <thead id ="tblThead">
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('id');return false;" class="th-a">ID</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">Photo</a> </th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">Username</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">Firstname</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">Middlename</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">Lastname</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">Email</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">Birthday</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('sex');return false;" class="th-a">Sex</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">Password</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position');return false;" class="th-a">Job</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">Address</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact');return false;" class="th-a">Contact</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about');return false;" class="th-a">About</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile');return false;" class="th-a">Twitter</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile');return false;" class="th-a">Facebook</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile');return false;" class="th-a">Instagram</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">LinkedIn</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">Date Created</a></th>
-                    <th scope="col" class="table-info" id ="th-action">Action</th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('username');return false;" class="th-a">USERNAME</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FIRST NAME</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('middlename');return false;" class="th-a">MIDDLE NAME</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('lastname');return false;" class="th-a">LAST NAME</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">EMAIL</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('birthday');return false;" class="th-a">BIRTHDAY</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('sex');return false;" class="th-a">SEX</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('password');return false;" class="th-a">PASSWORD</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('position');return false;" class="th-a">POSITION</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('address');return false;" class="th-a">ADDRESS</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('contact');return false;" class="th-a">CONTACT</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('about');return false;" class="th-a">ABOUT</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('twitterprofile');return false;" class="th-a">TWITTER</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('facebookprofile');return false;" class="th-a">FACEBOOK</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('instagramprofile');return false;" class="th-a">INSTAGRAM</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('linkedinprofile');return false;" class="th-a">LINKED IN</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
+                    <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
                     
                     
                   </tr>
@@ -828,9 +733,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <span aria-hidden="true">&laquo;</span>
                         </a>
                           </li>
-                          <li class="page-item"><a class="page-link" id= "page1">1</a></li>
+                          <!-- <li class="page-item"><a class="page-link" id= "page1">1</a></li>
                           <li class="page-item"><a class="page-link" id= "page2">2</a></li>
-                          <li class="page-item"><a class="page-link" id= "page3">3</a></li>
+                          <li class="page-item"><a class="page-link" id= "page3">3</a></li> -->
                           <li class="page-item">
                           <a class="page-link" aria-label="Next" id ="nextPage" >
                        <span aria-hidden="true">&raquo;</span>

@@ -24,6 +24,9 @@ var GVULessThanRow = 0;
 //Get desired number of row per page
 var GVURowPerPage = 0;
 
+//Usernames
+var GVUUsernames = {};
+
 //NextPage Call
 const nextpageCall = function nextPageCall(){
 
@@ -106,6 +109,12 @@ window.onload = function(){
     selectNumPage();
 }//Onload page
 
+//Get All Username even status is not active
+
+const getAllUserName = async () =>{
+
+}
+
 //getAllData Function
 function getAllDataAPI(){
     //get user accounts
@@ -115,10 +124,10 @@ function getAllDataAPI(){
         GVUResults = response;//Store the responseJSON into GVUResults global var
        
         GVUAccLength = response.length;//getThe totalLength
-        GVUNumRows = 5;//Set Number of rows default
+        GVUNumRows = 0;//Set Number of rows default
         
         let selectHolder = '';
-        if(GVUAccLength >= 500){
+        if(GVUAccLength >= 100){
            
             selectHolder += `
             <option value="5" selected>5</option>
@@ -126,23 +135,23 @@ function getAllDataAPI(){
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="ALL">All</option>`;
-        }else if (GVUAccLength >= 300){
+        }else if (GVUAccLength >= 50){
            
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="ALL">All</option>`;
-        }else if(GVUAccLength >= 25){
+        }else if(GVUAccLength >= 15){
             
             selectHolder += `
             <option value="5" selected>5</option>
             <option value="10" selected>10</option>
             <option value="ALL">All</option>`;
         }else{
+            //if lower than 5 rows
             selectHolder += `
-            <option value="5" selected>5</option>
-            <option value="ALL">All</option>`;
+            <option value="ALL" selected>All</option>`;
         }
         document.querySelector('#selectPage').innerHTML = selectHolder;// set the rows per page
 
@@ -168,6 +177,38 @@ function getAllDataAPI(){
     }).catch(error => console.log(error));//end of get user accounts
 }//end of function getAllDataAPI
 
+//check if valid image
+
+const checkIfImage = () =>{
+
+ 
+    
+   let file = document.getElementById('editUserPic');// fileupload
+
+            if(file.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
+                 console.log('Image has width, I think it is real image');
+                 editProfilePic();
+                 //TODO: upload to backend
+            }else{
+                 console.log("Not a image")
+                alertShowError.classList.add('show');
+                alertShowError.removeAttribute("hidden");
+                btnError.removeAttribute("hidden");
+                btnCreateUsers.style.display = "none";
+                let output = '';
+                output += ` Not a valid image!`
+                document.querySelector('#alertErrorMessage').innerHTML = output;
+                delayedAlert = () =>{
+                    alertShowError.classList.remove('show');
+                    alertShowError.setAttribute("hidden", "hidden");
+                    btnError.setAttribute("hidden", "hidden");//Is loading true
+                    btnCreateUsers.style.display = "inline-block";
+                }
+                setTimeout(delayedAlert, 3000);
+            }
+}
+
+//Move pic to server
 const editProfilePic = async () =>{
     let value = document.getElementById('changePicUserID').value
     let fileupload = document.getElementById('editUserPic');// fileupload
@@ -229,6 +270,7 @@ const saveChanges = async (...params) =>{
    
     imageformData.append('userId', params[0]);
     imageformData.append('Image_Url', params[1]);
+    let message = '';
     try{
        const fetchResponse = await fetch("../controller/user-edit-pic.php",{
            method: "POST",
@@ -240,12 +282,15 @@ const saveChanges = async (...params) =>{
          alertShowSuccess.removeAttribute("hidden");
          btnChangePic.setAttribute("disabled", "disabled");
           alertShowSuccess.classList.add('show');
+          message += ` Updated Succesfully!`
+        
         delayedRemoveAlert = () =>{   
             alertShowSuccess.classList.remove('show');  
             alertShowSuccess.setAttribute("hidden", "hidden");
         }
         setTimeout(delayedRemoveAlert, 3000);
       }
+      document.querySelector('#alertSuccessMessage').innerHTML = message;
     }catch(e){
        console.log(e);
     }
@@ -275,7 +320,6 @@ const bindAllDataIntoTable = function (){
 for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
  console.log("GVUIndexPage: "+GVUIndexPage+"< GVUDefaultRow:" +GVUdefaultRow)
     output += `<tr>
-    <td>${GVUResults[i].id}</td>
     <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVUResults[i].username}</td>
     <td>${GVUResults[i].firstname}</td>
@@ -296,9 +340,9 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     <td>${GVUResults[i].added_at}</td>
     <th scope="col" class="table-info">
     <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
     </th>
@@ -369,8 +413,7 @@ const bindAllDataIntoTableSorted = function (){
     
     for(let i = 0; i<GVUNumRows; i++){
         output += `<tr>
-        <td>${GVUResultsSorted[i].id}</td>
-        <td><a href =""><img src = "../../uploads/${GVUResultsSorted[i].profile_url} " alt="Profile" height = "100px" width = "100px"/></a></td>
+        <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
         <td>${GVUResultsSorted[i].username}</td>
         <td>${GVUResultsSorted[i].firstname}</td>
         <td>${GVUResultsSorted[i].middlename}</td>
@@ -390,9 +433,9 @@ const bindAllDataIntoTableSorted = function (){
         <td>${GVUResultsSorted[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"><i class="bi bi-trash"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="bi bi-trash"></i></a>
     
     </div>
         </th>
@@ -405,9 +448,52 @@ const bindAllDataIntoTableSorted = function (){
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
 
+//Archived prompt ! are you sure you want to archive?
+const moveToArchive = async (...params) => {
+let output = '';
+output += `Are you sure you want to remove `+params[1]+` ?!`;
+let showButtons ='';
+showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
+document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+}
 
+//RemoveUserAccount when confirmed
+const removeUserAccount = async (id) =>{
+    let message = '';// message alert
+ //get current date where removing was done
+ const removedDate = new Date();   
 
+formData = new FormData()
+formData.append('UserID', id);
+formData.append('Status', removedDate);
 
+try{
+    const fetchRemove = await fetch("../controller/user-remove.php",{
+          method: "POST",
+          body: formData,
+      });
+  
+      const fetchResponse = await fetchRemove.json();
+      if(fetchResponse.statusCode === 200){     
+            alertShowSuccess.removeAttribute("hidden");
+            alertShowSuccess.classList.add('show');
+            message += ` Removed Succesfully!`
+            refreshTable(); 
+        delayedRemoveAlert = () =>{   
+            alertShowSuccess.classList.remove('show');  
+            alertShowSuccess.setAttribute("hidden", "hidden");
+        }
+        setTimeout(delayedRemoveAlert, 3000);
+      }// end of if fetch === 200
+
+    document.querySelector('#alertSuccessMessage').innerHTML = message;
+       
+  }catch (e){
+      console.log(e)
+  }
+}
 
 //Select bind data
 
@@ -516,6 +602,16 @@ const resetFields = () =>{
 }
 
 
+
+//Validate Email
+const validateEmail = (mail) =>{
+    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(mail.match(mailformat))
+    {
+    return true;
+    }
+}
+
 //Check all of the fields
 const checkAllFields = () =>{
     let Fname = document.getElementById('newFname').value;
@@ -560,8 +656,43 @@ const checkAllFields = () =>{
 
     let Linkedin = document.getElementById('newlinkedinprofileURL').value;
 
-    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== "" && Twitter !== "" && Facebook !== "" && Instagram !== "" && Linkedin !== ""){
+    if(Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Username !== "" && Password !== "" && Job !== "..." && Contact !== "" && Address !== "" && About !== ""){
+    let message ="";
+        if(isNaN(Contact) || Contact.length > 11){
+        alertShowError.classList.add('show');
+        alertShowError.removeAttribute("hidden");
+        btnError.removeAttribute("hidden");
+        btnCreateUsers.style.display = "none";
+        let output = '';
+        output += ` Input a correct contact number!`
+        document.querySelector('#alertErrorMessage').innerHTML = output;
+        delayedAlert = () =>{
+            alertShowError.classList.remove('show');
+            alertShowError.setAttribute("hidden", "hidden");
+            btnError.setAttribute("hidden", "hidden");//Is loading true
+            btnCreateUsers.style.display = "inline-block";
+        }
+        setTimeout(delayedAlert, 3000);
+     }
+     else if(validateEmail(Email) !== true){
+        console.log(validateEmail(Email))
+     message += ` Please input a valid email!`
+     document.querySelector('#alertErrorMessage').innerHTML = message;
+
+         alertError.removeAttribute("hidden");
+         alertError.classList.add('show');
+      
+
+
+     delayedRemoveAlert = () =>{   
+         alertError.classList.remove('show');  
+         alertError.setAttribute("hidden", "hidden");
+     }
+     setTimeout(delayedRemoveAlert, 1000);
+    }else{
         createUserAccount();
+     }
+
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -680,7 +811,10 @@ for (var pair of formData.entries()) {
     .then((res) => res.json())
         .then(response =>{
             console.log(response.statusCode)
+            let message = '';
           if(response.statusCode === 200){
+         message += ` Created Succesfully!`
+            document.querySelector('#alertSuccessMessage').innerHTML = message;
             delayedShowAlert = () =>{
                 btnCreateUsers.setAttribute("hidden", "hidden");
                 alertShowSuccess.removeAttribute("hidden");
@@ -695,6 +829,8 @@ for (var pair of formData.entries()) {
             }
             setTimeout(delayedRemoveAlert, 6000);
           }
+
+          
             
         })
     .catch(err => console.log(err))
@@ -855,10 +991,41 @@ const editUserSorted = (a) =>{
 
     let Linkedin = document.getElementById('editlinkedinprofileURL').value 
 
-    if(UserId !=="" && Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  "" && Twitter !==  "" && Facebook !==  "" && Instagram !==  "" &&Linkedin !==  "" ){
-       
-        updateUser();
-
+    if(UserId !=="" && Fname !==  "" && Mname !==  "" && Lname !==  "" && Email !==  "" && Username !==  "" && Password !==  "" && Job !==  "" && Birthday !==  "" && Sex !==  "" && Contact !==  "" && Address !==  "" && About !==  ""){
+        let message ="";
+        if(isNaN(Contact) || Contact.length > 11){
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Input a correct contact number!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            delayedAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnError.setAttribute("hidden", "hidden");//Is loading true
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedAlert, 3000);
+         }else if(validateEmail(Email) !== true){
+            console.log(validateEmail(Email))
+         message += ` Please input a valid email!`
+         document.querySelector('#alertErrorMessage').innerHTML = message;
+    
+             alertError.removeAttribute("hidden");
+             alertError.classList.add('show');
+          
+    
+    
+         delayedRemoveAlert = () =>{   
+             alertError.classList.remove('show');  
+             alertError.setAttribute("hidden", "hidden");
+         }
+         setTimeout(delayedRemoveAlert, 1000);
+        }else{
+            updateUser();
+         }
     }else{
         alertShowError.classList.add('show');
         alertShowError.removeAttribute("hidden");
@@ -950,31 +1117,48 @@ try{
         body: formData,
     });
 
-
-    //Javascript edit account admin
-// const btnEditError = document.getElementById('btnEditError');//Error button disabled
-// const btnEditSuccess = document.getElementById('btnEditSuccess');//Succes button
-// const btnIsUpdating = document.getElementById('btnIsUpdating');//updating button
     const fetchResponse = await fetchEdit.json();
     
     const showAnimation = await function(){
-
+let message = '';
         if(fetchResponse.statusCode === 200){
             console.log(fetchResponse)
             delayedShowAlert = () =>{
-        
+                message += ` Updated Succesfully!`
+                document.querySelector('#alertSuccessMessage').innerHTML = message;
                 alertShowSuccess.removeAttribute("hidden");
                 alertShowSuccess.classList.add('show');
-                
+
             }
-            setTimeout(delayedShowAlert, 3000)
+            setTimeout(delayedShowAlert, 1000)
             delayedRemoveAlert = () =>{   
                 alertShowSuccess.classList.remove('show');  
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
-            setTimeout(delayedRemoveAlert, 6000);
+            setTimeout(delayedRemoveAlert, 3000);
           }
         }
+
+        if(fetchResponse.statusCode === 201){
+            delayedShowAlert = () =>{
+            alertShowError.classList.add('show');
+            alertShowError.removeAttribute("hidden");
+            btnError.removeAttribute("hidden");
+            btnCreateUsers.style.display = "none";
+            let output = '';
+            output += ` Username Already Exist!`
+            document.querySelector('#alertErrorMessage').innerHTML = output;
+            }
+            setTimeout(delayedShowAlert, 1000);
+            delayedUserExistAlert = () =>{
+                alertShowError.classList.remove('show');
+                alertShowError.setAttribute("hidden", "hidden");
+                btnError.setAttribute("hidden", "hidden");//Is loading true
+                btnCreateUsers.style.display = "inline-block";
+            }
+            setTimeout(delayedUserExistAlert, 3000);
+
+          }
     
         showAnimation();
      

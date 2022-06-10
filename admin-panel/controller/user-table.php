@@ -3,7 +3,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$sql = mysqli_query($con, "SELECT * FROM tbl_admin");
+$sql = mysqli_query($con, "SELECT * FROM `tbl_admin` WHERE `status` LIKE 'active' ORDER BY `id` DESC");
 
 //store in result
 
