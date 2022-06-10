@@ -327,6 +327,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Student Account Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="admin-curriculum.php">
+          <i class="bi bi-card-list"></i>
+          <span>Curriculum</span>
+        </a>
+      </li><!-- End Curriculum Nav -->
+
      
     </ul>
 
