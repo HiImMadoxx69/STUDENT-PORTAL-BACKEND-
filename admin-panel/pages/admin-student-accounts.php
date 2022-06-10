@@ -173,6 +173,15 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Student Account Nav -->
 
+<<<<<<< HEAD
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="admin-curriculum.php">
+          <i class="bi bi-card-list"></i>
+          <span>Curriculum</span>
+        </a>
+      </li><!-- End Curriculum Nav -->
+     
+=======
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="subject.php">
@@ -223,6 +232,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
     <span>Profile</span>
   </a>
 </li><!-- End Profile Page Nav -->
+>>>>>>> a872ad1a176f7a41a0e4d4c1d7d0f0677759e850
     </ul>
 
   </aside><!-- End Sidebar-->
