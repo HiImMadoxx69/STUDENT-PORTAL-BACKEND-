@@ -8,8 +8,9 @@ include_once("../connections/connection.php");
 $con = connection();
 
 $username =  mysqli_real_escape_string($con, $_POST['username']);
-  if(isset($username)){
-  
+echo json_encode(array("statusCode"=>$username));
+  if(isset($_POST['username'])){
+
   $password =   mysqli_real_escape_string($con,$_POST['password']);
   
   $sql = "SELECT * FROM tbl_admin WHERE email = '$username' AND password ='$password' AND status = 'active'";
