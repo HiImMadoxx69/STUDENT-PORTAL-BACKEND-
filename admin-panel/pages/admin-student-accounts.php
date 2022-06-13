@@ -173,15 +173,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Student Account Nav -->
 
-<<<<<<< HEAD
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="admin-curriculum.php">
-          <i class="bi bi-card-list"></i>
-          <span>Curriculum</span>
-        </a>
-      </li><!-- End Curriculum Nav -->
-     
-=======
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="subject.php">
@@ -232,7 +223,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
     <span>Profile</span>
   </a>
 </li><!-- End Profile Page Nav -->
->>>>>>> a872ad1a176f7a41a0e4d4c1d7d0f0677759e850
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -261,22 +251,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
     </div><!-- End Page Title -->
 
 
-     <!-- Are you sure you want to archived -->
-              <div class="modal fade" id="archivedModal" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="archive-modal-title">Are you sure archived this?</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-footer" id="modal-footer-button">
-                     
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End  Are you sure you want to archived-->
-
-
+    
     <div class="modal fade" id="basicModal" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -407,13 +382,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="newAddress">Address</label>
                   </div>
                 </div>
-                <div class = "col-md-6">
+                <div class = "col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newGuardian" placeholder="Guardian Name">
                     <label for="newGuardian">Guardian Name</label>
                   </div>
                 </div>
-                <div class = "col-md-6">
+                <div class = "col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="newGuardianContact" placeholder="Guardian Contact">
                     <label for="newGuardianContact">Guardian Contact</label>
@@ -573,7 +548,22 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   </div>
                 </div>
               </div><!-- End Miscellaneous Fee Modal-->
-            
+             <!-- Are you sure you want to archived -->
+             <div class="modal fade" id="archivedModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="archive-modal-title">Are you sure archived this?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer" id="modal-footer-button">
+                     
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End  Are you sure you want to archived-->
+
+
             
 
     <section class="section" id ="StudentTable">
@@ -592,9 +582,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               <i class="bi bi-person-plus"></i>  
              Student
               </button>
-              <a href ="archived-students.php" class="btn btn-warning" >
-              <i class="bi bi-recycle"></i> 
-              </a>
+             
        </div>
    
        <!-- Recycle -->
@@ -637,7 +625,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('studentnumber');return false;" class="th-a">STUDENT NUMBER</a></th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FULL NAME</a></th>
-                
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('status');return false;" class="th-a">STATUS</a></th>
                     <th scope="col"id ="th-action" style = "position:sticky; right:0%; position: -webkit-sticky; top: 0px;">ACTION</th>
                     
                     
@@ -653,6 +641,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </div>
   <!-- End for scroll table -->
   <div class ="row g-3">
+    <div class ="col-12"></div>
    <div class="col-6" id ="showNumberOfPage">
          
      </div>
@@ -698,7 +687,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <div class="row">
         <div class="col-xl-12">
 
-          <div class="card">
+          <div class="card" id="StudentCoverPhoto">
           <button type="button" class="btn btn-secondary" style="margin:10px;width:10%;" onClick ="backToTable();return false;"><i class ="ri-arrow-go-back-fill"></i> Back</button>
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" id="viewProfileCard">
 
@@ -783,7 +772,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="editPassword">Password</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="editCourse" aria-label="Floating label select example">
                         <option selected disabled>...</option>
@@ -794,7 +783,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <label for="editCourse">Course</label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="editSection" aria-label="Floating label select example">
                         <option selected disabled>...</option>
@@ -805,27 +794,29 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <label for="editSection">Section</label>
                     </div>
                 </div>
-                <div class = "col-md-6">
+                <div class = "col-md-12">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="editBirthday" placeholder="Birthday">
                     <label for ="editBirthday">Birthdate</label>
                   </div>
                 </div>
 
-                <div class = "col-md-6">
+                <div class = "col-md-9">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editContact" placeholder="Contact">
                     <label for="editContact">Contact</label>
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
-                </div>
+                <!-- <div class="col-md-3">
+                <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+                </div> -->
 
                 <fieldset class="col-md-3">
+                
                   <div class="col-sm-10">
                     <div class="form-check form-switch">
+                      
                       <input class="form-check-input" type="radio" name="gridRadios" id="editmaleCheck" value="Male">
                       <label class="form-check-label" for="gridRadios1">
                         Male
@@ -845,13 +836,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="editAddress">Address</label>
                   </div>
                 </div>
-                <div class = "col-md-6">
+                <div class = "col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editGuardian" placeholder="Guardian Name">
                     <label for="editGuardian">Guardian Name</label>
                   </div>
                 </div>
-                <div class = "col-md-6">
+                <div class = "col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editGuardianContact" placeholder="Guardian Contact">
                     <label for="editGuardianContact">Guardian Contact</label>
@@ -889,13 +880,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="gradesStudentNum">Student Number</label>
                   </div>
                 </div>
-               <div class ="col-md-6">
+               <!-- <div class ="col-md-6">
                <div class="form-floating">
                     <input type="text"  class="form-control" id="gradesSemester" placeholder="Semester" required>
                     <label for="gradesSemester">Semester</label>
                   </div>
-               </div> 
-               <div class="col-md-4">
+               </div>  -->
+               <div class="col-md-6">
                 <div class="form-floating mb-3">
                       <select class="form-select" onchange="insertSubjects(this.value)" id="gradeSubject" aria-label="Floating label select example">
 
@@ -903,13 +894,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       <label for="gradeSubject">Subjects</label>
                     </div>
                 </div>
-                <div class ="col-md-4">
+                <div class ="col-md-6">
                  <div class="form-floating">
                     <input type="number"  class="form-control" id="gradesMarks" placeholder="Marks" required>
                     <label for="gradesMarks">Marks</label>
                  </div>
                </div> 
-               <div class ="col-md-4">
+               <div class ="col-md-6">
                  <div class="form-floating">
                     <input type="text"  class="form-control" id="gradesInstructor" placeholder="Instructor" required>
                     <label for="gradesInstructor">Instructor</label>
@@ -921,27 +912,27 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="gradesSchedule">Schedule</label>
                  </div>
                </div>
-              
+           
                <div class ="col-md-6">
                <button class="btn btn-primary" type="button" disabled id ="btnIsUpdatingGrades" hidden>
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       Updating...
                 </button><!--End of updating button-->
                <button type ="button" class="btn btn-success" type="submit" onClick ="checkGradeFields()" id ="btnAddGrade">Add Subject</button>
-               <a href ="archived-results.php" class="btn btn-warning" >
-              <i class="bi bi-recycle"></i> 
-              </a>
+           
                </div>
+               <hr>
               
             <div id="table-wrapper">
              <div id="table-scroll">
                <table class="table table-hover"  id ="tblGrades">
                 <thead>
                   <tr class="table-primary">
-                    <th scope="col" class ="header-title">SUBJECT NAME</th>
+                    <th scope="col" class ="header-title">SUBJECT</th>
                     <th scope="col" class ="header-title">GRADE</th>
                     <th scope="col" class ="header-title">INSTRUCTOR</th>
                     <th scope="col" class ="header-title">SCHEDULE</th>
+                    <th scope="col" class ="header-title">STATUS</th>
                     <th scope="col" class ="header-title">DATE CREATED</th>
                     <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
                   </tr>
@@ -1010,15 +1001,17 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 </button><!--End of updating button-->
               <button type ="button" class="btn btn-success" type="submit"  id ="btnPaymentClick"onClick ="checkPayment()">Add Payment</button>
               </div>
+              <hr>
             <div  class="table-wrapper">
              <div  class ="table-scroll">
                <table class="table table-hover"  id ="tblFee">
                 <thead >
                   <tr class="table-primary">
-                  <th scope="col" class ="header-title">TYPE</th>
-                    <th scope="col" class ="header-title">NAME</th>
-                    <th scope="col" class ="header-title">AMOUNT</th>
-                    <th scope="col" class ="header-title">DATE CREATED</th>
+                  <th scope="col" class ="header-title" >TYPE</th>
+                    <th scope="col" class ="header-title" >NAME</th>
+                    <th scope="col" class ="header-title" >AMOUNT</th>
+                    <th scope="col" class ="header-title" >STATUS</th>
+                    <th scope="col" class ="header-title" >DATE CREATED</th>
                     <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
                   </tr>
                 </thead>

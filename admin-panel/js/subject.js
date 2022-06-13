@@ -282,17 +282,33 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
    <td>${GVSResults[i].subject_code}</td>
     <td>${GVSResults[i].subject_name}</td>
     <td>${GVSResults[i].units}</td>
-    <td>${GVSResults[i].amount}</td>
-    <td>${GVSResults[i].added_at}</td>
-    <th scope="col" class="table-info">
-    <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
+    <td>${GVSResults[i].amount}</td>`;
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].subject_code}');return false;"><i class="bi bi-trash"></i></a>
+    if(GVSResults[i].status == 'active'){
+        output +=`<td><h5><span class="badge rounded-pill bg-success">${GVSResults[i].status}</span></h5></td>
+        <th scope="col" class="table-info">
+        <div class = "pt-2">
+        <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
     
-    </div>
-    </th>
-    </tr>`;
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].subject_code}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        
+        </div>
+        </th>
+        </tr>`;
+    }
+   
+    if(GVSResults[i].status == 'inactive'){
+        output +=`<td><h5><span class="badge rounded-pill bg-danger">${GVSResults[i].status}</span></h5></td>
+        <th scope="col" class="table-info">
+        <div class = "pt-2">
+        <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
+    
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResults[i].id}', '${GVSResults[i].subject_code}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        
+        </div>
+        </th>
+        </tr>`;
+    }
     
 }
 
@@ -362,17 +378,32 @@ const bindAllDataIntoTableSorted = function (){
          <td>${GVSResultsSorted[i].subject_code}</td>
         <td>${GVSResultsSorted[i].subject_name}</td>
         <td>${GVSResultsSorted[i].units}</td>
-        <td>${GVSResultsSorted[i].amount}</td>
-        <td>${GVSResultsSorted[i].added_at}</td>
-        <th scope="col" class="table-info">
-        <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVSResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
-
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].subject_code}');return false;"><i class="bi bi-trash"></i></a>
-    
-    </div>
-        </th>
-        </tr>`;
+        <td>${GVSResultsSorted[i].amount}</td>`;
+        if(GVSResultsSorted[i].status == 'active'){
+            output +=`<td><h5><span class="badge rounded-pill bg-success">${GVSResultsSorted[i].status}</span></h5></td>
+            <th scope="col" class="table-info">
+            <div class = "pt-2">
+            <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResultsSorted[i].id});return false;" ><i class="bx bx-edit"></i></a>
+        
+            <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].subject_code}');return false;"><i class="ri-inbox-archive-line"></i></a>
+            
+            </div>
+            </th>
+            </tr>`;
+        }
+       
+        if(GVSResultsSorted[i].status == 'inactive'){
+            output +=`<td><h5><span class="badge rounded-pill bg-danger">${GVSResultsSorted[i].status}</span></h5></td>
+            <th scope="col" class="table-info">
+            <div class = "pt-2">
+            <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVSResultsSorted[i].id});return false;" ><i class="bx bx-edit"></i></a>
+        
+            <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].subject_code}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+            
+            </div>
+            </th>
+            </tr>`;
+        }
     }
    
     let numberOfPages = '';
@@ -381,10 +412,56 @@ const bindAllDataIntoTableSorted = function (){
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
 
+//unarchive
+const moveToUnArchive = (...params) =>{
+    let output = '';
+output += `Are you sure you want to unarchive `+params[1]+` ?!`;
+let showButtons ='';
+showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "unarchiveSubject(`+params[0]+`)">Remove</button>`;
+document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+}
+
+const unarchiveSubject = async (id) =>{
+    let message = '';// message alert
+    //get current date where removing was done
+    const removedDate = 'active';   
+   
+   formData = new FormData()
+   formData.append('UserID', id);
+   formData.append('Status', removedDate);
+   
+   try{
+       const fetchRemove = await fetch("../controller/subject-remove.php",{
+             method: "POST",
+             body: formData,
+         });
+     
+         const fetchResponse = await fetchRemove.json();
+         if(fetchResponse.statusCode === 200){     
+               alertShowSuccess.removeAttribute("hidden");
+               alertShowSuccess.classList.add('show');
+               message += ` Unarchived Succesfully!`
+               refreshTable(); 
+           delayedRemoveAlert = () =>{   
+               alertShowSuccess.classList.remove('show');  
+               alertShowSuccess.setAttribute("hidden", "hidden");
+           }
+           setTimeout(delayedRemoveAlert, 3000);
+         }// end of if fetch === 200
+   
+       document.querySelector('#alertSuccessMessage').innerHTML = message;
+          
+     }catch (e){
+         console.log(e)
+     }
+}
+
 //Archived prompt ! are you sure you want to archive?
 const moveToArchive = async (...params) => {
 let output = '';
-output += `Are you sure you want to remove `+params[1]+` ?!`;
+output += `Are you sure you want to archive `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 <button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
@@ -396,7 +473,7 @@ document.querySelector('#archive-modal-title').innerHTML = output;//change the t
 const removeUserAccount = async (id) =>{
     let message = '';// message alert
  //get current date where removing was done
- const removedDate = new Date();   
+ const removedDate = 'inactive';   
 
 formData = new FormData()
 formData.append('UserID', id);
@@ -412,7 +489,7 @@ try{
       if(fetchResponse.statusCode === 200){     
             alertShowSuccess.removeAttribute("hidden");
             alertShowSuccess.classList.add('show');
-            message += ` Removed Succesfully!`
+            message += ` Archive Succesfully!`
             refreshTable(); 
         delayedRemoveAlert = () =>{   
             alertShowSuccess.classList.remove('show');  

@@ -36,7 +36,12 @@
     top: 0px;
 
   }
-
+.header-title{
+  /* position: fixed!important; */
+    right: 0%;
+    color: rgb(31, 31, 32);
+    top: 0px;
+}
 
   #th-action{
     z-index:1;

@@ -58,17 +58,15 @@ setTimeout(delayedFunc, 1000);//Timer for loading
 function delayedFunc(){
 
      
-      
+      console.log(getResult.statusCode)
       
       if(getResult.statusCode === 200){
             location.reload();
       }else{          
           alertPrompt.style.display = 'inline-block';
-          alertMSG.innerHTML = 'Wrong credentials';
+          alertMSG.innerHTML = 'Wrong Email or Password';
           btnChangeToLoadingS.setAttribute("hidden", "hidden");
           btnLogIn.style.display = 'inline-block';
-          console.log("Wrong credentials!");
-      
      }//end of if status 200 
     
     }//end of delayedFunc

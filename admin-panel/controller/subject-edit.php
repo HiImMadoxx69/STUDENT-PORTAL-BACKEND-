@@ -3,7 +3,6 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-<<<<<<< HEAD
 // $uploadDirectory = "../../uploads/";
 
 $errors = []; // Store all foreseen and unforeseen errors here.
@@ -46,29 +45,6 @@ if (isset($userCurrentId)) {
                   $sql = "UPDATE `tbl_admin` SET `email` = '$email',`username` = '$username',`password` = '$password', `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`id` = $userCurrentId;";
     
                   mysqli_query($con, $sql);
-=======
-$errors = []; // Store all foreseen and unforeseen errors here.
-
-
-  $rowId = $_POST['SubjectId'];  
-  $subject_code = $_POST['Subject_Code'];
-  $subject_name = $_POST['Subject_Name'];
-  $units = $_POST['Units'];
-  $amount = $_POST['Amount'];
- 
-if (isset($rowId)) {
-
- 
-
- try{
-                  $sql = "UPDATE `tbl_subject` SET `subject_code` = '$subject_code', `subject_name` = '$subject_name', `units` = '$units', `amount` = '$amount' WHERE `tbl_subject`.`id` = $rowId;";
-                  mysqli_query($con, $sql);
-                  $dsql = "UPDATE `tbl_bills` SET `amount` = '$amount' WHERE `tbl_bills`.`billcode` = '$subject_code';";
-                  mysqli_query($con, $dsql);
-             
-                  $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Updated: Subject subject code: $subject_code');";
-                  mysqli_query($con, $auditsql);
->>>>>>> a872ad1a176f7a41a0e4d4c1d7d0f0677759e850
                   exit(json_encode(array("statusCode"=>200)));
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));
@@ -78,7 +54,6 @@ if (isset($rowId)) {
 
 
 
-<<<<<<< HEAD
 
 
 
@@ -123,7 +98,5 @@ if (isset($rowId)) {
 
 
 
-=======
->>>>>>> a872ad1a176f7a41a0e4d4c1d7d0f0677759e850
   
 ?>

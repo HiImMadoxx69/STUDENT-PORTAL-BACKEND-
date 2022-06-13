@@ -319,34 +319,7 @@ const changePicModal =  (id) =>{
 }
 
 
-const bindAllDataIntoTable = function (){   
-    let output ='';
 
-for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
- console.log("GVSIndexPage: "+GVSIndexPage+"< GVSDefaultRow:" +GVSdefaultRow)
-    output += `<tr>
-    <td><a href="#" onclick= "changePicModal(${GVSResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
-    <td>${GVSResults[i].studentnumber}</td>
-    <td>${GVSResults[i].firstname} ${GVSResults[i].middlename} ${GVSResults[i].lastname}</td>
-    <th scope="col" >
-    <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserNotSorted(${GVSResults[i].id});viewGrades('${GVSResults[i].studentnumber}');viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-eye"></i></a>
-
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
-    
-    </div>
-    </th>
-    </tr>`;
-    
-}
-
-let numberOfPages = '';
-numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results</h8>`;
-document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
-document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
-
-return true;
-}
 
 //View, Edit Fee Not Sorted
 const viewFees = (studID) =>{
@@ -417,7 +390,7 @@ const feesClick = () => {
 
 var GVSMiscellaneousFee = {};
 const bindMiscellaneousFee = async () =>{
-    const fetchResponse = await fetch('../controller/miscellaneous-fee-table.php');
+    const fetchResponse = await fetch('../controller/miscellaneous-fee-active.php');
     
     const getResponse = await fetchResponse.json();
     GVSMiscellaneousFee = getResponse;
@@ -434,7 +407,7 @@ const bindMiscellaneousFee = async () =>{
 const bindSubjects = async ()=>{
 
     //Dropdown
-    const subjectsResponse = await fetch('../controller/subject-table.php');
+    const subjectsResponse = await fetch('../controller/subject-table-active.php');
     const getResponse = await subjectsResponse.json();
     GVSSubjects = getResponse;
     console.log(getResponse)
@@ -661,12 +634,14 @@ const btnInsertSubs = async () =>{
     let Mark = document.getElementById('gradesMarks').value;
     let Type = 'Subject';
     let Editor = document.getElementById('getUserPosition').value;
+    // let Semester = document.getElementById('gradesSemester').value;
     formData = new FormData();
 
     formData.append('StudentId', gradeStudentNum);
     formData.append('Subject_name', objinsertSubjects[0].subject_name);
     formData.append('Subject_code', objinsertSubjects[0].subject_code);
     formData.append('Units', objinsertSubjects[0].units);
+    // formData.append('Semester', Semester);
     formData.append('Grade', Mark);
     formData.append('Editor', Editor);
     formData.append('Instructor', Instructor);
@@ -831,13 +806,20 @@ let message = '';
 }
 
 }
-
+const moveToArchiveFee = (...params) =>{
+    let output = '';
+output += `Are you sure you want to remove `+params[1]+` ?!`;
+let showButtons ='';
+showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "ArchiveFee(`+params[0]+`,'`+params[1]+`','`+params[2]+`')">Archive</button>`;
+document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+}
 
 //Remove Fee
+const ArchiveFee = async (...params) =>{
 
-const moveToArchiveFee = async (...params) =>{
-
-    let removedDate = new Date();
+    let removedDate = 'inactive';
     
     formData = new FormData();
     
@@ -860,7 +842,51 @@ const moveToArchiveFee = async (...params) =>{
             GetAllSubjectPerStudent();
             alertShowSuccess.removeAttribute("hidden");
             alertShowSuccess.classList.add('show');
-            message += ` Removed Succesfully!`
+            message += ` Archived Succesfully!`
+        document.querySelector('#alertSuccessMessage').innerHTML = message;
+    }
+    GetAllFeePerStudent();
+    }catch(e){
+    console.log(e);
+    GetAllFeePerStudent();
+    }
+    }
+const moveToUnArchiveFee = (...params) =>{
+    let output = '';
+output += `Are you sure you want to unarchive `+params[1]+` ?!`;
+let showButtons ='';
+showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "UnArchiveFee(`+params[0]+`,'`+params[1]+`','`+params[2]+`')">Remove</button>`;
+document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+}
+    //Unarchive Fee
+const UnArchiveFee = async (...params) =>{
+
+    let removedDate = 'active';
+    
+    formData = new FormData();
+    
+    formData.append('RowID', params[0]);
+    formData.append('Name', params[1])
+    formData.append('StudID', params[2]);
+    formData.append('Status',removedDate);
+    
+    
+    try{
+    const fetchResponse = await fetch("../controller/student-fee-remove.php",{
+        method: "POST",
+        body: formData,
+    });
+    
+    
+    const getResponse = await fetchResponse.json();
+    let message = '';
+        if(getResponse.statusCode === 200){     
+            GetAllSubjectPerStudent();
+            alertShowSuccess.removeAttribute("hidden");
+            alertShowSuccess.classList.add('show');
+            message += ` Unarchived Succesfully!`
         document.querySelector('#alertSuccessMessage').innerHTML = message;
     }
     GetAllFeePerStudent();
@@ -894,15 +920,32 @@ const GetAllFeePerStudent = async () =>{
             myTable += `<tr>
             <td>`+tableResponse[i].type+`</td>
             <td id ="tdName`+i+`">`+tableResponse[i].billname+`</td>
-            <td id ="tdGrade`+i+`">`+tableResponse[i].amount+`</td>
-            <td>`+tableResponse[i].added_at+`</td>
-            <th scope="col" class="table-info">
-            <div class = "pt-4">
-            <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].name+`'); return false;"><i class="bi bi-check-circle"></i></a>
-            <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  onclick ="moveToArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="bi bi-trash"></i></a>
-            </div>
-            </th>
-            </tr>`;    
+            <td id ="tdGrade`+i+`">`+tableResponse[i].amount+`</td>`;
+
+            if(tableResponse[i].status == 'active'){
+                myTable += `<td><h5><span class="badge rounded-pill bg-success">`+tableResponse[i].status+`</span></h5></td>
+                <td>`+tableResponse[i].added_at+`</td>
+                <th scope="col" class="table-info">
+                <div class = "pt-4">
+                <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].name+`'); return false;"><i class="bi bi-check-circle"></i></a>
+                <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="ri-inbox-archive-line"></i></a>
+                </div>
+                </th>
+                </tr>`;   
+            }
+          
+            if(tableResponse[i].status == 'inactive'){
+                myTable += `<td><h5><span class="badge rounded-pill bg-danger">`+tableResponse[i].status+`</span></h5></td>
+                <td>`+tableResponse[i].added_at+`</td>
+                <th scope="col" class="table-info">
+                <div class = "pt-4">
+                <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].name+`'); return false;"><i class="bi bi-check-circle"></i></a>
+                <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToUnArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+                </div>
+                </th>
+                </tr>`;   
+            }
+
             if(parseFloat(tableResponse[i].amount) > 0){
                totalAmount = parseFloat(totalAmount) + parseFloat(tableResponse[i].amount);
             }
@@ -1017,8 +1060,57 @@ document.getElementById('feeBalance').value = getResponse[0].balance;
    }catch(e){
 console.error(e)
    }
-   
+
 }
+
+
+const moveToUnArchiveResult = async (...params) => {
+    let output = '';
+    output += `Are you sure you want to unarchived  `+params[1]+` ?!`;
+    let showButtons ='';
+    showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "unarchivedResult(`+params[0]+`)">Unarchive</button>`;
+    document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+    document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+    }
+    
+    //unarchivedUser when confirmed
+    const unarchivedResult = async (id) =>{
+        let message = '';// message alert
+     //get current date where removing was done
+    const status = 'active';   
+    
+    formData = new FormData()
+    formData.append('UserID', id);
+    formData.append('Status', status);
+    
+    try{
+        const fetchRemove = await fetch("../controller/results-remove.php",{
+              method: "POST",
+              body: formData,
+          });
+      
+          const fetchResponse = await fetchRemove.json();
+          if(fetchResponse.statusCode === 200){     
+                alertShowSuccess.removeAttribute("hidden");
+                alertShowSuccess.classList.add('show');
+                message += ` Unarchived Succesfully!`
+                document.querySelector('#alertSuccessMessage').innerHTML = message;
+                GetAllSubjectPerStudent();
+            delayedRemoveAlert = () =>{   
+                alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.setAttribute("hidden", "hidden");
+            }
+            setTimeout(delayedRemoveAlert, 3000);
+            
+          }// end of if fetch === 200
+    
+          
+        
+      }catch (e){
+          console.log(e)
+      }
+    }
 
 //Get All Subject per students
 const GetAllSubjectPerStudent = async() =>{
@@ -1045,16 +1137,33 @@ const GetAllSubjectPerStudent = async() =>{
          <td id ="tdName`+i+`">`+tableResponse[i].subject_name+`</td>
          <td id ="tdGrade`+i+`">`+tableResponse[i].grade+`</td>
          <td id ="tdInstructor`+i+`">`+tableResponse[i].instructor+`</td>
-         <td id ="tdSched`+i+`">`+tableResponse[i].schedule+`</td>
-         <td>`+tableResponse[i].added_at+`</td>
-         <th scope="col" class="table-info">
-         <div class = "pt-4">
-         <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].subject_code+`'); return false;"><i class="bi bi-check-circle"></i></a>
-         <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bx bx-edit"></i></a>
-         <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  onclick ="moveToArchiveSubject(`+tableResponse[i].id+`);return false;"><i class="bi bi-trash"></i></a>
-         </div>
-         </th>
-         </tr>`;    
+         <td id ="tdSched`+i+`">`+tableResponse[i].schedule+`</td>`;
+
+
+         if(tableResponse[i].status == 'active'){
+            myTable +=`<td><h5><span class="badge rounded-pill bg-success">`+tableResponse[i].status+`</span></h5></td>
+            <td>`+tableResponse[i].added_at+`</td>
+            <th scope="col" class="table-info">
+            <div class = "pt-4">
+            <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].subject_code+`'); return false;"><i class="bi bi-check-circle"></i></a>
+            <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bx bx-edit"></i></a>
+            <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToArchiveSubject(`+tableResponse[i].id+`,'`+tableResponse[i].subject_name+`');return false;"><i class="ri-inbox-archive-line"></i></a>
+            </div>
+            </th>
+            </tr>`;    
+         }
+     if(tableResponse[i].status == 'inactive'){
+        myTable +=`<td><h5><span class="badge rounded-pill bg-danger">`+tableResponse[i].status+`</span></h5></td>
+        <td>`+tableResponse[i].added_at+`</td>
+        <th scope="col" class="table-info">
+        <div class = "pt-4">
+        <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].subject_code+`'); return false;"><i class="bi bi-check-circle"></i></a>
+        <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bx bx-edit"></i></a>
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToUnArchiveResult('`+tableResponse[i].id+`','`+tableResponse[i].subject_name+`');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        </div>
+        </th>
+        </tr>`;    
+     }
          
          if(tableResponse[i].grade > 0){
             MyAverage = parseFloat(MyAverage) + parseFloat(tableResponse[i].grade);
@@ -1071,6 +1180,7 @@ myTable += `<tr>
 <td></td>
 <td></td>
 <td></td>
+<td></td>
 </tr>`;
 
      document.querySelector('#tbody-student-subject').innerHTML = myTable;
@@ -1081,37 +1191,53 @@ myTable += `<tr>
     setTimeout(delayedRemoveAlert, 1000);
 }
 
+const archivedResult = async (id)=>{
+
+
+    let RowId = id;
+    let removedDate = 'inactive';
+    
+    formData = new FormData();
+    
+    formData.append('RowID', RowId);
+    formData.append('Status',removedDate);
+    
+    
+    try{
+    const fetchResponse = await fetch("../controller/student-subject-remove.php",{
+        method: "POST",
+        body: formData,
+    });
+    
+    
+    const getResponse = await fetchResponse.json();
+    let message = '';
+        if(getResponse.statusCode === 200){     
+            GetAllSubjectPerStudent();
+            alertShowSuccess.removeAttribute("hidden");
+            alertShowSuccess.classList.add('show');
+            message += ` Removed Succesfully!`
+        document.querySelector('#alertSuccessMessage').innerHTML = message;
+    }
+    }catch(e){
+    console.error(e);
+    }
+}
+
+
+
 //Remove Subject
-const moveToArchiveSubject = async (id) =>{
-let RowId = id;
-let removedDate = new Date();
-
-formData = new FormData();
-
-formData.append('RowID', RowId);
-formData.append('Status',removedDate);
-
-
-try{
-const fetchResponse = await fetch("../controller/student-subject-remove.php",{
-    method: "POST",
-    body: formData,
-});
-
-
-const getResponse = await fetchResponse.json();
-let message = '';
-    if(getResponse.statusCode === 200){     
-        GetAllSubjectPerStudent();
-        alertShowSuccess.removeAttribute("hidden");
-        alertShowSuccess.classList.add('show');
-        message += ` Removed Succesfully!`
-    document.querySelector('#alertSuccessMessage').innerHTML = message;
+const moveToArchiveSubject = async (...params) =>{
+    let output = '';
+    output += `Are you sure you want to archived  `+params[1]+` ?!`;
+    let showButtons ='';
+    showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "archivedResult(`+params[0]+`)">Unarchive</button>`;
+    document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+    document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
-}catch(e){
 
-}
-}
+
 
 
 
@@ -1156,7 +1282,53 @@ if(GVSIsSorted){
     bindAllDataIntoTableSorted();
 }//Sort by id
 
+const bindAllDataIntoTable = function (){   
+    let output ='';
 
+for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
+ console.log("GVSIndexPage: "+GVSIndexPage+"< GVSDefaultRow:" +GVSdefaultRow)
+    output += `<tr>
+    <td><a href="#" onclick= "changePicModal(${GVSResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
+    <td>${GVSResults[i].studentnumber}</td>
+    <td>${GVSResults[i].firstname} ${GVSResults[i].middlename} ${GVSResults[i].lastname}</td>`;
+
+    if(GVSResults[i].status =='active'){
+        output += `
+        <td><h5><span class="badge rounded-pill bg-success">${GVSResults[i].status}</span></h5></td>
+        <th scope="col" >
+        <div class = "pt-2">
+        <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserNotSorted(${GVSResults[i].id});viewGrades('${GVSResults[i].studentnumber}');viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-eye"></i></a>
+    
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        
+        </div>
+        </th>
+        </tr>`;
+    }
+   
+    if(GVSResults[i].status =='inactive'){
+        output += `
+        <td><h5><span class="badge rounded-pill bg-danger">${GVSResults[i].status}</span></h5></td>
+        <th scope="col" >
+        <div class = "pt-2">
+        <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserNotSorted(${GVSResults[i].id});viewGrades('${GVSResults[i].studentnumber}');viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-eye"></i></a>
+    
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        
+        </div>
+        </th>
+        </tr>`;
+    }
+    
+}
+
+let numberOfPages = '';
+numberOfPages += `<h8>Showing `+GVSdefaultRow+` out of `+GVSAccLength+` results</h8>`;
+document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
+document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
+
+return true;
+}
 
 
 
@@ -1169,17 +1341,38 @@ const bindAllDataIntoTableSorted = function (){
         output += `<tr>
     <td><a href="#" onclick= "changePicModal(${GVSResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVSResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVSResultsSorted[i].studentnumber}</td>
-    <td>${GVSResultsSorted[i].firstname} ${GVSResultsSorted[i].middlename} ${GVSResultsSorted[i].lastname}</td>
-        <th scope="col" >
-        <div class = "pt-2">
-    <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserSorted(${GVSResultsSorted[i].id});viewGradesSorted('${GVSResultsSorted[i].studentnumber}'); viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-eye"></i></a>
+    <td>${GVSResultsSorted[i].firstname} ${GVSResultsSorted[i].middlename} ${GVSResultsSorted[i].lastname}</td>`;
 
+    if(GVSResultsSorted[i].status == 'active'){
+        output += `
+        <td><h5><span class="badge rounded-pill bg-success">${GVSResultsSorted[i].status}</h5></span></td>
+            <th scope="col" >
+            <div class = "pt-2">
+        <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserSorted(${GVSResultsSorted[i].id});viewGradesSorted('${GVSResultsSorted[i].studentnumber}'); viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-eye"></i></a>
     
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-trash"></i></a>
+        
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        
+        </div>
+            </th>
+            </tr>`;
+    }
+  
+
+    if(GVSResultsSorted[i].status == 'inactive'){
+        output += `
+        <td><h5><span class="badge rounded-pill bg-danger">${GVSResultsSorted[i].status}</h5></span></td>
+            <th scope="col" >
+            <div class = "pt-2">
+        <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserSorted(${GVSResultsSorted[i].id});viewGradesSorted('${GVSResultsSorted[i].studentnumber}'); viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-eye"></i></a>
     
-    </div>
-        </th>
-        </tr>`;
+        
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        
+        </div>
+            </th>
+            </tr>`;
+    }
     }
    
     let numberOfPages = '';
@@ -1187,6 +1380,57 @@ const bindAllDataIntoTableSorted = function (){
     document.querySelector('#tbody-user-accounts').innerHTML = output;//print the data into the tbody
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
+
+
+//Archived prompt ! are you sure you want to archive?
+const moveToUnArchive = async (...params) => {
+    let output = '';
+    output += `Are you sure you want to unarchived  `+params[1]+` ?!`;
+    let showButtons ='';
+    showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "unarchivedUser(`+params[0]+`)">Unarchive</button>`;
+    document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+    document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+    }
+    
+    //unarchivedUser when confirmed
+    const unarchivedUser = async (id) =>{
+        let message = '';// message alert
+     //get current date where removing was done
+    const status = 'active';   
+    
+    formData = new FormData()
+    formData.append('UserID', id);
+    formData.append('Status', status);
+    
+    try{
+        const fetchRemove = await fetch("../controller/student-remove.php",{
+              method: "POST",
+              body: formData,
+          });
+      
+          const fetchResponse = await fetchRemove.json();
+          if(fetchResponse.statusCode === 200){     
+                alertShowSuccess.removeAttribute("hidden");
+                alertShowSuccess.classList.add('show');
+                message += ` Unarchived Succesfully!`
+                document.querySelector('#alertSuccessMessage').innerHTML = message;
+                refreshTable(); 
+            delayedRemoveAlert = () =>{   
+                alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.setAttribute("hidden", "hidden");
+            }
+            setTimeout(delayedRemoveAlert, 3000);
+            
+          }// end of if fetch === 200
+    
+          
+        
+      }catch (e){
+          console.log(e)
+      }
+    }
+    
 
 //Archived prompt ! are you sure you want to archive?
 const moveToArchive = async (...params) => {
@@ -1203,7 +1447,7 @@ document.querySelector('#archive-modal-title').innerHTML = output;//change the t
 const removeUserAccount = async (id) =>{
     let message = '';// message alert
  //get current date where removing was done
- const removedDate = new Date();   
+ const removedDate = 'inactive';   
 
 formData = new FormData()
 formData.append('UserID', id);
@@ -1737,9 +1981,7 @@ const editUserNotSorted = (a) =>{
             let Lname = document.getElementById('editLname').value = GVSResults[i].lastname;
         
             let Email = document.getElementById('editEmail').value = GVSResults[i].email;
-         
-            let Password = document.getElementById('editPassword').value = GVSResults[i].password;
-            
+             
         
             let Birthday = document.getElementById('editBirthday').value = GVSResults[i].birthday;
             
@@ -1748,10 +1990,11 @@ const editUserNotSorted = (a) =>{
             
             if(Sex == "Male"){
                 console.log(Sex =="Male")
-                document.getElementById('editmaleCheck').checked = true;
+                document.getElementById('editmaleCheck').checked = true;document.getElementById('StudentCoverPhoto').style.backgroundImage ="url('../img/male-background.png')";
             }
             if(Sex == "Female"){
                 document.getElementById('editfemaleCheck').checked = true;
+                document.getElementById('StudentCoverPhoto').style.backgroundImage ="url('../img/female-background.png')";
             }
         
             let Contact = document.getElementById('editContact').value = GVSResults[i].contact;
@@ -1857,8 +2100,7 @@ const editUserSorted = (a) =>{
         
             let Email = document.getElementById('editEmail').value = GVSResultsSorted[i].email;
          
-            let Password = document.getElementById('editPassword').value = GVSResultsSorted[i].password;
-            
+             
         
             let Birthday = document.getElementById('editBirthday').value = GVSResultsSorted[i].birthday;
             
@@ -1914,7 +2156,7 @@ const editUserSorted = (a) =>{
 
     let Email = document.getElementById('editEmail').value;
  
-    let Password = document.getElementById('editPassword').value;
+ 
     
     let Course = document.getElementById('editCourse').value;
 
@@ -1927,9 +2169,11 @@ const editUserSorted = (a) =>{
     
     if(document.getElementById('maleCheck').checked === true){
         Sex = "Male";
+        document.getElementById('StudentCoverPhoto').style.backgroundImage ="url('../img/male-background.png')";
     }
     if(document.getElementById('femaleCheck').checked === true){
         Sex = "Female";
+        document.getElementById('StudentCoverPhoto').style.backgroundImage ="url('../img/female-background.png')";
     }
 
     let Contact = document.getElementById('editContact').value;
@@ -1939,7 +2183,7 @@ const editUserSorted = (a) =>{
     let Guardian = document.getElementById('editGuardian').value;
 
     let GuardianNum = document.getElementById('editGuardianContact').value;
-    if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Password !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Birthday !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
+    if(StudNum !== "" && Fname !== "" && Mname !=="" && Lname !== "" && Email !== "" && Course !== "..." && Section !== "..." && Contact !== "" && Birthday !== "" && Address !== "" && Guardian !== "" && GuardianNum !== ""){
        
 
 
@@ -2030,7 +2274,7 @@ const updateUser = async () =>{
 
     let Email = document.getElementById('editEmail').value;
  
-    let Password = document.getElementById('editPassword').value;
+  
     
     let Course = document.getElementById('editCourse').value;
 
@@ -2039,13 +2283,14 @@ const updateUser = async () =>{
     let Birthday = document.getElementById('editBirthday').value;
     
     let Sex ="";
-
     
     if(document.getElementById('editmaleCheck').checked == true){
         Sex = "Male";
+        document.getElementById('StudentCoverPhoto').style.backgroundImage ="url('../img/male-background.png')";
     }
     if(document.getElementById('editfemaleCheck').checked == true){
         Sex = "Female";
+        document.getElementById('StudentCoverPhoto').style.backgroundImage ="url('../img/female-background.png')";
     }
 
     let Contact = document.getElementById('editContact').value;
@@ -2063,7 +2308,6 @@ formData.append('Fname', Fname);
 formData.append('Mname', Mname);
 formData.append('Lname', Lname);
 formData.append('Email', Email);
-formData.append('Password', Password);
 formData.append('Course', Course);
 formData.append('Section', Section);
 formData.append('Birthday', Birthday);
@@ -2221,9 +2465,7 @@ const refreshInfo = (a) =>{
         
             let Email = document.getElementById('editEmail').value = GVSResults[i].email;
          
-            let Password = document.getElementById('editPassword').value = GVSResults[i].password;
-            
-        
+       
             let Birthday = document.getElementById('editBirthday').value = GVSResults[i].birthday;
             
             let Sex = GVSResults[i].sex;

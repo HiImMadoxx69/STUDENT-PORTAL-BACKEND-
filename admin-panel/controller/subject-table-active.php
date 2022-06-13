@@ -3,7 +3,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$sql = mysqli_query($con, "SELECT * FROM `tbl_section` ORDER BY `id` DESC");
+$sql = mysqli_query($con, "SELECT * FROM `tbl_subject` WHERE `status` = 'active' ORDER BY `id` DESC");
 
 //store in result
 

@@ -10,13 +10,14 @@ $Grade = $_POST['Grade'];
 $Instructor = $_POST['Instructor'];
 $Schedule = $_POST['Schedule'];
 $Amount = $_POST['Amount'];
+// $Semester = $_POST['Semester'];
 $Type = $_POST['Type'];
 $Editor = $_POST['Editor'];
 
 if(isset($StudID)){
 
     
-    $sql = "SELECT * FROM tbl_grades WHERE studentid = '$StudID' AND subject_code = '$SubCode' AND status ='active'";
+    $sql = "SELECT * FROM tbl_grades WHERE studentid = '$StudID' AND subject_code = '$SubCode'";
 
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();

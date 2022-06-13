@@ -1086,5 +1086,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #d4d5da;
 }
+#StudentCoverPhoto{
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 
-
+#EmployeeCoverPhoto{
+  background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#profileCoverPhoto{
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}

@@ -316,7 +316,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-4">
                   <div class="form-floating">
                     <input type="number" class="form-control" id="newCredits" placeholder="Lastname">
-                    <label for="newCredits">Credits</label>
+                    <label for="newCredits">Units</label>
                   </div>
                 </div>
                
@@ -408,7 +408,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <div class="col-md-4">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editCredits" placeholder="Credits">
-                    <label for="editCredits">Credits</label>
+                    <label for="editCredits">Units</label>
                   </div>
                 </div>
               </form><!-- End floating Labels Form -->
@@ -450,9 +450,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               Course
               </button>
              
-              <a href ="archived-course.php" class="btn btn-warning" >
-              <i class="bi bi-recycle"></i> 
-              </a>
+             
        </div>
        
 
@@ -488,8 +486,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   <tr class="table-primary">
                   <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('course_name');return false;" class="th-a">COURSE NAME</a></th>
                   <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('course_faculty');return false;" class="th-a">COURSE FACULTY</a></th>
-                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('credits');return false;" class="th-a">CREDITS</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('credits');return false;" class="th-a">UNITS</a></th>
+                  <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('status');return false;" class="th-a">STATUS</a></th>
                     <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
                     
                     
@@ -505,6 +503,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </div>
   <!-- End for scroll table -->
   <div class ="row g-3">
+    <div class ="col-12"></div>
    <div class="col-6" id ="showNumberOfPage">
          
      </div>

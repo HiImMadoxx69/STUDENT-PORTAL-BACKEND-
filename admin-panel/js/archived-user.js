@@ -370,7 +370,7 @@ const bindAllDataIntoTableSorted = function (){
 }//Sorted Bind Table
 
 //Archived prompt ! are you sure you want to archive?
-const moveToArchive = async (...params) => {
+const moveToUnArchive = async (...params) => {
 let output = '';
 output += `Are you sure you want to unarchived  `+params[1]+` ?!`;
 let showButtons ='';

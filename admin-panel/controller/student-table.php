@@ -3,7 +3,24 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$sql = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE `status` LIKE 'active' ORDER BY `id` DESC");
+$sql = mysqli_query($con, "SELECT id,
+profile_url,
+studentnumber,
+firstname,
+middlename,
+lastname,
+email,
+address,
+sex,
+course,
+section,
+birthday,
+contact,
+guardian,
+guardian_contact,
+balance,
+status,
+added_at FROM `tbl_studentinfo` ORDER BY `added_at` DESC");
 
 //store in result
 

@@ -386,7 +386,6 @@ const saveChanges = async (...params) =>{
        console.log(receivedStatus)
        if(receivedStatus.statusCode === 200){
         getAllDataAPI(params[0]);
-        $('#changeProfileModal').modal('hide');
          alertShowSuccess.removeAttribute("hidden");
          btnChangePic.setAttribute("disabled", "disabled");
           alertShowSuccess.classList.add('show');
@@ -430,35 +429,15 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     output += `<tr>
     <td><a href="#" onclick= "changePicModal(${GVUResults[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResults[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
     <td>${GVUResults[i].firstname} ${GVUResults[i].middlename} ${GVUResults[i].lastname}</td>
-    <td>${GVUResults[i].email}</td>
-    `;
+    <th scope="col" >
+    <div class = "pt-2">
+    <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
 
-    //Active
-    if(GVUResults[i].status == 'active'){
-        output +=  `<td><h5><span class="badge rounded-pill bg-success">${GVUResults[i].status}</span></h5></td>
-        <th scope="col" >
-        <div class = "pt-2">
-        <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="bi bi-trash"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="ri-inbox-archive-line"></i></a>
-        
-        </div>
-        </th>
-        </tr>`;
-    }
-   //Inactive
-    if(GVUResults[i].status == 'inactive'){
-        output +=  `<td><h5><span class="badge rounded-pill bg-danger">${GVUResults[i].status}</span></h5></td>
-        <th scope="col" >
-        <div class = "pt-2">
-        <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
-    
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
-        
-        </div>
-        </th>
-        </tr>`;
-    }
+    </div>
+    </th>
+    </tr>`;
     
 }
 
@@ -527,36 +506,15 @@ const bindAllDataIntoTableSorted = function (){
         output += `<tr>
         <td><a href="#" onclick= "changePicModal(${GVUResultsSorted[i].id});return false;" data-bs-toggle="modal" data-bs-target="#changeProfileModal"><img src = "../../uploads/${GVUResultsSorted[i].profile_url}" alt="Profile" height = "100px" width = "100px"/></a></td>
         <td>${GVUResultsSorted[i].firstname} ${GVUResultsSorted[i].middlename} ${GVUResultsSorted[i].lastname}</td>
-        <td>${GVUResultsSorted[i].email}</td>
-        `;
+   <th scope="col">
+        <div class = "pt-2">
+    <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
 
-        if(GVUResultsSorted[i].status == 'active'){
-            output+= `<td><h5><span class="badge rounded-pill bg-success">${GVUResultsSorted[i].status}</span></h5></td>
-            <th scope="col">
-                 <div class = "pt-2">
-             <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
-         
-             <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="ri-inbox-archive-line"></i></a>
-             
-             </div>
-            </th>
-                 </tr>`;
-        }
-
-        if(GVUResultsSorted[i].status == 'inactive'){
-            output+= `<td><h5><span class="badge rounded-pill bg-danger">${GVUResultsSorted[i].status}</span></h5></td>
-            <th scope="col">
-                 <div class = "pt-2">
-             <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
-         
-             <a href="#" class ="btn btn-danger btn-sm" title = "Unarchived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
-             
-             </div>
-            </th>
-                 </tr>`;
-        }
-
-       
+    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="bi bi-trash"></i></a>
+    
+    </div>
+        </th>
+        </tr>`;
     }
    
     let numberOfPages = '';
@@ -565,66 +523,13 @@ const bindAllDataIntoTableSorted = function (){
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
 
-
-
-//Archived prompt ! are you sure you want to archive?
-const moveToUnArchive = async (...params) => {
-    let output = '';
-    output += `Are you sure you want to unarchived  `+params[1]+` ?!`;
-    let showButtons ='';
-    showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "unarchivedUser(`+params[0]+`)">Unarchive</button>`;
-    document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
-    document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
-    }
-    
-    //unarchivedUser when confirmed
-    const unarchivedUser = async (id) =>{
-        let message = '';// message alert
-     //get current date where removing was done
-    const status = 'active';   
-    
-    formData = new FormData()
-    formData.append('UserID', id);
-    formData.append('Status', status);
-    
-    try{
-        const fetchRemove = await fetch("../controller/user-remove.php",{
-              method: "POST",
-              body: formData,
-          });
-      
-          const fetchResponse = await fetchRemove.json();
-          if(fetchResponse.statusCode === 200){     
-                alertShowSuccess.removeAttribute("hidden");
-                alertShowSuccess.classList.add('show');
-                message += ` Unarchived Succesfully!`
-                document.querySelector('#alertSuccessMessage').innerHTML = message;
-                refreshTable(); 
-            delayedRemoveAlert = () =>{   
-                alertShowSuccess.classList.remove('show');  
-                alertShowSuccess.setAttribute("hidden", "hidden");
-            }
-            setTimeout(delayedRemoveAlert, 3000);
-            
-          }// end of if fetch === 200
-    
-          
-        
-      }catch (e){
-          console.log(e)
-      }
-    }
-
-    
-
 //Archived prompt ! are you sure you want to archive?
 const moveToArchive = async (...params) => {
 let output = '';
-output += `Are you sure you want to archive `+params[1]+` ?!`;
+output += `Are you sure you want to remove `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Archive</button>`;
+<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
@@ -633,7 +538,7 @@ document.querySelector('#archive-modal-title').innerHTML = output;//change the t
 const removeUserAccount = async (id) =>{
     let message = '';// message alert
  //get current date where removing was done
- const removedDate = 'inactive';   
+ const removedDate = new Date();   
 
 formData = new FormData()
 formData.append('UserID', id);
@@ -1188,11 +1093,9 @@ const editUserSorted = (a) =>{
          
          if(Sex === "Male"){
              document.getElementById('editmaleCheck').checked = true;
-             document.getElementById('EmployeeCoverPhoto').style.backgroundImage ="url('../img/male-background.png')";
          }
          if(Sex === "Female"){
              document.getElementById('editfemaleCheck').checked = true;
-             document.getElementById('EmployeeCoverPhoto').style.backgroundImage ="url('../img/female-background.png')";
          }
      
          let Contact = document.getElementById('editContact').value =    GVUResultsSorted[i].contact;
@@ -1392,14 +1295,10 @@ const updateUser = async () =>{
     let Sex ="";
 
     if(document.getElementById('editmaleCheck').checked === true){
-        
         Sex = "Male";
-        document.getElementById('EmployeeCoverPhoto').style.backgroundImage ="url('../img/male-background.png')";
-        
     }
     if(document.getElementById('editfemaleCheck').checked === true){
         Sex = "Female";
-        document.getElementById('EmployeeCoverPhoto').style.backgroundImage ="url('../img/female-background.png')";
     }
 
     let Contact = document.getElementById('editContact').value

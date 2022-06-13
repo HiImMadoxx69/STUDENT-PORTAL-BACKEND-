@@ -174,13 +174,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Student Account Nav -->
 
       <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link collapsed " href="admin-curriculum.php">
-          <i class="bi bi-card-list"></i>
-          <span>Curriculum</span>
-        </a>
-      </li><!-- End Curriculum Nav -->
-=======
         <a class="nav-link collapsed" href="subject.php">
           <i class="bi bi-book"></i>
           <span>Subjects</span>
@@ -227,7 +220,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </a>
 </li><!-- End Profile Page Nav -->
    
->>>>>>> a872ad1a176f7a41a0e4d4c1d7d0f0677759e850
      
     </ul>
 
@@ -241,7 +233,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               </div><!--Error End of Alert -->
 
               <!-- Success Alert -->
-              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;"> 
+              <div class="alert alert-success alert-dismissible fade" hidden role="alert" id="alertSuccess" style ="position:fixed; z-index: 9999;width:fit-content; left:40%; top:10%;" id ="alertSuccessMessage"> 
                 <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
@@ -511,22 +503,18 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <div class="row">
         <div class="col-lg-12">
 
-          <div class="card" >
+          <div class="card">
             <div class="card-body" >
             <h5 class="card-title">Employee Accounts Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
       <div class="row mb-3">
-        <div class="col-sm-2">
+        <div class="col-sm-2" >
               <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addusermodal">
               <i class="bi bi-person-plus"></i>  
               User
               </button>
-              </button>
-              <a href ="archived-user.php" class="btn btn-warning" >
-              <i class="bi bi-recycle"></i> 
-              </a>
        </div>
        
 
@@ -562,6 +550,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   <tr class="table-primary">
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('profile_url');return false;" class="th-a">PHOTO</a> </th>
                     <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('firstname');return false;" class="th-a">FULL NAME</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('email');return false;" class="th-a">EMAIL</a></th>
+                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('status');return false;" class="th-a">STATUS</a></th>
                     <th scope="col" class="header-title" style = "position:sticky; right:0%; position: -webkit-sticky; top: 0px; z-index:99;">ACTIONS</th>
                   </tr>
                 </thead>
@@ -575,6 +565,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </div>
   <!-- End for scroll table -->
   <div class ="row g-3">
+  <div class ="col-12"></div>
    <div class="col-6" id ="showNumberOfPage">
          
      </div>
@@ -616,7 +607,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
     <div class="row">
         <div class="col-xl-12">
 
-          <div class="card">
+          <div class="card" id= "EmployeeCoverPhoto">
           <button type="button" class="btn btn-secondary" style="margin:10px;width:10%;" onClick ="backToTable();return false;"><i class ="ri-arrow-go-back-fill"></i> Back</button>
          
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" hidden id ="profileBox">
@@ -687,7 +678,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <label for="editUsername">Username</label>
                   </div>
                 </div>
-                <div class="col-md-4" hidden>
+                <div class="col-md-12" hidden>
                   <div class="form-floating">
                     <input type="password" class="form-control" id="editPassword" placeholder="Password">
                     <label for="editPassword">Password</label>
@@ -697,7 +688,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                
                 
                
-                <div class="col-md-4">
+                <div class="col-md-12">
                 <div class="form-floating mb-3">
                       <select class="form-select" id="editJob" aria-label="Floating label select example">
                         <option selected disabled>...</option>
@@ -708,25 +699,25 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     </div>
                 </div>
 
-                <div class = "col-md-4">
+                <div class = "col-md-12">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="editBirthday" placeholder="Birthday">
                     <label for ="editBirthday">Birthdate</label>
                   </div>
                 </div>
 
-                <div class = "col-md-4">
+                <div class = "col-md-9">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="editContact" placeholder="Contact">
                     <label for="editContact">Contact</label>
                   </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                   <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
-                </div>
+                </div> -->
 
-                <fieldset class="col-md-3" >
+                <fieldset class="col-md-3">
                   <div class="col-sm-10">
                     <div class="form-check form-switch"> 
                       <input class="form-check-input" type="radio" name="gridRadios" id="editmaleCheck" value="Male">
@@ -788,7 +779,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                       Error!
                       </button><!-- End of error button -->
                       
-                      <button type="button" class="btn btn-primary" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
+                      <button type="button" class="btn btn-success" id ="btnEditUsers" onClick ="checkEditFields()">Submit</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 

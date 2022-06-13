@@ -178,14 +178,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       </li><!-- End Student Account Nav -->
 
       <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link collapsed " href="admin-curriculum.php">
-          <i class="bi bi-card-list"></i>
-          <span>Curriculum</span>
-        </a>
-      </li><!-- End Curriculum Nav -->
-
-=======
         <a class="nav-link collapsed" href="subject.php">
           <i class="bi bi-book"></i>
           <span>Subjects</span>
@@ -232,7 +224,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
     <span>Profile</span>
   </a>
 </li><!-- End Profile Page Nav -->
->>>>>>> a872ad1a176f7a41a0e4d4c1d7d0f0677759e850
      
     </ul>
 
@@ -270,9 +261,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
     <section class="section profile">
       <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-12">
 
-          <div class="card">
+          <div class="card" id ="profileCoverPhoto">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             
@@ -306,7 +297,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
         </div>
 
-        <div class="col-xl-8">
+        <div class="col-xl-12">
 
           <div class="card">
             <div class="card-body pt-3">
@@ -495,7 +486,15 @@ echo '<input type = "hidden" id ="currentUserPassword" value = "'.$user['passwor
                     </select>
                   </div>
                 </div>
-
+                    <script>
+                      let Sex = document.getElementById('Sex').value;
+                      if(Sex == "Male"){
+                        document.getElementById('profileCoverPhoto').style.backgroundImage ="url('../img/male-background.png')";
+                      }
+                      if(Sex == "Female"){
+                        document.getElementById('profileCoverPhoto').style.backgroundImage ="url('../img/female-background.png')";
+                      }
+                    </script>
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">

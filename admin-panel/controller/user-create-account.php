@@ -47,12 +47,11 @@ if(isset($Fname)){
 try{
    
 
-
+ 
     
 $check = false;
 
-
-
+// $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
 //Create instance of phpmailer
 $mail = new PHPMailer();
 //Set mailer to use smtp
@@ -70,7 +69,7 @@ $mail->Username = "nocumadoxx@gmail.com";
 //set gmail password
 $mail->Password = "pzectockhpctciww";
 //set email subject
-$mail->Subject = "Test Email Using PHPMailer";
+$mail->Subject = "AISAT BOT";
 //set sender email
 $mail->setFrom("nocumadoxx@gmail.com");
 //Enable HTML
@@ -90,11 +89,10 @@ $mail->smtpClose();
     exit(json_encode(array("statusCode"=>201)));
 }
 
-
 //Host user = iplm.haribon@gmail.com
 //Host password = iplm2022
 if($check = true){
-    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`, `username`, `password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username', '$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
+    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`, `username`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username','$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";

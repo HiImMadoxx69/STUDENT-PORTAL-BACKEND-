@@ -645,7 +645,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">User Accounts Table</h5>
+            <h5 class="card-title">Activity Logs Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      
@@ -695,6 +695,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </div>
   <!-- End for scroll table -->
   <div class ="row g-3">
+  <div class ="col-12"></div>
    <div class="col-6" id ="showNumberOfPage">
          
      </div>

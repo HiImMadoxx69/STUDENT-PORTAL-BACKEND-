@@ -279,18 +279,34 @@ for(let i = GVMFIndexPage; i<GVMFdefaultRow; i++){
  console.log("GVMFIndexPage: "+GVMFIndexPage+"< GVMFDefaultRow:" +GVMFdefaultRow)
     output += `<tr>
     <td>${GVMFResults[i].name}</td>
-    <td>${GVMFResults[i].amount}</td>
-    <td>${GVMFResults[i].added_at}</td>
-    <th scope="col" class="table-info">
-    <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVMFResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
+    <td>${GVMFResults[i].amount}</td>`;
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="bi bi-trash"></i></a>
+    if(GVMFResults[i].status == 'active'){
+        output += `<td><h5><span class="badge rounded-pill bg-success">${GVMFResults[i].status}</span></h5></td>
+        <td>${GVMFResults[i].added_at}</td>
+        <th scope="col" class="table-info">
+        <div class = "pt-2">
+        <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVMFResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
     
-    </div>
-    </th>
-    </tr>`;
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        
+        </div>
+        </th>
+        </tr>`;
+    }
+    if(GVMFResults[i].status == 'inactive'){
+        output += `<td><h5><span class="badge rounded-pill bg-danger">${GVMFResults[i].status}</span></h5></td>
+        <td>${GVMFResults[i].added_at}</td>
+        <th scope="col" class="table-info">
+        <div class = "pt-2">
+        <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVMFResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
     
+        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        
+        </div>
+        </th>
+        </tr>`;
+    }
 }
 
 let numberOfPages = '';
@@ -357,17 +373,37 @@ const bindAllDataIntoTableSorted = function (){
     for(let i = 0; i<GVMFNumRows; i++){
         output += `<tr>
         <td>${GVMFResultsSorted[i].name}</td>
-        <td>${GVMFResultsSorted[i].amount}</td>
-        <td>${GVMFResultsSorted[i].added_at}</td>
-        <th scope="col" class="table-info">
-        <div class = "pt-2">
-    <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVMFResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
+        <td>${GVMFResultsSorted[i].amount}</td>`;
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="bi bi-trash"></i></a>
-    
-    </div>
-        </th>
-        </tr>`;
+        if(GVMFResultsSorted[i].status =='active'){
+            output += `<td>
+            <h5><span class="badge rounded-pill bg-success">${GVMFResultsSorted[i].status}</span></h5></td>
+            <td>${GVMFResultsSorted[i].added_at}</td>
+             <th scope="col" class="table-info">
+             <div class = "pt-2">
+         <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVMFResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
+     
+         <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="ri-inbox-archive-line"></i></a>
+         
+         </div>
+             </th>
+             </tr>`;
+        }
+        if(GVMFResultsSorted[i].status =='inactive'){
+            output += `<td>
+            <h5><span class="badge rounded-pill bg-success">${GVMFResultsSorted[i].status}</span></h5></td>
+            <td>${GVMFResultsSorted[i].added_at}</td>
+             <th scope="col" class="table-info">
+             <div class = "pt-2">
+         <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVMFResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
+     
+         <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+         
+         </div>
+             </th>
+             </tr>`;
+        }
+     
     }
    
     let numberOfPages = '';
@@ -376,22 +412,77 @@ const bindAllDataIntoTableSorted = function (){
     document.querySelector('#showNumberOfPage').innerHTML = numberOfPages;
 }//Sorted Bind Table
 
+//Unarchive
+const moveToUnArchive = async (...params) => {
+    let output = '';
+    output += `Are you sure you want to unarchive `+params[1]+` ?!`;
+    let showButtons ='';
+    showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "UnArchive(`+params[0]+`)">Unarchive</button>`;
+    document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
+    document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
+    }
+    
+    
+    
+    
+    //RemoveUserAccount when confirmed
+    const UnArchive = async (id) =>{
+        let message = '';// message alert
+     //get current date where removing was done
+     const removedDate = 'active';   
+    
+    formData = new FormData()
+    formData.append('UserID', id);
+    formData.append('Status', removedDate);
+    
+    try{
+        const fetchRemove = await fetch("../controller/miscellaneous-fee-remove.php",{
+              method: "POST",
+              body: formData,
+          });
+      
+          const fetchResponse = await fetchRemove.json();
+          if(fetchResponse.statusCode === 200){     
+                alertShowSuccess.removeAttribute("hidden");
+                alertShowSuccess.classList.add('show');
+                message += ` Unarchive Succesfully!`
+                refreshTable(); 
+            delayedRemoveAlert = () =>{   
+                alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.setAttribute("hidden", "hidden");
+            }
+            setTimeout(delayedRemoveAlert, 3000);
+          }// end of if fetch === 200
+    
+        document.querySelector('#alertSuccessMessage').innerHTML = message;
+           
+      }catch (e){
+          console.log(e)
+      }
+    }
+    
+
+
 //Archived prompt ! are you sure you want to archive?
 const moveToArchive = async (...params) => {
 let output = '';
-output += `Are you sure you want to remove `+params[1]+` ?!`;
+output += `Are you sure you want to archive `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
+<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Archive</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
+
+
+
 
 //RemoveUserAccount when confirmed
 const removeUserAccount = async (id) =>{
     let message = '';// message alert
  //get current date where removing was done
- const removedDate = new Date();   
+ const removedDate = 'inactive';   
 
 formData = new FormData()
 formData.append('UserID', id);
@@ -407,7 +498,7 @@ try{
       if(fetchResponse.statusCode === 200){     
             alertShowSuccess.removeAttribute("hidden");
             alertShowSuccess.classList.add('show');
-            message += ` Removed Succesfully!`
+            message += ` Archive Succesfully!`
             refreshTable(); 
         delayedRemoveAlert = () =>{   
             alertShowSuccess.classList.remove('show');  

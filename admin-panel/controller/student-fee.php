@@ -11,7 +11,7 @@ $Editor = $_POST['Editor'];
 if(isset($StudID)){
 
     
-    $sql = "SELECT * FROM tbl_bills WHERE studentid = '$StudID' AND billname = '$Name' AND status ='active'";
+    $sql = "SELECT * FROM tbl_bills WHERE studentid = '$StudID' AND billname = '$Name'";
 
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();

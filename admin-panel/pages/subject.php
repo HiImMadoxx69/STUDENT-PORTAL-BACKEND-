@@ -459,9 +459,6 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
               Subject
               </button>
             
-              <a href ="archived-subjects.php" class="btn btn-warning" >
-              <i class="bi bi-recycle"></i> 
-              </a>
        </div>
        
 
@@ -499,8 +496,8 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('subject_name');return false;" class="th-a">SUBJECT NAME</a></th>
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('units');return false;" class="th-a">UNITS</a></th>
                     <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('amount');return false;" class="th-a">AMOUNT</a></th>
-                    <th scope="col" class ="header-title"><a href= "#" onclick ="sortCurrentTable('added_at');return false;" class="th-a">DATE CREATED</a></th>
-                    <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
+                    <th scope="col" class ="header-title" ><a href= "#" onclick ="sortCurrentTable('status');return false;" class="th-a">STATUS</a></th>
+                      <th scope="col" class="table-info" id ="th-action">ACTIONS</th>
                   </tr>
                 </thead>
                 <tbody id ="tbody-user-accounts">
@@ -513,6 +510,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
   </div>
   <!-- End for scroll table -->
   <div class ="row g-3">
+    <div class ="col-12"></div>
    <div class="col-6" id ="showNumberOfPage">
          
      </div>
