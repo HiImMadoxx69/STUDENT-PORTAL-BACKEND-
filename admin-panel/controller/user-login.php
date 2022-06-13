@@ -7,9 +7,9 @@ include_once("../connections/connection.php");
   
 $con = connection();
 
-
-  if(isset($_POST['username'])){
-  $username =  mysqli_real_escape_string($con, $_POST['username']);
+$username =  mysqli_real_escape_string($con, $_POST['username']);
+  if(isset($username)){
+  
   $password =   mysqli_real_escape_string($con,$_POST['password']);
   
   $sql = "SELECT * FROM tbl_admin WHERE email = '$username' AND password ='$password' AND status = 'active'";
