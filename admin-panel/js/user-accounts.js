@@ -440,7 +440,7 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
         <div class = "pt-2">
         <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="ri-inbox-archive-line"></i></a>
         
         </div>
         </th>
@@ -448,12 +448,12 @@ for(let i = GVUIndexPage; i<GVUdefaultRow; i++){
     }
    //Inactive
     if(GVUResults[i].status == 'inactive'){
-        output +=  `<td><h5><span class="badge rounded-pill bg-danger">${GVUResults[i].status}</span></h5></td>
+        output +=  `<td><h5><span class="badge rounded-pill bg-warning">${GVUResults[i].status}</span></h5></td>
         <th scope="col" >
         <div class = "pt-2">
         <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserNotSorted(${GVUResults[i].id});return false;" ><i class="bi bi-eye"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVUResults[i].id}', '${GVUResults[i].username}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
         
         </div>
         </th>
@@ -536,7 +536,7 @@ const bindAllDataIntoTableSorted = function (){
                  <div class = "pt-2">
              <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
          
-             <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="ri-inbox-archive-line"></i></a>
+             <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="ri-inbox-archive-line"></i></a>
              
              </div>
             </th>
@@ -544,12 +544,12 @@ const bindAllDataIntoTableSorted = function (){
         }
 
         if(GVUResultsSorted[i].status == 'inactive'){
-            output+= `<td><h5><span class="badge rounded-pill bg-danger">${GVUResultsSorted[i].status}</span></h5></td>
+            output+= `<td><h5><span class="badge rounded-pill bg-warning">${GVUResultsSorted[i].status}</span></h5></td>
             <th scope="col">
                  <div class = "pt-2">
              <a href="#" class ="btn btn-primary btn-sm" title = "View"  onclick ="editUserSorted(${GVUResultsSorted[i].id});return false;"><i class="bi bi-eye"></i></a>
          
-             <a href="#" class ="btn btn-danger btn-sm" title = "Unarchived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+             <a href="#" class ="btn btn-warning btn-sm" title = "Unarchived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVUResultsSorted[i].id}', '${GVUResultsSorted[i].username}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
              
              </div>
             </th>
@@ -573,7 +573,7 @@ const moveToUnArchive = async (...params) => {
     output += `Are you sure you want to unarchived  `+params[1]+` ?!`;
     let showButtons ='';
     showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "unarchivedUser(`+params[0]+`)">Unarchive</button>`;
+    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"onclick= "unarchivedUser(`+params[0]+`)">Unarchive</button>`;
     document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
     document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
     }
@@ -624,7 +624,7 @@ let output = '';
 output += `Are you sure you want to archive `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Archive</button>`;
+<button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Archive</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
@@ -859,17 +859,6 @@ const checkAllFields = () =>{
          alertError.setAttribute("hidden", "hidden");
      }
      setTimeout(delayedRemoveAlert, 1000);
-    }else if(Contact.length !== 11 || isNaN(Contact)){
-        let message ='';
-        message += ` Please input a valid contact!`
-        document.querySelector('#alertErrorMessage').innerHTML = message;
-            alertError.removeAttribute("hidden");
-            alertError.classList.add('show');
-        delayedRemoveAlert = () =>{   
-            alertError.classList.remove('show');  
-            alertError.setAttribute("hidden", "hidden");
-        }
-        setTimeout(delayedRemoveAlert, 1000);
     }
     else{
         createUserAccount();

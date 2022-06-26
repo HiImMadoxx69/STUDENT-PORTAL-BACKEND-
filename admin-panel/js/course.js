@@ -289,7 +289,7 @@ for(let i = GVACIndexPage; i<GVACdefaultRow; i++){
         <div class = "pt-2">
     <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVACResults[i].id});return false;"><i class="bx bx-edit"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVACResults[i].id}', '${GVACResults[i].course_name}');return false;"><i class="ri-inbox-archive-line"></i></a>
+    <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVACResults[i].id}', '${GVACResults[i].course_name}');return false;"><i class="ri-inbox-archive-line"></i></a>
     
     </div>
         </th>
@@ -298,12 +298,12 @@ for(let i = GVACIndexPage; i<GVACdefaultRow; i++){
  
     if(GVACResults[i].status == 'inactive'){
         output += `
-        <td><h5><span class="badge rounded-pill bg-danger">${GVACResults[i].status}</span></h5></td>
+        <td><h5><span class="badge rounded-pill bg-warning">${GVACResults[i].status}</span></h5></td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
     <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVACResults[i].id});return false;"><i class="bx bx-edit"></i></a>
 
-    <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVACResults[i].id}', '${GVACResults[i].course_name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+    <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVACResults[i].id}', '${GVACResults[i].course_name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
     
     </div>
         </th>
@@ -386,7 +386,7 @@ const bindAllDataIntoTableSorted = function (){
             <div class = "pt-2">
         <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVACResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVACResultsSorted[i].id}', '${GVACResultsSorted[i].course_name}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVACResultsSorted[i].id}', '${GVACResultsSorted[i].course_name}');return false;"><i class="ri-inbox-archive-line"></i></a>
         
         </div>
             </th>
@@ -395,12 +395,12 @@ const bindAllDataIntoTableSorted = function (){
      
         if(GVACResultsSorted[i].status == 'inactive'){
             output += `
-            <td><h5><span class="badge rounded-pill bg-danger">${GVACResultsSorted[i].status}</span></h5></td>
+            <td><h5><span class="badge rounded-pill bg-warning">${GVACResultsSorted[i].status}</span></h5></td>
             <th scope="col" class="table-info">
             <div class = "pt-2">
         <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVACResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVACResultsSorted[i].id}', '${GVACResultsSorted[i].course_name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVACResultsSorted[i].id}', '${GVACResultsSorted[i].course_name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
         
         </div>
             </th>
@@ -422,7 +422,7 @@ const moveToUnArchive = async (...params) => {
     output += `Are you sure you want to unarchive `+params[1]+` ?!`;
     let showButtons ='';
     showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "UnarchiveCourse(`+params[0]+`)">Remove</button>`;
+    <button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "UnarchiveCourse(`+params[0]+`)">Remove</button>`;
     document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
     document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
     }
@@ -470,7 +470,7 @@ let output = '';
 output += `Are you sure you want to archive `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
+<button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }

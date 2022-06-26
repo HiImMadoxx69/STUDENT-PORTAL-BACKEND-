@@ -194,13 +194,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-
+<!-- 
       <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
         </a>
-      </li><!-- End Archives Nav -->
+      </li>End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="announcement.php">
@@ -213,7 +213,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Activity Log</span>
+          <span>Audit Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -716,9 +716,9 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-grades" >Grades and Schedules</button>
                 </li>
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-bills">Bills</button>
-                </li>
+                </li> -->
 
               </ul>
               <div class="tab-content pt-2">

@@ -210,7 +210,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Activity Log</span>
+          <span>Audit Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li> 

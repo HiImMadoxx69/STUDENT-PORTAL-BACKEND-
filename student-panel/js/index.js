@@ -5,9 +5,9 @@ window.onload = function() {
     getAllBills();
     getAllNotifications();
 }
-window.setInterval('getAllResults()', 2000);
-window.setInterval('getAllBills()', 2000);
-window.setInterval('getAllNotifications()', 2000);
+setInterval('getAllResults()', 50000);
+setInterval('getAllBills()', 50000);
+setInterval('getAllNotifications()', 50000);
 
 //get all notitifications
 var StudentInfo = {};
@@ -313,7 +313,9 @@ const changePassword = async () =>{
   let confirmPassword = document.getElementById('confirmPassword').value;
 
   if(currentPass !== currentPassword){
-    alert("Wrong Pass");
+    console.log(currentPass)
+    console.log(currentPassword)
+    
   }else if(newPassword !== confirmPassword){
     alert("New Password and Confirm Password Doesnt match!");
   }else if(newPassword === currentPass){

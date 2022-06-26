@@ -47,7 +47,7 @@ if(isset($_SESSION['ID'])){
    
 </head>
 
-<body>
+<body style ="background-image: url('../img/aisat-bg-login.jpg');">
 
   <main>
      

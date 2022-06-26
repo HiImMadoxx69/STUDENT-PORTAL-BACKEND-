@@ -811,7 +811,7 @@ const moveToArchiveFee = (...params) =>{
 output += `Are you sure you want to remove `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "ArchiveFee(`+params[0]+`,'`+params[1]+`','`+params[2]+`')">Archive</button>`;
+<button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "ArchiveFee(`+params[0]+`,'`+params[1]+`','`+params[2]+`')">Archive</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
@@ -856,7 +856,7 @@ const moveToUnArchiveFee = (...params) =>{
 output += `Are you sure you want to unarchive `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "UnArchiveFee(`+params[0]+`,'`+params[1]+`','`+params[2]+`')">Remove</button>`;
+<button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "UnArchiveFee(`+params[0]+`,'`+params[1]+`','`+params[2]+`')">Remove</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
@@ -928,19 +928,19 @@ const GetAllFeePerStudent = async () =>{
                 <th scope="col" class="table-info">
                 <div class = "pt-4">
                 <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].name+`'); return false;"><i class="bi bi-check-circle"></i></a>
-                <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="ri-inbox-archive-line"></i></a>
+                <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="ri-inbox-archive-line"></i></a>
                 </div>
                 </th>
                 </tr>`;   
             }
           
             if(tableResponse[i].status == 'inactive'){
-                myTable += `<td><h5><span class="badge rounded-pill bg-danger">`+tableResponse[i].status+`</span></h5></td>
+                myTable += `<td><h5><span class="badge rounded-pill bg-warning">`+tableResponse[i].status+`</span></h5></td>
                 <td>`+tableResponse[i].added_at+`</td>
                 <th scope="col" class="table-info">
                 <div class = "pt-4">
                 <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].name+`'); return false;"><i class="bi bi-check-circle"></i></a>
-                <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToUnArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+                <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToUnArchiveFee('`+tableResponse[i].id+`','`+tableResponse[i].billname+`','`+tableResponse[i].studentid+`');return false;"><i class="ri-inbox-unarchive-line"></i></a>
                 </div>
                 </th>
                 </tr>`;   
@@ -1069,7 +1069,7 @@ const moveToUnArchiveResult = async (...params) => {
     output += `Are you sure you want to unarchived  `+params[1]+` ?!`;
     let showButtons ='';
     showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "unarchivedResult(`+params[0]+`)">Unarchive</button>`;
+    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"onclick= "unarchivedResult(`+params[0]+`)">Unarchive</button>`;
     document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
     document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
     }
@@ -1147,19 +1147,19 @@ const GetAllSubjectPerStudent = async() =>{
             <div class = "pt-4">
             <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].subject_code+`'); return false;"><i class="bi bi-check-circle"></i></a>
             <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bx bx-edit"></i></a>
-            <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToArchiveSubject(`+tableResponse[i].id+`,'`+tableResponse[i].subject_name+`');return false;"><i class="ri-inbox-archive-line"></i></a>
+            <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToArchiveSubject(`+tableResponse[i].id+`,'`+tableResponse[i].subject_name+`');return false;"><i class="ri-inbox-archive-line"></i></a>
             </div>
             </th>
             </tr>`;    
          }
      if(tableResponse[i].status == 'inactive'){
-        myTable +=`<td><h5><span class="badge rounded-pill bg-danger">`+tableResponse[i].status+`</span></h5></td>
+        myTable +=`<td><h5><span class="badge rounded-pill bg-warning">`+tableResponse[i].status+`</span></h5></td>
         <td>`+tableResponse[i].added_at+`</td>
         <th scope="col" class="table-info">
         <div class = "pt-4">
         <a href="#" hidden class ="btn btn-primary btn-sm" id ="tdUpdate`+i+`" title = "View" onclick ="updateBtn('`+i+`','`+tableResponse[i].studentid+`','`+tableResponse[i].subject_code+`'); return false;"><i class="bi bi-check-circle"></i></a>
         <a href="#" class ="btn btn-primary btn-sm" id ="tdEdit`+i+`" title = "View" onclick ="transform(`+i+`);return false;"><i class="bx bx-edit"></i></a>
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToUnArchiveResult('`+tableResponse[i].id+`','`+tableResponse[i].subject_name+`');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal"  onclick ="moveToUnArchiveResult('`+tableResponse[i].id+`','`+tableResponse[i].subject_name+`');return false;"><i class="ri-inbox-unarchive-line"></i></a>
         </div>
         </th>
         </tr>`;    
@@ -1232,7 +1232,7 @@ const moveToArchiveSubject = async (...params) =>{
     output += `Are you sure you want to archived  `+params[1]+` ?!`;
     let showButtons ='';
     showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "archivedResult(`+params[0]+`)">Unarchive</button>`;
+    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"onclick= "archivedResult(`+params[0]+`)">Unarchive</button>`;
     document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
     document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
@@ -1299,7 +1299,7 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
         <div class = "pt-2">
         <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserNotSorted(${GVSResults[i].id});viewGrades('${GVSResults[i].studentnumber}');viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-eye"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="ri-inbox-archive-line"></i></a>
         
         </div>
         </th>
@@ -1308,12 +1308,12 @@ for(let i = GVSIndexPage; i<GVSdefaultRow; i++){
    
     if(GVSResults[i].status =='inactive'){
         output += `
-        <td><h5><span class="badge rounded-pill bg-danger">${GVSResults[i].status}</span></h5></td>
+        <td><h5><span class="badge rounded-pill bg-warning">${GVSResults[i].status}</span></h5></td>
         <th scope="col" >
         <div class = "pt-2">
         <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserNotSorted(${GVSResults[i].id});viewGrades('${GVSResults[i].studentnumber}');viewFees('${GVSResults[i].studentnumber}');return false;" ><i class="bi bi-eye"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResults[i].id}', '${GVSResults[i].studentnumber}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
         
         </div>
         </th>
@@ -1351,7 +1351,7 @@ const bindAllDataIntoTableSorted = function (){
         <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserSorted(${GVSResultsSorted[i].id});viewGradesSorted('${GVSResultsSorted[i].studentnumber}'); viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-eye"></i></a>
     
         
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="ri-inbox-archive-line"></i></a>
         
         </div>
             </th>
@@ -1361,13 +1361,13 @@ const bindAllDataIntoTableSorted = function (){
 
     if(GVSResultsSorted[i].status == 'inactive'){
         output += `
-        <td><h5><span class="badge rounded-pill bg-danger">${GVSResultsSorted[i].status}</h5></span></td>
+        <td><h5><span class="badge rounded-pill bg-warning">${GVSResultsSorted[i].status}</h5></span></td>
             <th scope="col" >
             <div class = "pt-2">
         <a href="#" class ="btn btn-primary btn-sm" title = "View" onclick ="editUserSorted(${GVSResultsSorted[i].id});viewGradesSorted('${GVSResultsSorted[i].studentnumber}'); viewFeesSorted('${GVSResultsSorted[i].studentnumber}');return false;"><i class="bi bi-eye"></i></a>
     
         
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVSResultsSorted[i].id}', '${GVSResultsSorted[i].studentnumber}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
         
         </div>
             </th>
@@ -1388,7 +1388,7 @@ const moveToUnArchive = async (...params) => {
     output += `Are you sure you want to unarchived  `+params[1]+` ?!`;
     let showButtons ='';
     showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"onclick= "unarchivedUser(`+params[0]+`)">Unarchive</button>`;
+    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"onclick= "unarchivedUser(`+params[0]+`)">Unarchive</button>`;
     document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
     document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
     }
@@ -1438,7 +1438,7 @@ let output = '';
 output += `Are you sure you want to remove `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
+<button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Remove</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }
@@ -2136,6 +2136,7 @@ const editUserSorted = (a) =>{
  //Back to student table
 
  const backToTable = () =>{
+    infoOpen = false;
     let StudentTable = document.getElementById('StudentTable');
     StudentTable.removeAttribute("hidden");
     let ViewStudentInfo = document.getElementById('ViewStudentInfo');
@@ -2514,7 +2515,9 @@ const BindAllSection = async () =>{
     output = '<option selected value="..." disabled >...</option>';
     
     for(let i = 0; i<getResponse.length;i++){
-        output += `<option value="`+getResponse[i].name+`">`+getResponse[i].name+`</option>`;
+        if(getResponse[i].status == 'active'){
+            output += `<option value="`+getResponse[i].name+`">`+getResponse[i].name+`</option>`;
+        } 
     }
     document.querySelector('#editSection').innerHTML = output;
     document.querySelector('#newSection').innerHTML = output;
@@ -2532,7 +2535,10 @@ const BindAllCourse = async () =>{
     output = '<option selected value="..." disabled >...</option>';
     
     for(let i = 0; i<getResponse.length;i++){
-        output += `<option value="`+getResponse[i].course_name+`">`+getResponse[i].course_name+`</option>`;
+        if(getResponse[i].status == 'active'){
+            output += `<option value="`+getResponse[i].course_name+`">`+getResponse[i].course_name+`</option>`;
+        }
+        
     }
     document.querySelector('#editCourse').innerHTML = output;
     document.querySelector('#newCourse').innerHTML = output;

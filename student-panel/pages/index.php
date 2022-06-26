@@ -71,7 +71,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="../img/globe-client-logo.png" alt="">
         <span class="d-none d-lg-block">My Student Portal</span>
       </a>
@@ -262,19 +262,19 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Student Information</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">STUDENT INFORMATION</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Grades</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">GRADES</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Schedules</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">SCHEDULE</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Bills</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">BILLS</button>
                 </li>
 
               </ul>
@@ -287,34 +287,55 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                   <h5 class="card-title">Profile Details</h5>
                   <input type ="hidden" id="studentNumber" value ="<?php echo $_SESSION['StudentID']?>">
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                    <div class="col-lg-3 col-md-4 label ">FULL NAME</div>
                     <?php echo '<div class="col-lg-9 col-md-8">'.$user['firstname'].' '.$user['lastname'].'</div>' 
               ?>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label" >Student Number</div>
+                    <div class="col-lg-3 col-md-4 label" >STUDENT NUMBER</div>
                     <?php echo '<div class="col-lg-9 col-md-8">'.$user['studentnumber'].'</div>' 
+               ?>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">EMAIL</div>
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['email'].'</div>' 
                ?>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Course</div>
+                    <div class="col-lg-3 col-md-4 label">COURSE</div>
                     <?php echo '<div class="col-lg-9 col-md-8">'.$user['course'].'</div>' 
                ?>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Section</div>
+                    <div class="col-lg-3 col-md-4 label">SECTION</div>
                     <?php echo '<div class="col-lg-9 col-md-8">'.$user['section'].'</div>' 
+               ?>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">CONTACT</div>
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['contact'].'</div>' 
+               ?>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">BIRTH DATE</div>
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['birthday'].'</div>' 
                ?>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Birth Day</div>
-                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['birthday'].'</div>' 
+                    <div class="col-lg-3 col-md-4 label">GUARDIAN NAME</div>
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['guardian'].'</div>' 
                ?>
                   </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">GUARDIAN CONTACT</div>
+                    <?php echo '<div class="col-lg-9 col-md-8">'.$user['guardian_contact'].'</div>' 
+               ?>
+                  </div>
+
 
                
                 </div>
@@ -390,7 +411,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                
                        
                        </tbody>
-                       <thead>
+                       <!-- <thead>
                        <th style="background-color:#4CA4F3"></th>
                          <th style="background-color:#4CA4F3"><center>MISCELLANEOUS FEE</center></th>
                          <th style="background-color:#4CA4F3"></th>
@@ -404,7 +425,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                        <tbody id="misc-fee-table-body">
                
                        
-                       </tbody>
+                       </tbody> -->
                      </table>
 
                   
@@ -432,12 +453,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
   <!-- END OF MY JAVASCRIPT -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>Footer</span></strong>. All Rights Reserved
-    </div>
-   
-  </footer><!-- End Footer -->
+ 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

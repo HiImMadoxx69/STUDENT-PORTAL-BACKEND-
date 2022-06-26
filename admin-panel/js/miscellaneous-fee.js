@@ -288,20 +288,20 @@ for(let i = GVMFIndexPage; i<GVMFdefaultRow; i++){
         <div class = "pt-2">
         <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVMFResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="ri-inbox-archive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="ri-inbox-archive-line"></i></a>
         
         </div>
         </th>
         </tr>`;
     }
     if(GVMFResults[i].status == 'inactive'){
-        output += `<td><h5><span class="badge rounded-pill bg-danger">${GVMFResults[i].status}</span></h5></td>
+        output += `<td><h5><span class="badge rounded-pill bg-warning">${GVMFResults[i].status}</span></h5></td>
         <td>${GVMFResults[i].added_at}</td>
         <th scope="col" class="table-info">
         <div class = "pt-2">
         <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserNotSorted(${GVMFResults[i].id});return false;" ><i class="bx bx-edit"></i></a>
     
-        <a href="#" class ="btn btn-danger btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+        <a href="#" class ="btn btn-warning btn-sm" title = "Archived" data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVMFResults[i].id}', '${GVMFResults[i].name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
         
         </div>
         </th>
@@ -383,7 +383,7 @@ const bindAllDataIntoTableSorted = function (){
              <div class = "pt-2">
          <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVMFResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
      
-         <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="ri-inbox-archive-line"></i></a>
+         <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="ri-inbox-archive-line"></i></a>
          
          </div>
              </th>
@@ -391,13 +391,13 @@ const bindAllDataIntoTableSorted = function (){
         }
         if(GVMFResultsSorted[i].status =='inactive'){
             output += `<td>
-            <h5><span class="badge rounded-pill bg-success">${GVMFResultsSorted[i].status}</span></h5></td>
+            <h5><span class="badge rounded-pill bg-warning">${GVMFResultsSorted[i].status}</span></h5></td>
             <td>${GVMFResultsSorted[i].added_at}</td>
              <th scope="col" class="table-info">
              <div class = "pt-2">
          <a href="#" class ="btn btn-info btn-sm" title = "View" data-bs-toggle="modal" data-bs-target="#editusermodal" onclick ="editUserSorted(${GVMFResultsSorted[i].id});return false;"><i class="bx bx-edit"></i></a>
      
-         <a href="#" class ="btn btn-danger btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
+         <a href="#" class ="btn btn-warning btn-sm" title = "Archived"  data-bs-toggle="modal" data-bs-target="#archivedModal" onclick ="moveToUnArchive('${GVMFResultsSorted[i].id}', '${GVMFResultsSorted[i].name}');return false;"><i class="ri-inbox-unarchive-line"></i></a>
          
          </div>
              </th>
@@ -418,7 +418,7 @@ const moveToUnArchive = async (...params) => {
     output += `Are you sure you want to unarchive `+params[1]+` ?!`;
     let showButtons ='';
     showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "UnArchive(`+params[0]+`)">Unarchive</button>`;
+    <button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "UnArchive(`+params[0]+`)">Unarchive</button>`;
     document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
     document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
     }
@@ -449,7 +449,7 @@ const moveToUnArchive = async (...params) => {
                 message += ` Unarchive Succesfully!`
                 refreshTable(); 
             delayedRemoveAlert = () =>{   
-                alertShowSuccess.classList.remove('show');  
+                alertShowSuccess.classList.remove('show');  s
                 alertShowSuccess.setAttribute("hidden", "hidden");
             }
             setTimeout(delayedRemoveAlert, 3000);
@@ -470,7 +470,7 @@ let output = '';
 output += `Are you sure you want to archive `+params[1]+` ?!`;
 let showButtons ='';
 showButtons += ` <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Archive</button>`;
+<button type="button" class="btn btn-warning"data-bs-dismiss="modal" onclick= "removeUserAccount(`+params[0]+`)">Archive</button>`;
 document.querySelector('#modal-footer-button').innerHTML = showButtons;//show the buttons modal archive
 document.querySelector('#archive-modal-title').innerHTML = output;//change the title of modal archive
 }

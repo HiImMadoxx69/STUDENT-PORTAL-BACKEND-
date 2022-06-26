@@ -7,7 +7,7 @@ body {
   font-family: "Open Sans", sans-serif;
 
   color: #444444;
-background: #1859a4;
+background: #1b2257;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
@@ -1086,16 +1086,5 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #d4d5da;
 }
-#StudentCoverPhoto{
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
 
-#EmployeeCoverPhoto{
-  background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-#profileCoverPhoto{
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
+

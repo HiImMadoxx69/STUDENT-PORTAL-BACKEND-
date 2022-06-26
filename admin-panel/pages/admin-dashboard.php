@@ -190,13 +190,13 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
           <span>Section</span>
         </a>
       </li><!-- End Archives Nav -->
-
+<!-- 
       <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
         </a>
-      </li><!-- End Archives Nav -->
+      </li>End Archives Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed " href="announcement.php">
@@ -210,7 +210,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-item">
         <a class="nav-link collapsed " href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Activity Log</span>
+          <span>Audit Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -353,7 +353,7 @@ echo '<!-- Sales Card -->
 
               </div>
             </div><!-- End Revenue Card -->
-           
+<!--            
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card customers-card">
 
@@ -372,9 +372,9 @@ echo '<!-- Sales Card -->
                 </div>
 
               </div>
-            </div>
+            </div> -->
 
-            <div class="col-xxl-4 col-md-6">
+            <!-- <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
 
 
@@ -392,7 +392,7 @@ echo '<!-- Sales Card -->
                 </div>
 
               </div>
-            </div>
+            </div> -->
 
            
         

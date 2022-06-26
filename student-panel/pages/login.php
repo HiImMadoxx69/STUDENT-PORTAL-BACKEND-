@@ -48,7 +48,7 @@ if(isset($_SESSION['StudentID'])){
   <link href = "../css/custom.css" rel = "stylesheet">
 </head>
 
-<body>
+<body style ="background-image: url('../img/aisat-bg-login.jpg');"> 
 
   <main>
     <div class="container">
@@ -89,7 +89,7 @@ if(isset($_SESSION['StudentID'])){
                   <form class="row g-3 needs-validation" novalidate id ="loginForm">
 
                     <div class="col-12">
-                      <label for="yourStudentid" class="form-label">Student Id</label>
+                      <label for="yourStudentid" class="form-label">Student ID</label>
                       <div class="input-group has-validation">
                         <input type="text" name="studentid" class="form-control" id="yourStudentid" required>
                         <div class="invalid-feedback">Please enter your Student Id</div>

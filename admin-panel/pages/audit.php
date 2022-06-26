@@ -195,12 +195,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
         </a>
       </li><!-- End Archives Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed " href="miscellaneous-fee.php">
           <i class="bi bi-currency-dollar"></i>
           <span>Miscellaneous Fee</span>
         </a>
-      </li><!-- End Archives Nav -->
+      </li>End Archives Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed " href="announcement.php">
           <i class="bi bi-megaphone-fill"></i>
@@ -213,7 +213,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
       <li class="nav-item">
         <a class="nav-link" href="audit.php">
           <i class="bi bi-file-earmark-medical"></i>
-          <span>Activity Log</span>
+          <span>Audit Log</span>
         </a>
       </li><!-- End Archives Nav -->
       <li class="nav-heading">Settings</li>
@@ -241,12 +241,12 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
                 <i class="bi bi-exclamation-octagon me-1" id ="alertSuccessMessage"></i>
               </div><!-- End of Alert -->
     <div class="pagetitle">
-      <h1>Activity Log</h1>
+      <h1>Audit Log</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin-dashboard.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">Activity Log</li>
+          <li class="breadcrumb-item active">Audit Log</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -645,7 +645,7 @@ echo '<img src="../../uploads/'.$user['profile_url'].'" alt="Profile" class="rou
 
           <div class="card" >
             <div class="card-body" >
-            <h5 class="card-title">Activity Logs Table</h5>
+            <h5 class="card-title">Audit Log Table</h5>
       <!-- scroll table --> 
       <!-- Select Entry Page -->  
      

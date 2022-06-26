@@ -43,7 +43,7 @@ function delayedFunc(){
             location.reload();
       }else{          
           alertPrompt.style.display = 'inline-block';
-          alertMSG.innerHTML = 'Wrong credentials';
+          alertMSG.innerHTML = 'Wrong Student ID or Password';
           btnChangeToLoadingS.setAttribute("hidden", "hidden");
           btnLogIn.style.display = 'inline-block';
           console.log("Wrong credentials!");

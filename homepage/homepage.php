@@ -39,7 +39,7 @@
 
       <!-- <h1 class="logo"><a href="index.html">OnePage</a></h1> -->
       <!-- Uncomment below if you prefer to use an image logo -->
-  <a href="index.html" class="logo"><img src="assets/img/client-logo.png" alt="" class="img-fluid"></a>
+  <a href="homepage.php" class="logo"><img src="assets/img/client-logo.png" alt="" class="img-fluid"></a>
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -73,7 +73,7 @@
 
         <div class="section-title">
           <h2>About Us</h2>
-          <p>Blahblah </p>
+          <p>Asian of College of Science and Technology first come to existence as the Asian Institute of Electronics (AIE) </p>
         </div>
 
         <div class="row content">
@@ -87,7 +87,7 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <h1>Vision</h1>
-            <p>Blah blah blah</p>
+            <p>To be the leading Educational Institution of choice dedicated to the success of its graduates.</p>
           </div>
         </div>
 
@@ -185,7 +185,7 @@
                 <i class="bx bxl-dribbble"></i>
               </div>
               <h4><a href="../student-panel/pages/login.php">Student Portal</a></h4>
-              <p>Click this little shit to redirect to our student portal</p>
+              <p>Click this to enter student portal</p>
             </div>
           </div>
 
@@ -198,7 +198,7 @@
                 <i class="bx bx-file"></i>
               </div>
               <h4><a href="../admin-panel/pages/admin-login.php">Employee Portal</a></h4>
-              <p>Click this little shit to open employee portal</p>
+              <p>Click this to enter employee portal</p>
             </div>
           </div>
 

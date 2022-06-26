@@ -5,7 +5,7 @@ function connection(){
     //localhost
     $host = "localhost";
     $username = "root";
-    $password = "admin";
+    $password = "";
     $database = "db_admin";
 
     //upserver
