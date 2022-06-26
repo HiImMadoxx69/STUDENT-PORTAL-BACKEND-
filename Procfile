@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 student-portal/
+web: vendor/bin/heroku-php-apache2 /student-portal
