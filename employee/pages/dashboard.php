@@ -42,7 +42,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
 
 <body>
 <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
