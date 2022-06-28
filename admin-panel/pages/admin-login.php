@@ -76,7 +76,7 @@ if(isset($_SESSION['ID'])){
              
                  
                   <div class="pt-4 pb-2">
-                  <a href ="../../homepage/homepage.php"><i class ="bi bi-house-door"></i></a>
+                  <a href ="../../../homepage.php"><i class ="bi bi-house-door"></i></a>
                   <div class="d-flex justify-content-center py-4">
                     
                 <a href="admin-login.php" class="logo d-flex align-items-center w-auto">
