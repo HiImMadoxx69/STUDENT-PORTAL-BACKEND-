@@ -46,14 +46,15 @@ if(isset($_SESSION['StudentID'])){
 
   <!-- My Custom Css -->
   <link href = "../css/custom.css" rel = "stylesheet">
-</head>
-<style>
+  <style>
   body {
     background-image:url('../img/aisat-bg-login.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 </style>
+</head>
+
 <body> 
 
   <main>
