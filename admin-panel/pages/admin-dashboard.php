@@ -445,6 +445,7 @@ echo '<!-- Sales Card -->
 <!-- end of my javascript for user - profile -->
 
 
+
   <!-- Vendor JS Files -->
   <script src="../vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
