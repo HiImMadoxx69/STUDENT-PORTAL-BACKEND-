@@ -47,8 +47,14 @@ if(isset($_SESSION['StudentID'])){
   <!-- My Custom Css -->
   <link href = "../css/custom.css" rel = "stylesheet">
 </head>
-
-<body style ="background-image: url('../img/aisat-bg-login.jpg');"> 
+<style>
+  body {
+    background-image:url('../img/aisat-bg-login.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+</style>
+<body> 
 
   <main>
     <div class="container">

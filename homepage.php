@@ -184,7 +184,7 @@
                 </svg>
                 <i class="bx bxl-dribbble"></i>
               </div>
-              <h4><a href="../student-panel/pages/login.php">Student Portal</a></h4>
+              <h4><a href="student-panel/pages/login.php">Student Portal</a></h4>
               <p>Click this to enter student portal</p>
             </div>
           </div>
@@ -197,7 +197,7 @@
                 </svg>
                 <i class="bx bx-file"></i>
               </div>
-              <h4><a href="../admin-panel/pages/admin-login.php">Employee Portal</a></h4>
+              <h4><a href="admin-panel/pages/admin-login.php">Employee Portal</a></h4>
               <p>Click this to enter employee portal</p>
             </div>
           </div>
