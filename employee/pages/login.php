@@ -28,7 +28,7 @@ if(isset($_SESSION['Email'])){
     <div class="col-lg-5 col-12">
         <div id="auth-left">
             <div class="auth-logo">
-                <a href="login.php"><img src="../assets/images/logo/client-logo.png" alt="Logo"></a>
+                <a href="../../homepage.php"><img src="../assets/images/logo/client-logo.png" alt="Logo"></a>
             </div>
             <h1 class="auth-title">Employee Portal</h1>
             <p class="auth-subtitle mb-5">Log in with your data that has been sent to your Email</p>
