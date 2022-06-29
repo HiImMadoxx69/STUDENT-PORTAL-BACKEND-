@@ -1,21 +1,17 @@
 <?php
 
 function connection(){
-
-    //localhost
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "db_admin";
-
-    //upserver
-    // $host = "sql113.epizy.com";
-    // $username = "epiz_31877053";
-    // $password = "3DVYKyzccj5u";
-    // $database = "epiz_31877053_db_studentportal";
-    
-    $con = new mysqli($host, $username, $password, $database,);
-    
+    //Get Heroku ClearDB connection information
+    $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $cleardb_server = $cleardb_url["host"];
+    $cleardb_username = $cleardb_url["user"];
+    $cleardb_password = $cleardb_url["pass"];
+    $cleardb_db = substr($cleardb_url["path"],1);
+    $active_group = 'default';
+    $query_builder = TRUE;
+    // Connect to DB
+    $con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+ 
     if($con->connect_error){
         echo $con->connect_error;
     }else{
