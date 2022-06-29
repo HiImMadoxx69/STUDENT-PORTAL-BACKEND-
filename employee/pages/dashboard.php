@@ -210,7 +210,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Profile Visit</h4>
@@ -284,11 +284,11 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-12 col-xl-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Latest Comments</h4>
+                            <h4>Latest Activity</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -296,7 +296,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Comment</th>
+                                            <th>Activity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -310,7 +310,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                                                 </div>
                                             </td>
                                             <td class="col-auto">
-                                                <p class=" mb-0">Congratulations on your graduation!</p>
+                                                <p class=" mb-0">Created a new student</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -323,8 +323,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                                                 </div>
                                             </td>
                                             <td class="col-auto">
-                                                <p class=" mb-0">Wow amazing design! Can you make another tutorial for
-                                                    this design?</p>
+                                                <p class=" mb-0">Remove a student with student id: 123456</p>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -339,8 +338,9 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
             <div class="card">
                 <div class="card-body py-4 px-5">
                     <div class="d-flex align-items-center">
-                        <div class="avatar avatar-xl">
+                        <div class="avatar bg-warning avatar-xl">
                             <img src="../../uploads/<?php echo $user['profile_url']?>" alt="Face 1">
+                            <span class="avatar-status bg-success"></span>
                         </div>
                         <div class="ms-3 name">
                             <h5 class="font-bold"><?php echo $user['firstname'].' '.$user['lastname'];?></h5>
@@ -351,7 +351,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4>Recent Messages</h4>
+                    <h4>Active Employee</h4>
                 </div>
                 <div class="card-content pb-4">
                     <div class="recent-message d-flex px-4 py-3">
@@ -386,14 +386,14 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-header">
                     <h4>Visitors Profile</h4>
                 </div>
                 <div class="card-body">
                     <div id="chart-visitors-profile"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </div>
@@ -401,11 +401,7 @@ $user = $user->fetch_assoc();// for getting the admin credentials it is like a a
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="https://saugi.me">Saugi</a></p>
+                        <p>2022 &copy; Footer</p>
                     </div>
                 </div>
             </footer>
