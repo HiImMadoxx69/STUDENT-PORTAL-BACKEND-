@@ -1,4 +1,6 @@
 <?php
+
+
 // includes/PHPMailer.php
 //Inclue required phpmailerfiles
 require_once '../PHPMailer/includes/PHPMailer.php';
@@ -12,6 +14,8 @@ use PHPMailer\PHPMailer\Exception;
 
 include_once("../connections/connection.php");
 $con = connection();
+try{
+    
 
 $StudNum = $_POST['StudentNumber'];
 $Fname = $_POST['Fname'];
@@ -93,5 +97,7 @@ $mail->smtpClose();
 // if(isset($getFiles)){
 //     exit(json_encode(array("statusCode"=>201)));
 // }
-
+}catch (Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
+}
 ?>
