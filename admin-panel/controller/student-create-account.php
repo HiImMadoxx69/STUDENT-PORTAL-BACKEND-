@@ -64,15 +64,15 @@ $mail->SMTPAuth = "true";
 //set type of encryption (ssl/tls)
 $mail->SMTPSecure = "tls";
 //set port to connect smtp
-$mail->Port = "587";
+$mail->Port = '587';
 //set gmail username
-$mail->Username = "nocumadoxx@gmail.com";
+$mail->Username = 'nocumadoxx@gmail.com';
 //set gmail password
-$mail->Password = "tjmgrybklskwxtia";
+$mail->Password = 'tjmgrybklskwxtia';
 //set email subject
-$mail->Subject = "Test Email Using PHPMailer";
+$mail->Subject = 'Test Email Using PHPMailer';
 //set sender email
-$mail->setFrom("nocumadoxx@gmail.com");
+$mail->setFrom('nocumadoxx@gmail.com');
 //Enable HTML
 $mail->isHTML(true);
 //Email body
