@@ -1,10 +1,9 @@
 <?php
-
 // includes/PHPMailer.php
 //Inclue required phpmailerfiles
-require '../PHPMailer/includes/PHPMailer.php';
-require '../PHPMailer/includes/SMTP.php';
-require '../PHPMailer/includes/Exception.php';
+require_once '../PHPMailer/includes/PHPMailer.php';
+require_once '../PHPMailer/includes/SMTP.php';
+require_once '../PHPMailer/includes/Exception.php';
 //Define name spaces
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
