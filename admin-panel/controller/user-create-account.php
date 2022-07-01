@@ -1,7 +1,7 @@
 <?php
 
-// includes/PHPMailer.php
-//Inclue required phpmailerfiles
+//includes/PHPMailer.php
+//include required phpmailerfiles
 require '../PHPMailer/includes/PHPMailer.php';
 require '../PHPMailer/includes/SMTP.php';
 require '../PHPMailer/includes/Exception.php';
@@ -32,8 +32,6 @@ $Instagram = $_POST['Instagram'];
 $Linkedin = $_POST['Linkedin'];
 if(isset($Fname)){
 
-
-
     $sql = "SELECT * FROM tbl_admin WHERE username = '$Username'";
 
     $user = $con ->query($sql) or die ($con->error);
@@ -45,9 +43,6 @@ if(isset($Fname)){
     }
     
 try{
-   
-
- 
     
 $check = false;
 
@@ -67,7 +62,7 @@ $mail->Port = "587";
 //set gmail username
 $mail->Username = "nocumadoxx@gmail.com";
 //set gmail password
-$mail->Password = "pzectockhpctciww";
+$mail->Password = "tjmgrybklskwxtia";
 //set email subject
 $mail->Subject = "AISAT BOT";
 //set sender email
