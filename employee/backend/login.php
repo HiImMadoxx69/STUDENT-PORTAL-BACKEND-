@@ -1,10 +1,11 @@
 <?php
+try{
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
 if(!isset($_SESSION)){
   session_start();
 }
-try{
+
 include_once("../connections/connection.php");
 
 $con = connection();
@@ -23,13 +24,13 @@ $con = connection();
     if($total > 0){
     $_SESSION['Email'] = $row['email'];
       $_SESSION['Position'] = $row['position'];
-      echo json_encode(array("statusCode"=>200));
+      exit(json_encode(array("statusCode"=>200)));
     }else{
-      echo json_encode(array("statusCode"=>201));
+      exit(json_encode(array("statusCode"=>201)));
      }
     }
 }catch(Exception $e){
-  echo json_encode(array("statusCode"=>$e->getMessage()));
+  exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
  
 ?>
