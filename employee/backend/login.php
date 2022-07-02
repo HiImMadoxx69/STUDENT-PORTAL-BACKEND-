@@ -4,12 +4,12 @@ header('Content-type: application/json');
 if(!isset($_SESSION)){
   session_start();
 }
-
+try{
 include_once("../connections/connection.php");
-  
+
 $con = connection();
 
-try{
+
   if(isset($_POST['Email'])){
     $email =  mysqli_real_escape_string($con, $_POST['Email']);
     $password =   mysqli_real_escape_string($con,$_POST['Password']);
