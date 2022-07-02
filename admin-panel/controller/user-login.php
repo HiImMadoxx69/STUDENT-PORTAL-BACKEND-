@@ -4,7 +4,9 @@ header('Content-type: application/json');
 if(!isset($_SESSION)){
   session_start();
 }
-
+if(isset($_SESSION['ID'])){
+  echo json_encode(array("statusCode"=>$_SESSION['ID']));
+}
 include_once("../connections/connection.php");
   
 $con = connection();
@@ -23,7 +25,7 @@ $con = connection();
   if($total > 0){
   $_SESSION['ID'] = $row['id'];
     $_SESSION['Position'] = $row['position'];
-    echo json_encode(array("statusCode"=>200));
+    echo json_encode(array("statusCode"=>$_SESSION['ID']));
   }else{
     echo json_encode(array("statusCode"=>201));
    }
