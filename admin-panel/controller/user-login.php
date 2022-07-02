@@ -1,12 +1,9 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Content-type: application/json');
+
 if(!isset($_SESSION)){
   session_start();
 }
-if(isset($_SESSION['ID'])){
-  echo json_encode(array("statusCode"=>$_SESSION['ID']));
-}
+
 include_once("../connections/connection.php");
   
 $con = connection();
