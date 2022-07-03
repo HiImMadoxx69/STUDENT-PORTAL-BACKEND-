@@ -22,8 +22,7 @@ $con = connection();
     $total = $user->num_rows;
   
     if($total > 0){
-    $_SESSION['Email'] = $row['email'];
-      $_SESSION['Position'] = $row['position'];
+    $_SESSION['ID'] = session_id();
       exit(json_encode(array("statusCode"=>session_id())));
     }else{
       exit(json_encode(array("statusCode"=>201)));
