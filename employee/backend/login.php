@@ -23,7 +23,7 @@ $con = connection();
   
     if($total > 0){
     $_SESSION['ID'] = session_id();
-      exit(json_encode(array("statusCode"=>session_id())));
+      exit(json_encode(array("statusCode"=>$row)));
     }else{
       exit(json_encode(array("statusCode"=>201)));
      }
