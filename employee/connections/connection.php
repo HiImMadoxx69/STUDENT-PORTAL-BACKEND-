@@ -17,7 +17,7 @@ function connection(){
  }else{
      return $con;
  }
-
+}
  
  //localhost
 //  $host = "localhost";
