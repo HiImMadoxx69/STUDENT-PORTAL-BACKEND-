@@ -15,7 +15,7 @@ $con = connection();
     $email =  mysqli_real_escape_string($con, $_POST['Email']);
     $password =   mysqli_real_escape_string($con,$_POST['Password']);
     
-    $sql = "SELECT profile_url,email,username,firstname,middlename,lastname,birthday,sex,position,address,contact,about,twitterprofile,facebookprofile,instagramprofile,linkedinprofile,status,added_at FROM tbl_admin WHERE email = '$email' AND password ='$password' AND status = 'active'";
+    $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email' AND password ='$password' AND status = 'active'";
     
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
