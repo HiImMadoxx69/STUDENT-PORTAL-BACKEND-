@@ -13,8 +13,6 @@ use PHPMailer\PHPMailer\Exception;
 
 include_once("../connections/connection.php");
 try{
-    header('Access-Control-Allow-Origin: *');
-    header('Content-type: application/json');
     include_once("../connections/connection.php");
 $con = connection();
 
