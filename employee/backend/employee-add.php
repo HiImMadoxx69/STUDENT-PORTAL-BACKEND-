@@ -11,7 +11,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-include_once("../connections/connection.php");
 try{
     include_once("../connections/connection.php");
 $con = connection();
