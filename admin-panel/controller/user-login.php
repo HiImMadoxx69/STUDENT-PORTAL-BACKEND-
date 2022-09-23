@@ -1,5 +1,6 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
+header('Content-type: application/json');
 if(!isset($_SESSION)){
   session_start();
 }
