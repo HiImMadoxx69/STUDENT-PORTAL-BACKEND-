@@ -30,7 +30,7 @@ function logIn(e){
     const username = document.getElementById('yourUsername').value;
     const password = document.getElementById('yourPassword').value;
     
-    console.log(username)
+    console.log(username+ " " + password)
 if(username !== "" && password !== ""){
   e.preventDefault();
     let params = 
