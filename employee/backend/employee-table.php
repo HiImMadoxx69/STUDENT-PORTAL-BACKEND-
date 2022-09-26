@@ -7,7 +7,7 @@ $con = connection();
 
 
 $sql = mysqli_query($con, "SELECT 
-profile_url, email,username,firstname,middlename,lastname,birthday
+id, profile_url, email,username,firstname,middlename,lastname,birthday
 ,sex,position,address,contact,about
 ,twitterprofile
 ,facebookprofile
