@@ -20,6 +20,8 @@ $errors = []; // Store all foreseen and unforeseen errors here.
 // $uploadPath = $uploadDirectory . basename($fileName); 
 
 // echo $uploadPath;
+try{
+
 
   $email = $_POST['Email'];
   $fname = $_POST['Fisrtname'];
@@ -53,4 +55,8 @@ if (isset($email)) {
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));
  }
+
+}
+}catch(Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
