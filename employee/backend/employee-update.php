@@ -21,7 +21,7 @@ $errors = []; // Store all foreseen and unforeseen errors here.
 
 // echo $uploadPath;
 
-  $userCurrentId = $_POST['UserId'];  
+  $email = $_POST['Email'];
   $fname = $_POST['Fisrtname'];
   $mname = $_POST['Middlename'];
   $lname = $_POST['Lastname'];
@@ -38,11 +38,11 @@ $errors = []; // Store all foreseen and unforeseen errors here.
   $linkedin = $_POST['Linkedin'];
 
   
-if (isset($userCurrentId)) {
+if (isset($email)) {
  
  
  try{
-                  $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`id` = $userCurrentId;";
+                  $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`email` = '$email';";
     
                   mysqli_query($con, $sql);
 
