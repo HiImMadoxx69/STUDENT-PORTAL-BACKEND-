@@ -51,12 +51,26 @@ if (isset($email)) {
 
                   $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Updated: User Account rowID: $userCurrentId');";
                   mysqli_query($con, $auditsql);
-                  exit(json_encode(array("statusCode"=>200)));
+
+                  $dsql = mysqli_query($con, "SELECT 
+                id, profile_url, email,username,firstname,middlename,lastname,birthday
+                ,sex,position,address,contact,about
+                ,twitterprofile
+                ,facebookprofile
+                ,instagramprofile
+                ,linkedinprofile
+                ,status
+                ,added_at FROM `tbl_admin` ORDER BY `added_at` DESC");
+
+//store in result
+
+$result = mysqli_fetch_all($dsql, MYSQLI_ASSOC);
+                  exit(json_encode(array("statusCode"=>$result)));
  }catch(Exception $e){
-  exit(json_encode(array("statusCode"=>$e->getMessage())));
+  exit(json_encode(array("statusCode"=>201)));
  }
 
 }
 }catch(Exception $e){
-    exit(json_encode(array("statusCode"=>$e->getMessage())));
+    exit(json_encode(array("statusCode"=>201)));
 }
