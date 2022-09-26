@@ -24,14 +24,14 @@ try{
 
 
   $email = $_POST['Email'];
-  $fname = $_POST['Fisrtname'];
+  $fname = $_POST['Firstname'];
   $mname = $_POST['Middlename'];
   $lname = $_POST['Lastname'];
   $birthday = $_POST['Birthday'];
   // exit(json_encode(array("statusCode"=>$birthday)));
   $sex = $_POST['Sex'];
   $about = $_POST['About'];
-  $position = $_POST['Job'];
+  $position = $_POST['Position'];
   $address = $_POST['Address'];
   $contact = $_POST['Contact'];
   $twitter = $_POST['Twitter'];
