@@ -37,7 +37,7 @@ try{
   $twitter = $_POST['Twitter'];
   $facebook = $_POST['Facebook'];
   $instagram = $_POST['Instagram'];
-  $linkedin = $_POST['Linkedin'];
+  $linkedin = $_POST['LinkedIn'];
 
   
 if (isset($email)) {
