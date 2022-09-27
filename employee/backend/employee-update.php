@@ -77,10 +77,10 @@ if (isset($email)) {
         $row = $user->fetch_assoc();
         exit(json_encode(array("statusCode"=>$row)));
  }catch(Exception $e){
-  exit(json_encode(array("statusCode"=>$e)));
+  exit(json_encode(array("statusCode"=>$e->getMessage())));
  }
 
 }
 }catch(Exception $e){
-    exit(json_encode(array("statusCode"=>$e)));
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
