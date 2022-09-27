@@ -7,11 +7,14 @@ $con = connection();
 try{
     
 
-    $sql = "SELECT * from `tbl_updatehistory` WHERE `category` =  'Employee'";
-    mysqli_query($con, $sql);
-    $user = $con ->query($sql) or die ($con->error);
-    $row = $user->fetch_assoc();
-    exit(json_encode(array("statusCode"=>$row)));
+    $sql = mysqli_query($con, "SELECT 
+    * FROM `tbl_updatehistory` WHERE `category` = 'Employee'");
+    
+    //store in result
+    
+    $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
+    
+    exit(json_encode($result));
 }catch(Exception $e){
 
 }
