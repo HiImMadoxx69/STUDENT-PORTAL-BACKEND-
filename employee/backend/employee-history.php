@@ -7,7 +7,7 @@ $con = connection();
 try{
     
 
-    $sql = "SELECT * from `tbl_admin` WHERE `category` =  'Employee'";
+    $sql = "SELECT * from `tbl_updatehistory` WHERE `category` =  'Employee'";
     mysqli_query($con, $sql);
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
