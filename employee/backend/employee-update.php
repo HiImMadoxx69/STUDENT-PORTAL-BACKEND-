@@ -82,5 +82,5 @@ if (isset($email)) {
 
 }
 }catch(Exception $e){
-    exit(json_encode(array("statusCode"=>$e->getMessage())));
+  exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
