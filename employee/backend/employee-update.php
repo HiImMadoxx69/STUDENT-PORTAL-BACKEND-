@@ -39,17 +39,35 @@ try{
   $instagram = $_POST['Instagram'];
   $linkedin = $_POST['LinkedIn'];
 
+  $action = $_POST['Action'];
+  $category = $_POST['Category'];
+  $editPosition = $_POST['EditorPosition'];
+  $editEmail = $_POST['EditorEmail'];
   
 if (isset($email)) {
  
  
  try{
+                $beforeSql = "SELECT `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`,`address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`,`linkedinprofile` WHERE `tbl_admin`.`email` = '$email';";     
+                
+                mysqli_query($con, $xsql);
+
+                $getBefore = $con ->query($beforeSql) or die ($con->error);
+                $rowBefore = $getBefore ->fetch_assoc();
+
                   $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`email` = '$email';";
     
                   mysqli_query($con, $sql);
 
+                  $AfterSql = "SELECT `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`,`address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`,`linkedinprofile` WHERE `tbl_admin`.`email` = '$email';";     
+                
+                mysqli_query($con, $xsql);
 
-                  $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Updated: User Account rowID: $userCurrentId');";
+                $getAfter = $con ->query($AfterSql) or die ($con->error);
+                $rowAfter = $getAfter ->fetch_assoc();
+
+
+                  $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`,`after_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$email', '$rowBefore', '$rowAfter' );";
                   mysqli_query($con, $auditsql);
 
                   $xsql = "SELECT * from `tbl_admin` WHERE `email` =  '$email'";
