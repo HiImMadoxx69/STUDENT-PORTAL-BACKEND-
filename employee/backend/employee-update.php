@@ -53,8 +53,8 @@ if (isset($email)) {
                 mysqli_query($con, $beforeSql);
 
                 $getBefore = $con ->query($beforeSql) or die ($con->error);
-                $rowBefore = $getBefore ->fetch_assoc();
-
+                $rowBefore = implode(',', $getBefore ->fetch_assoc());
+                
                   $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`email` = '$email';";
     
                   mysqli_query($con, $sql);
@@ -64,7 +64,7 @@ if (isset($email)) {
                 mysqli_query($con, $AfterSql);
 
                 $getAfter = $con ->query($AfterSql) or die ($con->error);
-                $rowAfter = $getAfter ->fetch_assoc();
+                $rowAfter = implode(',', $getAfter ->fetch_assoc());
 
 
                   $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`,`after_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$email', '$rowBefore', '$rowAfter' );";
@@ -77,10 +77,12 @@ if (isset($email)) {
         $row = $user->fetch_assoc();
         exit(json_encode(array("statusCode"=>$row)));
  }catch(Exception $e){
-  exit(json_encode(array("statusCode"=>$e->getMessage())));
+  // exit(json_encode(array("statusCode"=>$e->getMessage())));
+  exit(json_encode(array("statusCode"=>201)));
  }
 
 }
 }catch(Exception $e){
-  exit(json_encode(array("statusCode"=>$e->getMessage())));
+  // exit(json_encode(array("statusCode"=>$e->getMessage())));
+  exit(json_encode(array("statusCode"=>201)));
 }
