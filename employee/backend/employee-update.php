@@ -53,7 +53,7 @@ if (isset($email)) {
                   mysqli_query($con, $auditsql);
 
                   $xsql = "SELECT * from `tbl_admin` WHERE `email` =  '$email'";
-        mysqli_query($con, $sql);
+        mysqli_query($con, $xsql);
 
         $user = $con ->query($xsql) or die ($con->error);
         $row = $user->fetch_assoc();
