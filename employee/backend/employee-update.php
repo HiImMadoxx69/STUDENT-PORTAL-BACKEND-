@@ -57,7 +57,7 @@ if (isset($email)) {
 
         $user = $con ->query($xsql) or die ($con->error);
         $row = $user->fetch_assoc();
-        exit(json_encode(array($row)));
+        exit(json_encode(array("statusCode"=>$row)));
  }catch(Exception $e){
   exit(json_encode(array("statusCode"=>201)));
  }
