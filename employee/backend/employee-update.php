@@ -52,10 +52,10 @@ if (isset($email)) {
                   $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Updated: User Account rowID: $userCurrentId');";
                   mysqli_query($con, $auditsql);
 
-                  $sql = "SELECT * from `tbl_admin` WHERE `email` =  '$email'";
+                  $xsql = "SELECT * from `tbl_admin` WHERE `email` =  '$email'";
         mysqli_query($con, $sql);
 
-        $user = $con ->query($sql) or die ($con->error);
+        $user = $con ->query($xsql) or die ($con->error);
         $row = $user->fetch_assoc();
         exit(json_encode(array($row)));
  }catch(Exception $e){
