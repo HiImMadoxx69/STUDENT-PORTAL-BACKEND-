@@ -50,7 +50,7 @@ if (isset($email)) {
  try{
                 $beforeSql = "SELECT `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`,`address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`,`linkedinprofile` WHERE `tbl_admin`.`email` = '$email';";     
                 
-                mysqli_query($con, $xsql);
+                mysqli_query($con, $beforeSql);
 
                 $getBefore = $con ->query($beforeSql) or die ($con->error);
                 $rowBefore = $getBefore ->fetch_assoc();
@@ -61,7 +61,7 @@ if (isset($email)) {
 
                   $AfterSql = "SELECT `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`,`address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`,`linkedinprofile` WHERE `tbl_admin`.`email` = '$email';";     
                 
-                mysqli_query($con, $xsql);
+                mysqli_query($con, $AfterSql);
 
                 $getAfter = $con ->query($AfterSql) or die ($con->error);
                 $rowAfter = $getAfter ->fetch_assoc();
