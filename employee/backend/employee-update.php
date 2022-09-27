@@ -53,7 +53,8 @@ if (isset($email)) {
                 mysqli_query($con, $beforeSql);
 
                 $getBefore = $con ->query($beforeSql) or die ($con->error);
-                $rowBefore = implode(',', $getBefore ->fetch_assoc());
+                $setBefore =  $getBefore ->fetch_assoc();
+                $rowBefore = implode(',', $setBefore);
                 
                   $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`email` = '$email';";
     
