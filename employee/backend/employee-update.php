@@ -68,8 +68,8 @@ if (isset($email)) {
                 $rowAfter = json_encode($getAfter ->fetch_assoc());
 
 
-                  // $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`,`after_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$email', $rowBefore, $rowAfter );";
-                  // mysqli_query($con, $auditsql);
+                  $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`,`after_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$email', '$rowBefore', '$rowAfter' );";
+                  mysqli_query($con, $auditsql);
 
                   $xsql = "SELECT * from `tbl_admin` WHERE `email` =  '$email'";
         mysqli_query($con, $xsql);
