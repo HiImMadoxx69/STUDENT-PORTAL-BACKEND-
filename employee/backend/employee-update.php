@@ -48,7 +48,7 @@ if (isset($email)) {
  
  
  try{
-                $beforeSql = "SELECT `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`,`address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`,`linkedinprofile` WHERE `tbl_admin`.`email` = '$email';";     
+                $beforeSql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'";     
                 
                 mysqli_query($con, $beforeSql);
 
@@ -59,7 +59,7 @@ if (isset($email)) {
     
                   mysqli_query($con, $sql);
 
-                  $AfterSql = "SELECT `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`,`address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`,`linkedinprofile` WHERE `tbl_admin`.`email` = '$email';";     
+                  $AfterSql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'";     
                 
                 mysqli_query($con, $AfterSql);
 

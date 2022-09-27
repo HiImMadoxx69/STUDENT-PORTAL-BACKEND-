@@ -9,7 +9,7 @@ $email = $_POST['Email'];
 if (isset($email)) {
 
     try{
-        $sql = "SELECT * from `tbl_admin` WHERE `email` =  '$email'";
+        $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'";
         mysqli_query($con, $sql);
 
         $user = $con ->query($sql) or die ($con->error);
