@@ -54,7 +54,7 @@ if (isset($email)) {
 
                 $getBefore = $con ->query($beforeSql) or die ($con->error);
                 $setBefore =  $getBefore ->fetch_assoc();
-                $rowBefore = implode(',', $setBefore);
+                $rowBefore = json_encode($setBefore);
                 
                   $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`email` = '$email';";
     
@@ -65,7 +65,7 @@ if (isset($email)) {
                 mysqli_query($con, $AfterSql);
 
                 $getAfter = $con ->query($AfterSql) or die ($con->error);
-                $rowAfter = implode(',', $getAfter ->fetch_assoc());
+                $rowAfter = json_encode($getAfter ->fetch_assoc());
 
 
                   $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`,`after_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$email', '$rowBefore', '$rowAfter' );";
