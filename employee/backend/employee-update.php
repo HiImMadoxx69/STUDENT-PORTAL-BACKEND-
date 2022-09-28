@@ -38,7 +38,7 @@ try{
   $facebook = $_POST['Facebook'];
   $instagram = $_POST['Instagram'];
   $linkedin = $_POST['LinkedIn'];
-
+  $status = $_POST['Status'];
   $action = $_POST['Action'];
   $category = $_POST['Category'];
   $editPosition = $_POST['EditorPosition'];
@@ -56,7 +56,7 @@ if (isset($email)) {
                 $setBefore =  $getBefore ->fetch_assoc();
                 $rowBefore = json_encode($setBefore);
                 
-                  $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin' WHERE `tbl_admin`.`email` = '$email';";
+                  $sql = "UPDATE `tbl_admin` SET `firstname` = '$fname', `middlename` = '$mname', `lastname` = '$lname', `birthday` = '$birthday', `sex` = '$sex', `position` = '$position', `address` = '$address', `contact` = '$contact', `about` = '$about', `twitterprofile` = '$twitter', `facebookprofile` = '$facebook', `instagramprofile` = '$instagram', `linkedinprofile` = '$linkedin', `status` = '$status' WHERE `tbl_admin`.`email` = '$email';";
     
                   mysqli_query($con, $sql);
 
