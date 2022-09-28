@@ -16,7 +16,7 @@ try{
     
     exit(json_encode($result));
 }catch(Exception $e){
-
+    exit(json_encode(array($e->getMessage())));
 }
 
 ?>
