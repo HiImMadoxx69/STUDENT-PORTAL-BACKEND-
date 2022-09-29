@@ -26,7 +26,6 @@ $Birthday = $_POST['Birthday'];
 $Sex = $_POST['Sex'];
 $Contact = $_POST['Contact'];
 $Address = $_POST['Address'];
-$About = $_POST['About'];
 $Twitter = $_POST['Twitter'];
 $Facebook = $_POST['Facebook'];
 $Instagram = $_POST['Instagram'];
@@ -88,7 +87,7 @@ $mail->smtpClose();
 //Host user = iplm.haribon@gmail.com
 //Host password = iplm2022
 if($check = true){
-    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username','$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
+    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username','$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";
