@@ -21,7 +21,7 @@ $Mname = $_POST['Mname'];
 $Lname = $_POST['Lname'];
 $Email = $_POST['Email'];
 $Password = $_POST['Password'];
-$Job = $_POST['Job'];
+$Position = $_POST['Position'];
 $Birthday = $_POST['Birthday'];
 $Sex = $_POST['Sex'];
 $Contact = $_POST['Contact'];
@@ -71,7 +71,7 @@ $mail->setFrom('nocumadoxx@gmail.com');
 //Enable HTML
 $mail->isHTML(true);
 //Email body
-$mail->Body ="<h1>HI! Our School Now Have A New $Job! </h1> <h2>Welcome to our Family!</h2>
+$mail->Body ="<h1>HI! Our School Now Have A New $Position! </h1> <h2>Welcome to our Family!</h2>
 <p>You can now login to our Employee portal: Your Password = $Password</p>";
 //Add recipient
 $mail->addAddress($Email);
@@ -88,7 +88,7 @@ $mail->smtpClose();
 //Host user = iplm.haribon@gmail.com
 //Host password = iplm2022
 if($check = true){
-    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username','$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
+    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username','$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";
