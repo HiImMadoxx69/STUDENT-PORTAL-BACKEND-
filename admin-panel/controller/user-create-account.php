@@ -32,17 +32,7 @@ $Twitter = $_POST['Twitter'];
 $Facebook = $_POST['Facebook'];
 $Instagram = $_POST['Instagram'];
 $Linkedin = $_POST['Linkedin'];
-if(isset($Fname)){
 
-    $sql = "SELECT * FROM tbl_admin WHERE username = '$Username'";
-
-    $user = $con ->query($sql) or die ($con->error);
-    $row = $user->fetch_assoc();
-    $total = $user->num_rows;
-  
-    if($total > 0){
-        exit(json_encode(array("statusCode"=>201)));
-    }
     
 try{
     
@@ -88,19 +78,19 @@ $mail->smtpClose();
 
 //Host user = iplm.haribon@gmail.com
 //Host password = iplm2022
-if($check = true){
+
     $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`, `username`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username','$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";
     mysqli_query($con, $auditsql);
     exit(json_encode(array("statusCode"=>200)));
-}
+
   
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
-}
+
 // $getFiles = $_POST['floatingFname'];
 // if(isset($getFiles)){
 //     exit(json_encode(array("statusCode"=>201)));
