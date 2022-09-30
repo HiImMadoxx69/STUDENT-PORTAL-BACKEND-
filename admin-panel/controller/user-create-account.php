@@ -22,7 +22,7 @@ $Lname = $_POST['Lname'];
 $Email = $_POST['Email'];
 $Username = $_POST['Username'];
 $Password = $_POST['Password'];
-$Job = $_POST['Job'];
+$Job = $_POST['Position'];
 $Birthday = $_POST['Birthday'];
 $Sex = $_POST['Sex'];
 $Contact = $_POST['Contact'];
@@ -64,7 +64,7 @@ $mail->Port = '587';
 //set gmail username
 $mail->Username = 'nocumadoxx@gmail.com';
 //set gmail password
-$mail->Password = 'jivthfccfzabrlts';
+$mail->Password = 'wbzmzieesrrbonki';
 //set email subject
 $mail->Subject = 'Test Email Using PHPMailer';
 //set sender email
