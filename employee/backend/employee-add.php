@@ -3,9 +3,9 @@
  header('Content-type: application/json');
 //includes/PHPMailer.php
 //include required phpmailerfiles
-require_once '../../admin-panel/phpmailer/includes/PHPMailer.php';
-require_once '../../admin-panel../phpmailer/includes/SMTP.php';
-require_once '../../admin-panel../phpmailer/includes/Exception.php';
+require_once '../phpmailer/includes/PHPMailer.php';
+require_once '../phpmailer/includes/SMTP.php';
+require_once '../phpmailer/includes/Exception.php';
 //Define name spaces
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
