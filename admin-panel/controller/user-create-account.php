@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-type: application/json');
 
 //includes/PHPMailer.php
 //include required phpmailerfiles
