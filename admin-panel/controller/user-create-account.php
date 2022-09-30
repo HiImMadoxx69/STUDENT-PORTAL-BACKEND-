@@ -64,7 +64,7 @@ $mail->Port = '587';
 //set gmail username
 $mail->Username = 'nocumadoxx@gmail.com';
 //set gmail password
-$mail->Password = 'wbzmzieesrrbonki';
+$mail->Password = 'jivthfccfzabrlts';
 //set email subject
 $mail->Subject = 'Test Email Using PHPMailer';
 //set sender email
