@@ -44,7 +44,7 @@ if(username !== "" && password !== ""){
 
     //send
     xhr.send(params);
-
+  console.log(params)
     xhr.onprogress = function (){
       // alertPrompt.style.display = 'none';
       btnChangeToLoadingS.removeAttribute("hidden");
@@ -60,7 +60,7 @@ function delayedFunc(){
      
       console.log(getResult.statusCode)
       
-      if(getResult.statusCode === 200){
+      if(getResult.statusCode === 201){
             location.reload();
       }else{          
           alertPrompt.style.display = 'inline-block';
