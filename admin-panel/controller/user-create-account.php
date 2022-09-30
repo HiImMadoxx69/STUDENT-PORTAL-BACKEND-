@@ -16,6 +16,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
+
 $Fname = $_POST['Fname'];
 $Mname = $_POST['Mname'];
 $Lname = $_POST['Lname'];
@@ -31,7 +32,10 @@ $Twitter = $_POST['Twitter'];
 $Facebook = $_POST['Facebook'];
 $Instagram = $_POST['Instagram'];
 $Linkedin = $_POST['Linkedin'];
-
+$editPosition = $_POST['EditorPosition'];
+$editEmail = $_POST['EditorEmail'];
+$category =  $_POST['Category'];
+$action = $_POST['Action'];
     
 try{
     
@@ -80,8 +84,20 @@ $mail->smtpClose();
     $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `about`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email','$Password', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Job', '$Address', '$Contact', '$About', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
-    $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";
+
+    $BeforeSql = "SELECT `email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$Email'";     
+                
+    mysqli_query($con, $BeforeSql);
+
+    $getBefore = $con ->query($BeforeSql) or die ($con->error);
+    $rowBefore = json_encode($getBefore ->fetch_assoc());
+
+
+    
+
+    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$email', '$rowBefore' );";
     mysqli_query($con, $auditsql);
+
     exit(json_encode(array("statusCode"=>200)));
 
   
