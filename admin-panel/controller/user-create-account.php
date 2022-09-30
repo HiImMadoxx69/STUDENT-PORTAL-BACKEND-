@@ -35,7 +35,6 @@ $Linkedin = $_POST['Linkedin'];
     
 try{
     
-$check = false;
 
 // $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
 //Create instance of phpmailer
@@ -55,7 +54,7 @@ $mail->Username = 'nocumadoxx@gmail.com';
 //set gmail password
 $mail->Password = 'jivthfccfzabrlts';
 //set email subject
-$mail->Subject = 'Test Email Using PHPMailer';
+$mail->Subject = 'AISAT Employee Account Status';
 //set sender email
 $mail->setFrom('nocumadoxx@gmail.com');
 //Enable HTML
