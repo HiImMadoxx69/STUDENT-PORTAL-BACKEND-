@@ -1,4 +1,7 @@
 <?php
+try{
+
+}
  header('Access-Control-Allow-Origin: *');
  header('Content-type: application/json');
 //includes/PHPMailer.php
@@ -91,6 +94,8 @@ $mail->smtpClose();
 //     exit(json_encode(array("statusCode"=>201)));
 // }
 
-
+catch(Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
+}
 
 ?>
