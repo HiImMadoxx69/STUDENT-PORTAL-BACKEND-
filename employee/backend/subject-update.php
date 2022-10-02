@@ -1,0 +1,48 @@
+<?php
+header('Access-Control-Allow-Origin: *');
+header('Content-type: application/json');
+include_once("../connections/connection.php");
+$con = connection();
+
+$CurrentId  = $_POST['ID'];
+$SubjectCode = $_POST['Subject_Code'];
+$SubjectName = $_POST['Subject_Name'];
+$Units = $_POST['Units'];
+$Amount = $_POST['Amount'];
+$Status = $_POST['Status'];
+$Action = $_POST['Action'];
+$EditorPosition = $_POST['EditorPosition'];
+$EditorEmail = $_POST['EditorEmail'];
+$Category = $_POST['Category'];
+
+try{
+    
+    if (isset($CurrentId)) {
+
+        $beforeSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at` FROM tbl_subject WHERE id = $CurrentId";     
+                
+        mysqli_query($con, $beforeSql);
+
+        $getBefore = $con ->query($beforeSql) or die ($con->error);
+        $setBefore =  $getBefore ->fetch_assoc();
+        $rowBefore = json_encode($setBefore);
+
+        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status',  WHERE `tbl_subject`.`id` = $CurrentId;";
+        mysqli_query($con, $sql);
+
+        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$SubjectCode', '$rowBefore');";
+                  mysqli_query($con, $auditsql);
+
+                  $xsql = "SELECT * from `tbl_subject` WHERE `subject_code` =  '$SubjectCode'";
+        mysqli_query($con, $xsql);
+
+        $user = $con ->query($xsql) or die ($con->error);
+        $row = $user->fetch_assoc();
+        exit(json_encode(array("statusCode"=>$row)));
+    }
+}catch(Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
+}
+
+
+?>
