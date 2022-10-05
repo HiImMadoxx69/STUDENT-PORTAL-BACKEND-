@@ -19,7 +19,7 @@ try{
     
     if (isset($CurrentId)) {
 
-        $beforeSql = "SELECT * FROM tbl_subject WHERE id = $CurrentId;";     
+        $beforeSql = "SELECT * FROM tbl_subject WHERE subject_code = '$SubjectCode';";     
        
         mysqli_query($con, $beforeSql);
 
