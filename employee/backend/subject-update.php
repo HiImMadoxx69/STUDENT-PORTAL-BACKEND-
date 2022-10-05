@@ -26,7 +26,8 @@ try{
         $getBefore = $con ->query($beforeSql) or die ($con->error);
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
-        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE 'subject_code' = '$SubjectCode';";
+
+        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE `tbl_subject`.`subject_code` = '$SubjectCode';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_subject WHERE 'subject_code' = '$SubjectCode';";     
