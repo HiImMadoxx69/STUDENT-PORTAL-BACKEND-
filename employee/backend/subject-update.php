@@ -19,7 +19,7 @@ try{
     
     if (isset($CurrentId)) {
 
-        $beforeSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at`,`status` FROM tbl_subject WHERE `subject_code` = '$SubjectCode'";     
+        $beforeSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at`,`status` FROM tbl_subject WHERE `tbl_subject`.`id` = $CurrentId;";     
                 
         mysqli_query($con, $beforeSql);
 
@@ -30,7 +30,7 @@ try{
         $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE `tbl_subject`.`id` = $CurrentId;";
         mysqli_query($con, $sql);
 
-        $AfterSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at`,`status` FROM tbl_subject WHERE `subject_code` = '$SubjectCode'";     
+        $AfterSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at`,`status` FROM tbl_subject WHERE `tbl_subject`.`id` = $CurrentId;";     
                 
         mysqli_query($con, $AfterSql);
 
