@@ -20,13 +20,13 @@ try{
     if (isset($CurrentId)) {
 
         $beforeSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at`,`status` FROM tbl_subject WHERE `tbl_subject`.`id` = $CurrentId;";     
-                
+       
         mysqli_query($con, $beforeSql);
 
         $getBefore = $con ->query($beforeSql) or die ($con->error);
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
-
+        
         $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE `tbl_subject`.`id` = $CurrentId;";
         mysqli_query($con, $sql);
 
@@ -36,7 +36,7 @@ try{
 
         $getAfter = $con ->query($AfterSql) or die ($con->error);
         $rowAfter = json_encode($getAfter ->fetch_assoc());
-
+        exit(json_encode(array("statusCode"=>'1')));
         $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$SubjectCode', '$rowAfter','$rowBefore');";
                   mysqli_query($con, $auditsql);
 
