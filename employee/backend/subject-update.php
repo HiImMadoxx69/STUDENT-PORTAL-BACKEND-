@@ -30,7 +30,14 @@ try{
         $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE `tbl_subject`.`id` = $CurrentId;";
         mysqli_query($con, $sql);
 
-        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$SubjectCode', '$rowBefore');";
+        $AfterSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at` FROM tbl_subject WHERE id = $CurrentId";     
+                
+        mysqli_query($con, $AfterSql);
+
+        $getAfter = $con ->query($AfterSql) or die ($con->error);
+        $rowAfter = json_encode($getAfter ->fetch_assoc());
+
+        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$SubjectCode', '$rowAfter','$rowBefore');";
                   mysqli_query($con, $auditsql);
 
                   $xsql = "SELECT * from `tbl_subject` WHERE `subject_code` =  '$SubjectCode'";
