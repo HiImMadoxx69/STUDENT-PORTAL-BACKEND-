@@ -26,10 +26,10 @@ try{
         $getBefore = $con ->query($beforeSql) or die ($con->error);
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
-        
+        exit(json_encode(array("statusCode"=>'1')));
         $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE `tbl_subject`.`id` = $CurrentId;";
         mysqli_query($con, $sql);
-        exit(json_encode(array("statusCode"=>'1')));
+       
         $AfterSql = "SELECT `subject_code`, `subject_name`, `units`, `amount`, `added_at`,`status` FROM tbl_subject WHERE `tbl_subject`.`id` = $CurrentId;";     
                 
         mysqli_query($con, $AfterSql);
