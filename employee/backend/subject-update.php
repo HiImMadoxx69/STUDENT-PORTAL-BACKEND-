@@ -19,7 +19,7 @@ try{
     
     if (isset($CurrentId)) {
 
-        $beforeSql = "SELECT * FROM tbl_subject WHERE `tbl_subject`.`id` = $CurrentId;";     
+        $beforeSql = "SELECT * FROM tbl_subject WHERE id = $CurrentId;";     
        
         mysqli_query($con, $beforeSql);
 
@@ -27,10 +27,10 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
         exit(json_encode(array("statusCode"=>'1')));
-        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE `tbl_subject`.`id` = $CurrentId;";
+        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE id = $CurrentId;";
         mysqli_query($con, $sql);
        
-        $AfterSql = "SELECT * FROM tbl_subject WHERE `tbl_subject`.`id` = $CurrentId;";     
+        $AfterSql = "SELECT * FROM tbl_subject WHERE id = $CurrentId;";     
                 
         mysqli_query($con, $AfterSql);
 
