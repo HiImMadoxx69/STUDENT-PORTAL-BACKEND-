@@ -25,7 +25,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_faculty` SET `faculty_name` = '$facultyName',`description` = '$Description',`status` = '$Status' WHERE `tbl_faculty`.`faculty_name` = '$Faculty';";
+        $sql = "UPDATE `tbl_faculty` SET `faculty_name` = '$Faculty',`description` = '$Description',`status` = '$Status' WHERE `tbl_faculty`.`faculty_name` = '$Faculty';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_faculty WHERE 'faculty_name' = '$Faculty';";     
