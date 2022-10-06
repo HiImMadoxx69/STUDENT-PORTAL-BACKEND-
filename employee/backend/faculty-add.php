@@ -22,7 +22,7 @@ try{
     mysqli_query($con, $sql);
 
 
-    $BeforeSql = "SELECT * FROM tbl_subject WHERE faculty_name = '$Faculty'";     
+    $BeforeSql = "SELECT * FROM tbl_faculty WHERE faculty_name = '$Faculty'";     
                 
     mysqli_query($con, $BeforeSql);
 
