@@ -17,7 +17,7 @@ try{
     
     if (isset($CurrentId)) {
 
-        $beforeSql = "SELECT * FROM tbl_faculty WHERE 'faculty_name' = '$Faculty';";     
+        $beforeSql = "SELECT * FROM tbl_faculty WHERE `faculty_name` = '$Faculty';";     
        
         mysqli_query($con, $beforeSql);
 
@@ -28,7 +28,7 @@ try{
         $sql = "UPDATE `tbl_faculty` SET `faculty_name` = '$Faculty',`description` = '$Description',`status` = '$Status' WHERE `tbl_faculty`.`faculty_name` = '$Faculty';";
         mysqli_query($con, $sql);
        
-        $AfterSql = "SELECT * FROM tbl_faculty WHERE 'faculty_name' = '$Faculty';";     
+        $AfterSql = "SELECT * FROM tbl_faculty WHERE `faculty_name` = '$Faculty';";     
                 
         mysqli_query($con, $AfterSql);
 
