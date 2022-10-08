@@ -8,7 +8,6 @@ $CurrentId  = $_POST['ID'];
 $SubjectCode = $_POST['Subject_Code'];
 $SubjectName = $_POST['Subject_Name'];
 $Units = $_POST['Units'];
-$Amount = $_POST['Amount'];
 $Status = $_POST['Status'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
@@ -27,7 +26,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`amount` = '$Amount',`status` = '$Status' WHERE `tbl_subject`.`subject_code` = '$SubjectCode';";
+        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`status` = '$Status' WHERE `tbl_subject`.`subject_code` = '$SubjectCode';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_subject WHERE `subject_code` = '$SubjectCode';";     

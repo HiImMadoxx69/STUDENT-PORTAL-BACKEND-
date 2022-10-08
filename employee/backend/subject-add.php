@@ -12,17 +12,16 @@ $category =  $_POST['Category'];
 $action = $_POST['Action'];
 $Subject_Code = $_POST['Subject_Code'];
 $Subject_Name = $_POST['Subject_Name'];
-$Amount = $_POST['Amount'];
 $Units = $_POST['Units'];
 try{
     
 
 
-    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name`,`amount`,`units`) VALUES ('$Subject_Code','$Subject_Name','$Amount','$Units');";
+    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name,`units`) VALUES ('$Subject_Code','$Subject_Name','$Units');";
     mysqli_query($con, $sql);
 
 
-    $BeforeSql = "SELECT `subject_code`,`subject_name`,`amount`,`units`,`status`,`added_at` FROM tbl_subject WHERE subject_code = '$Subject_Code'";     
+    $BeforeSql = "SELECT `subject_code`,`subject_name`,`units`,`status`,`added_at` FROM tbl_subject WHERE subject_code = '$Subject_Code'";     
                 
     mysqli_query($con, $BeforeSql);
 
