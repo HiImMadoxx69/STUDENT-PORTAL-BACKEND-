@@ -13,11 +13,14 @@ $action = $_POST['Action'];
 $Subject_Code = $_POST['Subject_Code'];
 $Subject_Name = $_POST['Subject_Name'];
 $Units = $_POST['Units'];
+$Courses = $_POST['Courses'];
+$Semester = $_POST['Semester'];
+$Year = $_POST['Year_Available'];
 try{
     
 
 
-    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name,`units`) VALUES ('$Subject_Code','$Subject_Name','$Units');";
+    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name,`units`,`course_available`,`year_available`,`semester_available`) VALUES ('$Subject_Code','$Subject_Name','$Units', '$Courses' ,'$Semester', '$Year');";
     mysqli_query($con, $sql);
 
 
