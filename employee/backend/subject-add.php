@@ -20,7 +20,7 @@ try{
     
 
 
-    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name,`units`,`course_available`,`year_available`,`semester_available`) VALUES ('$Subject_Code','$Subject_Name','$Units', '$Courses' ,'$Semester', '$Year');";
+    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name,`units`,`course_available`,,`semester_available`, `year_available`) VALUES ('$Subject_Code','$Subject_Name','$Units', '$Courses' ,'$Semester', '$Year');";
     mysqli_query($con, $sql);
 
 
