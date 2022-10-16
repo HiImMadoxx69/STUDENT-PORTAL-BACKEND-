@@ -17,7 +17,7 @@ $Category = $_POST['Category'];
 $Course = $_POST['Course'];
 $Year = $_POST['Year'];
 $Semester = $_POST['Semester'];
-
+//sd
 try{
     
     if (isset($CurrentId)) {
