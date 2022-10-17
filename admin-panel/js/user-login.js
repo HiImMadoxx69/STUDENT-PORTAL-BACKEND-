@@ -61,13 +61,12 @@ function delayedFunc(){
       console.log(getResult.statusCode)
       
       if(getResult.statusCode != 201){
-        alertPrompt.style.display = 'inline-block';
-        alertMSG.innerHTML = 'Wrong Email or Password';
-        btnChangeToLoadingS.setAttribute("hidden", "hidden");
-        btnLogIn.style.display = 'inline-block';  
+            location.reload();
       }else{          
-       
-          location.reload();
+          alertPrompt.style.display = 'inline-block';
+          alertMSG.innerHTML = 'Wrong Email or Password';
+          btnChangeToLoadingS.setAttribute("hidden", "hidden");
+          btnLogIn.style.display = 'inline-block';
      }//end of if status 200 
     
     }//end of delayedFunc
