@@ -60,7 +60,7 @@ function delayedFunc(){
      
       console.log(getResult.statusCode)
       
-      if(getResult.statusCode === 4){
+      if(getResult.statusCode == 4){
             location.reload();
       }else{          
           alertPrompt.style.display = 'inline-block';
