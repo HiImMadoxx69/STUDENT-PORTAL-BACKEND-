@@ -5,7 +5,6 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$CurrentId  = $_POST['ID'];
 $SubjectCode = $_POST['Subject_Code'];
 $SubjectName = $_POST['Subject_Name'];
 $Units = $_POST['Units'];
@@ -55,6 +54,4 @@ try{
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
-
-
 ?>
