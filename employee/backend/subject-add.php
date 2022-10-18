@@ -16,15 +16,16 @@ $Units = $_POST['Units'];
 $Courses = $_POST['Courses'];
 $Semester = $_POST['Semester'];
 $Year = $_POST['Year_Available'];
+$Type = $_POST['Type'];
 try{
     
 
 
-    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name`,`units`,`course_available`,`semester_available`, `year_available`) VALUES ('$Subject_Code','$Subject_Name','$Units', '$Courses' ,'$Semester', '$Year');";
+    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name`,`units`,`type`,`course_available`,`semester_available`, `year_available`) VALUES ('$Subject_Code','$Subject_Name','$Units',`$Type`, '$Courses' ,'$Semester', '$Year');";
     mysqli_query($con, $sql);
 
 
-    $BeforeSql = "SELECT `subject_code`,`subject_name`,`units`,`status`,`added_at` FROM tbl_subject WHERE subject_code = '$Subject_Code'";     
+    $BeforeSql = "SELECT `subject_code`,`subject_name`,`units`,`type`,`status`,`added_at` FROM tbl_subject WHERE subject_code = '$Subject_Code'";     
                 
     mysqli_query($con, $BeforeSql);
 

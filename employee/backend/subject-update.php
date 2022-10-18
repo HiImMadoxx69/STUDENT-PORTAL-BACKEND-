@@ -14,6 +14,7 @@ $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
 $EditorEmail = $_POST['EditorEmail'];
 $Category = $_POST['Category'];
+$Type = $_POST['Type'];
 $Course = $_POST['Course'];
 $Year = $_POST['Year'];
 $Semester = $_POST['Semester'];
@@ -30,7 +31,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`course_available` = '$Course',`year_available` = '$Year',`semester_available` = '$Semester',`status` = '$Status' WHERE `tbl_subject`.`subject_code` = '$SubjectCode';";
+        $sql = "UPDATE `tbl_subject` SET `subject_name` = '$SubjectName',`units` = '$Units',`type` = '$Type',`course_available` = '$Course',`year_available` = '$Year',`semester_available` = '$Semester',`status` = '$Status' WHERE `tbl_subject`.`subject_code` = '$SubjectCode';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_subject WHERE `subject_code` = '$SubjectCode';";     
