@@ -21,7 +21,7 @@ try{
     
 
 
-    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name`,`units`,`type`,`course_available`,`semester_available`, `year_available`) VALUES ('$Subject_Code','$Subject_Name','$Units',`$Type`, '$Courses' ,'$Semester', '$Year');";
+    $sql = "INSERT INTO `tbl_subject` (`subject_code`,`subject_name`,`units`,`type`,`course_available`,`semester_available`, `year_available`) VALUES ('$Subject_Code','$Subject_Name','$Units','$Type', '$Courses' ,'$Semester', '$Year');";
     mysqli_query($con, $sql);
 
 
