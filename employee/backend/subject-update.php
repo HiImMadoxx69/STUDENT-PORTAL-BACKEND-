@@ -4,6 +4,9 @@ header('Content-type: application/json');
 include_once("../connections/connection.php");
 $con = connection();
 
+try{
+
+
 
 $CurrentId  = $_POST['ID'];
 $SubjectCode = $_POST['Subject_Code'];
@@ -52,6 +55,10 @@ try{
         $row = $user->fetch_assoc();
         exit(json_encode(array("statusCode"=>$row)));
     }
+}catch(Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
+}
+
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
