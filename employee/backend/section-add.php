@@ -17,7 +17,7 @@ $Semester = $_POST['Semester'];
 $StartYear = $_POST['StartYear'];
 $EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
-$SectionName = $Course.$Year.'1';
+$SectionName = $Course.' '.substr($Year,0,1).'-'.'1';
 try{
 
     $existSQL = "SELECT * FROM tbl_section WHERE section_name = '$SectionName' AND academic_year = '$AcademicYear'";
@@ -30,7 +30,7 @@ try{
         $SectionName  = null;
         $y = 1;
         $y = $y + $total;
-        $SectionName = $Course.$Year.$y;
+        $SectionName = $Course.' '.substr($Year,0,1).'-'.$y;
     } 
 
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
