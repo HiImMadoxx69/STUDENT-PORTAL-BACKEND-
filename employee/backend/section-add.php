@@ -25,9 +25,8 @@ try{
     mysqli_query($con, $existSQL);
     if($total > 0){
         $SectionName  = null;
-        $y = 1;
-        $sectionend = $y + $existSQL;
-        $SectionName = $Course.' '.substr($Year,0,1).'-'.$sectionend;
+        $existSQL += 1;
+        $SectionName = $Course.' '.substr($Year,0,1).'-'.$existSQL;
     } 
 
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
