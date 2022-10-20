@@ -24,7 +24,7 @@ try{
     mysqli_query($con, $existSQL);
 
     $toInt = (int) $existSQL;
-    if($toInt > 1){
+    if($existSQL > 1){
         $SectionName  = null;
         $uniqueSection = $toInt + 1;
         $SectionName = $Course.' '.substr($Year,0,1).'-'.$toInt;
