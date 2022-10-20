@@ -29,8 +29,8 @@ try{
     if($total > 0){
         $SectionName  = null;
         $y = 1;
-        $y = $y + $total;
-        $SectionName = $Course.' '.substr($Year,0,1).'-'.$y;
+        $sectionend = $y + $total;
+        $SectionName = $Course.' '.substr($Year,0,1).'-'.$sectionend;
     } 
 
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
