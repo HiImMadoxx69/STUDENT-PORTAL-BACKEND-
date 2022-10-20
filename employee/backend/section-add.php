@@ -17,7 +17,7 @@ $Semester = $_POST['Semester'];
 $StartYear = $_POST['StartYear'];
 $EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
-
+$SectionName = $Course.' '.substr($Year,0,1).'-'.'1';
 try{
 
     $existSQL = "SELECT COUNT(*) FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
