@@ -17,18 +17,16 @@ $Semester = $_POST['Semester'];
 $StartYear = $_POST['StartYear'];
 $EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
-$SectionName = $Course.' '.substr($Year,0,1).'-'.'1';
+
 try{
 
-    $existSQL = "SELECT COUNT(*) FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
+    $existSQL = "SELECT COUNT(*)+1 FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
     mysqli_query($con, $existSQL);
 
-$toInt = (int) $existSQL;
-    if($existSQL > 1){
-        $SectionName  = null;
-        $uniqueSection = $toInt + 1;
-        $SectionName = $Course.' '.substr($Year,0,1).'-'.$uniqueSection;
-    } 
+  
+   
+        $SectionName = $Course.' '.substr($Year,0,1).'-'.$existSQL;
+    
 
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
     mysqli_query($con, $sql);
