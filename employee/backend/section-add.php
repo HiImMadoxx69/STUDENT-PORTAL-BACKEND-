@@ -21,11 +21,12 @@ $SectionName = $Course.' '.substr($Year,0,1).'-'.'1';
 try{
 
     $existSQL = "SELECT COUNT(*) FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
-
     mysqli_query($con, $existSQL);
+
+    $toInt = (int) $existSQL;
     if($existSQL > 1){
         $SectionName  = null;
-        $uniqueSection = $existSQL + 1;
+        $uniqueSection = $toInt + 1;
         $SectionName = $Course.' '.substr($Year,0,1).'-'.$uniqueSection;
     } 
 
