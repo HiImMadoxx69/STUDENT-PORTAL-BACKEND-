@@ -23,7 +23,7 @@ try{
     $existSQL = "SELECT COUNT(*) FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
 
     mysqli_query($con, $existSQL);
-    if($total > 0){
+    if($existSQL > 1){
         $SectionName  = null;
         $uniqueSection = $existSQL + 1;
         $SectionName = $Course.' '.substr($Year,0,1).'-'.$uniqueSection;
