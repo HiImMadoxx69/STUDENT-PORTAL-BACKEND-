@@ -23,9 +23,8 @@ try{
     $existSQL = "SELECT COUNT(*) FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
     mysqli_query($con, $existSQL);
 
-    $incrementSql = $existSQL + 1;
-   
-    $SectionName = $Course.' '.substr($Year,0,1).'-'.$incrementSql;
+
+    $SectionName = $Course.' '.substr($Year,0,1).'-'.$existSQL;
     
 
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
