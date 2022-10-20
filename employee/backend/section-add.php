@@ -27,7 +27,7 @@ try{
     if($toInt > 1){
         $SectionName  = null;
         $uniqueSection = $toInt + 1;
-        $SectionName = $Course.' '.substr($Year,0,1).'-'.$uniqueSection;
+        $SectionName = $Course.' '.substr($Year,0,1).'-'.$toInt;
     } 
 
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
