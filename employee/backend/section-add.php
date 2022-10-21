@@ -17,19 +17,8 @@ $Semester = $_POST['Semester'];
 $StartYear = $_POST['StartYear'];
 $EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
-$SectionName = $Course.' '.substr($Year,0,1).'-'.'1';
+$SectionName = $_POST['SectionName'];
 try{
-
-    $existSQL = "SELECT COUNT(*)+1 FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
-    mysqli_query($con, $existSQL);
-
-    try{
-        $SectionName = $Course.' '.substr($Year,0,1).' - '.$existSQL;
-    }catch(Exception $e){
-        exit(json_encode(array("statusCode"=>$e->getMessage())));
-    }
-    
-
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
     mysqli_query($con, $sql);
 
