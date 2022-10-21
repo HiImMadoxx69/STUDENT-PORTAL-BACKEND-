@@ -14,7 +14,7 @@ $AcademicYear = $_POST['AcademicYear'];
 
 try{
 
-    $existSQL = "SELECT COUNT(*)+1 FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
+    $existSQL = "SELECT COUNT(*) FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
     mysqli_query($con, $existSQL);
     
     $dataAdd = $existSQL;
