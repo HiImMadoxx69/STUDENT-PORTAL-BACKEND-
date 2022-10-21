@@ -17,8 +17,9 @@ try{
     $existSQL = "SELECT COUNT(*)+1 FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
     mysqli_query($con, $existSQL);
     
+    $dataAdd = $existSQL;
 
-    exit(json_encode(array("statusCode"=>$existSQL)));
+    exit(json_encode(array("statusCode"=>$dataAdd)));
 
   
 }catch(Exception $e){
