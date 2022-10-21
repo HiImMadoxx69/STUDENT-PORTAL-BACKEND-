@@ -6,16 +6,9 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$editPosition = $_POST['EditorPosition'];
-$editEmail = $_POST['EditorEmail'];
-$category =  $_POST['Category'];
-$action = $_POST['Action'];
 //Add shits here
 $Course = $_POST['Course'];
 $Year = $_POST['Year'];
-$Semester = $_POST['Semester'];
-$StartYear = $_POST['StartYear'];
-$EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
 
 
