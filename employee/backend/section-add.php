@@ -31,8 +31,6 @@ try{
     $rowBefore = json_encode($getBefore ->fetch_assoc());
 
 
-    
-
     $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$SectionName', '$rowBefore' );";
     mysqli_query($con, $auditsql);
 
