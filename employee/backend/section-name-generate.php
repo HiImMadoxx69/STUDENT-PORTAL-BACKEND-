@@ -15,9 +15,7 @@ $AcademicYear = $_POST['AcademicYear'];
 try{
 
     $existSQL = "SELECT COUNT(*) FROM tbl_section WHERE course = '$Course' AND section_year = '$Year' AND academic_year = '$AcademicYear'";
-    mysqli_query($con, $existSQL);
-    
-    $dataAdd = $existSQL;
+    $dataAdd = mysqli_query($con, $existSQL);
 
     exit(json_encode(array("statusCode"=>$dataAdd)));
 
