@@ -23,6 +23,21 @@ try{
     mysqli_query($con, $sql);
 
 
+     $getAllSubject = mysqli_query($con, "SELECT * FROM tbl_subject WHERE course_available = '$Course' AND year_available = '$Year' AND semester_available = '$Semester");
+
+    //store in result
+    $result = mysqli_fetch_all($getAllSubject, MYSQLI_ASSOC);
+
+    for($i = 0; $i < $result; $i++ ){
+        $GenerateSubName = $result[$i]['subject_code'];
+        $GenerateDesc = $result[$i]['subject_name'];
+        $GenerateUnit = $result[$i]['units'];
+        $GenerateID = $result[$i]['id'];
+        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (subject_name, section_name, description, units, schedule_day, schedule_time, professor_initial, academic_year, subject_id) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit', '', '', '', '$AcademicYear', '$GenerateID');";
+        mysqli_query($con, $sqlGenerateSchedule);
+    }
+
+
     $BeforeSql = "SELECT * FROM tbl_section WHERE section_name = '$SectionName' AND academic_year = '$AcademicYear'";     
                 
     mysqli_query($con, $BeforeSql);
