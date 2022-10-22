@@ -33,7 +33,7 @@ try{
         $GenerateDesc = $result[$i]['subject_name'];
         $GenerateUnit = $result[$i]['units'];
         $GenerateID = $result[$i]['id'];
-        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (subject_name, section_name, description, units, schedule_day, schedule_time, professor_initial, academic_year, subject_id) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit', '', '', '', '$AcademicYear', '$GenerateID');";
+        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`, `subject_id`) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear', '$GenerateID');";
         mysqli_query($con, $sqlGenerateSchedule);
     }
 
