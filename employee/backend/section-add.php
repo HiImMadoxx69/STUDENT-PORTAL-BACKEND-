@@ -27,8 +27,8 @@ try{
 
     //store in result
     $result = mysqli_fetch_all($getAllSubject, MYSQLI_ASSOC);
-
-    for($i = 0; $i < $result; $i++ ){
+    $count = count($result);
+    for($i = 0; $i < $count; $i++ ){
         $GenerateSubName = $result[$i]['subject_code'];
         $GenerateDesc = $result[$i]['subject_name'];
         $GenerateUnit = $result[$i]['units'];
