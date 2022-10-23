@@ -10,7 +10,6 @@ try{
 
 $CurrentId  = $_POST['ID'];
 $Semester = $_POST['Semester'];
-$
 $Status = $_POST['Status'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
