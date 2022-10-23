@@ -23,20 +23,7 @@ try{
     mysqli_query($con, $sql);
 
 
-     $getAllSubject = mysqli_query($con, "SELECT * FROM tbl_subject WHERE course_available = '$Course' AND year_available = '$Year' AND semester_available = '$Semester'");
-
-    //store in result
-    $result = mysqli_fetch_all($getAllSubject, MYSQLI_ASSOC);
-    $count = count($result);
-    for($i = 0; $i < $count; $i++ ){
-        $GenerateSubName = $result[$i]['subject_code'];
-        $GenerateDesc = $result[$i]['subject_name'];
-        $GenerateUnit = $result[$i]['units'];
-        $GenerateID = $result[$i]['id'];
-        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`, `subject_id`) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear', '$GenerateID');";
-        mysqli_query($con, $sqlGenerateSchedule);
-    }
-
+     
 
     $BeforeSql = "SELECT * FROM tbl_section WHERE section_name = '$SectionName' AND academic_year = '$AcademicYear'";     
                 
@@ -49,6 +36,24 @@ try{
     $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$SectionName', '$rowBefore' );";
     mysqli_query($con, $auditsql);
 
+
+
+    $getAllSubject = mysqli_query($con, "SELECT * FROM tbl_subject WHERE course_available = '$Course' AND year_available = '$Year' AND semester_available = '$Semester'");
+
+    //store in result
+    $GenerateSectionID = $BeforeSql['id'];
+    $result = mysqli_fetch_all($getAllSubject, MYSQLI_ASSOC);
+    $count = count($result);
+    for($i = 0; $i < $count; $i++ ){
+        $GenerateSubName = $result[$i]['subject_code'];
+        $GenerateDesc = $result[$i]['subject_name'];
+        $GenerateUnit = $result[$i]['units'];
+        $GenerateID = $result[$i]['id'];
+        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`, `subject_id`,`section_id`) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear', '$GenerateID','$GenerateSectionID');";
+        mysqli_query($con, $sqlGenerateSchedule);
+    }
+
+    
     exit(json_encode(array("statusCode"=>$count)));
 
   
