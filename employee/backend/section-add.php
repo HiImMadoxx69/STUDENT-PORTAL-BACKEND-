@@ -41,7 +41,6 @@ try{
     $getAllSubject = mysqli_query($con, "SELECT * FROM tbl_subject WHERE course_available = '$Course' AND year_available = '$Year' AND semester_available = '$Semester'");
 
     //store in result
-    $GenerateSectionID = $BeforeSql[0]['id'];
     $result = mysqli_fetch_all($getAllSubject, MYSQLI_ASSOC);
     $count = count($result);
     for($i = 0; $i < $count; $i++ ){
