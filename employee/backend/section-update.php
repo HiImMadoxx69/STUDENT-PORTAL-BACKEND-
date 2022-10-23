@@ -15,7 +15,7 @@ $Status = $_POST['Status'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
 $EditorEmail = $_POST['EditorEmail'];
-
+$Category = $_POST['Category'];
 //sd
 try{
     
