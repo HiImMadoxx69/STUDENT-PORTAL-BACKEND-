@@ -10,6 +10,7 @@ try{
 
 $CurrentId  = $_POST['ID'];
 $Semester = $_POST['Semester'];
+$
 $Status = $_POST['Status'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
@@ -28,10 +29,10 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_section` SET `subject_name` = '$SubjectName',`units` = '$Units',`type` = '$Type',`course_available` = '$Course',`year_available` = '$Year',`semester_available` = '$Semester',`status` = '$Status' WHERE `tbl_section`.`subject_code` = '$SubjectCode';";
+        $sql = "UPDATE `tbl_section` SET `semester` = '$Semester',`status` = '$Status' WHERE `tbl_section`.`id` = $CurrentId;";
         mysqli_query($con, $sql);
        
-        $AfterSql = "SELECT * FROM tbl_section WHERE `subject_code` = '$SubjectCode';";     
+        $AfterSql = "SELECT * FROM tbl_section WHERE `id` = $CurrentId;";     
                 
         mysqli_query($con, $AfterSql);
 
@@ -39,10 +40,10 @@ try{
         $rowAfter = json_encode($getAfter ->fetch_assoc());
         
 
-        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$SubjectCode', '$rowAfter','$rowBefore');";
+        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$CurrentId', '$rowAfter','$rowBefore');";
                   mysqli_query($con, $auditsql);
 
-                  $xsql = "SELECT * from `tbl_section` WHERE `subject_code` =  '$SubjectCode'";
+                  $xsql = "SELECT * from `tbl_section` WHERE `id` = '$CurrentId'";
         mysqli_query($con, $xsql);
 
         $user = $con ->query($xsql) or die ($con->error);
