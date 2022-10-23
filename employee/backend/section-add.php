@@ -49,7 +49,7 @@ try{
     $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$SectionName', '$rowBefore' );";
     mysqli_query($con, $auditsql);
 
-    exit(json_encode(array("statusCode"=>200)));
+    exit(json_encode(array("statusCode"=>$count)));
 
   
 }catch(Exception $e){
