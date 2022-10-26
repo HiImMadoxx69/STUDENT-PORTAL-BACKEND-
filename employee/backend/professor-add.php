@@ -47,7 +47,7 @@ $mail->Username = 'nocumadoxx@gmail.com';
 //set gmail password
 $mail->Password = 'tjmgrybklskwxtia';
 //set email subject
-$mail->Subject = 'Test Email Using PHPMailer';
+$mail->Subject = 'Aisat Portal';
 //set sender email
 $mail->setFrom('nocumadoxx@gmail.com');
 //Enable HTML
