@@ -68,10 +68,10 @@ $mail->smtpClose();
 }
 
 
-    $sql = "INSERT INTO `tbl_professor` (`profile_url`, `firstname`, `middlename`, `lastname`, `email`, `password`, `gender`, `faculty`,`professor_username`) VALUES ('default_profile.jpg', '$Firstname', '$Middlename', '$Lastname', '$Email', '$Password', '$Gender', '$Faculty', '$ProfessorUsername');";
+    $sql = "INSERT INTO `tbl_professor` (`profile_url`, `firstname`, `middlename`, `lastname`, `email`, `password`, `faculty`,`professor_username`) VALUES ('default_profile.jpg', '$Firstname', '$Middlename', '$Lastname', '$Email', '$Password', '$Faculty', '$ProfessorUsername');";
     mysqli_query($con, $sql);
 
-    $BeforeSql = "SELECT * FROM tbl_professor WHERE professor_username = '$ProfessorUsername'";     
+    $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `faculty`,`professor_username`, `status`, `added_at` FROM tbl_professor WHERE professor_username = '$ProfessorUsername'";     
                 
     mysqli_query($con, $BeforeSql);
 
