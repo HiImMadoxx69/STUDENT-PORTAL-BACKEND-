@@ -30,7 +30,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_professor` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName',`faculty` = '$Faculty',` `status` = '$Status' WHERE `professor_username` = '$Username';";
+        $sql = "UPDATE `tbl_professor` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName',`faculty` = '$Faculty', `status` = '$Status' WHERE `professor_username` = '$Username';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_professor WHERE `id` = '$Username';";     
