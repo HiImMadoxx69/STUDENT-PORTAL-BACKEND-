@@ -24,7 +24,10 @@ $Password = $_POST['Password'];
 $Gender = $_POST['Gender'];
 $Faculty = $_POST['Faculty'];
 $ProfessorUsername = $_POST['ProfessorUsername'];
-
+$Action = $_POST['Action'];
+$EditorPosition = $_POST['EditorPosition'];
+$EditorEmail = $_POST['EditorEmail'];
+$Category = $_POST['Category'];
 try{
     
 $check = false;
@@ -81,7 +84,7 @@ $mail->smtpClose();
 
     
 
-    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$ProfessorUsername', '$Faculty', '$rowBefore' );";
+    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$ProfessorUsername', '$rowBefore' );";
     mysqli_query($con, $auditsql);
 
     
