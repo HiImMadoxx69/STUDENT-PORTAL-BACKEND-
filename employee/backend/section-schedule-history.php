@@ -4,12 +4,11 @@
 include_once("../connections/connection.php");
 $con = connection();
 
-
-
+$CurrentID = $_POST['ID'];
 try{
     
     $sql = mysqli_query($con, "SELECT 
-    * FROM `tbl_updatehistory` WHERE `category` = 'Subject'");
+    * FROM `tbl_updatehistory` WHERE `category` = 'SectionSchedule' AND edited_email = '$CurrentID';");
     
     //store in result
     
