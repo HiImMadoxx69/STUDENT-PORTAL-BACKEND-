@@ -27,7 +27,7 @@ $Category = $_POST['Category'];
 
 try{
     
-    if (isset($Username)) {
+    if (isset($StudentNumber)) {
 
         $beforeSql = "SELECT * FROM tbl_studentinfo WHERE `studentnumber` = '$StudentNumber';";     
        
