@@ -20,7 +20,7 @@ $AcademicYear = $_POST['AcademicYear'];
 $SectionName = $_POST['SectionName'];
 $SectionAndYear = $_POST['SectionAndYear'];
 try{
-    $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`,`sectionandyear`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear', '$SectionAndYear');";
+    $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`,`sectionandacademicyear`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear', '$SectionAndYear');";
     mysqli_query($con, $sql);
 
 
