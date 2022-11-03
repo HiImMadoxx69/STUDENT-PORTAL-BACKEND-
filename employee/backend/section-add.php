@@ -18,8 +18,9 @@ $StartYear = $_POST['StartYear'];
 $EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
 $SectionName = $_POST['SectionName'];
+$SectionAndYear = $_POST['SectionAndYear'];
 try{
-    $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear');";
+    $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`,`sectionandyear`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear', '$SectionAndYear');";
     mysqli_query($con, $sql);
 
 
@@ -33,7 +34,7 @@ try{
     $rowBefore = json_encode($getBefore ->fetch_assoc());
 
 
-    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$SectionName', '$rowBefore' );";
+    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$SectionAndYear', '$rowBefore' );";
     mysqli_query($con, $auditsql);
 
 
@@ -52,7 +53,9 @@ try{
         mysqli_query($con, $sqlGenerateSchedule);
     }
 
-    
+    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$SectionAndYear', '$rowBefore' );";
+    mysqli_query($con, $auditsql);
+
     exit(json_encode(array("statusCode"=>$count)));
 
   
