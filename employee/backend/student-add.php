@@ -34,6 +34,8 @@ try{
     
     try{
 
+        $check = false;
+
 // $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
 //Create instance of phpmailer
 $mail = new PHPMailer();
