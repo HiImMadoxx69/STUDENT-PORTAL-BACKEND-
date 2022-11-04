@@ -69,7 +69,7 @@ try {
 $mail->smtpClose();
     $check = true;
 } catch (Exception $e) {
-    exit(json_encode(array("statusCode"=>201)));
+    exit(json_encode(array("statusCode"=>$e)));
 }
 
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
