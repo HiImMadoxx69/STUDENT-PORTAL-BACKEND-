@@ -3,6 +3,7 @@
  header('Content-type: application/json');
 //includes/PHPMailer.php
 //include required phpmailerfiles
+
 require_once '../phpmailer/includes/PHPMailer.php';
 require_once '../phpmailer/includes/SMTP.php';
 require_once '../phpmailer/includes/Exception.php';
@@ -11,11 +12,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+try{
 
     include_once("../connections/connection.php");
 $con = connection();
 
-try{
+
     $StudentNumber = $_POST['StudentNumber'];
     $Firstname = $_POST['FirstName'];
     $Middlename = $_POST['MiddleName'];
@@ -101,12 +103,6 @@ try{
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
-
-// $getFiles = $_POST['floatingFname'];
-// if(isset($getFiles)){
-//     exit(json_encode(array("statusCode"=>201)));
-// }
-
 
 
 ?>
