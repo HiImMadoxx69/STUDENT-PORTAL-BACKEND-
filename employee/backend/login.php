@@ -20,21 +20,13 @@ $con = connection();
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
     $total = $user->num_rows;
-
-    $result = $pdo->prepare($sql);
-    $result->bindParam(1, $email);
-    $result->execute();
-
-    $userAuth = $result->fetch();
   
-    if(password_verify($password, $userAuth['password'])){
-      $_SESSION['ID'] = session_id();
+    if($total > 0){
+    $_SESSION['ID'] = session_id();
       exit(json_encode(array("statusCode"=>$row)));
     }else{
       exit(json_encode(array("statusCode"=>201)));
-    }
-  
-   
+     }
     }
 }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));
