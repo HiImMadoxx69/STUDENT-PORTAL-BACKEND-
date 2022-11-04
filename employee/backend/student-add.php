@@ -69,8 +69,9 @@ try{
     //Closing smtp connection
     $mail->smtpClose();
     $check = true;
-    
+
 }catch(Exception $e) {
+    $check = false;
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
 
