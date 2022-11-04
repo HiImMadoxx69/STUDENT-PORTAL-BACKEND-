@@ -14,7 +14,7 @@ use PHPMailer\PHPMailer\Exception;
 
 include_once("../connections/connection.php");
 $con = connection();
-exit(json_encode(array("statusCode"=>201)));
+
 try{
     $StudentNumber = $_POST['StudentNumber'];
     $Firstname = $_POST['FirstName'];
@@ -31,6 +31,7 @@ try{
     $EditorPosition = $_POST['EditorPosition'];
     $EditorEmail = $_POST['EditorEmail'];
     $Category = $_POST['Category'];
+    exit(json_encode(array("statusCode"=>201)));
     try{
         
     $check = false;
