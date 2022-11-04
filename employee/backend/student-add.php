@@ -16,9 +16,9 @@ use PHPMailer\PHPMailer\Exception;
 $con = connection();
 
 $StudentNumber = $_POST['StudentNumber'];
-$Firstname = $_POST['Firstname'];
-$Middlename = $_POST['Middlename'];
-$Lastname = $_POST['Lastname'];
+$Firstname = $_POST['FirstName'];
+$Middlename = $_POST['MiddleName'];
+$Lastname = $_POST['LastName'];
 $Email = $_POST['Email'];
 $Password = $_POST['Password'];
 $Type = $_POST['Type'];
@@ -73,10 +73,10 @@ $mail->smtpClose();
 }
 $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO `tbl_professor` (`profile_url`, `firstname`, `middlename`, `lastname`, `email`, `password`, `faculty`,`professor_username`) VALUES ('default_profile.jpg', '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword', '$Faculty', '$ProfessorUsername');";
+    $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
     mysqli_query($con, $sql);
 
-    $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `faculty`,`professor_username`, `status`, `added_at` FROM tbl_professor WHERE professor_username = '$ProfessorUsername'";     
+    $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `type`, `birthday`, `address`, `course`, `section` `status`, `added_at` FROM tbl_studentinfo WHERE studentnumber = '$StudentNumber'";     
                 
     mysqli_query($con, $BeforeSql);
 
@@ -86,7 +86,7 @@ $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
     
 
-    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$ProfessorUsername', '$rowBefore' );";
+    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowBefore' );";
     mysqli_query($con, $auditsql);
 
     
