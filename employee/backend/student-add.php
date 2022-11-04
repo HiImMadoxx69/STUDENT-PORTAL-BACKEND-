@@ -33,49 +33,47 @@ try{
     $Category = $_POST['Category'];
     
     try{
-        
-        $check = false;
-    
-        // $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
-        //Create instance of phpmailer
-        $mail = new PHPMailer();
-        //Set mailer to use smtp
-        $mail->isSMTP();
-        //define smtp host
-        $mail->Host = "smtp.gmail.com";
-        //enable smtp authentication
-        $mail->SMTPAuth = "true";
-        //set type of encryption (ssl/tls)
-        $mail->SMTPSecure = "tls";
-        //set port to connect smtp
-        $mail->Port = '587';
-        //set gmail username
-        $mail->Username = 'nocumadoxx@gmail.com';
-        //set gmail password
-        $mail->Password = 'tjmgrybklskwxtia';
-        //set email subject
-        $mail->Subject = 'Aisat Portal';
-        //set sender email
-        $mail->setFrom('nocumadoxx@gmail.com');
-        //Enable HTML
-        $mail->isHTML(true);
-        //Email body
-        $mail->Body ="<h1>HI! Our School Now Have A New Student! </h1> <h2>Welcome to our Family!</h2>
-        <p>You can now login to our Employee portal: Your Password = $Password</p>";
-        //Add recipient
-        $mail->addAddress($Email);
-        //Finally send email
-        try {
-            $mail->Send();
-            //Closing smtp connection
-        $mail->smtpClose();
-            $check = true;
-        } catch (Exception $e) {
-            exit(json_encode(array("statusCode"=>201)));
-        }
+
+// $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
+//Create instance of phpmailer
+$mail = new PHPMailer();
+//Set mailer to use smtp
+$mail->isSMTP();
+//define smtp host
+$mail->Host = "smtp.gmail.com";
+//enable smtp authentication
+$mail->SMTPAuth = "true";
+//set type of encryption (ssl/tls)
+$mail->SMTPSecure = "tls";
+//set port to connect smtp
+$mail->Port = '587';
+//set gmail username
+$mail->Username = 'nocumadoxx@gmail.com';
+//set gmail password
+$mail->Password = 'tjmgrybklskwxtia';
+//set email subject
+$mail->Subject = 'Aisat Portal';
+//set sender email
+$mail->setFrom('nocumadoxx@gmail.com');
+//Enable HTML
+$mail->isHTML(true);
+//Email body
+$mail->Body ="<h1>HI! Our School Now Have A New Professor! </h1> <h2>Welcome to our Family!</h2>
+<p>You can now login to our Employee portal: Your Password = $Password</p>";
+//Add recipient
+$mail->addAddress($Email);
+//Finally send email
+try {
+    $mail->Send();
+    //Closing smtp connection
+$mail->smtpClose();
+    $check = true;
+} catch (Exception $e) {
+    exit(json_encode(array("statusCode"=>201)));
+}
 
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
-        exit(json_encode(array("statusCode"=>201)));
+        
         try{
             $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
             mysqli_query($con, $sql);
