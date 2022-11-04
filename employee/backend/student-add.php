@@ -32,9 +32,8 @@ $con = connection();
     $EditorEmail = $_POST['EditorEmail'];
     $Category = $_POST['Category'];
     $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+    $check = false;
 try{
-    
-$check = false;
 
 // $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
 //Create instance of phpmailer
@@ -76,27 +75,27 @@ try{
 }
 
     
-    
-    try{
-        $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
-        mysqli_query($con, $sql);
-    
-        $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `type`, `birthday`, `address`, `course`, `section` `status`, `added_at` FROM tbl_studentinfo WHERE studentnumber = '$StudentNumber'";     
-                    
-        mysqli_query($con, $BeforeSql);
-    
-        $getBefore = $con ->query($BeforeSql) or die ($con->error);
-        $rowBefore = json_encode($getBefore ->fetch_assoc());
-    
-        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowBefore' );";
-        mysqli_query($con, $auditsql);
-    
-        exit(json_encode(array("statusCode"=>200)));
-    }catch(Exception $e){
-        exit(json_encode(array("statusCode"=>$e->getMessage())));
+    if($check){
+        try{
+            $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
+            mysqli_query($con, $sql);
+        
+            $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `type`, `birthday`, `address`, `course`, `section` `status`, `added_at` FROM tbl_studentinfo WHERE studentnumber = '$StudentNumber'";     
+                        
+            mysqli_query($con, $BeforeSql);
+        
+            $getBefore = $con ->query($BeforeSql) or die ($con->error);
+            $rowBefore = json_encode($getBefore ->fetch_assoc());
+        
+            $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowBefore' );";
+            mysqli_query($con, $auditsql);
+        
+            exit(json_encode(array("statusCode"=>200)));
+        }catch(Exception $e){
+            exit(json_encode(array("statusCode"=>$e->getMessage())));
+        }
     }
-
-  
+    
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
