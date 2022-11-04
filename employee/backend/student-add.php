@@ -52,7 +52,7 @@ $mail->Port = '587';
 //set gmail username
 $mail->Username = 'nocumadoxx@gmail.com';
 //set gmail password
-$mail->Password = 'tjmgrybklskwxtia';
+$mail->Password = 'ehluumhipkoxcksw';
 //set email subject
 $mail->Subject = 'Aisat Portal';
 //set sender email
