@@ -34,7 +34,7 @@ try{
     
     try{
 
-        $check = false;
+        
 
 // $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
 //Create instance of phpmailer
@@ -69,7 +69,7 @@ try {
     $mail->Send();
     //Closing smtp connection
 $mail->smtpClose();
-    $check = true;
+
 } catch (Exception $e) {
     exit(json_encode(array("statusCode"=>$e)));
 }
