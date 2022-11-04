@@ -3,7 +3,6 @@
  header('Content-type: application/json');
 //includes/PHPMailer.php
 //include required phpmailerfiles
-
 require_once '../phpmailer/includes/PHPMailer.php';
 require_once '../phpmailer/includes/SMTP.php';
 require_once '../phpmailer/includes/Exception.php';
@@ -12,11 +11,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-include_once("../connections/connection.php");
+
+    include_once("../connections/connection.php");
 $con = connection();
 
-try{
-    $StudentNumber = $_POST['StudentNumber'];
+
+    $StudentNumber = $_POST['StudentNumber'];   
     $Firstname = $_POST['FirstName'];
     $Middlename = $_POST['MiddleName'];
     $Lastname = $_POST['LastName'];
@@ -31,9 +31,11 @@ try{
     $EditorPosition = $_POST['EditorPosition'];
     $EditorEmail = $_POST['EditorEmail'];
     $Category = $_POST['Category'];
-    
+
 try{
     
+$check = false;
+
 // $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
 //Create instance of phpmailer
 $mail = new PHPMailer();
@@ -66,48 +68,46 @@ $mail->addAddress($Email);
 try {
     $mail->Send();
     //Closing smtp connection
-    $mail->smtpClose();
+$mail->smtpClose();
+    $check = true;
 } catch (Exception $e) {
-    exit(json_encode(array("statusCode"=>$e->getMessage())));
+    exit(json_encode(array("statusCode"=>201)));
 }
-} catch (Exception $e) {
-    exit(json_encode(array("statusCode"=>$e->getMessage())));
-}
+    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-try{
-        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+    try{
+        $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
+        mysqli_query($con, $sql);
+    
+        $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `type`, `birthday`, `address`, `course`, `section` `status`, `added_at` FROM tbl_studentinfo WHERE studentnumber = '$StudentNumber'";     
+                    
+        mysqli_query($con, $BeforeSql);
+    
+        $getBefore = $con ->query($BeforeSql) or die ($con->error);
+        $rowBefore = json_encode($getBefore ->fetch_assoc());
+    
+    
         
-        try{
-            $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
-            mysqli_query($con, $sql);
+    
+        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowBefore' );";
+        mysqli_query($con, $auditsql);
+    
         
-            $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `type`, `birthday`, `address`, `course`, `section` `status`, `added_at` FROM tbl_studentinfo WHERE studentnumber = '$StudentNumber'";     
-                        
-            mysqli_query($con, $BeforeSql);
-        
-            $getBefore = $con ->query($BeforeSql) or die ($con->error);
-            $rowBefore = json_encode($getBefore ->fetch_assoc());
-        
-        
-            
-        
-            $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowBefore' );";
-            mysqli_query($con, $auditsql);
-        
-            
-            exit(json_encode(array("statusCode"=>200)));
-        }catch(Exception $e){
-            exit(json_encode(array("statusCode"=>$e->getMessage())));
-        }
-            
-      
+        exit(json_encode(array("statusCode"=>200)));
     }catch(Exception $e){
         exit(json_encode(array("statusCode"=>$e->getMessage())));
     }
-    
+
+  
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
+
+// $getFiles = $_POST['floatingFname'];
+// if(isset($getFiles)){
+//     exit(json_encode(array("statusCode"=>201)));
+// }
+
 
 
 ?>
