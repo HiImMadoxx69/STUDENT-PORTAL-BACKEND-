@@ -15,15 +15,17 @@ use PHPMailer\PHPMailer\Exception;
     include_once("../connections/connection.php");
 $con = connection();
 
-
+$StudentNumber = $_POST['StudentNumber'];
 $Firstname = $_POST['Firstname'];
 $Middlename = $_POST['Middlename'];
 $Lastname = $_POST['Lastname'];
 $Email = $_POST['Email'];
 $Password = $_POST['Password'];
-$Gender = $_POST['Gender'];
-$Faculty = $_POST['Faculty'];
-$ProfessorUsername = $_POST['ProfessorUsername'];
+$Type = $_POST['Type'];
+$Birthday = $_POST['Birthday'];
+$Address = $_POST['Address'];
+$Course = $_POST['Course'];
+$Section = $_POST['Section'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
 $EditorEmail = $_POST['EditorEmail'];
@@ -69,9 +71,9 @@ $mail->smtpClose();
 } catch (Exception $e) {
     exit(json_encode(array("statusCode"=>201)));
 }
-    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO `tbl_professor` (`profile_url`, `firstname`, `middlename`, `lastname`, `email`, `password`, `faculty`,`professor_username`) VALUES ('default_profile.jpg', '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword', '$Faculty', '$ProfessorUsername');";
+
+    $sql = "INSERT INTO `tbl_professor` (`profile_url`, `firstname`, `middlename`, `lastname`, `email`, `password`, `faculty`,`professor_username`) VALUES ('default_profile.jpg', '$Firstname', '$Middlename', '$Lastname', '$Email', '$Password', '$Faculty', '$ProfessorUsername');";
     mysqli_query($con, $sql);
 
     $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `faculty`,`professor_username`, `status`, `added_at` FROM tbl_professor WHERE professor_username = '$ProfessorUsername'";     
