@@ -21,6 +21,7 @@ $con = connection();
     $Middlename = $_POST['MiddleName'];
     $Lastname = $_POST['LastName'];
     $Email = $_POST['Email'];
+    $Contact = $_POST['Contact'];
     $Password = $_POST['Password'];
     $Type = $_POST['Type'];
     $Birthday = $_POST['Birthday'];
@@ -78,10 +79,10 @@ try{
     
     if($check){
         try{
-            $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg','$StudentNumber', '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
+            $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`,`contact`) VALUES ('default_profile.jpg','$StudentNumber', '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section', '$Contact' );";
             mysqli_query($con, $sql);
         
-            $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `type`, `birthday`, `address`, `course`, `section`, `status`, `added_at` FROM tbl_studentinfo WHERE studentnumber = '$StudentNumber'";     
+            $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `type`, `birthday`, `address`, `course`, `section`,`contact`, `status`, `added_at` FROM tbl_studentinfo WHERE studentnumber = '$StudentNumber'";     
                         
             mysqli_query($con, $BeforeSql);
         
