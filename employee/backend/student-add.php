@@ -70,10 +70,11 @@ try{
     //Closing smtp connection
     $mail->smtpClose();
     $check = true;
-    exit(json_encode(array("statusCode"=>201)));
+    
 }catch(Exception $e) {
     exit(json_encode(array("statusCode"=>201)));
 }
+exit(json_encode(array("statusCode"=>201)));
     $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
     try{
