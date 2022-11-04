@@ -74,9 +74,9 @@ try{
 }catch(Exception $e) {
     exit(json_encode(array("statusCode"=>201)));
 }
-exit(json_encode(array("statusCode"=>201)));
-    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
+    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+    exit(json_encode(array("statusCode"=>201)));
     try{
         $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
         mysqli_query($con, $sql);
