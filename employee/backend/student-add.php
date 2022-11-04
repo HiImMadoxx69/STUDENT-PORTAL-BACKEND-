@@ -63,11 +63,10 @@ $mail->Body ="<h1>HI! Our School Now Have A New Professor! </h1> <h2>Welcome to 
 //Add recipient
 $mail->addAddress($Email);
 //Finally send email
-exit(json_encode(array("statusCode"=>201)));
 try {
     $mail->Send();
     //Closing smtp connection
-$mail->smtpClose();
+    $mail->smtpClose();
 } catch (Exception $e) {
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
