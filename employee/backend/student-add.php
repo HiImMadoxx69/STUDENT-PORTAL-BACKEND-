@@ -31,7 +31,7 @@ $con = connection();
     $EditorPosition = $_POST['EditorPosition'];
     $EditorEmail = $_POST['EditorEmail'];
     $Category = $_POST['Category'];
-
+    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 try{
     
 $check = false;
@@ -75,7 +75,7 @@ try{
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
 
-    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+    
     
     try{
         $sql = "INSERT INTO `tbl_studentinfo` (`profile_url`,`studentnumber`, `firstname`, `middlename`, `lastname`, `email`, `password`,`type`,`birthday`,`address`,`course`,`section`) VALUES ('default_profile.jpg',`$StudentNumber`, '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword','$Type', '$Birthday', '$Address', '$Course', '$Section' );";
