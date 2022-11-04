@@ -32,10 +32,8 @@ try{
     $EditorEmail = $_POST['EditorEmail'];
     $Category = $_POST['Category'];
     
-    try{
-
-        
-
+try{
+    
 // $hashed_password = password_hash($Password, PASSWORD_DEFAULT);
 //Create instance of phpmailer
 $mail = new PHPMailer();
@@ -65,6 +63,7 @@ $mail->Body ="<h1>HI! Our School Now Have A New Professor! </h1> <h2>Welcome to 
 //Add recipient
 $mail->addAddress($Email);
 //Finally send email
+exit(json_encode(array("statusCode"=>201)));
 try {
     $mail->Send();
     //Closing smtp connection
