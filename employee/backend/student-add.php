@@ -65,12 +65,12 @@ $mail->Body ="<h1>HI! Our School Now Have A New Professor! </h1> <h2>Welcome to 
 //Add recipient
 $mail->addAddress($Email);
 //Finally send email
-try {
+try{
     $mail->Send();
     //Closing smtp connection
-$mail->smtpClose();
+    $mail->smtpClose();
     $check = true;
-} catch (Exception $e) {
+}catch(Exception $e) {
     exit(json_encode(array("statusCode"=>201)));
 }
     $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
