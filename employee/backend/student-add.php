@@ -68,11 +68,14 @@ try {
     $mail->Send();
     //Closing smtp connection
 $mail->smtpClose();
-
+} catch (Exception $e) {
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
+}
 } catch (Exception $e) {
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
 
+try{
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
         
         try{
