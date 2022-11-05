@@ -39,7 +39,7 @@ try{
 
 
 
-    $getAllSubject = mysqli_query($con, "SELECT * FROM tbl_subject WHERE course_available = '$Course' AND year_available = '$Year' AND semester_available = '$Semester'");
+    $getAllSubject = mysqli_query($con, "SELECT * FROM tbl_subject WHERE course_available LIKE '%$Course%' AND year_available = '$Year' AND semester_available = '$Semester'");
 
     //store in result
     $result = mysqli_fetch_all($getAllSubject, MYSQLI_ASSOC);
