@@ -10,7 +10,7 @@ $SectionName = $_POST['SectionName'];
 
 try{
 
-    $sql = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE section_name = '$SectionName' AND academic_year = '$AcademicYear' ORDER BY `id` DESC");
+    $sql = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE section = '$SectionName' AND academic_year = '$AcademicYear' ORDER BY `id` DESC");
 
     //store in result
     
