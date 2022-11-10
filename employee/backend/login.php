@@ -15,7 +15,7 @@ $con = connection();
     $email =  mysqli_real_escape_string($con, $_POST['Email']);
     $password =   mysqli_real_escape_string($con,$_POST['Password']);
 
-    $checkLoginEmail = mysqli_query($conn, "SELECT * FROM tbl_admin WHERE email = '$email'");
+    $checkLoginEmail = mysqli_query($con, "SELECT * FROM tbl_admin WHERE email = '$email'");
     
     
     if (mysqli_num_rows($checkLoginEmail) == 0) {
@@ -23,7 +23,7 @@ $con = connection();
   } else {
     try{
       $rowData = mysqli_fetch_array($checkLoginEmail);
-      exit(json_encode(array("statusCode"=>201)));
+      
       if (password_verify($password, $rowData['password'])) {
         $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'  AND status = 'active'";
       $user = $con ->query($sql) or die ($con->error);
