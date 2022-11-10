@@ -37,6 +37,8 @@ $con = connection();
       }else{
         exit(json_encode(array("statusCode"=>201)));
      }
+    }else{
+      exit(json_encode(array("statusCode"=>"Incorrect password")));
     }
     }catch(Exception $e){
       exit(json_encode(array("statusCode"=>$e->getMessage())));
