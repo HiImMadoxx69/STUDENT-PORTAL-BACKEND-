@@ -23,6 +23,7 @@ $con = connection();
   } else {
     try{
       $rowData = mysqli_fetch_array($checkLoginEmail);
+      exit(json_encode(array("statusCode"=>201)));
       if (password_verify($password, $rowData['password'])) {
         $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'  AND status = 'active'";
       $user = $con ->query($sql) or die ($con->error);
