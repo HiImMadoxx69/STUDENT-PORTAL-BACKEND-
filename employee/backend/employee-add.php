@@ -75,7 +75,7 @@ $mail->smtpClose();
 }
 
 
-    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$Username','$hashedPassword', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
+    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$hashedPassword', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";
