@@ -22,6 +22,7 @@ $con = connection();
       exit(json_encode(array("statusCode"=>201)));
   } else {
     try{
+      exit(json_encode(array("statusCode"=>201)));
       $rowData = mysqli_fetch_array($checkLoginEmail);
       
       if (password_verify($password, $rowData['password'])) {
