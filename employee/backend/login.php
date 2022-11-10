@@ -14,9 +14,16 @@ $con = connection();
   if(isset($_POST['Email'])){
     $email =  mysqli_real_escape_string($con, $_POST['Email']);
     $password =   mysqli_real_escape_string($con,$_POST['Password']);
+
+    $checkLoginEmail = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$email'");
     
-    $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email' AND password ='$password' AND status = 'active'";
     
+    if (mysqli_num_rows($checkLoginEmail) == 0) {
+      exit(json_encode(array("statusCode"=>201)));
+  } else {
+    $row = mysqli_fetch_array($checkLoginEmail);
+    if (password_verify($password, $row['password'])) {
+      $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'  AND status = 'active'";
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
     $total = $user->num_rows;
@@ -26,8 +33,10 @@ $con = connection();
       exit(json_encode(array("statusCode"=>$row)));
     }else{
       exit(json_encode(array("statusCode"=>201)));
-     }
-    }
+   }
+  }
+ }
+}
 }catch(Exception $e){
   exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
