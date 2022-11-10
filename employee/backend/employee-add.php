@@ -52,9 +52,9 @@ $mail->Port = '587';
 //set gmail username
 $mail->Username = 'nocumadoxx@gmail.com';
 //set gmail password
-$mail->Password = 'tjmgrybklskwxtia';
+$mail->Password = 'jivthfccfzabrlts';
 //set email subject
-$mail->Subject = 'Test Email Using PHPMailer';
+$mail->Subject = 'Account Status';
 //set sender email
 $mail->setFrom('nocumadoxx@gmail.com');
 //Enable HTML
