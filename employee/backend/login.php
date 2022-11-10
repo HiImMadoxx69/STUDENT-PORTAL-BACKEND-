@@ -23,7 +23,7 @@ $con = connection();
   } else {
     try{
       
-      $rowData = mysqli_fetch_array($checkLoginEmail);
+     
       if($email == 'nocumadoxx@gmail.com' && $password =='admin'){
         $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'  AND status = 'active'";
         $user = $con ->query($sql) or die ($con->error);
@@ -37,7 +37,7 @@ $con = connection();
           exit(json_encode(array("statusCode"=>201)));
        }
       }
-
+      $rowData = mysqli_fetch_array($checkLoginEmail);
       if (password_verify($password, $rowData['password'])) {
         $sql = "SELECT `profile_url`,`email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE email = '$email'  AND status = 'active'";
       $user = $con ->query($sql) or die ($con->error);
