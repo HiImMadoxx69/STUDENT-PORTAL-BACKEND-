@@ -51,7 +51,7 @@ $con = connection();
         exit(json_encode(array("statusCode"=>204)));
      }
     }else{
-      exit(json_encode(array("statusCode"=>201)));
+      exit(json_encode(array("statusCode"=>205)));
     }
     }catch(Exception $e){
       exit(json_encode(array("statusCode"=>$e->getMessage())));
