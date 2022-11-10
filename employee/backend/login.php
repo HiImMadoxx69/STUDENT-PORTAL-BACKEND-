@@ -15,7 +15,7 @@ $con = connection();
     $email =  mysqli_real_escape_string($con, $_POST['Email']);
     $password =   mysqli_real_escape_string($con,$_POST['Password']);
 
-    $checkLoginEmail = mysqli_query($conn, "SELECT * FROM customers WHERE email = '$email'");
+    $checkLoginEmail = mysqli_query($conn, "SELECT * FROM tbl_admin WHERE email = '$email'");
     
     
     if (mysqli_num_rows($checkLoginEmail) == 0) {
