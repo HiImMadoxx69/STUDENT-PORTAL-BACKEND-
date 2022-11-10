@@ -31,7 +31,7 @@ $Facebook = $_POST['Facebook'];
 $Instagram = $_POST['Instagram'];
 $Linkedin = $_POST['Linkedin'];
 
-$hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+
 try{
     
 $check = false;
@@ -73,15 +73,19 @@ $mail->smtpClose();
 } catch (Exception $e) {
     exit(json_encode(array("statusCode"=>201)));
 }
+$hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-
+if($hashed_password != $Password){
     $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$hashedPassword', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";
     mysqli_query($con, $auditsql);
     exit(json_encode(array("statusCode"=>200)));
-
+}else{
+    exit(json_encode(array("statusCode"=>201)));
+}
+   
   
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
