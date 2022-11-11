@@ -60,8 +60,7 @@ $mail->setFrom('nocumadoxx@gmail.com');
 //Enable HTML
 $mail->isHTML(true);
 //Email body
-$mail->Body ="<h1>HI! Our School Now Have A New Student! </h1> <h2>Welcome to our Family!</h2>
-<p>You can now login to our Student portal: Your Password = $Password</p>";
+$mail->Body ="<span style="font-size: 22px; font-family: Arial, sans-serif; color: #222222;" >Hello!</span>";
 //Add recipient
 $mail->addAddress($Email);
 //Finally send email
