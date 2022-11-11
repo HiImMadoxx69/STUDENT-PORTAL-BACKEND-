@@ -60,7 +60,8 @@ $mail->setFrom('nocumadoxx@gmail.com');
 //Enable HTML
 $mail->isHTML(true);
 //Email body
-$mail->Body ="<span style="font-size: 22px; font-family: Arial, sans-serif; color: #222222;" >Hello!</span>";
+$mail->Body ="<body width='100%' style='margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1; 	font-family: 'Poppins', sans-serif;font-weight: 400;font-size: 15px; line-height: 1.8; color: rgba(0,0,0,.4);' >
+<center style='width: 100%; background-color: #f1f1f1;'>";
 //Add recipient
 $mail->addAddress($Email);
 //Finally send email
