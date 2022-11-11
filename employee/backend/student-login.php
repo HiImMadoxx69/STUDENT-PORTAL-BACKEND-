@@ -11,7 +11,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-  if(isset($_POST['Email'])){
+  if(isset($_POST['StudentNumber'])){
     $studentnumber =  mysqli_real_escape_string($con, $_POST['StudentNumber']);
     $password =   mysqli_real_escape_string($con,$_POST['Password']);
 
