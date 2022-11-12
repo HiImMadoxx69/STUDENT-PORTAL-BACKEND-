@@ -48,7 +48,7 @@ $con = connection();
       $_SESSION['ID'] = session_id();
         exit(json_encode(array("statusCode"=>$row)));
       }else{
-        exit(json_encode(array("statusCode"=>201)));
+        exit(json_encode(array("statusCode"=>204)));
      }
     }else{
       exit(json_encode(array("statusCode"=>201)));
