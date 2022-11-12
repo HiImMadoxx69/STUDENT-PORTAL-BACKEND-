@@ -51,7 +51,7 @@ $con = connection();
         exit(json_encode(array("statusCode"=>201)));
      }
     }else{
-      exit(json_encode(array("statusCode"=>204)));
+      exit(json_encode(array("statusCode"=>$rowData['password'])));
     }
     }catch(Exception $e){
       exit(json_encode(array("statusCode"=>201)));
