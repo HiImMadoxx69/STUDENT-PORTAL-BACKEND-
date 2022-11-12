@@ -37,7 +37,8 @@ try{
 
     $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$SectionAndYear', '$rowBefore' );";
     mysqli_query($con, $auditsql);
-
+    
+    
 
 
     $getAllSubject = mysqli_query($con, "SELECT * FROM tbl_subject WHERE course_available LIKE '%$Course%' AND year_available = '$Year' AND semester_available = '$Semester'");
@@ -46,10 +47,21 @@ try{
     $result = mysqli_fetch_all($getAllSubject, MYSQLI_ASSOC);
     $count = count($result);
     for($i = 0; $i < $count; $i++ ){
+        
         $GenerateSubName = $result[$i]['subject_code'];
         $GenerateDesc = $result[$i]['subject_name'];
         $GenerateUnit = $result[$i]['units'];
         $GenerateID = $result[$i]['id'];
+
+        
+        $getHighestid = mysqli_query($con, "SELECT * from tbl_subjectpersection ORDER BY `added_at` DESC LIMIT 1;");
+
+        $GenerateYear = substr ($AcademicYear->string, 4);
+
+        $getHighId = mysqli_fetch_all($getHighestid, MYSQLI_ASSOC);
+        
+        $GenerateSchedCode = $GenerateYear . $getHighId . $GenerateID . $GenerateUnit;
+
         $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`,`sectionacademicyear`, `subject_id`,`section_id`) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear','$SectionAndYear', '$GenerateID','$GenerateSectionID');";
         mysqli_query($con, $sqlGenerateSchedule);
     }
