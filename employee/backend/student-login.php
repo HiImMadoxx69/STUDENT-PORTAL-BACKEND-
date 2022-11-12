@@ -48,10 +48,10 @@ $con = connection();
       $_SESSION['ID'] = session_id();
         exit(json_encode(array("statusCode"=>$row)));
       }else{
-        exit(json_encode(array("statusCode"=>204)));
+        exit(json_encode(array("statusCode"=>201)));
      }
     }else{
-      exit(json_encode(array("statusCode"=>201)));
+      exit(json_encode(array("statusCode"=>204)));
     }
     }catch(Exception $e){
       exit(json_encode(array("statusCode"=>201)));
