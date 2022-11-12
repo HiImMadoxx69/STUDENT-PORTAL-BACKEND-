@@ -56,13 +56,13 @@ try{
         
         $getHighestid = mysqli_query($con, "SELECT * from tbl_subjectpersection ORDER BY `added_at` DESC LIMIT 1;");
 
-        $GenerateYear = substr ($AcademicYear->string, 4);
+        $GenerateYear = substr($AcademicYear->string, 4);
 
         $getHighId = mysqli_fetch_all($getHighestid, MYSQLI_ASSOC);
         
         $GenerateSchedCode = $GenerateYear . $getHighId . $GenerateID . $GenerateUnit;
 
-        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`,`sectionacademicyear`, `subject_id`,`section_id`) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear','$SectionAndYear', '$GenerateID','$GenerateSectionID');";
+        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`sched_code`,`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`,`sectionacademicyear`, `subject_id`,`section_id`) VALUES ('$GenerateSchedCode','$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear','$SectionAndYear', '$GenerateID','$GenerateSectionID');";
         mysqli_query($con, $sqlGenerateSchedule);
     }
 
