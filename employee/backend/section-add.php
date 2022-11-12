@@ -19,6 +19,7 @@ $EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
 $SectionName = $_POST['SectionName'];
 $SectionAndYear = $_POST['SectionAndYear'];
+
 try{
     $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`,`sectionandacademicyear`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear', '$SectionAndYear');";
     mysqli_query($con, $sql);
@@ -49,8 +50,7 @@ try{
         $GenerateDesc = $result[$i]['subject_name'];
         $GenerateUnit = $result[$i]['units'];
         $GenerateID = $result[$i]['id'];
-        $GenerateSectionAY = $SectionName . $AcademicYear;
-        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`,`sectionacademicyear`, `subject_id`,`section_id`) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear','$GenerateSectionAY' '$GenerateID','$GenerateSectionID');";
+        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`,`sectionacademicyear`, `subject_id`,`section_id`) VALUES ('$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear','$SectionAndYear' '$GenerateID','$GenerateSectionID');";
         mysqli_query($con, $sqlGenerateSchedule);
     }
 
