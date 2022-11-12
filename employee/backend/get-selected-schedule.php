@@ -15,7 +15,7 @@ $ScheduleCode = $_POST['ScheduleCode'];
     $total = $user->num_rows;
   
     if($total > 0){
-        exit(json_encode(array("statusCode"=>200, "scheduleData" => $row)));
+        exit(json_encode(array("statusCode"=>200)));
     }else{
         exit(json_encode(array("statusCode"=>'Schedule doesnt not exist')));
     }
