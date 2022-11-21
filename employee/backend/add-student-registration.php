@@ -33,8 +33,9 @@ mysqli_query($con, $sqlGenerateSchedule);
 for($i = 0; $i < count($GetFee); $i++){
     $Name = $GetFee[$i][$i]['name'];
     $Amount = $GetFee[$i][$i]['amount'];
+    $Subtotal = $GetFee[$i][$i]['subtotal'];
     $sqlAddStudentFee ="INSERT INTO tbl_feeperstudent
-    (`name`,`student_id`, `amount`) VALUES ('$Name', '$StudentNumber', '$Amount');";
+    (`name`,`student_id`, `amount`,`subtotal`) VALUES ('$Name', '$StudentNumber', '$Amount','$Subtotal');";
     mysqli_query($con, $sqlAddStudentFee);    
 }
 
