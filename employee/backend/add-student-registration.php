@@ -9,6 +9,6 @@ $Schedule = $_POST['Schedule'];
 
 $GetSchedule = json_decode($Schedule, true);
 
-exit(json_encode(array("statusCode"=>$GetSchedule)));
+exit(json_encode(array("statusCode"=>$GetSchedule[0]['id'])));
 
 ?>
