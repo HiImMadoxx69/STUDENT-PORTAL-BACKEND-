@@ -39,14 +39,6 @@ for($i = 0; $i < count($GetFee[0]); $i++){
     mysqli_query($con, $sqlAddStudentFee);    
 }
 
-for($i = 0; $i < count($GetFee[1]); $i++){
-    $Name = $GetFee[1][$i]['name'];
-    $Amount = $GetFee[1][$i]['amount'];
-    $Subtotal = $GetFee[1][$i]['subtotal'];
-    $sqlAddStudentFee ="INSERT INTO tbl_feeperstudent
-    (`name`,`student_id`, `amount`,`subtotal`) VALUES ('$Name', '$StudentNumber', '$Amount','$Subtotal');";
-    mysqli_query($con, $sqlAddStudentFee);    
-}
 
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
