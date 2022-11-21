@@ -10,6 +10,9 @@ $StudentNumber = $_POST['StudentNumber'];
 
 $GetSchedule = json_decode($Schedule, true);
 
+try{
+
+
 for($i = 0; $i < count($GetSchedule); $i++ ){ 
 $Sched = $GetSchedule[$i]['sched_code'];
 $StudentNumber = $GetSchedule[$i]['student_id'];
@@ -26,6 +29,10 @@ $SectionAndYear = $GetSchedule[$i]['sectionandacademicyear'];
 $sqlGenerateSchedule = "INSERT INTO tbl_gradesperstudent (`sched_code`, `student_id`,`subject_name`,`section_name`,`description`,`units`,`semester`,`schedule_day`,`schedule_time`,`sectionandacademicyear`) VALUES ('$Sched', '$StudentNumber', '$SubjectName', '$SectionName', '$Description', '$Units', '$Semester', '$Day', '$Time', '$AcademicYear');";
 mysqli_query($con, $sqlGenerateSchedule);
 
+}
+
+}catch(Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
 exit(json_encode(array("statusCode"=>$GetSchedule[0]['id'])));
 
