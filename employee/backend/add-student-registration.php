@@ -15,7 +15,6 @@ try{
 
 for($i = 0; $i < count($GetSchedule); $i++ ){ 
 $Sched = $GetSchedule[$i]['sched_code'];
-$StudentNumber = $GetSchedule[$i]['student_id'];
 $SubjectName = $GetSchedule[$i]['subject_name'];
 $SectionName = $GetSchedule[$i]['section_name'];
 $Description = $GetSchedule[$i]['description'];
