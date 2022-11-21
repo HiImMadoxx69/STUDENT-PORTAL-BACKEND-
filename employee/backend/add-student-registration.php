@@ -7,9 +7,9 @@ $con = connection();
 
 $Schedule = $_POST['Schedule'];
 $StudentNumber = $_POST['StudentNumber'];
-
+$Fee = $_POST['Fee'];
 $GetSchedule = json_decode($Schedule, true);
-
+$GetFee = json_decode($Fee, true);
 try{
 
 
@@ -29,6 +29,15 @@ $sqlGenerateSchedule = "INSERT INTO tbl_gradesperstudent (`sched_code`, `student
 mysqli_query($con, $sqlGenerateSchedule);
 
 }
+
+for($i = 0; $i < count($GetFee); $i++){
+    $Name = $GetFee[$i]['name'];
+    $Amount = $GetFee[$i]['amount'];
+    $sqlAddStudentFee ="INSERT INTO tbl_tbl_feeperstudent
+    (`name`,`student_id`, `amount`) VALUES ('$Name', '$StudentNumber', '$Amount');";
+    mysqli_query($con, $sqlAddStudentFee);    
+}
+
 
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
