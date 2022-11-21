@@ -39,10 +39,10 @@ for($i = 0; $i < count($GetFee[0]); $i++){
     mysqli_query($con, $sqlAddStudentFee);    
 }
 
-
+exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
-exit(json_encode(array("statusCode"=>$GetSchedule[0]['id'])));
+
 
 ?>
