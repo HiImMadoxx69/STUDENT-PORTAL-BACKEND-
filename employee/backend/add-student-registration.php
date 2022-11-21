@@ -30,15 +30,23 @@ mysqli_query($con, $sqlGenerateSchedule);
 
 }
 
-for($i = 0; $i < count($GetFee); $i++){
-    $Name = $GetFee[$i][$i]['name'];
-    $Amount = $GetFee[$i][$i]['amount'];
-    $Subtotal = $GetFee[$i][$i]['subtotal'];
+for($i = 0; $i < count($GetFee[0]); $i++){
+    $Name = $GetFee[$i]['name'];
+    $Amount = $GetFee[$i]['amount'];
+    $Subtotal = $GetFee[$i]['subtotal'];
     $sqlAddStudentFee ="INSERT INTO tbl_feeperstudent
     (`name`,`student_id`, `amount`,`subtotal`) VALUES ('$Name', '$StudentNumber', '$Amount','$Subtotal');";
     mysqli_query($con, $sqlAddStudentFee);    
 }
 
+for($i = 0; $i < count($GetFee[1]); $i++){
+    $Name = $GetFee[$i]['name'];
+    $Amount = $GetFee[$i]['amount'];
+    $Subtotal = $GetFee[$i]['subtotal'];
+    $sqlAddStudentFee ="INSERT INTO tbl_feeperstudent
+    (`name`,`student_id`, `amount`,`subtotal`) VALUES ('$Name', '$StudentNumber', '$Amount','$Subtotal');";
+    mysqli_query($con, $sqlAddStudentFee);    
+}
 
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
