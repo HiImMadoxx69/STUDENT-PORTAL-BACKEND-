@@ -7,10 +7,21 @@ $con = connection();
 try{
 
 
+  
 
-$CurrentId  = $_POST['ID'];
-$SectionName = $_POST['SectionName'];
-$Semester = $_POST['Semester'];
+
+$StudentNumber = $_POST['StudentNumber'];
+$FirstName = $_POST['FirstName'];
+$MiddleName = $_POST['MiddleName'];
+$LastName = $_POST['LastName'];
+$Email = $_POST['Email'];
+$Address = $_POST['Address'];
+$Sex = $_POST['Sex'];
+$Course = $_POST['Course'];
+$Section = $_POST['Section'];
+$Birthday = $_POST['Birthday'];
+$Contact = $_POST['Contact'];
+$Faculty = $_POST['Faculty'];
 $Status = $_POST['Status'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
@@ -20,9 +31,9 @@ $SectionAndYear = $_POST['SectionAndYear'];
 //sd
 try{
     
-    if (isset($CurrentId)) {
+    if (isset($StudentNumber)) {
 
-        $beforeSql = "SELECT * FROM tbl_section WHERE `id` = '$CurrentId';";     
+        $beforeSql = "SELECT * FROM tbl_studentinfo WHERE `studentnumber` = '$StudentNumber';";     
        
         mysqli_query($con, $beforeSql);
 
@@ -30,10 +41,10 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_section` SET `semester` = '$Semester',`status` = '$Status' WHERE `tbl_section`.`id` = $CurrentId;";
+        $sql = "UPDATE `tbl_studentinfo` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName',`address` = '$Address',`sex` = '$Sex',`course` = '$Course',`section` = '$Section',`birthday` = '$Birthday',`contact` = '$Contact',`faculty` = '$Faculty',`status` = '$Status' WHERE `tbl_studentinfo`.`studentnumber` = $StudentNumber;";
         mysqli_query($con, $sql);
        
-        $AfterSql = "SELECT * FROM tbl_section WHERE `id` = $CurrentId;";     
+        $AfterSql = "SELECT * FROM tbl_studentinfo WHERE `studentnumber` = $StudentNumber;";     
                 
         mysqli_query($con, $AfterSql);
 
@@ -41,10 +52,10 @@ try{
         $rowAfter = json_encode($getAfter ->fetch_assoc());
         
 
-        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$SectionAndYear', '$rowAfter','$rowBefore');";
+        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowAfter','$rowBefore');";
                   mysqli_query($con, $auditsql);
 
-                  $xsql = "SELECT * from `tbl_section` WHERE `id` = '$CurrentId'";
+                  $xsql = "SELECT * from `tbl_studentinfo` WHERE `studentnumber` = '$StudentNumber'";
         mysqli_query($con, $xsql);
 
         $user = $con ->query($xsql) or die ($con->error);
