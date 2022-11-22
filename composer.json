@@ -1,6 +1,7 @@
 {
     "require": {
-        "psr/log": "^3.0"
+        "psr/log": "^3.0",
+        "cloudinary/cloudinary_php": "dev-master"
     },
     "post-install-cmd": [
         "php artisan clear-compiled",
