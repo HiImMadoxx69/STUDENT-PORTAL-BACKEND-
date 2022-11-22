@@ -37,7 +37,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_studentinfo` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName',`email` = '$Email', `address` = '$Address', `sex` = '$Sex', `course` = '$Course',`section` = '$Section', `birthday` = '$Birthday',`contact` = '$Contact', `guardian` = '$Guardian', `guardian_contact` = '$GuardianContact', `status` = '$Status' WHERE `studentnumber` = '$StudentNumber';";
+        $sql = "UPDATE `tbl_studentinfo` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName',`email` = '$Email', `address` = '$Address',`course` = '$Course',`section` = '$Section', `birthday` = '$Birthday',`contact` = '$Contact',`status` = '$Status' WHERE `studentnumber` = '$StudentNumber';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_studentinfo WHERE `studentnumber` = '$StudentNumber';";     
