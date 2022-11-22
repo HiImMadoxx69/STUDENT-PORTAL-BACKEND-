@@ -29,6 +29,7 @@ $con = connection();
     $Course = $_POST['Course'];
     $Section = $_POST['Section'];
     $AcademicYear = $_POST['AcademicYear'];
+    $Semester = $_POST['Semester'];x
     $Action = $_POST['Action'];
     $EditorPosition = $_POST['EditorPosition'];
     $EditorEmail = $_POST['EditorEmail'];
