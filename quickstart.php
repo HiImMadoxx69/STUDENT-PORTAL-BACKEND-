@@ -22,10 +22,7 @@ $imgSize = $_FILES['Image']['size'];
 $tmp_name = $_FILES['Image']['tmp_name'];
 
 try{
-
     if (isset($img_name)) {
-
-  
         if ( $imgSize > 2000000) {
           exit(json_encode(array("statusCode"=>201)));
         }
@@ -44,6 +41,7 @@ try{
         } else {
           exit(json_encode(array("statusCode"=>201)));
         }
+        exit(json_encode(array("statusCode"=>'No name')));
       } 
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
