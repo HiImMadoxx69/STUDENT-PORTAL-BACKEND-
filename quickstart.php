@@ -46,42 +46,46 @@ if (isset($img_name)) {
   } 
 
 
-// Upload the image
-$upload = new UploadApi();
-echo '<pre>';
-echo json_encode(
-    $upload->upload('https://res.cloudinary.com/demo/image/upload/flower.jpg', [
-        'public_id' => 'flower_sample',
-        'use_filename' => TRUE,
-        'overwrite' => TRUE]),
-    JSON_PRETTY_PRINT
-);
-echo '</pre>';
+// // Upload the image
+
+// $upload = new UploadApi();
+// echo '<pre>';
+// echo json_encode(
+//     $upload->upload('https://res.cloudinary.com/demo/image/upload/flower.jpg', [
+//         'public_id' => 'flower_sample',
+//         'use_filename' => TRUE,
+//         'overwrite' => TRUE]),
+//     JSON_PRETTY_PRINT
+// );
+// echo '</pre>';
 
 // Use the AdminApi class for managing assets
 use Cloudinary\Api\Admin\AdminApi;
 
 // Get the asset details
-$admin = new AdminApi();
-echo '<pre>';
-echo json_encode($admin->asset('flower_sample', [
-    'colors' => TRUE]), JSON_PRETTY_PRINT
-);
-echo '</pre>';
+
+// $admin = new AdminApi();
+// echo '<pre>';
+// echo json_encode($admin->asset('flower_sample', [
+//     'colors' => TRUE]), JSON_PRETTY_PRINT
+// );
+// echo '</pre>';
 
 // Use the Resize transformation group and the ImageTag class
-use Cloudinary\Transformation\Resize;
-use Cloudinary\Transformation\Background;
-use Cloudinary\Tag\ImageTag;
 
-// Create the image tag with the transformed image
-$imgtag = (new ImageTag('flower_sample'))
-    ->resize(Resize::pad()
-        ->width(400)
-        ->height(400)
-        ->background(Background::predominant())
-    );
+// use Cloudinary\Transformation\Resize;
+// use Cloudinary\Transformation\Background;
+// use Cloudinary\Tag\ImageTag;
 
-echo $imgtag;
+// // Create the image tag with the transformed image
+// $imgtag = (new ImageTag('flower_sample'))
+//     ->resize(Resize::pad()
+//         ->width(400)
+//         ->height(400)
+//         ->background(Background::predominant())
+//     );
+
+// echo $imgtag;
+
 // The code above generates an HTML image tag similar to the following:
 //  <img src="https://res.cloudinary.com/demo/image/upload/b_auto:predominant,c_pad,h_400,w_400/flower_sample">
