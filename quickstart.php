@@ -16,12 +16,15 @@ use Cloudinary\Api\Upload\UploadApi;
 // include_once("/employee/connections/connection.php");
 // $con = connection();
 
+
+try{
+
+    
 $img_name = $_FILES['Image']['name'];
 $img_size = $_FILES['Image']['size'];
 $imgSize = $_FILES['Image']['size'];
 $tmp_name = $_FILES['Image']['tmp_name'];
 
-try{
     if (isset($img_name)) {
         if ( $imgSize > 2000000) {
           exit(json_encode(array("statusCode"=>201)));
