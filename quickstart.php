@@ -4,7 +4,7 @@ header('Content-type: application/json');
 
 
 require __DIR__ . '/vendor/autoload.php';
-
+exit(json_encode(array("statusCode"=>201)));
 // Use the Configuration class 
 use Cloudinary\Configuration\Configuration;
 
