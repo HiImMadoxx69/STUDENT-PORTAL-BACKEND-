@@ -24,36 +24,43 @@ use Cloudinary\Transformation\Background;
 use Cloudinary\Tag\ImageTag;
 
 $Image = $_POST['Image'];
+$ImagePath = $_POST['Image']['path'];
+$ImageName = $_POST['Image']['name'];
 
 try{
 
-    $cloudinary->uploadApi()->upload($Image, $options = []);
+    // $cloudinary->uploadApi()->upload($Image, $options = []);
 
-    $cloudinary->uploadApi()->upload($Image);
+    // $cloudinary->uploadApi()->upload($Image);
 
 // Upload the image
 
-// $upload = new UploadApi();
-// echo '<pre>';
-// echo json_encode(
-//     $upload->upload('https://res.cloudinary.com/demo/image/upload/flower.jpg', [
-//         'public_id' => 'flower_sample',
-//         'use_filename' => TRUE,
-//         'overwrite' => TRUE]),
-//     JSON_PRETTY_PRINT
-// );
-// echo '</pre>';
+$upload = new UploadApi();
+
+json_encode(
+    $upload->upload($ImagePath, [
+        'public_id' => $ImageName,
+        'use_filename' => TRUE,
+        'overwrite' => TRUE]),
+    JSON_PRETTY_PRINT
+);
+
 
 
 
 
 // Get the asset details
 
-// $admin = new AdminApi();
+$admin = new AdminApi();
 // echo '<pre>';
-// echo json_encode($admin->asset('flower_sample', [
+// echo 
+// json_encode($admin->asset($ImageName, [
 //     'colors' => TRUE]), JSON_PRETTY_PRINT
 // );
+
+exit(json_encode($admin->asset($ImageName, [
+    'colors' => TRUE]), JSON_PRETTY_PRINT
+));
 // echo '</pre>';
 
 
@@ -73,5 +80,5 @@ try{
 
 
 }catch (Exception $e){
-
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
