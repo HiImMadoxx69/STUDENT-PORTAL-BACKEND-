@@ -24,7 +24,7 @@ try{
 
     
 
-    $BeforeSql = "SELECT * FROM tbl_announcement ORDER BY id DESC LIMIT 1;'";     
+    $BeforeSql = "SELECT * FROM tbl_announcement ORDER BY id DESC LIMIT 1;";     
                 
 
     mysqli_query($con, $BeforeSql);
