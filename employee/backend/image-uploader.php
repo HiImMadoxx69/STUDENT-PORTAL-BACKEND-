@@ -5,6 +5,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+
 // Use the Configuration class 
 use Cloudinary\Configuration\Configuration;
 
