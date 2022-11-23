@@ -24,15 +24,13 @@ try{
 
     
 
-    $getHighestid  = mysqli_query($con, "SELECT * from tbl_announcement ORDER BY `added_at` DESC LIMIT 1;");     
+    $getBefore  = mysqli_query($con, "SELECT * from tbl_announcement ORDER BY `added_at` DESC LIMIT 1;");     
                 
 
-    mysqli_query($con, $BeforeSql);
-
-    $getBefore = $con ->query($BeforeSql) or die ($con->error);
+    $getHighId = mysqli_fetch_all($getBefore, MYSQLI_ASSOC);
     $rowBefore = json_encode($getBefore ->fetch_assoc());
 
-    $getHighId = mysqli_fetch_all($getHighestid, MYSQLI_ASSOC);
+    
 
     $getID = $getHighId[0]['id'];
     
