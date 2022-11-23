@@ -2,8 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
 
-include_once("/employee/connections/connection.php");
-$con = connection();
+
 require __DIR__ . '/vendor/autoload.php';
 
 // Use the Configuration class 
@@ -14,7 +13,8 @@ Configuration::instance('cloudinary://my_key:my_secret@my_cloud_name?secure=true
 // Use the UploadApi class for uploading assets
 use Cloudinary\Api\Upload\UploadApi;
 
-
+// include_once("/employee/connections/connection.php");
+// $con = connection();
 
 $img_name = $_FILES['Image']['name'];
 $img_size = $_FILES['Image']['size'];
@@ -35,7 +35,7 @@ if (isset($img_name)) {
                     $img_ex_lc = strtolower($img_ex);
   
                     $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                    $img_upload_path = '../../uploads/'.$new_img_name;
+                    $img_upload_path = 'uploads/'.$new_img_name;
                     move_uploaded_file($tmp_name, $img_upload_path);
       
                    
