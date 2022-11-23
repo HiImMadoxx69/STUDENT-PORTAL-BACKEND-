@@ -18,12 +18,18 @@ use Cloudinary\Api\Upload\UploadApi;
 
 
 try{
-
+    $Image = $_POST['Image'];
+    $data = json_decode(file_get_contents($Image), true);
     
-$img_name = $_FILES['Image']['name'];
-$img_size = $_FILES['Image']['size'];
-$imgSize = $_FILES['Image']['size'];
-$tmp_name = $_FILES['Image']['tmp_name'];
+// $img_name = $_FILES['Image']['name'];
+// $img_size = $_FILES['Image']['size'];
+// $imgSize = $_FILES['Image']['size'];
+// $tmp_name = $_FILES['Image']['tmp_name'];
+
+$img_name = $data['name'];
+$imgSize = $data['size'];
+$tmp_name = $data['name'];
+
 
     if (isset($img_name)) {
         if ( $imgSize > 2000000) {
