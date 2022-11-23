@@ -19,7 +19,7 @@ try{
     
 
 
-    $sql = "INSERT INTO `tbl_announcement` (`image_url`,`title`,`category`,`message`) VALUES ('$ImageUrl','$Title','$Category','$Message');";
+    $sql = "INSERT INTO `tbl_announcement` (`image_url`,`title`,`category`,`message`,`editor`) VALUES ('$ImageUrl','$Title','$Category','$Message','$editEmail');";
     mysqli_query($con, $sql);
 
     
