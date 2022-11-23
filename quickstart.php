@@ -28,10 +28,7 @@ $tmp_name = $_FILES['Image']['tmp_name'];
     if (isset($img_name)) {
         if ( $imgSize > 2000000) {
           exit(json_encode(array("statusCode"=>201)));
-        }
-      
-        if (empty($errors)) {
-      
+        }  
             try{
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
@@ -44,11 +41,9 @@ $tmp_name = $_FILES['Image']['tmp_name'];
             }
                       
                 exit(json_encode(array("image"=>$new_img_name,"statusCode"=>200)));
-        } else {
-          exit(json_encode(array("statusCode"=>201)));
-        }
-        exit(json_encode(array("statusCode"=>'No name')));
-      } 
+      }else{
+        exit(json_encode(array("image"=>$new_img_name,"statusCode"=>'No name')));
+      }
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
