@@ -48,7 +48,7 @@ $tmp_name = $data['name'];
                       
                 exit(json_encode(array("image"=>$new_img_name,"statusCode"=>200)));
       }else{
-        exit(json_encode(array("image"=>$new_img_name,"statusCode"=>'No name')));
+        exit(json_encode(array("image"=>$new_img_name,"statusCode"=>$img_name)));
       }
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
