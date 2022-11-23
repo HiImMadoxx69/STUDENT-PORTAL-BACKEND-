@@ -29,15 +29,18 @@ try{
       
         if (empty($errors)) {
       
-                        $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-                        $img_ex_lc = strtolower($img_ex);
-      
-                        $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                        $img_upload_path = 'uploads/'.$new_img_name;
-                        move_uploaded_file($tmp_name, $img_upload_path);
-          
-                       
-                        exit(json_encode(array("image"=>$new_img_name,"statusCode"=>200)));
+            try{
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+
+                $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+                $img_upload_path = 'uploads/'.$new_img_name;
+                move_uploaded_file($tmp_name, $img_upload_path);
+            }catch(Exception $e){
+                exit(json_encode(array("statusCode"=>$e->getMessage())));
+            }
+                      
+                exit(json_encode(array("image"=>$new_img_name,"statusCode"=>200)));
         } else {
           exit(json_encode(array("statusCode"=>201)));
         }
