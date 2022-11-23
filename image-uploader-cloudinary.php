@@ -2,8 +2,8 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
 
-include_once("/employee/connections/connection.php");
-$con = connection();
+// include_once("/employee/connections/connection.php");
+// $con = connection();
 require __DIR__ . '/vendor/autoload.php';
 
 // Use the Configuration class 
