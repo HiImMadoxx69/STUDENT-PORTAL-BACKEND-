@@ -68,7 +68,7 @@ $tmp_name = $_FILES['Image']['tmp_name'];
 // echo '</pre>';
 
 // Use the AdminApi class for managing assets
-use Cloudinary\Api\Admin\AdminApi;
+// use Cloudinary\Api\Admin\AdminApi;
 
 // Get the asset details
 
