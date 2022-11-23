@@ -22,10 +22,11 @@ try{
     $sql = "INSERT INTO `tbl_announcement` (`image_url`,`title`,`category`,`message`) VALUES ('$ImageUrl','$Title','$Category','$Message');";
     mysqli_query($con, $sql);
 
+    
 
-    $BeforeSql = "SELECT TOP 1 * FROM `tbl_announcement` ORDER BY 
-    CONVERT(VARCHAR(10), `added_at`, 111) DESC'";     
+    $BeforeSql = "SELECT * FROM tbl_announcement ORDER BY id DESC LIMIT 1;'";     
                 
+
     mysqli_query($con, $BeforeSql);
 
     $getBefore = $con ->query($BeforeSql) or die ($con->error);
