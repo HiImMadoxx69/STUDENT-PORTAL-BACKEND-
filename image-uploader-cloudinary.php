@@ -23,12 +23,12 @@ use Cloudinary\Transformation\Resize;
 use Cloudinary\Transformation\Background;
 use Cloudinary\Tag\ImageTag;
 
-$Image = $_POST['Image'];
-$ImagePath = $_POST['Image']['path'];
-$ImageName = $_POST['Image']['name'];
 
 try{
 
+    $Image = $_POST['Image'];
+    $ImagePath = $_POST['Image']['path'];
+    $ImageName = $_POST['Image']['name'];
     // $cloudinary->uploadApi()->upload($Image, $options = []);
 
     // $cloudinary->uploadApi()->upload($Image);
