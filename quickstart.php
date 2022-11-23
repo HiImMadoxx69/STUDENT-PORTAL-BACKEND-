@@ -16,7 +16,7 @@ use Cloudinary\Api\Upload\UploadApi;
 // include_once("/employee/connections/connection.php");
 // $con = connection();
 
-exit(json_encode(array("statusCode"=>201)));
+
 try{
 
     
