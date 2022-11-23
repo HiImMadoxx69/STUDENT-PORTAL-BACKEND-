@@ -31,7 +31,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_announcement` SET `image_url` = '$ImageUrl', `title` = '$Title',`editor` = '$EditorEmail',`category` = '$Category',`message` ='$Message',`status` = '$Status' WHERE `tbl_fee`.`id` = '$CurrentId';";
+        $sql = "UPDATE `tbl_announcement` SET `image_url` = '$ImageUrl', `title` = '$Title',`editor` = '$EditorEmail',`category` = '$Category',`message` ='$Message',`status` = '$Status' WHERE `tbl_announcement`.`id` = '$CurrentId';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_announcement WHERE `id` = '$CurrentId';";     
