@@ -24,7 +24,7 @@ try{
 
     
 
-    $BeforeSql = "SELECT * FROM tbl_announcement ORDER BY id DESC LIMIT 1";     
+    $getHighestid  = mysqli_query($con, "SELECT * from tbl_announcement ORDER BY `added_at` DESC LIMIT 1;");     
                 
 
     mysqli_query($con, $BeforeSql);
@@ -32,7 +32,9 @@ try{
     $getBefore = $con ->query($BeforeSql) or die ($con->error);
     $rowBefore = json_encode($getBefore ->fetch_assoc());
 
-    $getID = $rowBefore['id'];
+    $getHighId = mysqli_fetch_all($getHighestid, MYSQLI_ASSOC);
+
+    $getID = $getHighId[0]['id'];
     
 
     $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$getID', '$rowBefore' );";
