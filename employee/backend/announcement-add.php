@@ -24,7 +24,7 @@ try{
 
 
     $BeforeSql = "SELECT TOP 1 * FROM tbl_announcement ORDER BY 
-    CONVERT(VARCHAR(10), lastUpdatedBy, 111) DESC'";     
+    CONVERT(VARCHAR(10), added_at, 111) DESC'";     
                 
     mysqli_query($con, $BeforeSql);
 
