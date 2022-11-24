@@ -19,7 +19,7 @@ try{
     
 
 
-    $sql = "UPDATE `tbl_admin` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName', `birthday` = '$Birthday', `contact` = '$Contact', `address` = '$Address', `profile_url` = '$ImageUrl' WHERE `tbl_admin`.`firstname` = '$FirstName';";
+    $sql = "UPDATE `tbl_admin` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName', `birthday` = '$Birthday', `contact` = '$Contact', `address` = '$Address', `profile_url` = '$ImageUrl' WHERE `tbl_admin`.`email` = '$Email';";
     mysqli_query($con, $sql);
 
     $AfterSql = "SELECT * FROM tbl_admin WHERE `email` = '$Email';";     
