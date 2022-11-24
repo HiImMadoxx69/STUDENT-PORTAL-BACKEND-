@@ -10,7 +10,7 @@ try{
     $Email = $_POST['Email'];
     $Password = $_POST['NewPassword'];
   
-if (isset($email)) {
+if (isset($Email)) {
 
  
  try{
@@ -23,7 +23,7 @@ if (isset($email)) {
 
         exit(json_encode(array("statusCode"=>200)));
  }catch(Exception $e){
-    exit(json_encode(array("statusCode"=>201)));
+  exit(json_encode(array("statusCode"=>$e->getMessage())));
   // exit(json_encode(array("statusCode"=>201)));
  }
  exit(json_encode(array("statusCode"=>201)));
