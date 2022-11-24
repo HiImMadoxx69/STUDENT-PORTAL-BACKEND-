@@ -8,7 +8,7 @@ $con = connection();
 try{
 
     $Email = $_POST['Email'];
-    $Password = $_POST['Password'];
+    $Password = $_POST['NewPassword'];
   
 if (isset($email)) {
 
