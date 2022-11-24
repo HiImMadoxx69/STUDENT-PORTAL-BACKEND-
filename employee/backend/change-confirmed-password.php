@@ -27,8 +27,10 @@ if (isset($Email)) {
   // exit(json_encode(array("statusCode"=>201)));
  }
  exit(json_encode(array("statusCode"=>201)));
+}else{
+    exit(json_encode(array("statusCode"=>201)));
 }
-exit(json_encode(array("statusCode"=>201)));
+
 }catch(Exception $e){
   // exit(json_encode(array("statusCode"=>$e->getMessage())));
   exit(json_encode(array("statusCode"=>201)));
