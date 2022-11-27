@@ -16,7 +16,7 @@ $GetFee = json_decode($Fee, true);
 try{
 
     $sqlRegister = "INSERT INTO tbl_studentregistration (`student_id`,`sectionandsemester`,`academicyear`,`semester`,`sectionandyear`) VALUES ('$StudentNumber', '$SectionAndYear', '$AcademicYear', '$Semester', '$SectionAndYear');";
-mysqli_query($con, $sqlGenerateSchedule);
+mysqli_query($con, $sqlRegister);
 
 for($i = 0; $i < count($GetSchedule); $i++ ){ 
 $Sched = $GetSchedule[$i]['sched_code'];
