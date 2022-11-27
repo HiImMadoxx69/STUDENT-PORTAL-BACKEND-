@@ -10,7 +10,6 @@ $AcademicYear = $_POST['AcademicYear'];
 $SectionAndYear = $_POST['SectionAndSemester'];
 $Semester = $_POST['Semester'];
 $Schedule = $_POST['Schedule'];
-$StudentNumber = $_POST['StudentNumber'];
 $Fee = $_POST['Fee'];
 $GetSchedule = json_decode($Schedule, true);
 $GetFee = json_decode($Fee, true);
