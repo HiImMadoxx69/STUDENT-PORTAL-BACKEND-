@@ -5,7 +5,7 @@ try{
     include_once("../connections/connection.php");
 $con = connection();
 
-$sql = mysqli_query($con, "SELECT * FROM `tbl_studentregistration` LEFT JOIN `tbl_studentinfo` ON `tbl_studentregistration`.`student_id` = `tbl_studentinfo`.`studentnumber` ORDER BY `tbl_studentregistration`.`added_at`;");
+$sql = mysqli_query($con, "SELECT * FROM `tbl_studentregistration` RIGHT JOIN `tbl_studentinfo` ON `tbl_studentregistration`.`student_id` = `tbl_studentinfo`.`studentnumber` ORDER BY `tbl_studentregistration`.`added_at`;");
 
 //store in result
 
