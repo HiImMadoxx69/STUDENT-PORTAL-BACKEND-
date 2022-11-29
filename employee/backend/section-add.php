@@ -19,9 +19,9 @@ $EndYear = $_POST['EndYear'];
 $AcademicYear = $_POST['AcademicYear'];
 $SectionName = $_POST['SectionName'];
 $SectionAndYear = $_POST['SectionAndYear'];
-
+$SectionAndSemester = $_POST['SectionAndSemester'];
 try{
-    $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`,`sectionandacademicyear`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear', '$SectionAndYear');";
+    $sql = "INSERT INTO `tbl_section` (`section_name`,`course`,`section_year`,`semester`,`year_start`,`year_end`,`academic_year`,`sectionandacademicyear`,`sectionandsemester`) VALUES ('$SectionName', '$Course', '$Year', '$Semester', '$StartYear', '$EndYear', '$AcademicYear', '$SectionAndYear','$SectionAndSemester');";
     mysqli_query($con, $sql);
 
 
