@@ -29,6 +29,16 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
+        if($Status == 'confirmed'){
+            $sql = "UPDATE `tbl_studentregistration` SET `section` = '$Section',`semester` ='$Semester', `academicyear` = '$AcademicYear',`status` = '$Status' WHERE `id` = '$CurrentID';";
+            mysqli_query($con, $sql);
+        }
+
+        if($Status == 'decline' || $Status == 'pending'){
+            $sql = "UPDATE `tbl_studentregistration` SET `status` = '$Status' WHERE `id` = '$CurrentID';";
+            mysqli_query($con, $sql);
+        }
+
         $sql = "UPDATE `tbl_studentregistration` SET `section` = '$Section',`semester` ='$Semester', `academicyear` = '$AcademicYear',`status` = '$Status' WHERE `id` = '$CurrentID';";
         mysqli_query($con, $sql);
        
