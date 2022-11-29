@@ -12,14 +12,9 @@ $StudentID = $_POST['StudentId'];
 
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
-    $total = $user->num_rows;
+
   
-    if($total > 0){
-        exit(json_encode(array("statusCode"=>$row)));
-    }else{
-        exit(json_encode(array("statusCode"=>201)));
-    }
-    exit(json_encode(array("statusCode"=>201)));
+    exit(json_encode(array("statusCode"=>$row)));
  }catch(Exception $e){
     exit(json_encode(array("statusCode"=>201)));
  }
