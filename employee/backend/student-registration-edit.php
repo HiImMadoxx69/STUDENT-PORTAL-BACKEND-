@@ -34,9 +34,7 @@ try{
             mysqli_query($con, $sql);
 
             
-            
-            $sqlv = "UPDATE `tbl_studentinfo` SET `section` = '$Section', `semester` = '$Semester', `academicyear` = '$AcademicYear' WHERE `studentnumber` = '$StudentNumber';";
-            mysqli_query($con, $sqlv);
+           
         }
 
         if($Status == 'decline' || $Status == 'pending'){
