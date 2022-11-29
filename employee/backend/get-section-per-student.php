@@ -8,7 +8,7 @@ $con = connection();
 
 $StudentID = $_POST['StudentId'];
 
-    $sql = "SELECT `tbl_studentinfo`.* , `tbl_section`.* FROM `tbl_studentinfo` WHERE `tbl_studentinfo`.`studentnumber` = '$StudentID ' LEFT JOIN `tbl_section` ON `tbl_studentinfo`.`section` = `tbl_section`.`section_name`;";
+    $sql = "SELECT `tbl_studentinfo`.* , `tbl_section`.* FROM `tbl_studentinfo` WHERE `tbl_studentinfo`.`studentnumber` = '$StudentID' LEFT JOIN `tbl_section` ON `tbl_studentinfo`.`section` = `tbl_section`.`section_name`;";
 
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
