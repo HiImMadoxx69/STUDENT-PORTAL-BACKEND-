@@ -6,7 +6,11 @@ $con = connection();
 
 
 try{
+
 $CurrentID = $_POST['ID'];
+$Section = $_POST['Section'];
+$Semester = $_POST['Semester'];
+$AcademicYear = $_POST['AcademicYear'];
 $Status = $_POST['Status'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
@@ -25,7 +29,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_studentregistration` SET `status` = '$Status' WHERE `id` = '$CurrentID';";
+        $sql = "UPDATE `tbl_studentregistration` SET `section` = '$Section',`semester` ='$Semester', `academicyear` = '$AcademicYear',`status` = '$Status' WHERE `id` = '$CurrentID';";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_studentregistration WHERE `id` = '$CurrentID';";     
