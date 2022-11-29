@@ -14,9 +14,9 @@ $StudentID = $_POST['StudentId'];
     $row = $user->fetch_assoc();
 
   
-    exit(json_encode(array("statusCode"=>$row)));
+    exit(json_encode(array("statusCode"=>200, "content" => $row)));
  }catch(Exception $e){
-    exit(json_encode(array("statusCode"=>201)));
+    exit(json_encode(array("statusCode" =>201, "error"=>$e->getMessage())));
  }
 
  ?>
