@@ -16,7 +16,7 @@ $StudentID = $_POST['StudentId'];
   
     exit(json_encode(array("statusCode"=>200, "content" => $row)));
  }catch(Exception $e){
-    exit(json_encode(array("statusCode" =>201, "error"=>$e->$StudentID)));
+    exit(json_encode(array("statusCode" =>201, "error"=>$e->getMessage())));
  }
 
  ?>
