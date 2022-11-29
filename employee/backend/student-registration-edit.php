@@ -35,7 +35,7 @@ try{
 
             
             
-            $sqlv = "UPDATE `tbl_studentinfo` SET `section` = '$Section', `semester` = '$Semester', `academicyear` = '$AcademicYear', `status` = '$Status' WHERE `studentnumber` = '$StudentNumber';";
+            $sqlv = "UPDATE `tbl_studentinfo` SET `section` = '$Section', `semester` = '$Semester', `academicyear` = '$AcademicYear' WHERE `studentnumber` = '$StudentNumber';";
             mysqli_query($con, $sqlv);
         }
 
