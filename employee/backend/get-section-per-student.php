@@ -15,9 +15,9 @@ $StudentID = $_POST['StudentId'];
     $total = $user->num_rows;
   
     if($total > 0){
-        exit(json_encode(array("statusCode"=>200)));
+        exit(json_encode(array("statusCode"=>$row)));
     }else{
-        exit(json_encode(array("statusCode"=>'Schedule doesnt not exist')));
+        exit(json_encode(array("statusCode"=>200)));
     }
     exit(json_encode(array("statusCode"=>201)));
  }catch(Exception $e){
