@@ -16,7 +16,7 @@ $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
 $EditorEmail = $_POST['EditorEmail'];
 $Category = $_POST['Category'];
-
+$StudentNumber = $_POST['StudentId'];
 try{
     
     if (isset($CurrentID)) {
@@ -30,8 +30,13 @@ try{
         $rowBefore = json_encode($setBefore);
 
         if($Status == 'confirmed'){
-            $sql = "UPDATE `tbl_studentregistration` SET `section` = '$Section',`semester` ='$Semester', `academicyear` = '$AcademicYear',`status` = '$Status' WHERE `id` = '$CurrentID';";
+            $sql = "UPDATE `tbl_studentregistration` SET `status` = '$Status' WHERE `id` = '$CurrentID';";
             mysqli_query($con, $sql);
+
+            
+
+            $sqlv = "UPDATE `tbl_studentinfo` SET `section` = '$Section',`semester` ='$Semester', `academicyear` = '$AcademicYear' WHERE `studentnumber` = '$StudentNumber';";
+            mysqli_query($con, $sqlv);
         }
 
         if($Status == 'decline' || $Status == 'pending'){
