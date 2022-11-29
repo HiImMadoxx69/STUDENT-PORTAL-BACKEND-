@@ -8,7 +8,7 @@ $con = connection();
 
 $StudentID = $_POST['StudentId'];
 
-    $sql = mysqli_query($con,"SELECT `tbl_studentinfo`.* , `tbl_section`.* FROM `tbl_studentinfo` LEFT JOIN `tbl_section` ON `tbl_studentinfo`.`section` = `tbl_section`.`sectionandsemester` WHERE `tbl_studentinfo`.`studentnumber` = '$StudentID'");
+    $sql = mysqli_query($con,"SELECT `tbl_studentinfo`.* , `tbl_section`.* FROM `tbl_studentinfo` LEFT JOIN `tbl_section` ON `tbl_studentinfo`.`section` = `tbl_section`.`sectionandsemester` WHERE `tbl_studentinfo`.`studentnumber` = '$StudentID';");
 
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
   
