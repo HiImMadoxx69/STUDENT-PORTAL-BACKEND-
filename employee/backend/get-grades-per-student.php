@@ -13,9 +13,13 @@ $SectionAndSemester = $_POST['SectionAndSemester'];
 
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
    
-    $sumSql = mysqli_query($con,"SELECT SUM(`grade`) FROM `tbl_gradesperstudent` WHERE `tbl_gradesperstudent`.`student_id` = '$StudentID' AND `tbl_gradesperstudent`.`sectionandsemester` = '$SectionAndSemester';");
+    $GPA = 0;
+    $Sum = 0;
+   for($i = 0; $i < count($result); $i++){
+      $Sum = $Sum + $result['grade']; 
+   }
 
-    $GPA = mysqli_fetch_all($sumSql, MYSQLI_ASSOC);
+   $GPA = $SUM / count($result);
 
     exit(json_encode(array("statusCode"=>200, "content" => $result, "GPA" => $GPA)));
  }catch(Exception $e){
