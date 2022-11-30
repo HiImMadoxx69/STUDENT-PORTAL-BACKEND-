@@ -7,15 +7,16 @@
 $con = connection();
 
 $StudentID = $_POST['StudentId'];
-$SectionAndSemester = $_POST['SectionAndSemester'];
 
-    $sql = mysqli_query($con,"SELECT * FROM `tbl_gradesperstudent` WHERE `tbl_gradesperstudent`.`studentnumber` = '$StudentID' AND `tbl_gradesperstudent`.`sectionandsemester` = '$SectionAndSemester ' ;");
+$sql = mysqli_query($con,"SELECT * FROM tbl_studentregistration WHERE student_id = '$StudentID' AND status = 'confirmed';");
 
+    
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
   
     exit(json_encode(array("statusCode"=>200, "content" => $result)));
+    
  }catch(Exception $e){
-    exit(json_encode(array("statusCode" =>201, "error"=>$e->getMessage())));
+    exit(json_encode(array("statusCode"=>201)));
  }
 
  ?>
