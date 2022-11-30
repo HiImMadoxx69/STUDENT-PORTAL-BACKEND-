@@ -14,7 +14,7 @@ $SectionAndSemester = $_POST['SectionAndSemester'];
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
    
     $GPA = 0;
-    $Sum = 0;
+    $Sum = 3;
    for($i = 0; $i < count($result); $i++){
       $float_value = (float) $result[$i]['grade'];
       $Sum = $Sum + $float_value; 
