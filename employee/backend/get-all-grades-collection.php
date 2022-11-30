@@ -8,7 +8,7 @@ $con = connection();
 
 $StudentID = $_POST['StudentId'];
 
-    $sql = "SELECT * FROM tbl_subjectpersection WHERE sched_code = '$StudentID' AND status = 'confirmed'";
+    $sql = "SELECT * FROM tbl_studentregistration WHERE student_id = '$StudentID' AND status = 'confirmed' ";
 
     $user = $con ->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
