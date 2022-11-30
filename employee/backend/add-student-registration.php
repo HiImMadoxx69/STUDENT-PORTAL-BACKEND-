@@ -49,7 +49,7 @@ for($i = 0; $i < count($GetFee[0]); $i++){
 }
 
 $sqlAddStudentFee ="INSERT INTO tbl_accountbalance
-(`studentnumber`,`academicyear`,`semester`,`totalfee`,`totalpaid`,`balance`) VALUES ('$StudentNumber', '$AcademicYear', '$Semester','$TotalFee','$TotalPaid','$Balance');";
+(`studentnumber`,`academicyear`,`semester`,`totalfee`,`totalpaid`,`balance`) VALUES ('$StudentNumber', '$AcademicYear', '$Semester','$TotalFee','$TotalPaid','$TotalFee');";
 mysqli_query($con, $sqlAddStudentFee); 
 
 
