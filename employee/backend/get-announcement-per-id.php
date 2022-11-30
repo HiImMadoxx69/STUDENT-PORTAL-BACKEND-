@@ -8,7 +8,7 @@ $con = connection();
 
 $ID = $_POST['ID'];
 
-$sql = mysqli_query($con,"SELECT * FROM tbl_announcement WHERE id = '$ID';");
+$sql = mysqli_query($con,"SELECT * FROM tbl_announcement WHERE `tbl_announcement`.`id` = '$ID';");
 
     
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
