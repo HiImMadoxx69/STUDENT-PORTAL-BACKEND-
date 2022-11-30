@@ -16,7 +16,7 @@ $SectionAndSemester = $_POST['SectionAndSemester'];
     $GPA = 0;
     $Sum = 0;
    for($i = 0; $i < count($result); $i++){
-      $Sum = $Sum + $result['grade']; 
+      $Sum = $Sum + $result[$i]['grade']; 
    }
 
    $GPA = $SUM / count($result);
