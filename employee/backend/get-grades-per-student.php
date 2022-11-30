@@ -14,13 +14,13 @@ $SectionAndSemester = $_POST['SectionAndSemester'];
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
    
     $GPA = 0;
-    $Sum = 3;
+    $Sum = 0;
    for($i = 0; $i < count($result); $i++){
       $float_value = (float) $result[$i]['grade'];
-      $Sum = $Sum + $float_value; 
+      $Sum = (float) $Sum + $float_value; 
    }
 
-   $GPA = $SUM / count($result);
+   $GPA =  (float) $SUM / count($result);
 
     exit(json_encode(array("statusCode"=>200, "content" => $result, "GPA" => $GPA)));
  }catch(Exception $e){
