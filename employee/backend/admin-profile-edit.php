@@ -21,7 +21,7 @@ try{
     $sql = "UPDATE `tbl_admin` SET `firstname` = '$FirstName', `middlename` = '$MiddleName',`lastname` = '$LastName', `birthday` = '$Birthday', `contact` = '$Contact', `address` = '$Address' WHERE `tbl_admin`.`email` = '$Email';";
     mysqli_query($con, $sql);
 
-    $AfterSql = "SELECT `email`,`firstname`,`middlename`,`lastname`,`birthday`,`sex`,`position`,`address`,`contact`,`about`,`twitterprofile`,`facebookprofile`,`instagramprofile`,`linkedinprofile`,`status`,`added_at` FROM tbl_admin WHERE `email` = '$Email'";     
+    $AfterSql = "SELECT * FROM tbl_admin WHERE `email` = '$Email'";     
                 
     mysqli_query($con, $AfterSql);
 
