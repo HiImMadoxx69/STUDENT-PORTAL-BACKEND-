@@ -4,6 +4,9 @@ header('Content-type: application/json');
 include_once("../connections/connection.php");
 $con = connection();
 
+$basic  = new \Vonage\Client\Credentials\Basic("3d9dfeb4", "iouHxWLbe9jz28N0");
+$client = new \Vonage\Client($basic);
+
 try{
 
 
@@ -46,6 +49,18 @@ try{
 
         $user = $con ->query($xsql) or die ($con->error);
         $row = $user->fetch_assoc();
+
+        $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("639152052904", BRAND_NAME, 'A text message sent using the Nexmo SMS API')
+        );
+        
+        $message = $response->current();
+        
+        if ($message->getStatus() == 0) {
+            echo "The message was sent successfully\n";
+        } else {
+            echo "The message failed with status: " . $message->getStatus() . "\n";
+        }
         
         exit(json_encode(array("statusCode"=>$row)));
     }
