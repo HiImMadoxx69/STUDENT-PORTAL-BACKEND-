@@ -26,7 +26,7 @@ try{
     mysqli_query($con, $AfterSql);
 
     $getAfter = $con ->query($AfterSql) or die ($con->error);
-    $rowAfter = json_encode($getAfter ->fetch_assoc());
+    $rowAfter = $getAfter ->fetch_assoc();
 
    
     exit(json_encode(array("statusCode"=>200, "information" => $rowAfter )));
