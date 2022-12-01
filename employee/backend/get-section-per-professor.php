@@ -8,7 +8,7 @@ $con = connection();
 
 $Email = $_POST['Email'];
 
-    $sql = mysqli_query($con,"SELECT DISTINCT `tbl_subjectpersection`.`sectionandacademicyear` , `tbl_subjectpersection`.`id` FROM `tbl_professor` LEFT JOIN `tbl_subjectpersection` ON `tbl_professor`.`professor_username` = `tbl_subjectpersection`.`professor_initial` WHERE `tbl_professor`.`email` = '$Email' AND `tbl_subjectpersection`.`status` = 'active';");
+    $sql = mysqli_query($con,"SELECT `tbl_subjectpersection`.`id` ,`tbl_subjectpersection`.`sectionacademicyear` FROM `tbl_professor` LEFT JOIN `tbl_subjectpersection` ON `tbl_professor`.`professor_username` = `tbl_subjectpersection`.`professor_initial` WHERE `tbl_professor`.`email` = '$Email' AND `tbl_subjectpersection`.`status` = 'active' GROUP BY(`tbl_subjectpersection`.`sectionacademicyear`);");
 
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
   
