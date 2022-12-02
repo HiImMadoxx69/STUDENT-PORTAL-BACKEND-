@@ -30,7 +30,7 @@ $Twitter = $_POST['Twitter'];
 $Facebook = $_POST['Facebook'];
 $Instagram = $_POST['Instagram'];
 $Linkedin = $_POST['Linkedin'];
-
+$DateHired = $_POST['DateHired'];
 
 try{
     
@@ -171,7 +171,7 @@ $mail->smtpClose();
 $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
 if($hashed_password != $Password){
-    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$hashedPassword', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
+    $sql = "INSERT INTO `tbl_admin` (`profile_url`, `email`,`password`, `firstname`, `middlename`, `lastname`, `birthday`, `sex`, `position`, `address`, `contact`,`datehired`, `twitterprofile`, `facebookprofile`, `instagramprofile`, `linkedinprofile`) VALUES ('default_profile.jpg', '$Email', '$hashedPassword', '$Fname', '$Mname', '$Lname', '$Birthday', '$Sex', '$Position', '$Address', '$Contact', '$DateHired','$Twitter', '$Facebook', '$Instagram', '$Linkedin');";
     mysqli_query($con, $sql);
 
     $auditsql = "INSERT INTO `tbl_audit` (`action`) VALUES ('Created a new User Account');";
