@@ -6,7 +6,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$sql = mysqli_query($con, "SELECT id, profile_url, firstname, middlename, lastname, email, faculty, professor_username, status, added_at FROM `tbl_professor`  ORDER BY `id` DESC");
+$sql = mysqli_query($con, "SELECT * status, added_at FROM `tbl_professor`  ORDER BY `id` DESC");
 
 //store in result
 
