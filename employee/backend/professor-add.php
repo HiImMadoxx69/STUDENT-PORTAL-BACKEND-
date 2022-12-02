@@ -23,6 +23,7 @@ $Email = $_POST['Email'];
 $Password = $_POST['Password'];
 $Gender = $_POST['Gender'];
 $Faculty = $_POST['Faculty'];
+$DateHired = $_POST['DateHired'];
 $ProfessorUsername = $_POST['ProfessorUsername'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
@@ -166,10 +167,10 @@ $mail->smtpClose();
 }
     $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO `tbl_professor` (`profile_url`, `firstname`, `middlename`, `lastname`, `email`, `password`, `faculty`,`professor_username`) VALUES ('default_profile.jpg', '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword', '$Faculty', '$ProfessorUsername');";
+    $sql = "INSERT INTO `tbl_professor` (`profile_url`, `firstname`, `middlename`, `lastname`, `email`, `password`, `faculty`,`professor_username`,`date_hired`) VALUES ('default_profile.jpg', '$Firstname', '$Middlename', '$Lastname', '$Email', '$hashedPassword', '$Faculty', '$ProfessorUsername','$DateHired');";
     mysqli_query($con, $sql);
 
-    $BeforeSql = "SELECT `profile_url`, `firstname`, `middlename`, `lastname`, `email`, `faculty`,`professor_username`, `status`, `added_at` FROM tbl_professor WHERE professor_username = '$ProfessorUsername'";     
+    $BeforeSql = "SELECT * FROM tbl_professor WHERE professor_username = '$ProfessorUsername'";     
                 
     mysqli_query($con, $BeforeSql);
 
