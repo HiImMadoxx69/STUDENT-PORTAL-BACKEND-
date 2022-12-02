@@ -25,7 +25,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = " UPDATE `tbl_academicyear` SET `tbl_academicyear`.`status` = IF(`tbl_academicyear`.`id` = '$CurrentId', 'active', 'inactive');UPDATE `tbl_academicyear` SET `status` = '$Status' WHERE `tbl_academicyear`.`id` = '$CurrentId';";
+        $sql = " UPDATE `tbl_academicyear` SET `tbl_academicyear`.`status` = IF(`tbl_academicyear`.`id` = '$CurrentId', 'active', 'inactive');";
 
        
         mysqli_query($con, $sql);
