@@ -41,12 +41,11 @@ try{
         $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$CurrentId', '$rowAfter','$rowBefore');";
                   mysqli_query($con, $auditsql);
 
-                  $xsql = "SELECT * from `tbl_academicyear` WHERE `id` =  '$CurrentId'";
-        mysqli_query($con, $xsql);
+                  $sqvl = mysqli_query($con, "SELECT * FROM `tbl_academicyear`  ORDER BY `id` DESC");
+                  
+$result = mysqli_fetch_all($sqvl, MYSQLI_ASSOC);
 
-        $user = $con ->query($xsql) or die ($con->error);
-        $row = $user->fetch_assoc();
-        exit(json_encode(array("statusCode"=>$row)));
+        exit(json_encode(array("statusCode"=>$result)));
     }
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
