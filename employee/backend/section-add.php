@@ -60,7 +60,7 @@ try{
         
         $GenerateSchedCode = $StartYear . $getHighId[0]['id'] . $GenerateID . $GenerateUnit;
 
-        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`sched_code`,`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`,`sectionacademicyear`, `subject_id`,`section_id`) VALUES ('$GenerateSchedCode','$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear','$SectionAndYear', '$GenerateID','$GenerateSectionID');";
+        $sqlGenerateSchedule = "INSERT INTO tbl_subjectpersection (`sched_code`,`subject_name`, `section_name`, `description`, `units`,`semester`, `schedule_day`, `schedule_time`, `professor_initial`, `academic_year`,`sectionacademicyear`, `subject_id`,`section_id`,`sectionandsemester`) VALUES ('$GenerateSchedCode','$GenerateSubName', '$SectionName', '$GenerateDesc', '$GenerateUnit','$Semester', '', '', '', '$AcademicYear','$SectionAndYear', '$GenerateID','$GenerateSectionID','$SectionAndSemester');";
         mysqli_query($con, $sqlGenerateSchedule);
     }
 
