@@ -52,6 +52,21 @@ $sqlAddStudentFee ="INSERT INTO tbl_accountbalance
 (`studentnumber`,`academicyear`,`semester`,`totalfee`,`totalpaid`,`balance`) VALUES ('$StudentNumber', '$AcademicYear', '$Semester','$TotalFee','$TotalPaid','$TotalFee');";
 mysqli_query($con, $sqlAddStudentFee); 
 
+$sqlUpdateStud = "UPDATE `tbl_section` SET `tbl_section`.`totalstudent` = `tbl_section`.`totalstudent` + 1 WHERE `tbl_section`.`sectionandsemester` = '$SectionAndSemester';";
+        mysqli_query($con, $sqlUpdateStud);
+
+        $AfterSql = "SELECT * FROM tbl_fee WHERE `id` = '$CurrentId';";     
+                
+        mysqli_query($con, $AfterSql);
+
+        $getAfter = $con ->query($AfterSql) or die ($con->error);
+        $rowAfter = json_encode($getAfter ->fetch_assoc());
+        
+
+        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`) VALUES ('$Action','$Category','Student','$StudentNumber', '$StudentNumber', '$rowAfter');";
+                  mysqli_query($con, $auditsql);
+
+
 
 exit(json_encode(array("statusCode"=>200)));
 }catch(Exception $e){
