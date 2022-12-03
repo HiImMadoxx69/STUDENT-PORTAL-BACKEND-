@@ -11,6 +11,7 @@ try{
 $CurrentId  = $_POST['ID'];
 $SectionName = $_POST['SectionName'];
 $Semester = $_POST['Semester'];
+$MaxStudent = $_POST['MaxStudent'];
 $Status = $_POST['Status'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
@@ -30,7 +31,7 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_section` SET `semester` = '$Semester',`status` = '$Status' WHERE `tbl_section`.`id` = $CurrentId;";
+        $sql = "UPDATE `tbl_section` SET `semester` = '$Semester',`status` = '$Status', `maxstudent` = '$MaxStudent' WHERE `tbl_section`.`id` = $CurrentId;";
         mysqli_query($con, $sql);
        
         $AfterSql = "SELECT * FROM tbl_section WHERE `id` = $CurrentId;";     
