@@ -5,8 +5,6 @@ header('Content-type: application/json');
 include_once("../connections/connection.php");
 $con = connection();
 
-$SectionName = $_POST['SectionAY'];
-
 
 $Year = $_['Year'];
 $AcademicYear = $_POST['AcademicYear'];
