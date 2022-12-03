@@ -6,7 +6,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$Year = $_['Year'];
+$Year = $_POST['Year'];
 $AcademicYear = $_POST['AcademicYear'];
 $Semester = $_POST['Semester'];
 $Course = $_POST['Course'];
