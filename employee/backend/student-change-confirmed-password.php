@@ -16,7 +16,7 @@ if (isset($StudentNumber)) {
  try{
     $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-                  $sql = "UPDATE `tbl_studentinfo` SET `password` = '$hashedPassword' WHERE `tbl_studentinfo`.`student` = '$StudentNumber';";
+                  $sql = "UPDATE `tbl_studentinfo` SET `password` = '$hashedPassword' WHERE `tbl_studentinfo`.`studentnumber` = '$StudentNumber';";
     
                   mysqli_query($con, $sql);
 
