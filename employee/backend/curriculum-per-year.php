@@ -7,11 +7,11 @@ $con = connection();
 
 $Course = $_POST['Course'];
 $Year = $_POST['Year'];
-
+$Semester = $_POST['Semester'];
 try{
     
 
-    $sql = mysqli_query($con, "SELECT * FROM `tbl_subject` WHERE status = 'active' AND `course_available` LIKE '%$Course%' AND `year_available` = '$Year' ORDER BY `id` DESC");
+    $sql = mysqli_query($con, "SELECT * FROM `tbl_subject` WHERE status = 'active' AND `course_available` LIKE '%$Course%' AND `year_available` = '$Year' AND `semester` = '$Semester' ORDER BY `id` DESC");
 
     //store in result
     
