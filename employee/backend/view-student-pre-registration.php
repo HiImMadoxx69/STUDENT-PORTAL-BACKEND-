@@ -22,9 +22,9 @@ $sqlfee = mysqli_query($con, "SELECT * FROM `tbl_feeperstudent` WHERE `tbl_feepe
 
 $fee = mysqli_fetch_all($sqlfee, MYSQLI_ASSOC);
 
-$student = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE `tbl_studentinfo`.`student_id` = '$StudentNumber'  ORDER BY `id` DESC");
+$sqlstudent = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE `tbl_studentinfo`.`student_id` = '$StudentNumber'  ORDER BY `id` DESC");
 
-$fee = mysqli_fetch_all($sqlfee, MYSQLI_ASSOC);
+$student = mysqli_fetch_all($sqlstudent, MYSQLI_ASSOC);
 
 exit(json_encode(array("info"=>$prereg, "sched" => $sched, "fee" =>$fee, "student" => $student)));
 ?>
