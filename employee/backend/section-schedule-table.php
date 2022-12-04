@@ -12,7 +12,7 @@ try{
 
     $sql = mysqli_query($con, "SELECT * FROM `tbl_subjectpersection` WHERE sectionandsemester = '$SectionName' ORDER BY `id` DESC");
 
-    //store in result
+    //store in results
     
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
     
