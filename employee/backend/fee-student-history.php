@@ -9,7 +9,7 @@ $StudentNumber = $_POST['StudentNumber'];
 try{
     
     $sql = mysqli_query($con, "SELECT 
-    * FROM `tbl_updatehistory` WHERE `category` = 'StudentFee' AND `editor_email` = '$StudentNumber';");
+    * FROM `tbl_updatehistory` WHERE `category` = 'StudentFee' AND `edited_email` = '$StudentNumber';");
     
     //store in result
     
