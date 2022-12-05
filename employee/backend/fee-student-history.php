@@ -4,10 +4,12 @@
 include_once("../connections/connection.php");
 $con = connection();
 
+$StudentNumber = $_POST['StudentNumber'];
+
 try{
     
     $sql = mysqli_query($con, "SELECT 
-    * FROM `tbl_updatehistory` WHERE `category` = 'StudentFee'");
+    * FROM `tbl_updatehistory` WHERE `category` = 'StudentFee' AND `editor_email` = '$StudentNumber';");
     
     //store in result
     
