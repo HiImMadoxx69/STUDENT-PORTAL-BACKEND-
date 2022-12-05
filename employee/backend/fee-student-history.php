@@ -22,7 +22,7 @@ $sqlstudent = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE `tbl_stu
 
 $student = mysqli_fetch_all($sqlstudent, MYSQLI_ASSOC);
 
-$studentacc = mysqli_query($con,"SELECT * FROM `tbl_accountbalance` WHERE `tbl_accountbalance`.`studentnumber` = '$StudentNumber' ;");
+$studentacc = mysqli_query($con,"SELECT * FROM `tbl_accountbalance` WHERE `tbl_accountbalance`.`studentnumber` = '$StudentNumber';");
 
 $balance = mysqli_fetch_all($studentacc, MYSQLI_ASSOC);
     
