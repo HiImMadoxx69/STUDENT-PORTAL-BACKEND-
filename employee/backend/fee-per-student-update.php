@@ -7,6 +7,7 @@ $con = connection();
 try{
 
 $CurrentId  = $_POST['ID'];
+$StudentNumber = $_POST['StudentNumber'];
 $TotalPaid = $_POST['TotalPaid'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
@@ -36,7 +37,7 @@ try{
         $rowAfter = json_encode($getAfter ->fetch_assoc());
         
 
-        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$Name', '$rowAfter','$rowBefore');";
+        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$StudentNumber', '$Name', '$rowAfter','$rowBefore');";
                   mysqli_query($con, $auditsql);
 
                   $xsql = "SELECT * from `tbl_accountbalance` WHERE `id` =  '$CurrentId'";
