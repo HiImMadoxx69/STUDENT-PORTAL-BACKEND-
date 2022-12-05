@@ -5,7 +5,8 @@ include_once("../connections/connection.php");
 $con = connection();
 
 $StudentNumber = $_POST['StudentNumber'];
-
+$AcademicYear = $_POST['AcademicYear'];
+$Semester = $_POST['Semester'];
 try{
     
 
@@ -22,7 +23,7 @@ $sqlstudent = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE `tbl_stu
 
 $student = mysqli_fetch_all($sqlstudent, MYSQLI_ASSOC);
 
-$studentacc = mysqli_query($con,"SELECT * FROM `tbl_accountbalance` WHERE `tbl_accountbalance`.`studentnumber` = '$StudentNumber';");
+$studentacc = mysqli_query($con,"SELECT * FROM `tbl_accountbalance` WHERE `tbl_accountbalance`.`studentnumber` = '$StudentNumber' AND `tbl_accountbalance`.`academicyear` = '$AcademicYear' AND `tbl_accountbalance`.`semester` = '$Semester';");
 
 $balance = mysqli_fetch_all($studentacc, MYSQLI_ASSOC);
     
