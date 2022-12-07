@@ -26,8 +26,13 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_accountbalance` SET `tbl_accountbalance`.`totalpaid` = `tbl_accountbalance`.`totalpaid` + '$Payment', `tbl_accountbalance`.`balance` = `tbl_accountbalance`.`balance` - `tbl_accountbalance`.`totalpaid`, `tbl_accountbalance`.`payment` = '$Payment' WHERE `tbl_accountbalance`.`id` = '$CurrentId';";
+        $sql = "UPDATE `tbl_accountbalance` SET `tbl_accountbalance`.`totalpaid` = `tbl_accountbalance`.`totalpaid` + '$Payment',  `tbl_accountbalance`.`payment` = '$Payment' WHERE `tbl_accountbalance`.`id` = '$CurrentId';";
         mysqli_query($con, $sql);
+
+        
+
+        $sqlu = "UPDATE `tbl_accountbalance` SET  `tbl_accountbalance`.`balance` = `tbl_accountbalance`.`balance` - `tbl_accountbalance`.`totalpaid`, `tbl_accountbalance`.`payment` = '$Payment' WHERE `tbl_accountbalance`.`id` = '$CurrentId';";
+        mysqli_query($con, $sqlu);
 
     //     $sql = "INSERT INTO `tbl_accountbalancehistory` (`academicyear`,`semester`,`totalfee`,`totalpaid`,`balance`,`payment`) VALUES ('$AcademicYear','$Semester');";
     // mysqli_query($con, $sql);
