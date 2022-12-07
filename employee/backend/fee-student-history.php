@@ -23,11 +23,15 @@ $sqlstudent = mysqli_query($con, "SELECT * FROM `tbl_studentinfo` WHERE `tbl_stu
 
 $student = mysqli_fetch_all($sqlstudent, MYSQLI_ASSOC);
 
+$studentfee = mysqli_query($con,"SELECT * FROM `tbl_feeperstudent` WHERE `tbl_feeperstudent`.`student_id` = '$StudentNumber' AND `tbl_feeperstudent`.`academicyear` = '$AcademicYear' AND `tbl_feeperstudent`.`semester` = '$Semester';");
+
+$fee = mysqli_fetch_all($studentfee, MYSQLI_ASSOC);
+
 $studentacc = mysqli_query($con,"SELECT * FROM `tbl_accountbalance` WHERE `tbl_accountbalance`.`studentnumber` = '$StudentNumber' AND `tbl_accountbalance`.`academicyear` = '$AcademicYear' AND `tbl_accountbalance`.`semester` = '$Semester';");
 
 $balance = mysqli_fetch_all($studentacc, MYSQLI_ASSOC);
     
-    exit(json_encode(array("history"=>$result, "student" => $student, "balance" => $balance )));
+    exit(json_encode(array("history"=>$result, "student" => $student, "balance" => $balance, "fee" => $fee )));
 }catch(Exception $e){
     exit(json_encode(array($e->getMessage())));
 }
