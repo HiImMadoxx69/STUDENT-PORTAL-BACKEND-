@@ -44,7 +44,7 @@ for($i = 0; $i < count($GetFee[0]); $i++){
     $Subtotal = $GetFee[0][$i]['subtotal'];
     $TotalFee = doubleval($TotalFee) + doubleval($Subtotal);
     $sqlAddStudentFee ="INSERT INTO tbl_feeperstudent
-    (`name`,`student_id`, `amount`,`subtotal`,`academicyear`,`sectionandyear`,`sectionandsemester`) VALUES ('$Name', '$StudentNumber', '$Amount','$Subtotal','$AcademicYear','$SectionAndYear', '$SectionAndSemester');";
+    (`name`,`student_id`, `amount`,`subtotal`,`academicyear`,`sectionandyear`,`sectionandsemester`,`semester`) VALUES ('$Name', '$StudentNumber', '$Amount','$Subtotal','$AcademicYear','$SectionAndYear', '$SectionAndSemester',`$Semester`);";
     mysqli_query($con, $sqlAddStudentFee);    
 }
 
