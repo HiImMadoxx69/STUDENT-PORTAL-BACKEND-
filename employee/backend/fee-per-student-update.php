@@ -8,7 +8,7 @@ try{
 
 $CurrentId  = $_POST['ID'];
 $StudentNumber = $_POST['StudentNumber'];
-$TotalPaid = $_POST['TotalPaid'];
+$Payment = $_POST['Payment'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
 $EditorEmail = $_POST['EditorEmail'];
@@ -26,14 +26,20 @@ try{
         $setBefore =  $getBefore ->fetch_assoc();
         $rowBefore = json_encode($setBefore);
 
-        $sql = "UPDATE `tbl_accountbalance` SET `tbl_accountbalance`.`totalpaid` = `tbl_accountbalance`.`totalpaid` + '$TotalPaid', `tbl_accountbalance`.`balance` = `tbl_accountbalance`.`balance` - `tbl_accountbalance`.`totalpaid` WHERE `tbl_accountbalance`.`id` = '$CurrentId';";
+        $sql = "UPDATE `tbl_accountbalance` SET `tbl_accountbalance`.`totalpaid` = `tbl_accountbalance`.`totalpaid` + '$Payment', `tbl_accountbalance`.`balance` = `tbl_accountbalance`.`balance` - `tbl_accountbalance`.`totalpaid`, `tbl_accountbalace`.`payment` = '$Payment' WHERE `tbl_accountbalance`.`id` = '$CurrentId';";
         mysqli_query($con, $sql);
+
+    //     $sql = "INSERT INTO `tbl_accountbalancehistory` (`academicyear`,`semester`,`totalfee`,`totalpaid`,`balance`,`payment`) VALUES ('$AcademicYear','$Semester');";
+    // mysqli_query($con, $sql);
+
+
        
         $AfterSql = "SELECT * FROM tbl_accountbalance WHERE `id` = '$CurrentId';";     
                 
         mysqli_query($con, $AfterSql);
 
         $getAfter = $con ->query($AfterSql) or die ($con->error);
+        $arPayment = [$Payment];
         $rowAfter = json_encode($getAfter ->fetch_assoc());
         
 
