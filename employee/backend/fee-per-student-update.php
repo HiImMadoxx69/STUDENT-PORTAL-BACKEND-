@@ -39,7 +39,6 @@ try{
         mysqli_query($con, $AfterSql);
 
         $getAfter = $con ->query($AfterSql) or die ($con->error);
-        $arPayment = [$Payment];
         $rowAfter = json_encode($getAfter ->fetch_assoc());
         
 
