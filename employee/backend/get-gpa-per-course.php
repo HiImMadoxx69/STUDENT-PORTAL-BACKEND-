@@ -18,7 +18,7 @@ $sql = mysqli_query($con,"SELECT * FROM tbl_gradesperstudent WHERE section_name 
     $gpa = 0;
     $sum = 0;
     for($i =0; $i<count($result); $i++){
-        $sum = floatval($sum) +  floatval($result['grade']);
+        $sum = floatval($sum) +  floatval($result[$i]['grade']);
     }
     
     $gpa = floatval($sum) / count($result);
