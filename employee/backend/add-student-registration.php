@@ -29,8 +29,9 @@ $Semester = $GetSchedule[$i]['semester'];
 $Day = $GetSchedule[$i]['schedule_day'];
 $Time = $GetSchedule[$i]['schedule_time'];
 $SectionAndYear = $GetSchedule[$i]['sectionacademicyear'];
+$Professor =  $GetSchedule[$i]['professor_initial'];
 
-$sqlGenerateSchedule = "INSERT INTO tbl_gradesperstudent (`sched_code`, `student_id`,`subject_name`,`section_name`,`description`,`units`,`semester`,`schedule_day`,`schedule_time`,`academic_year`,`sectionandacademicyear`,`sectionandsemester`) VALUES ('$Sched', '$StudentNumber', '$SubjectName', '$SectionName', '$Description', '$Units', '$Semester', '$Day', '$Time', '$AcademicYear','$SectionAndYear','$SectionAndSemester');";
+$sqlGenerateSchedule = "INSERT INTO tbl_gradesperstudent (`sched_code`, `student_id`,`subject_name`,`section_name`,`description`,`units`,`semester`,`schedule_day`,`schedule_time`,`academic_year`,`sectionandacademicyear`,`sectionandsemester`,`professor_initial`) VALUES ('$Sched', '$StudentNumber', '$SubjectName', '$SectionName', '$Description', '$Units', '$Semester', '$Day', '$Time', '$AcademicYear','$SectionAndYear','$SectionAndSemester','$Professor');";
 mysqli_query($con, $sqlGenerateSchedule);
 
 }
