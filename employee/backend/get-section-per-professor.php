@@ -6,9 +6,9 @@
     include_once("../connections/connection.php");
 $con = connection();
 
-$Email = $_POST['Email'];
+$Username = $_POST['Username'];
 
-    $sql = mysqli_query($con,"SELECT `tbl_subjectpersection`.`id` ,`tbl_subjectpersection`.`sectionacademicyear` FROM `tbl_professor` LEFT JOIN `tbl_subjectpersection` ON `tbl_professor`.`professor_username` = `tbl_subjectpersection`.`professor_initial` WHERE `tbl_professor`.`email` = '$Email' AND `tbl_subjectpersection`.`status` = 'active' GROUP BY(`tbl_subjectpersection`.`sectionacademicyear`);");
+    $sql = mysqli_query($con,"SELECT * FROM `tbl_subjectpersection` WHERE `tbl_subjectpersection`.`professor_initial` = '$Username' AND `tbl_subjectpersection`.`status` = 'active' GROUP BY(`tbl_subjectpersection`.`sectionandsemester`);");
 
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
   
