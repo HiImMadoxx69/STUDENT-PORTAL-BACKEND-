@@ -23,7 +23,7 @@ $sql = mysqli_query($con,"SELECT * FROM tbl_gradesperstudent WHERE section_name 
     
     $gpa = floatval($sum) / count($result);
   
-    exit(json_encode(array("statusCode"=>200, "content" => $result, "gpa" => $sum)));
+    exit(json_encode(array("statusCode"=>200, "content" => $result, "gpa" => $gpa)));
     
  }catch(Exception $e){
     exit(json_encode(array("statusCode"=>201)));
