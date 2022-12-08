@@ -184,7 +184,7 @@ try{
             $getBefore = $con ->query($BeforeSql) or die ($con->error);
             $rowBefore = json_encode($getBefore ->fetch_assoc());
         
-            $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowBefore' );";
+            $auditsql = "INSERT INTO `tbl_history` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$StudentNumber', '$rowBefore' );";
             mysqli_query($con, $auditsql);
         
             exit(json_encode(array("statusCode"=>200)));

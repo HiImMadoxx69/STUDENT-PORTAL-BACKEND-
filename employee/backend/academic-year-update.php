@@ -38,7 +38,7 @@ try{
         $rowAfter = json_encode($getAfter ->fetch_assoc());
         
 
-        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$CurrentId', '$rowAfter','$rowBefore');";
+        $auditsql = "INSERT INTO `tbl_history` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`,`before_edit`) VALUES ('$Action','$Category','$EditorPosition','$EditorEmail', '$CurrentId', '$rowAfter','$rowBefore');";
                   mysqli_query($con, $auditsql);
 
                   $sqvl = mysqli_query($con, "SELECT * FROM `tbl_academicyear`  ORDER BY `id` DESC");

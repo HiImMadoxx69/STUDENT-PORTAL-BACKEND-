@@ -35,7 +35,7 @@ try{
     $getID = $getHighId[0]['id'];
     
 
-    $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$getID', '$getHighId' );";
+    $auditsql = "INSERT INTO `tbl_history` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`before_edit`) VALUES ('$action','$category','$editPosition','$editEmail', '$getID', '$getHighId' );";
     mysqli_query($con, $auditsql);
 
     exit(json_encode(array("statusCode"=>200)));

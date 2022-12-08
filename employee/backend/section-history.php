@@ -7,7 +7,7 @@ $con = connection();
 try{
     
     $sql = mysqli_query($con, "SELECT 
-    * FROM `tbl_updatehistory` WHERE `category` = 'Section'");
+    * FROM `tbl_history` WHERE `category` = 'Section'");
     
     //store in result
     

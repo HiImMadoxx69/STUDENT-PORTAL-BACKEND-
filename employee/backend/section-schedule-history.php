@@ -8,7 +8,7 @@ $CurrentID = $_POST['ID'];
 try{
     
     $sql = mysqli_query($con, "SELECT 
-    * FROM `tbl_updatehistory` WHERE `category` = 'SectionSchedule' AND edited_email = '$CurrentID';");
+    * FROM `tbl_history` WHERE `category` = 'SectionSchedule' AND edited_email = '$CurrentID';");
     
     //store in result
     

@@ -63,7 +63,7 @@ $sqlUpdateStud = "UPDATE `tbl_section` SET `tbl_section`.`totalstudent` = `tbl_s
         $rowAfter = json_encode($getAfter ->fetch_assoc());
         
 
-        $auditsql = "INSERT INTO `tbl_updatehistory` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`) VALUES ('$Action','$Category','Student','$StudentNumber', '$StudentNumber', '$rowAfter');";
+        $auditsql = "INSERT INTO `tbl_history` (`action`,`category`,`editor_position`,`editor_email`,`edited_email`,`after_edit`) VALUES ('$Action','$Category','Student','$StudentNumber', '$StudentNumber', '$rowAfter');";
                   mysqli_query($con, $auditsql);
 
 

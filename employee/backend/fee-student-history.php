@@ -12,7 +12,7 @@ try{
 
 
     $sql = mysqli_query($con, "SELECT 
-    * FROM `tbl_updatehistory` WHERE `category` = 'StudentFee' AND `edited_email` = '$StudentNumber';");
+    * FROM `tbl_history` WHERE `category` = 'StudentFee' AND `edited_email` = '$StudentNumber';");
     
     //store in result
     

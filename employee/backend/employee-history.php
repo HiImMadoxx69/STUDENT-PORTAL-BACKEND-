@@ -8,7 +8,7 @@ try{
     
 
     $sql = mysqli_query($con, "SELECT 
-    * FROM `tbl_updatehistory` WHERE `category` = 'Employee'");
+    * FROM `tbl_history` WHERE `category` = 'Employee'");
     
     //store in result
     
