@@ -9,7 +9,7 @@ $con = connection();
 $Username = $_POST['Username'];
 $Section = $_POST['Section'];
 
-    $sql = mysqli_query($con,"SELECT `tbl_gradesperstudent`.* ,`tbl_studentinfo`.`firstname`, `tbl_studentinfo`.`middlename`, `tbl_studentinfo`.`lastname` FROM `tbl_gradesperstudent` LEFT JOIN `tbl_subjectpersection` ON `tbl_gradesperstudent`.`sectionandacademicyear` = `tbl_subjectpersection`.`sectionacademicyear` LEFT JOIN `tbl_studentinfo` ON `tbl_gradesperstudent`.`student_id` = `tbl_studentinfo`.`studentnumber` WHERE `tbl_subjectpersection`.`professor_initial` = '$Username' AND `tbl_gradesperstudent`.`sectionandacademicyear` = '$Section' GROUP BY(`tbl_gradesperstudent`.`id`);");
+    $sql = mysqli_query($con,"SELECT *  WHERE `tbl_gradesperstudent`.`sectionandsemester` = '$Section' AND `tbl_gradesperstudent`.`professor_initial` = '$Username';");
 
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
   
