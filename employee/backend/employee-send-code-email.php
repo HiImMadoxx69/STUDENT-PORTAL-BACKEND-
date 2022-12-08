@@ -155,7 +155,7 @@ $mail->smtpClose();
 } catch (Exception $e) {
     exit(json_encode(array("statusCode"=>201)));
 }
-  
+exit(json_encode(array("statusCode"=>200, "message" =>"submitted")));
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
 }
