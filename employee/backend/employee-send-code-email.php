@@ -101,7 +101,7 @@ $mail->Body ="<!DOCTYPE html>
 				          	<img src='images/logo.jpg' alt='' style='width: 100px; max-width: 600px; height: auto; margin: auto; display: block; border-radius: 50%; padding-bottom: 20px;'>
 				          	<h2 style='color: black; font-family: 'Poppins', sans-serif; margin-top: 0; font-weight: 400;'>RESET CODE</h2>
 
-				           	<p><a  class='btn btn-primary' style='padding: 10px 15px; display: inline-block; border-radius: 5px;background: #1100BB; color: #ffffff;'>$ResetCode</a></p>
+				           	<h3><a  class='btn btn-primary' style='padding: 10px 15px; display: inline-block; border-radius: 5px;background: #1100BB; color: #ffffff;'>$ResetCode</a></h3>
 			          </td>
 			        </tr>
             </table>
