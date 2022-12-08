@@ -9,7 +9,7 @@ $con = connection();
 $Username = $_POST['Username'];
 $Section = $_POST['Section'];
 
-    $sql = mysqli_query($con,"SELECT *  WHERE `tbl_gradesperstudent`.`sectionandsemester` = '$Section' AND `tbl_gradesperstudent`.`professor_initial` = '$Username';");
+    $sql = mysqli_query($con,"SELECT * FROM  `tbl_gradesperstudent`  WHERE `tbl_gradesperstudent`.`sectionandsemester` = '$Section' AND `tbl_gradesperstudent`.`professor_initial` = '$Username';");
 
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
   
