@@ -19,7 +19,7 @@ try{
     
     $sched = mysqli_fetch_all($sqlsched, MYSQLI_ASSOC);
     
-    $sqlfee = mysqli_query($con, "SELECT * FROM `tbl_feeperstudent` WHERE `tbl_feeperstudent`.`studentnumber` = '$StudentNumber' AND `tbl_feeperstudent`.`sectionandsemester` = '$SectionAndSemester' ORDER BY `id` DESC");
+    $sqlfee = mysqli_query($con, "SELECT * FROM `tbl_feeperstudent` WHERE `tbl_feeperstudent`.`student_id` = '$StudentNumber' AND `tbl_feeperstudent`.`sectionandsemester` = '$SectionAndSemester' ORDER BY `id` DESC");
     
     $fee = mysqli_fetch_all($sqlfee, MYSQLI_ASSOC);
     
