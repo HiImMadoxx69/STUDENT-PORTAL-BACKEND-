@@ -8,7 +8,7 @@ $con = connection();
 
 $Username = $_POST['Username'];
 
-    $sql = mysqli_query($con,"SELECT  `tbl_subjectpersection`.* FROM `tbl_subjectpersection`.`professor_initial` = '$Username';");
+    $sql = mysqli_query($con,"SELECT  * FROM `tbl_subjectpersection` WHERE `tbl_subjectpersection`.`professor_initial` = '$Username';");
 
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
   
