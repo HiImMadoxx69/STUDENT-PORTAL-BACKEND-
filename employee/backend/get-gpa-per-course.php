@@ -14,8 +14,16 @@ $sql = mysqli_query($con,"SELECT * FROM tbl_gradesperstudent WHERE section_name 
 
     
     $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
+
+    $gpa = 0;
+    $sum = 0;
+    for($i =0; $i<count($result); $i++){
+        $sum = floatval($sum) +  floatval($result['grade']);
+    }
+    
+    $gpa = floatval($sum) / count($result);
   
-    exit(json_encode(array("statusCode"=>200, "content" => $result)));
+    exit(json_encode(array("statusCode"=>200, "content" => $result, "gpa" => $gpa)));
     
  }catch(Exception $e){
     exit(json_encode(array("statusCode"=>201)));
