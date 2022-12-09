@@ -52,15 +52,15 @@ try{
         $studentSql = "SELECT `contact` from `tbl_studentinfo` WHERE `tbl_studentinfo`.`studentnumber` = '$StudentNumber'";
         mysqli_query($con, $xsql);
 
-        $user = $con ->query($studentSql) or die ($con->error);
-        $row = $user->fetch_assoc();
+        $userContact = $con ->query($studentSql) or die ($con->error);
+        $rowContact = $userContact->fetch_assoc();
         
 // Your Account SID and Auth Token from twilio.com/console
 $account_sid = 'ACae648f1b603ee817585643e5e5fc89c0';
 $auth_token = 'e989c10c051a158e01262447f432e3aa';
 // In production, these should be environment variables. E.g.:
 // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
-$contact = substr_replace($row[0]['contact'], "+63", 0, 1);
+$contact = substr_replace($rowContact[0]['contact'], "+63", 0, 1);
 // A Twilio number you own with SMS capabilities
 $twilio_number = '+13075221591';
 
@@ -78,7 +78,7 @@ $client->messages->create(
         exit(json_encode(array("statusCode"=>$row)));
     }
 }catch(Exception $e){
-    exit(json_encode(array("statusCode"=>$e->getMessage(),"contact"=> $contact, "row"=> $row)));
+    exit(json_encode(array("statusCode"=>$e->getMessage(),"contact"=> $contact, "row"=> $rowContact)));
 }
 
 }catch(Exception $e){
