@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Vonage\\NexmoBridge\\' => array($vendorDir . '/vonage/nexmo-bridge/src'),
     'Vonage\\' => array($vendorDir . '/vonage/client-core/src'),
+    'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
     'Teapot\\StatusCode\\' => array($vendorDir . '/teapot/status-code/src'),
     'StellaMaris\\Clock\\' => array($vendorDir . '/stella-maris/clock/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),

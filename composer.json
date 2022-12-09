@@ -2,7 +2,8 @@
     "require": {
         "psr/log": "^3.0",
         "cloudinary/cloudinary_php": "^2",
-        "vonage/client": "^3.0"
+        "vonage/client": "^3.0",
+        "twilio/sdk": "^6.43"
     },
     "post-install-cmd": [
         "php artisan clear-compiled",

@@ -38,6 +38,7 @@ class ComposerStaticInit504b0995ca8e891e2ef19e4ff6de0fb3
         ),
         'T' => 
         array (
+            'Twilio\\' => 7,
             'Teapot\\StatusCode\\' => 18,
         ),
         'S' => 
@@ -79,6 +80,10 @@ class ComposerStaticInit504b0995ca8e891e2ef19e4ff6de0fb3
         'Vonage\\' => 
         array (
             0 => __DIR__ . '/..' . '/vonage/client-core/src',
+        ),
+        'Twilio\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
         ),
         'Teapot\\StatusCode\\' => 
         array (
