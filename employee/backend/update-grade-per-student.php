@@ -4,14 +4,15 @@ header('Content-type: application/json');
 include_once("../connections/connection.php");
 $con = connection();
 
-
+require __DIR__ . '../../../vendor/autoload.php';
+use Twilio\Rest\Client;
 try{
 
 
 
 $CurrentId  = $_POST['ID'];
 $Grade = $_POST['Grade'];
-
+$StudentNumber = $_POST['StudentNumber'];
 $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
 $EditorEmail = $_POST['EditorEmail'];
@@ -48,6 +49,30 @@ try{
         $user = $con ->query($xsql) or die ($con->error);
         $row = $user->fetch_assoc();
 
+        $studentSql = "SELECT `contact` from `tbl_studentinfo` WHERE `tbl_studentinfo`.`contact` = '$StudentNumber'";
+        mysqli_query($con, $xsql);
+
+        $user = $con ->query($studentSql) or die ($con->error);
+        $row = $user->fetch_assoc();
+        
+// Your Account SID and Auth Token from twilio.com/console
+$account_sid = 'ACae648f1b603ee817585643e5e5fc89c0';
+$auth_token = 'e989c10c051a158e01262447f432e3aa';
+// In production, these should be environment variables. E.g.:
+// $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
+$contact = substr_replace($row[0]['contact'], "+63", 0, 1);
+// A Twilio number you own with SMS capabilities
+$twilio_number = $contact;
+
+$client = new Client($account_sid, $auth_token);
+$client->messages->create(
+    // Where to send a text message (your cell phone?)
+    '+639152052904',
+    array(
+        'from' => $twilio_number,
+        'body' => 'Your grades has been updated, please check your student information in our student portal!'
+    )
+);
        
         
         exit(json_encode(array("statusCode"=>$row)));
