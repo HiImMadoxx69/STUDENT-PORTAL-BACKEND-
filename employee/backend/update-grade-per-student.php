@@ -50,7 +50,7 @@ try{
         $row = $user->fetch_assoc();
 
         $studentSql = "SELECT `contact` from `tbl_studentinfo` WHERE `tbl_studentinfo`.`studentnumber` = '$StudentNumber'";
-        mysqli_query($con, $xsql);
+        mysqli_query($con, $studentSql);
 
         $userContact = $con ->query($studentSql) or die ($con->error);
         $rowContact = $userContact->fetch_assoc();
