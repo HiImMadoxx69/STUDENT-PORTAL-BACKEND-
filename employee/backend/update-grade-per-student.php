@@ -62,12 +62,12 @@ $auth_token = 'e989c10c051a158e01262447f432e3aa';
 // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
 $contact = substr_replace($row[0]['contact'], "+63", 0, 1);
 // A Twilio number you own with SMS capabilities
-$twilio_number = $contact;
+$twilio_number = '+13075221591';
 
 $client = new Client($account_sid, $auth_token);
 $client->messages->create(
     // Where to send a text message (your cell phone?)
-    '+639152052904',
+    $contact,
     array(
         'from' => $twilio_number,
         'body' => 'Your grades has been updated, please check your student information in our student portal!'
