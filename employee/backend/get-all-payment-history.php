@@ -5,7 +5,7 @@ include_once("../connections/connection.php");
 $con = connection();
 
 
-$sql = mysqli_query($con, "SELECT * FROM `tbl_history`  ORDER BY `id` DESC");
+$sql = mysqli_query($con, "SELECT * FROM `tbl_history` WHERE `category` = 'StudentFee'  ORDER BY `id` DESC");
 
 //store in result
 
