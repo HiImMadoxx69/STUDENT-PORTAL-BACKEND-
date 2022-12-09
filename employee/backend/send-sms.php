@@ -3,27 +3,28 @@ header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
 include_once("../connections/connection.php");
 $con = connection();
-
-// Update the path below to your autoload.php,
-// see https://getcomposer.org/doc/01-basic-usage.md
-require_once '../../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 use Twilio\Rest\Client;
-try{
 
+try {
+// Your Account SID and Auth Token from twilio.com/console
+$account_sid = 'ACae648f1b603ee817585643e5e5fc89c0';
+$auth_token = 'e989c10c051a158e01262447f432e3aa';
+// In production, these should be environment variables. E.g.:
+// $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
 
+// A Twilio number you own with SMS capabilities
+$twilio_number = "+15017122661";
 
-// Find your Account SID and Auth Token at twilio.com/console
-// and set the environment variables. See http://twil.io/secure
-$sid = getenv("TWILIO_ACCOUNT_SID");
-$token = getenv("TWILIO_AUTH_TOKEN");
-$twilio = new Client($sid, $token);
-
-$message = $twilio->messages
-                  ->create("+639561482987", // to
-                           ["body" => "David na update na ang iyong grades", "from" => "+12059843854"]
-                  );
-
-print($message->sid);
+$client = new Client($account_sid, $auth_token);
+$client->messages->create(
+    // Where to send a text message (your cell phone?)
+    '+15558675310',
+    array(
+        'from' => $twilio_number,
+        'body' => 'I sent this message in under 10 minutes!'
+    )
+);
 
 }catch(Exception $e){
     exit(json_encode(array("statusCode"=>$e->getMessage())));
