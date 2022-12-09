@@ -70,7 +70,7 @@ $client->messages->create(
     $contact,
     array(
         'from' => $twilio_number,
-        'body' => 'Your grades has been updated, please check your student information in our student portal!'
+        'body' => 'Your grades has been updated, please check your grades on our student portal!'
     )
 );
        
