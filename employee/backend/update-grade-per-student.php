@@ -78,7 +78,7 @@ $client->messages->create(
         exit(json_encode(array("statusCode"=>$row)));
     }
 }catch(Exception $e){
-    exit(json_encode(array("statusCode"=>$e->getMessage(),"contact"=> $contact)));
+    exit(json_encode(array("statusCode"=>$e->getMessage(),"contact"=> $contact, "row"=> $row)));
 }
 
 }catch(Exception $e){
