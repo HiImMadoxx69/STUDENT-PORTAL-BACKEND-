@@ -7,8 +7,10 @@ $con = connection();
 // Update the path below to your autoload.php,
 // see https://getcomposer.org/doc/01-basic-usage.md
 require_once '../../vendor/autoload.php';
-
 use Twilio\Rest\Client;
+try{
+
+
 
 // Find your Account SID and Auth Token at twilio.com/console
 // and set the environment variables. See http://twil.io/secure
@@ -22,3 +24,7 @@ $message = $twilio->messages
                   );
 
 print($message->sid);
+
+}catch(Exception $e){
+    exit(json_encode(array("statusCode"=>$e->getMessage())));
+}
