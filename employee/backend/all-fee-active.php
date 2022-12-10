@@ -7,7 +7,7 @@ $con = connection();
 
 $sql = mysqli_query($con, "SELECT * FROM `tbl_fee` WHERE status ='active' ORDER BY `id` DESC");
 
-//store in result
+//store in resultsad
 
 $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
 
