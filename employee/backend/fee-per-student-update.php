@@ -13,6 +13,8 @@ $Action = $_POST['Action'];
 $EditorPosition = $_POST['EditorPosition'];
 $EditorEmail = $_POST['EditorEmail'];
 $Category = $_POST['Category'];
+
+$Payment = round($Payment, 1);
 //sd
 try{
     
